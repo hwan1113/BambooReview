@@ -1,0 +1,121 @@
+body,
+html {
+	height: 100%;
+}
+
+body.slider__body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.slider__container {
+	position: relative;
+	display: block;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+	-webkit-transition: -webkit-transform 500ms ease-in-out;
+	transition: -webkit-transform 500ms ease-in-out;
+	-o-transition: transform 500ms ease-in-out;
+	transition: transform 500ms ease-in-out;
+	transition: transform 500ms ease-in-out, -webkit-transform 500ms ease-in-out;
+}
+
+.slider__page {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.slider__indicators {
+	position: absolute;
+	left: 66px;
+	top: 50%;
+	z-index: 2;
+	margin: 0;
+	padding: 0;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+.slider__indicator {
+	display: block;
+	width: 10px;
+	height: 10px;
+	margin: 10px 0;
+	border-radius: 100px;
+	background-color: red;
+	cursor: default;
+}
+.slider__indicator--active {
+	opacity: 0.3;
+}
+
+
+  html	{width:1024px; height:768px; margin:0 auto; text-align: center;}
+    /* section 	{width:1024px; margin:0 auto;}; */
+      #norwegian {
+        background: linear-gradient(225deg, #ffc27d, #ff8e93);
+      }
+ 
+      #french {
+        background: linear-gradient(#f3defc, #63a3e6);
+      }
+      #spanish {
+        background: linear-gradient(#d2fcad, #22eaeb);
+      }
+      #hindi{
+        background: linear-gradient(#f0bed4, #a163f5);
+      }
+      #mandarin {
+        background: linear-gradient(#65cce1, #6365ec);
+      }
+      #page1-img{
+      border: 2px solid white;
+      position: absolute;
+	  top: 270px;
+	  right: 530px;
+	  width: 25em;
+	  height: 13em;
+      }
+      #page1-logo{
+      position: absolute;
+	  top: 200px;
+	  right: 140px;
+	  width: 2o%;
+	  height: 20%;
+      }
+
+      /* section > span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 7vw;
+        font-family: sans-serif;
+        text-transform: uppercase;
+        color: #fff;
+      } */
+      #norwegian span{
+     	position: absolute;
+      	top: 50%;
+        left: 60%;
+        transform: translate(-15%, 30%);
+        font-size:24px;
+      	font-family: sans-serif;
+        color: #fff;
+      }
+      
+       #french span{
+     	position: absolute;
+      	top: 30%;
+        left: 38%;
+        transform: translate(-15%, 30%);
+        font-size:34px;
+      	font-family: sans-serif;
+        color: #fff;
+      }
