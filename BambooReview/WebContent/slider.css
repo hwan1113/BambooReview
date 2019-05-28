@@ -25,6 +25,13 @@ body.slider__body {
 	transition: transform 500ms ease-in-out, -webkit-transform 500ms ease-in-out;
 }
 
+
+
+.slider__page1 {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
 .slider__page {
 	position: relative;
 	width: 100%;
@@ -48,7 +55,7 @@ body.slider__body {
 	height: 10px;
 	margin: 10px 0;
 	border-radius: 100px;
-	background-color: red;
+	background-color: green;
 	cursor: default;
 }
 .slider__indicator--active {
@@ -57,65 +64,131 @@ body.slider__body {
 
 
   html	{width:1024px; height:768px; margin:0 auto; text-align: center;}
-    /* section 	{width:1024px; margin:0 auto;}; */
-      #norwegian {
-        background: linear-gradient(225deg, #ffc27d, #ff8e93);
-      }
- 
-      #french {
-        background: linear-gradient(#f3defc, #63a3e6);
-      }
-      #spanish {
-        background: linear-gradient(#d2fcad, #22eaeb);
-      }
-      #hindi{
-        background: linear-gradient(#f0bed4, #a163f5);
-      }
-      #mandarin {
-        background: linear-gradient(#65cce1, #6365ec);
-      }
-      #page1-img{
-      border: 2px solid white;
-      position: absolute;
-	  top: 270px;
-	  right: 530px;
-	  width: 25em;
-	  height: 13em;
-      }
-      #page1-logo{
-      position: absolute;
-	  top: 200px;
-	  right: 140px;
-	  width: 2o%;
-	  height: 20%;
-      }
 
-      /* section > span {
+
+      #page1-logo{
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 7vw;
-        font-family: sans-serif;
-        text-transform: uppercase;
-        color: #fff;
-      } */
+    	top: 220px;
+   		right: 27%;
+    	width: 2o%;
+    	height: 40%;
+      }    
       #norwegian span{
      	position: absolute;
-      	top: 50%;
-        left: 60%;
-        transform: translate(-15%, 30%);
+	    top: 60%;
+	    left: 57%;
+	    transform: translate(-65%, 30%);
         font-size:24px;
       	font-family: sans-serif;
         color: #fff;
       }
-      
+     .div1{
+            position: absolute;
+		    top: 30%;
+		    left: 26%;
+		    margin: 0 auto;
+		    width: 480px;
+		    height: 401px;
+		    background: black;
+		    opacity: 0.5;
+        }
+        .div2{
+            position: absolute;
+		    top: 40%;
+		    left: 0%;
+		    margin: 0 auto;
+		    width: 1024px;
+		    height: 201px;
+		    background: black;
+		    opacity: 0.8;
+        }
        #french span{
      	position: absolute;
-      	top: 30%;
+      	top: 42%;
         left: 38%;
         transform: translate(-15%, 30%);
         font-size:34px;
       	font-family: sans-serif;
-        color: #fff;
+        color: #fbfbfb;
       }
+      #spanish span{
+      	position: absolute;
+      	top: 40%;
+   		left: 67%;
+    	width: 300px;
+    	text-align: center;
+        transform: translate(-15%, 30%);
+        font-size:34px;
+      	font-family: sans-serif;
+        color: #fff;
+        
+      }
+      #french{
+       background-image: url("/BambooReview/images/main-page2-back.jpg");
+      }
+      #spanish{
+       background-image: url("/BambooReview/images/main-page3-back.jpg");
+      }
+      #hindi{
+       background-image: url("/BambooReview/images/main-page3-back.jpg");
+      }
+      
+      
+      #search-location{
+     	position: absolute;
+      	top: 56%;
+        left: 31%;
+      }
+      #searh-button{
+      	position: absolute;
+      	top: 56%;
+    	left: 64.56%;
+      	border-radius:4rem;
+      	width: 56px;
+      	padding: 0.78571429em 0.6em 0.78571429em;
+      	line-height: 1.2em;
+      }
+      .ui.input > input {
+  		width: 400px;
+		}
+		.main-review{
+		width:180px;
+		height:160px;
+		}
+		#main-card1{
+		position: absolute;
+      	top: 13.0%;
+    	left: 4.56%;
+		border:2px solid black;
+		max-width: 440px;
+    	max-height: 170px;
+    	 
+    	 animation-name: ani1;
+            animation-duration: 3s;
+            animation-direction: normal;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+		}
+		#main-card2{
+		position: absolute;
+      	top: 38.0%;
+    	left: 4.56%;
+		border:2px solid black;
+		max-width: 440px;
+    	max-height: 170px;
+		}
+		#main-card3{
+		position: absolute;
+      	top: 64.0%;
+    	left: 4.56%;
+		border:2px solid black;
+		max-width: 440px;
+    	max-height: 170px;
+		}
+		#navbar {
+    background-color: green;
+}
+#footerp{
+	top:250px;
+}
+

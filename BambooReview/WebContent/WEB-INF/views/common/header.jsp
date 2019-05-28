@@ -1,56 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%@ page import="member.model.vo.*" %> --%>
-<%
-	//세션객체로부터 저장된 로그인사용자정보 가져오기
-	/* Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn"); */
-
-	//쿠키관련 처리
-	Cookie[] cookies = request.getCookies();
-	boolean saveIdFlag = false;
-	String memberId = "";
-	
-	if(cookies != null){
-		//System.out.println("-----------------------------");
-		for(Cookie c: cookies){
-			String key = c.getName();
-			String value = c.getValue();
-			//System.out.println(key+"="+value);
-			
-			if("saveId".equals(key)){
-				saveIdFlag = true;
-				memberId = value;
-			}
-			
-		}
-		//System.out.println("-----------------------------");		
-	}
- %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css" />
-<script src="<%=request.getContextPath()%>/js/jquery-3.4.0.js"></script>
-<script>
-/*
- * 로그인 유효성검사 함수
- */
-function loginValidate(){
-	if($("#memberId").val().trim().length == 0){
-		alert("아이디를 입력하세요.");
-		$("#memberId").focus();
-		return false;
-	}
-	
-	if($("#password").val().trim().length == 0){
-		alert("비밀번호를 입력하세요.");
-		$("#password").focus();
-		return false;
-	}
-	return true;
-}
-</script>
+<link rel="stylesheet" href="slider.css">
 </head>
 <body>
 	<div id="container">
@@ -61,17 +18,19 @@ function loginValidate(){
 					<li class="notice"><a href="<%=request.getContextPath()%>/price/priceInfo">가격정보</a></li>
 					<li class="board"><a href="<%=request.getContextPath()%>/member/memberInfo">내 정보보기</a></li>
 					<li class="board"><a href="<%=request.getContextPath()%>/member/memberLoggedIn">로그인</a></li>
-					
-					<%-- <!-- 관리자인 경우, 관리자메뉴(회원관리)추가 -->
-					<%if(memberLoggedIn!=null && "admin".equals(memberLoggedIn.getMemberId())){ %>
-					<li class="admin"><a href="<%=request.getContextPath()%>/admin/memberList">회원관리</a></li>					 --%>
-					
-				<%-- 	<%} %> --%>
-				</ul>
-			</nav>
-			
-			<!-- 메인메뉴 끝-->
-			
 		</header>
-		
-		<section id="content">
+	<!-- 	<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="#">Features</a>
+      <a class="nav-item nav-link" href="#">Pricing</a>
+      <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+    </div>
+  </div>
+</nav> -->
+</body>
