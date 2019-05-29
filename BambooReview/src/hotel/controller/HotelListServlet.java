@@ -30,11 +30,10 @@ public class HotelListServlet extends HttpServlet {
 		
 		
 		
-		
 		request.setAttribute("hotelData", dataString);
 		
-		
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		System.out.println(11);
+		request.getRequestDispatcher("/WEB-INF/views/hotel/ignore.jsp").forward(request, response);
 		
 		
 	}
