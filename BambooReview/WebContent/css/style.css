@@ -1,11 +1,17 @@
-@CHARSET "UTF-8";
-body {font-family:"휴먼모음T";}
 
-/********** 전체컨테이너 **********/
-div#container	{background-color:#400040; width:1024px; margin:0 auto;}
 
 /********** header **********/
-header			{background:url('/semi/images/bamboo.png') 2% 15%/15% no-repeat;  background-color:#7cd70f; height:70px; position:relative;}
+header			{
+	background:url('/BambooReview/images/bambooHeader.png') 2% 15%/15% no-repeat;
+	background-color:#68b30d; 
+	height:70px; 
+	position:relative;
+	opacity: 0.8;
+	
+	}
+	.bg-light {
+     background-color: green; 
+}
 
 /*로그인 관련*/
 /* header div.login-container{width:250px; position: absolute; right: 0px; top: 10px;} */
@@ -69,20 +75,20 @@ footer p{
 
 
 /********** content **********/
-section#content	{ background-color:#ffffff; float:left; width:1024px; min-height:3000px; }
+/* section#content	{ background-color:#ffffff; float:left; width:1024px; min-height:3000px; }
 
-/*회원가입페이지*/
+회원가입페이지
 section#enroll-container{text-align: center;}
 section#enroll-container input {margin: 3px;}
 section#enroll-container table {margin: 0 auto;}
 section#enroll-container table th{padding: 0 10px; text-align: right;}
 section#enroll-container table td{padding: 0 10px; text-align: left;}
 
-/*회원정보보기*/
+회원정보보기
 section#enroll-container input[readonly]{background: lightgray;}
 
 
-/*관리자 회원관리테이블 */
+관리자 회원관리테이블
 section#memberList-container{
 	text-align: center;
 }
@@ -90,7 +96,7 @@ section#memberList-container table#tbl-member{
 	width: 100%; 
 	border: 1px solid gray;
 	border-collapse: collapse;
-}
+} */
 
 table#tbl-member th, table#tbl-member td{
 	border: 1px solid gray;
@@ -145,11 +151,15 @@ div#pageBar a{
 
 
 
-
-
-
 /********** footer **********/
-footer			{ background-color:#7cd70f; clear:both; height:70px; text-align:center;padding-top:0px;}
+footer			{
+	background-color:#68b30d; 
+	height:70px; 
+	position:relative;
+	opacity: 0.8;
+	top: 628px;
+	
+	}
 
 
 

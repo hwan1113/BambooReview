@@ -3,21 +3,21 @@ package hotel.model.vo;
 public class Hotel {
 	
 	private String hotelId;
-	private int review;
+	private int hotelRate;
+	private String pictureRef;
 	private String region;
-	private String picture;
 	private String info;
 	
 	public Hotel() {
 		
 	}
 
-	public Hotel(String hotelId, int review, String region, String picture, String info) {
+	public Hotel(String hotelId, int hotelRate, String region, String pictureRef, String info) {
 		super();
 		this.hotelId = hotelId;
-		this.review = review;
+		this.hotelRate = hotelRate;
 		this.region = region;
-		this.picture = picture;
+		this.pictureRef = pictureRef;
 		this.info = info;
 	}
 	
@@ -27,11 +27,11 @@ public class Hotel {
 	public void setHotelId(String hotelId) {
 		this.hotelId = hotelId;
 	}
-	public int getReview() {
-		return review;
+	public int gethotelRate() {
+		return hotelRate;
 	}
-	public void setReview(int review) {
-		this.review = review;
+	public void sethotelRate(int hotelRate) {
+		this.hotelRate = hotelRate;
 	}
 	public String getRegion() {
 		return region;
@@ -39,11 +39,11 @@ public class Hotel {
 	public void setRegion(String region) {
 		this.region = region;
 	}
-	public String getPicture() {
-		return picture;
+	public String getpictureRef() {
+		return pictureRef;
 	}
-	public void setPicture(String picture) {
-		this.picture = picture;
+	public void setpictureRef(String pictureRef) {
+		this.pictureRef = pictureRef;
 	}
 	public String getInfo() {
 		return info;
@@ -55,7 +55,7 @@ public class Hotel {
 	
 	@Override
 	public String toString() {
-		return "Hotel [hotelId=" + hotelId + ", review=" + review + ", region=" + region + ", picture=" + picture
+		return "Hotel [hotelId=" + hotelId + ", hotelRate=" + hotelRate + ", region=" + region + ", pictureRef=" + pictureRef
 				+ ", info=" + info + "]";
 	}
 	
