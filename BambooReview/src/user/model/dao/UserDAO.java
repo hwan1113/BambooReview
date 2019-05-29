@@ -94,4 +94,65 @@ public class UserDAO {
 		return u;
 	}
 
+	public int insertUser(Connection conn, User u) {
+		int result = 0;
+		String sql = prop.getProperty("insertUser");
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, u.getEmail());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteUser(Connection conn, String email) {
+		int result = 0;
+		String sql = prop.getProperty("deleteUser");
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateUser(Connection conn, User u) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updateuser"); 
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, u.getUserName());
+			pstmt.setString(2, u.getPhone());
+			pstmt.setString(3, u.getEmail());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+
 }

@@ -133,69 +133,9 @@
      	 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
       </section>
     </div>
-    
-    <form action="<%=request.getContextPath()%>/hotel/hotelList"
-    	name="hotelDataFrm" id="hotelDataFrm">
-    	
-    	<input type="hidden" name="hotelData" id="hotelData"/>
-    </form>
-
-
-
-
 
     <script>
       slider('.slides');
-      $("#searh-button").click(function(){
-    	  $.ajax({
-    			url:'https://maps.googleapis.com/maps/api/place/textsearch/json?query=hotels+in+london&key=AIzaSyBamfF6Gj9yf1Spt6oL6sX1GB86eMTtI6U',
-    			type:'GET',
-    			success: function(data){
-    				//console.dir(data.results)
-    				Arr =[];
-    				for(var i=0; i<3; i++){
-    					hotel = {};
-    					hotel.id = data.results[i].place_id
-    					hotel.name = data.results[i].name
-    					if(data.results[i].photos){
-    					hotel.photo = data.results[i].photos[0].photo_reference}
-    					hotel.address = data.results[i].formatted_address
-    					hotel.rate = data.results[i].rating
-    					hotel.info = data.results[i].types
-    					Arr.push(hotel)
-    				}
-    				//console.dir(Arr)
-    				var json = JSON.stringify(Arr);
-    				//console.dir(json);
-    				//param={hotelData:json}
-    				$("#hotelData").val(json)
-    				$("#hotelDataFrm").submit()
-    				
-    				
-    				<%-- location.href='<%=request.getContextPath() %>/hotel/hotelList' --%>
-    			<%-- 	$.ajax({
-    					url: "<%=request.getContextPath()%>/hotel/hotelList",
-    					type:"get",
-    					data: param,
-    					success:function(data){
-    						console.log("ajax처리 성공")
-    					},
-    					error:function(jqxhr, textStatus, errorThrown){
-    						console.log("ajax처리실패!")
-    						console.log(jqxhr);
-    						console.log(textStatus);
-    						console.log(errorThrown);
-    					}
-    				}); --%>
-    			},
-    			error:function(jqxhr, textStatus, errorThrown){
-    				console.log("ajax처리실패!")
-    				console.log(jqxhr);
-					console.log(textStatus);
-					console.log(errorThrown);
-    			}
-    		})
-      })
     </script>
     </div>
   </body>

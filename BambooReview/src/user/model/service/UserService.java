@@ -26,4 +26,28 @@ public class UserService {
 		return u;
 	}
 
+	public int insertUser(User u) {
+		Connection conn = getConnection();
+		int result = new UserDAO().insertUser(conn, u);
+		close(conn);
+		return result;
+	}
+
+	public int deleteUser(String email) {
+		Connection conn = getConnection();
+		int result = new UserDAO().deleteUser(conn, email);
+		close(conn);
+		return result;
+				
+		
+	}
+
+	public int updateUser(User u) {
+		Connection conn = getConnection();
+		int result = new UserDAO().updateUser(conn, u);
+		close(conn);
+		return result;
+		
+	}
+
 }
