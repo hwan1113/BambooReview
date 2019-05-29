@@ -81,7 +81,7 @@
  				</div>
  			 	<div class="results"></div>
  			 </div>
- 			 <button class="ui green button" id="searh-button">search</button>
+ 			 <button class="ui green button" id="searh-button"><a href="<%=request.getContextPath()%>/HotelListServlet">search</a></button>
 
 
       </section>

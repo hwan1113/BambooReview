@@ -238,7 +238,7 @@ body.slider__body {
     font-family: sans-serif;
     color: #fff;
 }
-.card{
+#thanos{
 	top: 36%;
     position: absolute;
     left: 39%;
@@ -246,7 +246,7 @@ body.slider__body {
     opacity: 0;
     transform: translateY(430px);
 }
-#hindi:hover .card{
+#hindi:hover #thanos{
         transform: translateY(0);
         opacity: 1;
     }

@@ -1,0 +1,136 @@
+
+
+/********** header **********/
+header			{
+	background:url('/BambooReview/images/bambooHeader.png') 2% 15%/15% no-repeat;
+	background-color:#68b30d; 
+	height:70px; 
+	position:relative;
+	opacity: 0.8;
+	
+	}
+	.bg-light {
+     background-color: green; 
+}
+
+
+
+
+/*메인메뉴 관련 */
+header nav {
+	/* background: #408080; */
+	width: 100%;
+	margin-top: 0px;
+}
+ul.main-nav{
+	display: table;
+	padding: 0px;
+	float:right;
+	margin-top:20px;
+	/* margin: auto; */
+}
+ul.main-nav li{
+	list-style-type: none;
+	width: 8em;
+	height: 1px;
+	float: left;
+	text-align: center;
+	font-family: '휴먼모음T', sans-serif;
+	margin-top:20px
+	
+
+}
+
+
+ul.main-nav li a{
+	display:block;
+	padding: .5em;
+	text-decoration: none;
+	color: #ffffff;
+}
+/* ul.main-nav li:hover{background: #30f;} */
+ul.main-nav li:hover a {color: #dadada;}
+
+
+
+
+
+footer p{
+	padding-top:25px;
+}
+
+
+
+table#tbl-member th, table#tbl-member td{
+	border: 1px solid gray;
+	padding: 10px;	
+}
+
+
+/*관리자: 회원검색*/
+div#header-container{
+	padding: 0px;
+	height: 50px;
+	background-color: rgba(0, 188, 212, 0.3);
+}
+div#search-container{
+	margin: 0 0 10px 0;
+	padding: 3px;
+	float: left;
+}
+div#search-memberId{
+	display: inline-block;
+}
+div#search-memberName{
+	display: none;
+}
+div#search-gender{
+	display: none;
+}
+div#numPerPage-container{
+	margin-top: 10px;
+	float:right;
+}
+div#numPerPage-container form{
+	display: inline;
+}
+
+
+
+
+/*페이지바*/
+div#pageBar{
+	margin-top: 10px;
+	text-align: center;
+	background-color: rgba(0,188,212,0.3);
+}
+div#pageBar span.cPage{
+	color: #06f;
+	margin-right: 10px;
+}
+div#pageBar a{
+	margin-right: 10px;
+}
+
+
+
+/********** footer **********/
+footer			{
+	background-color:#68b30d; 
+	height:70px; 
+	position:relative;
+	opacity: 0.8;
+	top: 698px;
+	
+	}
+
+
+
+
+
+
+
+
+
+
+
