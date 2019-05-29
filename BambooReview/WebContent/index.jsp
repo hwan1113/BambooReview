@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset=UTF-8">
-<title>Insert title here</title>
+<title>BambooReview</title>
 </head>
 <body>
 <!DOCTYPE html>
@@ -12,9 +12,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BamBoo Review</title>
     <script src="slider.js"></script>
-    <link rel="stylesheet" href="slider.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/slider.css" />
     
     <!-- 시맨틱 UI -->
     <link rel="stylesheet" type="text/css" href="Semantic/semantic.css">
@@ -24,19 +24,24 @@
  		crossorigin="anonymous"></script>
 	<script src="Semantic/semantic.js"></script>
 	<!----------------------------------------------->
+	
 	<!--bootstrap-->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <!----------------------------------------------->
-    <link rel="stylesheet" type="text/css" href="demo.css" />
-      <link rel="stylesheet" type="text/css" href="backgroundTransition.css" />
+    
+    <!--------------------Scroll page--------------------------->
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+      <link rel="stylesheet" type="text/css" href="css/backgroundTransition.css" />
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="backgroundTransition.js"></script>
-
+	 <!----------------------------------------------->
+	
   </head>
 
   <body>
   <div style="width:1024px;" align="center">
+
   
   
     <div class="slides">
@@ -65,6 +70,7 @@
       		<span id="page1-intro">전세계 모든 숙박 시설에 대해 솔직하고 믿을 수 있는 후기를 남길 수 있는 리뷰 커뮤니티</span>
       		
       </section>
+      
       <section id="french">
       	<div class="div2"></div>
       	<span>숙박후기, 여기서 보세요!</span>
@@ -79,7 +85,8 @@
 
 
       </section>
-      <section id="spanish">
+      <section id="spanish" class="animated">
+      
       <!--1번-->
       	<div class="card mb-3" style="max-width: 540px;" id="main-card1">
   				<div class="row no-gutters">
@@ -125,12 +132,23 @@
     			</div>
   			</div>
 		</div>
+		<div class="div3"></div>
       <span>유저 후기로 인증된 신뢰 1위 커뮤니티</span>
       
       </section>
       <section id="hindi">
-      <span>유저 후기로 인증된 신뢰 1위 커뮤니티  </span>
-     	 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+      <div class="div4"></div>
+      <span class="adver1">숙박 광고를 위한 최고의 파트너  </span>
+      <span class="adver2">여행을 계획하고있는 수많은 고객이 방문하는 BamBooReview에서 최상의 광고효과를 얻을 수 있습니다!  </span>
+      <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+      
+      <div class="card" style="width: 15rem;" id="thanos">
+	  <img src="/BambooReview/images/thanos.jpg" class="card-img-top" alt="...">
+	  <div class="card-body">
+	    <p class="card-text">Team Thanos. contact:ageg123@naver.com</p>
+	  </div>
+	</div>
+     	 
       </section>
     </div>
 
@@ -143,3 +161,8 @@
 
 </body>
 </html>
+<!-- -------------------------------------------------05-29 이혜성-------------------------------------------------------------------------------------- -->
+ 
+ 
+ 
+ 

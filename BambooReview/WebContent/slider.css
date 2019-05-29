@@ -102,6 +102,26 @@ body.slider__body {
 		    background: black;
 		    opacity: 0.8;
         }
+        .div3{
+                position: absolute;
+			    top: 0;
+			    left: 60%;
+			    margin: 0 auto;
+			    width: 410px;
+			    height: 768px;
+			    background: black;
+			    opacity: 0.8;
+        }
+         .div4{
+                    position: absolute;
+				    top: 0;
+				    left: 23.5%;
+				    margin: 0 auto;
+				    width: 550px;
+				    height: 768px;
+				    background: black;
+				    opacity: 0.8;
+				}
        #french span{
      	position: absolute;
       	top: 42%;
@@ -155,39 +175,81 @@ body.slider__body {
 		width:180px;
 		height:160px;
 		}
-		#main-card1{
+		.card.mb-3{
 		position: absolute;
-      	top: 13.0%;
-    	left: 4.56%;
+		left: 4.56%;
 		border:2px solid black;
 		max-width: 440px;
     	max-height: 170px;
-    	 
-    	 animation-name: ani1;
-            animation-duration: 3s;
-            animation-direction: normal;
-            animation-iteration-count: 1;
-            animation-fill-mode: forwards;
+    	transition-duration: 0.6s;
+        opacity: 0;
+		}
+		#main-card1{
+		transform: translateX(-430px);
+      	top: 13.0%;
+    	
 		}
 		#main-card2{
-		position: absolute;
       	top: 38.0%;
-    	left: 4.56%;
-		border:2px solid black;
-		max-width: 440px;
-    	max-height: 170px;
+      	transform: translateX(-430px);
+        transition-delay: .2s;
 		}
 		#main-card3{
-		position: absolute;
       	top: 64.0%;
-    	left: 4.56%;
-		border:2px solid black;
-		max-width: 440px;
-    	max-height: 170px;
+      	transform: translateX(-430px);
+        transition-delay: .2s;
 		}
+		.animated:hover #main-card1{
+        transform: translateX(0);
+        opacity: 1;
+    }
+    .animated:hover #main-card2{
+        transform: translateX(0);
+        opacity: 1;
+    }
+    .animated:hover #main-card3{
+        transform: translateX(0);
+        opacity: 1;
+    }
+    
 		#navbar {
     background-color: green;
 }
+.adver1{
+	position: absolute;
+    top: 5%;
+    left: 40%;
+    width: 300px;
+    text-align: center;
+    transform: translate(-15%, 30%);
+    font-size: 34px;
+    font-family: sans-serif;
+    color: #fff;
+}
+.adver2{
+	position: absolute;
+    top: 23%;
+    left: 32%;
+    width: 550px;
+    /* width: 30px; */
+    xt-align: center;
+    transform: translate(-15%, 30%);
+    font-size: 20px;
+    font-family: sans-serif;
+    color: #fff;
+}
+.card{
+	top: 36%;
+    position: absolute;
+    left: 39%;
+    transition-duration: 0.6s;
+    opacity: 0;
+    transform: translateY(430px);
+}
+#hindi:hover .card{
+        transform: translateY(0);
+        opacity: 1;
+    }
 #footerp{
 	top:250px;
 }
