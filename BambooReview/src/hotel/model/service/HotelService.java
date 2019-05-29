@@ -12,9 +12,9 @@ import hotel.model.vo.Hotel;
 
 public class HotelService {
 
-	public List<Hotel> selectHotelList() {
+	public List<Hotel> selectHotelList(String region) {
 		Connection conn = getConnection();
-		List<Hotel> list= new HotelDAO().selectMemberList(conn);
+		List<Hotel> list= new HotelDAO().selectHotelList(conn, region);
 		close(conn);
 		return list;
 	}

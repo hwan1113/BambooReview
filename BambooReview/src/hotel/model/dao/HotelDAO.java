@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import hotel.model.vo.Hotel;
-import member.model.vo.Member;
+
 
 public class HotelDAO {
 	private Properties prop = new Properties();
@@ -37,34 +37,25 @@ public class HotelDAO {
 
 
 
-	public List<Hotel> selectMemberList(Connection conn) {
+	public List<Hotel> selectHotelList(Connection conn, String region) {
 		List<Hotel> list = new ArrayList<>();
         PreparedStatement pstmt = null;
         ResultSet rset = null;
-        String query = prop.getProperty("");
+        String query = prop.getProperty("selectHotelByCity");
 		
         try{
             pstmt = conn.prepareStatement(query);
-            
-            pstmt.setInt(1, );
-            pstmt.setInt(2, );
-            
+            pstmt.setString(1, "%"+region+"%");
             
             rset = pstmt.executeQuery();
             
             while(rset.next()){
                 Hotel h = new Hotel();
-                //컬럼명은 대소문자 구분이 없다.
-                m.setMemberId(rset.getString("MEMBERID"));
-                m.setPassword(rset.getString("PASSWORD"));
-                m.setMemberName(rset.getString("MEMBERNAME"));
-                m.setGender(rset.getString("GENDER"));
-                m.setAge(rset.getInt("AGE"));
-                m.setEmail(rset.getString("EMAIL"));
-                m.setPhone(rset.getString("PHONE"));
-                m.setAddress(rset.getString("ADDRESS"));
-                m.setHobby(rset.getString("HOBBY"));
-                m.setEnrollDate(rset.getDate("ENROLLDATE"));
+                h.setHotelId(rset.getString("hotel_id"));
+                h.sethotelRate(rset.getInt("hotel_rate"));
+                h.setInfo(rset.getString("info"));
+                h.setpictureRef(rset.getString("picture_ref"));
+                h.setRegion(rset.getString("region"));
                 
                 list.add(h);
             }

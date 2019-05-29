@@ -15,7 +15,7 @@ import hotel.model.vo.Hotel;
 /**
  * Servlet implementation class HotelListServlet
  */
-@WebServlet("/HotelListServlet")
+@WebServlet("/hotel/hotelList")
 public class HotelListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -24,10 +24,17 @@ public class HotelListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String dataString = request.getParameter("hotelData");
+		System.out.println(dataString);
 		
-		List<Hotel> list = new HotelService().selectHotelList();
 		
+		
+		
+		request.setAttribute("hotelData", dataString);
+		
+		
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 		
 		
 	}
