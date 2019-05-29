@@ -25,15 +25,19 @@ public class HotelListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+
 		String dataString = request.getParameter("hotelData");
 		System.out.println(dataString);
-		
-		
-		
 		request.setAttribute("hotelData", dataString);
 		
 		System.out.println(11);
-		request.getRequestDispatcher("/WEB-INF/views/hotel/ignore.jsp").forward(request, response);
+		
+
+		request.getRequestDispatcher("/WEB-INF/views/hotel/HotelList.jsp").forward(request, response);
+
+		
+		
+		
 		
 		
 	}
