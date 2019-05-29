@@ -32,7 +32,7 @@ border:1px solid;
 <script>
 $(function(){
 	
-/* 	 $.ajax({
+/*  	 $.ajax({
 		url:"https://maps.googleapis.com/maps/api/place/photo?photoreference=CmRaAAAA77mrRjormFMt-MoRZ2WMTUQJGdWSEUXy05izyFHctlvtAZD-TooskWocHA9mVqqAKrzqG_DaPQx-xMYDSgU_BNxmwLIoVo2dnuJQYpZsd_lyJccztH6GfP-ru9M2fNH1EhAPPNRYTynKSDW3R04eMWOTGhSKYDChsxfrf19s9NKtHEt2jfr1yw&key=AIzaSyBamfF6Gj9yf1Spt6oL6sX1GB86eMTtI6U&maxheight=100&maxwidth=100",
 		type:"get",
 		success: function(data){
@@ -46,7 +46,6 @@ $(function(){
 			console.log(jqxhr);
 			console.log(textStatus);
 			console.log(errorThrown);
->>>>>>> refs/remotes/origin/khkim
 		}
 	}) */
 	
@@ -56,11 +55,6 @@ $(function(){
 	$("#info").html(<%=hotelData%>[i].info)
 	$("#rating").html(<%=hotelData%>[i].rate)
 	}
-
-	
-	
->>>>>>> refs/remotes/origin/khkim
-})
 
 </script>
 </body>
