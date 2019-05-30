@@ -12,11 +12,8 @@ footer{
 #re{
 	 display: inline-block;
 	 width: auto; 
-	 position:absolute;
-	/*  margin:0 auto; */
-	    top: 10%;
-	    left: 57%;
-	    transform: translate(-65%, 30%);
+	    top: 110px;;
+	    left: 270px;
         font-size:34px;
       	/* font-family: sans-serif; */
       	font-family: 'Nanum Gothic Coding', monospace;
@@ -25,14 +22,11 @@ footer{
       	
 }
 #cardlist{
-	/* display:flex; */
-	flex-wrap: wrap;
-	flex-direction:row;
-	flex-wrap:wrap;
-	position: absolute;
+	display: inline-block;
+	 width: auto;
+	 top:3px; 
+	width:600px;
 	height:150px;
-	left: 25%;
-	top: 30%; 
 }
 .hoteldot{
 	position: absolute;
@@ -67,7 +61,7 @@ div.ui.card{
 	left:0%;
 	top:0%;
 	width:200px;
-	height:200px;
+	height:150px;
 }
 
 
@@ -182,26 +176,32 @@ footer{
 }
 .ui.rating{
 	position:absolute;
-	top:180px;
+	top:130px;
 	left:212px;
 }
 .ui.visible.message{
-	position: fixed;
-    top: 160px;
-    left: 249px;
+	display: inline-block;
+	 width: auto;
+    top: 5px;
+    left: 2px;
     width: 714px;
     text-align: left;
 }
 
 .ui.text.menu{
-	position:fixed;
-	top:132px;
-	left:620px;
+	position:absolute;
+	top:-35px;
+	left:370px;
 	height:100px;
 	width:20px;
 }
 .header.item{
 	width:70px;
+}
+.right.floated.like.icon{
+	position:absolute;
+	top:6px;
+	left:360px
 }
 
 
