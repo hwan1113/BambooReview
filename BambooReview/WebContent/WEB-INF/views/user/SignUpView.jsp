@@ -60,7 +60,7 @@
 	 
 	 if($("#password").val()!=$("#passwordCfrm").val()){
 			alert("비밀번호가 일치하지 않습니다");
-			$("#memberId").focus();
+			$("#password").focus();
 			return false;
 		}
 		return true;
