@@ -1,0 +1,38 @@
+@charset "UTF-8";
+html	{width:1024px; height:768px; margin:0 auto; text-align: center; }
+#month{
+	display: inline-block;
+	width: auto;
+    top: -43px;
+    left: -10px;
+    width: 502px;
+font-family: 'Nanum Gothic Coding', monospace;
+}
+#year{
+	display: inline-block;
+	width: auto;
+    top: -118px;
+    left: 501.5px;
+    width: 502px;
+    font-family: 'Nanum Gothic Coding', monospace;
+}
+.month-detail{
+	position:absolute;
+    top:120px;
+    left: 160.5px;
+    width: 190px;
+}
+.year-detail{
+	position:absolute;
+    top:-60px;
+    left: 200.5px;
+    width: 155px;
+}
+footer{
+	position:absolute;
+	top:698px;
+	width:1024px;
+}
+.all{
+	height:100px;
+}
