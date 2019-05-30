@@ -17,4 +17,52 @@
     <servlet-name>UserLogin</servlet-name>
     <url-pattern>/user/userLogin</url-pattern>
   </servlet-mapping>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <servlet>
+    <servlet-name>PriceView</servlet-name>
+    <jsp-file>/WEB-INF/views/payment/PriceView.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PriceView</servlet-name>
+    <url-pattern>/price/priceInfo</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -2,17 +2,12 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
-<html>
+
+
 <head>
-<meta charset=UTF-8">
 <title>Hotel List</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/HotelList.css" />
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
-<!--bootstrap-->
-	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
-<!----------------------------------------------->
 <!-- 시맨틱 UI -->
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/Semantic/semantic.css">
 	<script
@@ -22,9 +17,11 @@
 	<script src="<%=request.getContextPath() %>/Semantic/semantic.js"></script>
 	<!----------------------------------------------->
 </head>
+
 <body style="width:1024px;" align="center" id="listbody">
-<div class="backbox"></div>
-<br />
+
+<div class="backbox">
+<p></p>
 	<h2 id="re">???지역의 호텔 리스트 입니다.</h2>
 	<div class="ui visible message"><p>정렬 방식</p>
 		<div class="ui text menu">
@@ -40,7 +37,7 @@
 			  </a>
 		</div>	
 	</div>
-	<div class="listj">정렬조건</div>
+	
 <div class="ui card" id="cardlist">
 		<div class="slideshow-container">
 		
@@ -70,16 +67,13 @@
   <div class="content">
   <div class="textarea">위치:어딘가, 시설:ㄱㅊㄱㅊ, 교통:별로임, 가격:짱비쌈</div>
     
-    <div class="header">sd
-    <i class="right floated like icon"></i>
-    
-    </div>
+    <div class="header">sd<i class="right floated like icon"></i></div>
     <div class="ui rating" data-rating="3" data-max-rating="5"></div>
   
   </div>
 </div>
 </div>
-
+</div>
 
 
 <script>
@@ -118,7 +112,5 @@ $('.ui.rating')
 })
 ;
 </script>
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
-	
-</body>
-</html>
