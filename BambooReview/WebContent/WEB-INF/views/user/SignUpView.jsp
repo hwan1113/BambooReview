@@ -15,35 +15,35 @@
    			</div>
 		</div>
   		<div class="column">
-  		  <form class="ui form" action="<%=request.getContextPath() %>/user/signup">
+  		  <form class="ui form" action="<%=request.getContextPath() %>/user/signup" onsubmit="return passwordCheck();">
 			  <div class="field">
 			    <label>이메일</label>
-			    <input type="text" name="email" placeholder="email">
+			    <input type="email" name="email" placeholder="email" required/>
 			  </div>
 			  
 			  <div class="field">
 			    <label>이름</label>
-			    <input type="text" name="name" placeholder="password">
+			    <input type="text" name="name" placeholder="name" required/>
 			  </div>
 			  
 			  <div class="field">
 			    <label>비밀번호</label>
-			    <input type="text" name="password" placeholder="password">
+			    <input type="password" name="password" placeholder="password" id="password" required/>
 			  </div>
 			  
 			  <div class="field">
 			    <label>비밀번호 확인</label>
-			    <input type="text" name="passwordCfrm" placeholder="password">
+			    <input type="password" name="passwordCfrm" placeholder="password" id="passwordCfrm" required/> 
 			  </div>
 			  
 			  <div class="field">
 			    <label>전화 번호</label>
-			    <input type="text" name="phone" placeholder="password">
+			    <input type="number" name="phone" placeholder="phone number" required/>
 			  </div>
 			  
 			  <div class="field">
 			    <div class="ui checkbox">
-			      <input type="checkbox" name="saveId">
+			      <input type="checkbox" name="saveId" required>
 			      <label>개인정보 약관에 동의합니다.</label>
 			    </div>
 			  </div>
@@ -54,6 +54,17 @@
   		</div>
   	</div>
  
- 
+ <script>
+ function passwordCheck(){
+		
+	 
+	 if($("#password").val()!=$("#passwordCfrm").val()){
+			alert("비밀번호가 일치하지 않습니다");
+			$("#memberId").focus();
+			return false;
+		}
+		return true;
+	}
+ </script>
  
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
