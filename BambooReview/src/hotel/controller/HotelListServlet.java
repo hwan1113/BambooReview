@@ -29,16 +29,8 @@ public class HotelListServlet extends HttpServlet {
 		String dataString = request.getParameter("hotelData");
 		System.out.println(dataString);
 		request.setAttribute("hotelData", dataString);
-		
-		System.out.println(11);
-		
-
 		request.getRequestDispatcher("/WEB-INF/views/hotel/HotelList.jsp").forward(request, response);
 
-		
-		
-		
-		
 		
 	}
 
