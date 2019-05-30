@@ -23,7 +23,7 @@
 			  
 			  <div class="field">
 			    <label>이름</label>
-			    <input type="text" name="password" placeholder="password">
+			    <input type="text" name="name" placeholder="password">
 			  </div>
 			  
 			  <div class="field">
@@ -33,12 +33,12 @@
 			  
 			  <div class="field">
 			    <label>비밀번호 확인</label>
-			    <input type="text" name="password" placeholder="password">
+			    <input type="text" name="passwordCfrm" placeholder="password">
 			  </div>
 			  
 			  <div class="field">
 			    <label>전화 번호</label>
-			    <input type="text" name="password" placeholder="password">
+			    <input type="text" name="phone" placeholder="password">
 			  </div>
 			  
 			  <div class="field">

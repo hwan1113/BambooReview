@@ -43,6 +43,7 @@ public class UserEnrollServlet extends HttpServlet {
 		}
     	request.setAttribute("msg", msg);
 		request.setAttribute("loc", "/");
+		
 		String view = "/WEB-INF/views/common/msg.jsp";
 		request.getRequestDispatcher(view)
 			   .forward(request, response);

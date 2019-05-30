@@ -104,6 +104,9 @@ public class UserDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, u.getEmail());
+			pstmt.setString(2, u.getPassword());
+			pstmt.setString(3, u.getUserName());
+			pstmt.setString(4, u.getPhone());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
