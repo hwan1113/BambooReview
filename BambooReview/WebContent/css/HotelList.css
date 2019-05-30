@@ -1,5 +1,6 @@
 html	{width:1024px; height:768px; margin:0 auto; text-align: center; border:1px solid black;}
 body{
+	width:1024px; height:768px; margin:0 auto; text-align: center;
 }
 #listbody{
 	background-color:#dddddd;
@@ -9,7 +10,10 @@ footer{
 	back
 }
 #re{
-	 position: absolute;
+	 display: inline-block;
+	 width: auto; 
+	 position:absolute;
+	/*  margin:0 auto; */
 	    top: 10%;
 	    left: 57%;
 	    transform: translate(-65%, 30%);
@@ -21,29 +25,29 @@ footer{
       	
 }
 #cardlist{
-	display:flex;
+	/* display:flex; */
 	flex-wrap: wrap;
 	flex-direction:row;
 	flex-wrap:wrap;
 	position: absolute;
-	height:200px;
+	height:150px;
 	left: 25%;
 	top: 30%; 
 }
 .hoteldot{
 	position: absolute;
-	top:91%;
+	top:81%;
 	left:11%;
 	height:50px;
 }
 .textarea{
-	position:absolute;
-	top:16%;
-	left:36%;
-	width:370px;
-	height:173px;
-	text-align: center;
-	font-weight:bold;
+	position: absolute;
+    top: 19%;
+    left: 36%;
+    width: 370px;
+    height: 105px;
+    text-align: center;
+    font-weight: bold;
 	
 }
 div.ui.card{
@@ -156,21 +160,48 @@ img {vertical-align: middle;}
 }
 footer{
 	position:absolute;
-	top:877px;
+	top:698px;
 	width:1024px;
 }
 
 .backbox{
-	position: fixed;
+	display: inline-block;
+	 width: auto;
+	/* position: absolute; */
 	border: 1px solid #aaaaaa;
     top: 71px;
     left: 230px;
     background-color:white;
     width: 720px;
-    height: 806px;
+    height: 627px;
     box-shadow: 5px 0px 4px #aaaaaa;
 }
+.listj{
+	position:absolute;
+	top:128px;
+}
+.ui.rating{
+	position:absolute;
+	top:180px;
+	left:212px;
+}
+.ui.visible.message{
+	position: fixed;
+    top: 160px;
+    left: 249px;
+    width: 714px;
+    text-align: left;
+}
 
-
+.ui.text.menu{
+	position:fixed;
+	top:132px;
+	left:620px;
+	height:100px;
+	width:20px;
+}
+.header.item{
+	width:70px;
+}
 
 

@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/header.css" />
-<link rel="stylesheet" href="slider.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/slider.css">
 </head>
 <body>
 	<div id="container">
