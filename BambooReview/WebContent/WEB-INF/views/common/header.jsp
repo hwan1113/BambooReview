@@ -16,7 +16,7 @@
 				<ul class="main-nav">
 					<li class="home"><a href="<%=request.getContextPath()%>/admin/adminList">관리자 페이지</a></li>
 					<li class="notice"><a href="<%=request.getContextPath()%>/price/priceInfo">가격정보</a></li>
-					<li class="board"><a href="<%=request.getContextPath()%>/member/memberInfo">내 정보보기</a></li>
+					<li class="board"><a href="<%=request.getContextPath()%>/user/userInfo">내 정보보기</a></li>
 					<li class="board"><a href="<%=request.getContextPath()%>/user/userLogin">로그인</a></li>
 				</ul>
 				</nav>
