@@ -9,9 +9,9 @@
 <head>
 <meta charset="UTF-8">
 <script
-  		src="https://code.jquery.com/jquery-3.1.1.min.js"
-  		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
- 		crossorigin="anonymous"></script>
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
 <title>이페이지는 무시하세요</title>
 <style>
 div{
@@ -45,8 +45,7 @@ for(var i=0; i < <%=hotelData%>.length; i++){
 $(function(){
 	
 	
-	
-	$("#hotelPhoto").attr("src", "https://maps.googleapis.com/maps/api/place/photo?photoreference=CmRaAAAA77mrRjormFMt-MoRZ2WMTUQJGdWSEUXy05izyFHctlvtAZD-TooskWocHA9mVqqAKrzqG_DaPQx-xMYDSgU_BNxmwLIoVo2dnuJQYpZsd_lyJccztH6GfP-ru9M2fNH1EhAPPNRYTynKSDW3R04eMWOTGhSKYDChsxfrf19s9NKtHEt2jfr1yw&key=AIzaSyBamfF6Gj9yf1Spt6oL6sX1GB86eMTtI6U&maxheight=100&maxwidth=100")
+	/* $("#hotelPhoto").attr("src", "https://maps.googleapis.com/maps/api/place/photo?photoreference=CmRaAAAA77mrRjormFMt-MoRZ2WMTUQJGdWSEUXy05izyFHctlvtAZD-TooskWocHA9mVqqAKrzqG_DaPQx-xMYDSgU_BNxmwLIoVo2dnuJQYpZsd_lyJccztH6GfP-ru9M2fNH1EhAPPNRYTynKSDW3R04eMWOTGhSKYDChsxfrf19s9NKtHEt2jfr1yw&key=AIzaSyBamfF6Gj9yf1Spt6oL6sX1GB86eMTtI6U&maxheight=100&maxwidth=100") */
 	
 	
 	<%-- for(var i=0; i < <%=hotelData%>.length; i++){

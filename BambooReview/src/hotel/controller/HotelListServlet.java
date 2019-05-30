@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import hotel.model.service.HotelService;
 import hotel.model.vo.Hotel;
 
@@ -25,10 +27,11 @@ public class HotelListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
+		String srchWord= request.getParameter("srchword");
 		String dataString = request.getParameter("hotelData");
-		System.out.println(dataString);
+		System.out.println(srchWord);
 		request.setAttribute("hotelData", dataString);
+		request.setAttribute("srchWord", srchWord);
 		request.getRequestDispatcher("/WEB-INF/views/hotel/HotelList.jsp").forward(request, response);
 
 		

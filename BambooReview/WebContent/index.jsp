@@ -77,7 +77,8 @@
       	<span>숙박후기, 여기서 보세요!</span>
       		<div class="ui category search" id="search-location">
  			 	<div class="ui icon input">
-    			<input id="srch-input" class="prompt" type="text" placeholder="Search location...">
+ 			 	
+    				<input id="srch-input" class="prompt" type="text" placeholder="Search location..." name="srch-input">
     			<i class="search icon"></i>
  				</div>
  			 	<div class="results"></div>
@@ -149,33 +150,43 @@
 	    <p class="card-text">Team Thanos. contact:ageg123@naver.com</p>
 	  </div>
 	</div>
-	<form action="<%=request.getContextPath()%>/hotel/hotelList"
-       name="hotelDataFrm" id="hotelDataFrm" method="post">
-       
-       <input type="hidden" name="hotelData" id="hotelData"/>
-   </form>
+		<form action="<%=request.getContextPath()%>/hotel/hotelList"
+      				name="hotelDataFrm" id="hotelDataFrm" method="post">
+       			<input type="hidden" name="hotelData" id="hotelData"/>
+    			<input type="hidden" name="srchword" id="srchword">
+   		</form>
+	
      	 
       </section>
     </div>
 
     <script>
       slider('.slides');
-  /*     $("#searh-button").click(function(){
+      /* function callAjax(url, callback){
+    	    var xmlhttp;
+    	    xmlhttp = new XMLHttpRequest();
+    	    xmlhttp.onreadystatechange = function(){
+    	        if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+    	            console.log(xmlhttp);
+    	        }
+    	    }
+    	    xmlhttp.open("GET", 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=hotels+in+'+
+            		$("#srch-input").val()+
+            		'&key=AIzaSyBamfF6Gj9yf1Spt6oL6sX1GB86eMTtI6U', true);
+    	    xmlhttp.send();
+    	} */
+      
+       $("#searh-button").click(function(){
     	  if($("#srch-input").val()==''){
     		  $("#srch-input").val("london")
     	  }
-          $.ajax({
+          		$.ajax({
                 url:'https://maps.googleapis.com/maps/api/place/textsearch/json?query=hotels+in+'+
                 		$("#srch-input").val()+
                 		'&key=AIzaSyBamfF6Gj9yf1Spt6oL6sX1GB86eMTtI6U',
                 type:'GET',
-                dataType:'jsonp',
-                header:{
-                	'Access-Control-Allow-Origin': 'http://localhost:9090'
-
-                },
                 success: function(data){
-                    //console.dir(data.results)
+                	console.dir(data.results)
                     Arr =[];
                     for(var i=0; i<3; i++){
                         hotel = {};
@@ -190,6 +201,7 @@
                     }
                     var json = JSON.stringify(Arr);
                     $("#hotelData").val(json)
+             		$("#srchword").val($("#srch-input").val())
                     $("#hotelDataFrm").submit()
                 },
                 error:function(jqxhr, textStatus, errorThrown){
@@ -199,7 +211,7 @@
                      console.log(errorThrown);
                 }
             })
-      }) */
+      })
       
     </script>
     </div>
