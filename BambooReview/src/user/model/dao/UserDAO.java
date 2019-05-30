@@ -36,6 +36,7 @@ public class UserDAO {
 		ResultSet rset = null;
 		
 		try {
+			System.out.println(sql);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, u.getEmail());
 			rset = pstmt.executeQuery();

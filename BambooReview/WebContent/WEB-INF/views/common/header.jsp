@@ -7,6 +7,7 @@
 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/header.css" />
 <!-- <link rel="stylesheet" href="slider.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css"/>
 </head>
 <body>
 	<div id="container">
@@ -16,8 +17,12 @@
 					<li class="home"><a href="<%=request.getContextPath()%>/admin/adminList">관리자 페이지</a></li>
 					<li class="notice"><a href="<%=request.getContextPath()%>/price/priceInfo">가격정보</a></li>
 					<li class="board"><a href="<%=request.getContextPath()%>/member/memberInfo">내 정보보기</a></li>
-					<li class="board"><a href="<%=request.getContextPath()%>/member/memberLoggedIn">로그인</a></li>
+					<li class="board"><a href="<%=request.getContextPath()%>/user/userLogin">로그인</a></li>
+				</ul>
+				</nav>
 		</header>
+	</div>
+
 	<!-- 	<nav class="navbar navbar-expand-lg navbar-light bg-light" >
   <a class="navbar-brand" href="#">Navbar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

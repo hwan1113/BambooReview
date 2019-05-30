@@ -17,7 +17,7 @@ import user.model.vo.User;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/LoginServlet")
+@WebServlet("/user/login")
 public class UserLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -30,12 +30,14 @@ public class UserLoginServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		String saveId = request.getParameter("saveId");
+		String saveId = request.getParameter("saveId");//null 혹은 on
+		
 		User u = new User();
 		u.setEmail(email);
 		u.setPassword(password);
 		
 		int result = new UserService().loginCheck(u);
+		System.out.println("result"+result);
 		
 		
 		String referer = request.getHeader("Referer");
@@ -43,14 +45,13 @@ public class UserLoginServlet extends HttpServlet {
 		String view = "/WEB-INF/views/common/msg.jsp";
 		String msg = "";
 		String loc = referer.replace(origin+request.getContextPath(), "");
+		
 		if(result ==1) {
 			msg="로그인 성공!";
 			User userLoggedIn = new UserService().selectOne(email);
 			HttpSession session = request.getSession();
 			session.setAttribute("userLoggedIn", userLoggedIn);
 			session.setMaxInactiveInterval(60*60);
-			
-			
 		}else {
 			msg = "존재하지 않는 아이디이거나 비밀번호가 틀렸습니다.";
 		}

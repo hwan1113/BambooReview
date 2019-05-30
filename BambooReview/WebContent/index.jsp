@@ -11,10 +11,11 @@
 <html onresize="parent.resizeTo(1024,768)" onload="parent.resizeTo(1024,768)">
   <head>
     <meta charset="utf-8">
+    <title>BambooReview</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="slider.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/slider.css" />
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/slider.css" />
     
     <!-- 시맨틱 UI -->
     <link rel="stylesheet" type="text/css" href="Semantic/semantic.css">
@@ -76,7 +77,7 @@
       	<span>숙박후기, 여기서 보세요!</span>
       		<div class="ui category search" id="search-location">
  			 	<div class="ui icon input">
-    			<input class="prompt" type="text" placeholder="Search location...">
+    			<input id="srch-input" class="prompt" type="text" placeholder="Search location...">
     			<i class="search icon"></i>
  				</div>
  			 	<div class="results"></div>
@@ -160,8 +161,13 @@
     <script>
       slider('.slides');
       $("#searh-button").click(function(){
+    	  if($("#srch-input").val()==''){
+    		  $("#srch-input").val("london")
+    	  }
           $.ajax({
-                url:'https://maps.googleapis.com/maps/api/place/textsearch/json?query=hotels+in+london&key=AIzaSyBamfF6Gj9yf1Spt6oL6sX1GB86eMTtI6U',
+                url:'https://maps.googleapis.com/maps/api/place/textsearch/json?query=hotels+in+'+
+                		$("#srch-input").val()+
+                		'&key=AIzaSyBamfF6Gj9yf1Spt6oL6sX1GB86eMTtI6U',
                 type:'GET',
                 success: function(data){
                     //console.dir(data.results)
@@ -177,10 +183,7 @@
                         hotel.info = data.results[i].types
                         Arr.push(hotel)
                     }
-                    //console.dir(Arr)
                     var json = JSON.stringify(Arr);
-                    //console.dir(json);
-                    //param={hotelData:json}
                     $("#hotelData").val(json)
                     $("#hotelDataFrm").submit()
                 },
