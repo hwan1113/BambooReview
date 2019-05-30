@@ -23,7 +23,7 @@ public class UserEnrollServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email =request.getParameter("email");
     	String password= request.getParameter("password");
-    	String userName = request.getParameter("userName");
+    	String userName = request.getParameter("name");
     	String phone = request.getParameter("phone");
 		
     	User u = new User();

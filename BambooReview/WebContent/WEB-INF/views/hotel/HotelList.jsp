@@ -2,8 +2,9 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-
-
+<%
+	String hotelData = (String)request.getAttribute("hotelData");
+%>
 <head>
 <title>Hotel List</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/HotelList.css" />
@@ -15,10 +16,10 @@
   		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
  		crossorigin="anonymous"></script>
 	<script src="<%=request.getContextPath() %>/Semantic/semantic.js"></script>
-	<!----------------------------------------------->
+<!----------------------------------------------->
 </head>
 
-<body style="width:1024px;" align="center" id="listbody">
+<body style= "width:100%;" align="center" id="listbody">
 
 <div class="backbox">
 <p></p>
@@ -38,41 +39,32 @@
 		</div>	
 	</div>
 	
-<div class="ui card" id="cardlist">
+	<div class="ui card" id="cardlist">
 		<div class="slideshow-container">
-		
-		<div class="listSlides fade">
-		  <img src="/BambooReview/images/main-back1.jpg" >
+			<div class="listSlides fade">
+			 	<img src="/BambooReview/images/main-back1.jpg" >
+			</div>
+			<div class="listSlides fade">
+			 	<img src="/BambooReview/images/thanos2.jpg" >
+			</div>
+			<div class="listSlides fade">
+			 	<img src="/BambooReview/images/main-back3.jpg" >
+			</div>
 		</div>
-		
-		<div class="listSlides fade">
-		  <img src="/BambooReview/images/thanos2.jpg" >
-		</div>
-		
-		<div class="listSlides fade">
-		  <img src="/BambooReview/images/main-back3.jpg" >
-		</div>
-		
-		
-		
-		</div>
-<!-- <br> -->
-
-<div style="height:20px;" class="hoteldot" >
-  <span class="dot" onclick="currentSlide(1)"></span> 
-  <span class="dot" onclick="currentSlide(2)"></span> 
-  <span class="dot" onclick="currentSlide(3)"></span> 
-</div>
-
-  <div class="content">
-  <div class="textarea">위치:어딘가, 시설:ㄱㅊㄱㅊ, 교통:별로임, 가격:짱비쌈</div>
-    
-    <div class="header">sd<i class="right floated like icon"></i></div>
-    <div class="ui rating" data-rating="3" data-max-rating="5"></div>
-  
-  </div>
-</div>
-</div>
+	<!-- <br> -->
+	
+	<div style="height:20px;" class="hoteldot" >
+	  <span class="dot" onclick="currentSlide(1)"></span> 
+	  <span class="dot" onclick="currentSlide(2)"></span> 
+	  <span class="dot" onclick="currentSlide(3)"></span> 
+	</div>
+	
+	  <div class="content">
+	    <div class="header">sd<i class="right floated like icon"></i></div>
+	  	<div class="textarea">위치:어딘가, 시설:ㄱㅊㄱㅊ, 교통:별로임, 가격:짱비쌈</div>
+	    <div class="ui rating" data-rating="3" data-max-rating="5"></div>
+	  </div>
+	</div>
 </div>
 
 

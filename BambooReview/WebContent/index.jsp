@@ -160,7 +160,7 @@
 
     <script>
       slider('.slides');
-      $("#searh-button").click(function(){
+  /*     $("#searh-button").click(function(){
     	  if($("#srch-input").val()==''){
     		  $("#srch-input").val("london")
     	  }
@@ -169,11 +169,11 @@
                 		$("#srch-input").val()+
                 		'&key=AIzaSyBamfF6Gj9yf1Spt6oL6sX1GB86eMTtI6U',
                 type:'GET',
-              /*   dataType:'jsonp',
+                dataType:'jsonp',
                 header:{
                 	'Access-Control-Allow-Origin': 'http://localhost:9090'
 
-                }, */
+                },
                 success: function(data){
                     //console.dir(data.results)
                     Arr =[];
@@ -199,7 +199,7 @@
                      console.log(errorThrown);
                 }
             })
-      })
+      }) */
       
     </script>
     </div>
