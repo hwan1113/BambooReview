@@ -4,8 +4,7 @@
 <%
 	List<Review> list = (List<Review>)request.getAttribute("list");
 	String pageBar = (String)request.getAttribute("pageBar");
-	//header.jsp에 memberLoggedIn변수를 선언했으므로, 이 페이지에서는 선언할 필요 없음.
-	//Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
+
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" />		
