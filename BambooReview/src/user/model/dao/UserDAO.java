@@ -140,11 +140,12 @@ public class UserDAO {
 
 	public int updateUser(Connection conn, User u) {
 		int result = 0;
+		String sql = prop.getProperty("updateuser");
 		PreparedStatement pstmt = null;
-		String query = prop.getProperty("updateuser"); 
-
+		ResultSet rset = null;
+		
 		try {
-			pstmt = conn.prepareStatement(query);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, u.getUserName());
 			pstmt.setString(2, u.getPhone());
 			pstmt.setString(3, u.getEmail());
@@ -152,11 +153,10 @@ public class UserDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(rset);
 			close(pstmt);
 		}
 		
 		return result;
-		
 	}
-
 }

@@ -30,6 +30,20 @@ header nav {
 	width: 100%;
 	margin-top: 0px;
 }
+#userinfo{
+	display:inline-block;
+	width:auto;
+	position:absolute;
+	left:300px;
+	top:30px;
+	list-style-type: none;
+	width: 8em;
+	height: 1px;
+	float: left;
+	text-align: center;
+	font-family: '휴먼모음T', sans-serif;
+	margin-top:20px
+}
 ul.main-nav{
 	display: table;
 	padding: 0px;

@@ -57,6 +57,7 @@ public class UserLoginServlet extends HttpServlet {
 		//Origin 가져올 수 없음.
 		String origin = request.getHeader("Origin");
 		System.out.println("origin="+origin);
+		System.out.println("email= "+email);
 		String view = "/WEB-INF/views/common/msg.jsp";
 		
 		String loc = referer.replace(request.getContextPath(), "");

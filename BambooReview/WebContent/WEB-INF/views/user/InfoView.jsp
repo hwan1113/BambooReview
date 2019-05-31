@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%User u = (User)request.getAttribute("email");%>
 <%@ include file="/WEB-INF/views/common/headerCommon.jsp" %>
  <style>
  #space{
@@ -28,10 +29,11 @@
 			</div>
   		</div>
  		 <div class="five wide column">
-    		<form class="ui form" action="<%=request.getContextPath() %>/user/signup" onsubmit="return passwordCheck();">
+    		<form class="ui form" action="<%=request.getContextPath() %>/user/update" onsubmit="return passwordCheck();">
 			  <div class="field">
 			    <label>이메일</label>
-			    <input type="email" name="email" placeholder="email" required>
+			   <!--  <input type="email" name="email" placeholder="email" required> -->
+			   <%--  <input type="email" name="email" id="memberId_" value="<%=u.getEmail()%>" readonly required/> --%>
 			  </div>
 			  
 			  <div class="field">
@@ -39,7 +41,7 @@
 			    <input type="text" name="password" placeholder="name" required>
 			  </div>
 			  
-			  <div class="field">
+			  <!-- <div class="field">
 			    <label>비밀번호</label>
 			    <input type="password" name="password" placeholder="password" id="password" required>
 			  </div>
@@ -47,7 +49,7 @@
 			  <div class="field">
 			    <label>비밀번호 확인</label>
 			    <input type="password" name="passwordCfm" placeholder="password" id="passwordCfm" required>
-			  </div>
+			  </div> -->
 			  
 			  <div class="field">
 			    <label>전화 번호</label>
@@ -62,11 +64,11 @@
 	
 	<script>
 	function passwordCheck(){
-		if($("#password").val()!=$("#passwordCfrm").val()){
+		/* if($("#password").val()!=$("#passwordCfrm").val()){
 			alert("비밀번호가 일치하지 않습니다");
 			$("#password").focus();
 			return false;
-			}
+			} */
 		
 		//////////////비밀번호 정규화, 최종버전에서 사용할것
 		/* var password = $("#password").val();

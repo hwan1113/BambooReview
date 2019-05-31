@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%User u = (User)request.getAttribute("email");%>
  <%@ include file="/WEB-INF/views/common/headerCommon.jsp" %>
  <style>
  #space{
@@ -7,6 +8,10 @@
  type:inline-block;
  }
  </style>
+ <form name="checkIdDuplicateFrm" method="post">
+	<input type="hidden" name="email" />
+</form>
+
 <title>LoginView</title>
 	<div class="ui two column centered grid">
   		<div class="column centered row">
@@ -19,6 +24,7 @@
 			  <div class="field" >
 			    <label>이메일</label>
 			    <input type="email" name="email" placeholder="email" id="memberId"/>
+			    
 			  </div>
 			  <div class="field" >
 			    <label>비밀번호</label>

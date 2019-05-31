@@ -16,13 +16,18 @@ import user.model.vo.User;
 /**
  * Servlet implementation class UserUpdateServlet
  */
-@WebServlet("/UserUpdateServlet")
+@WebServlet("/user/update")
 public class UserUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	String userName = request.getParameter("userName");
-    	String phone = request.getParameter("phone");
+		request.setCharacterEncoding("UTF-8");
+		
+		
+		String userName = request.getParameter("name");
+		String phone = request.getParameter("phone");
+
+
 		
     	User u = new User();
     	u.setUserName(userName);
@@ -30,13 +35,29 @@ public class UserUpdateServlet extends HttpServlet {
     	
     	int result = new UserService().updateUser(u);
     	
-    	String view = "/WEB-INF/views/common/msg.jsp";
+    	
+    	String msg = "";
+    	if(result > 0) {
+			msg = "회원수정성공!";
+		}
+		else {
+			msg = "회원수정실패!";
+		}
+    	request.setAttribute("msg", msg);
+		request.setAttribute("loc", "/");
+		
+		String view = "/WEB-INF/views/common/msg.jsp";
+		request.getRequestDispatcher(view)
+			   .forward(request, response);
+	}
+    	
+    	/*String view = "/WEB-INF/views/common/msg.jsp";
 		String msg = "";
 		String loc = "/";
 		
 		if(result>0) {
 			msg = "성공적으로 회원정보를 수정했습니다.";
-			loc = "/member/memberView?memberId="+u.getEmail();
+			loc = "/user/userView?email="+u.getEmail();
 			HttpSession session = request.getSession();
 			session.setAttribute("userLoggedIn", new UserService().selectOne(u.getEmail()));
 		}
@@ -47,7 +68,7 @@ public class UserUpdateServlet extends HttpServlet {
 		request.setAttribute("loc", loc);
 		
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
-		reqDispatcher.forward(request, response);
+		reqDispatcher.forward(request, response);*/
     	
     	
     	
@@ -55,7 +76,7 @@ public class UserUpdateServlet extends HttpServlet {
     	
     	
 		
-	}
+	/*}*/
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

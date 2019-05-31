@@ -13,7 +13,9 @@ import user.model.vo.User;
 /**
  * Servlet implementation class UserViewServlet
  */
-@WebServlet("/UserViewServlet")
+/*@WebServlet("/UserViewServlet")*/
+@WebServlet(urlPatterns= {"/user/userView"},
+name= "UserViewServlet")
 public class UserViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,7 +31,7 @@ public class UserViewServlet extends HttpServlet {
 		String msg = "";
 		
 		if(u != null) {
-			view = "/WEB-INF/views/member/memberView.jsp";
+			view = "/WEB-INF/views/user/InfoView.jsp";
 			request.setAttribute("user", u);
 		}else {
 			view = "/WEB-INF/views/common/msg.jsp";

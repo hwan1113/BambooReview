@@ -43,7 +43,7 @@
 			</style>
 		<% }
 		//관리자로 로그인 한 경우
-		else if(LoggedIn == "admin"){%>
+		else if(LoggedIn == "test@test"){%>
 			<style>
 			#login-button{display:none;}
 			</style>
@@ -54,13 +54,13 @@
 		.home{display:none;}
 		#login-button{display:none;}
 		</style>
+			<a href="<%=request.getContextPath()%>/user/userView?email=<%=userLoggedIn.getEmail()%>" id="userinfo">내 정보보기</a>
 		<%}	%>
 		<nav>
 				<ul class="main-nav">
 					<a href="<%=request.getContextPath()%>/" class="home-logo"><!-- <div class="home-logo"></div> --></a>
 					<li class="home"><a href="<%=request.getContextPath()%>/admin/adminList">관리자 페이지</a></li>
 					<li class="notice"><a href="<%=request.getContextPath()%>/price/priceInfo">가격정보</a></li>
-					<li class="board" id="userinfo"><a href="<%=request.getContextPath()%>/user/userInfo">내 정보보기</a></li>
 					<li class="board" id="login-button"><a href="<%=request.getContextPath()%>/user/userLogin">로그인/회원가입</a></li>
 					<li class="board" id="logout-button"><a href="<%=request.getContextPath()%>/user/logout">로그아웃</a></li>
 				</ul>
