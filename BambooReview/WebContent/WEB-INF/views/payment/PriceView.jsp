@@ -27,7 +27,7 @@
   </div>
 </div>
 <div class="ui buttons">
-  <button class="ui button">뒤로가기</button>
+  <button class="ui button" onclick="location.href='index.jsp' ">뒤로가기</button>
   <div class="or"></div>
   <button class="ui positive button">결제하기</button>
 </div>
