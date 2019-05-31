@@ -15,14 +15,14 @@
    			</div>
 		</div>
   		<div class="column">
-  		  <form class="ui form" action="<%=request.getContextPath() %>/user/login">
-			  <div class="field">
+  		  <form class="ui form" action="<%=request.getContextPath() %>/user/login" onsubmit="return loginValidate();">
+			  <div class="field" >
 			    <label>이메일</label>
-			    <input type="text" name="email" placeholder="email">
+			    <input type="email" name="email" placeholder="email" id="memberId"/>
 			  </div>
-			  <div class="field">
+			  <div class="field" >
 			    <label>비밀번호</label>
-			    <input type="text" name="password" placeholder="password">
+			    <input type="password" name="password" placeholder="password" id="password"/>
 			  </div>
 			  
 			  <div class="field">
@@ -32,7 +32,7 @@
 			    </div>
 			  </div>
 			  
-  				<button class="ui button" type="submit">Submit</button>
+  				<button class="ui button" type="submit">로그인</button>
 			</form>
 			 <div class="ui message">
  				 <div class="header">
@@ -95,7 +95,20 @@ function renderButton() {
    });
 }
 
-
+function loginValidate(){
+	if($("#memberId").val().trim().length == 0){
+		alert("아이디를 입력하세요.");
+		$("#memberId").focus();
+		return false;
+	}
+	
+	if($("#password").val().trim().length == 0){
+		alert("비밀번호를 입력하세요.");
+		$("#password").focus();
+		return false;
+	}
+	return true;
+}
 </script>
 
 
