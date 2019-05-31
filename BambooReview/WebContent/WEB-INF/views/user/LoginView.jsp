@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ include file="/WEB-INF/views/common/headerCommon.jsp" %>
  <style>
  #space{
  height:100px;
  type:inline-block;
  }
  </style>
+ <%@ include file="/WEB-INF/views/common/headerCommon.jsp" %>
 <title>LoginView</title>
 	<div class="ui two column centered grid">
   		<div class="column centered row">
@@ -69,9 +69,9 @@ function onSuccess(googleUser) {
       console.log('Email: ' + profile.getEmail());
       var id_token = googleUser.getAuthResponse().id_token;
       
-      $("#userName").val(json)
+      $("#userName").val(profile.getName())
       $("#email").val(profile.getEmail())
-      $("#picture").val(json)
+      $("#picture").val(profile.getImageUrl())
       $("#googleUserFrm").submit()
       
       

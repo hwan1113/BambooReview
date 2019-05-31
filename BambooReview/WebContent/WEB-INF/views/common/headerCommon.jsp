@@ -32,30 +32,7 @@
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 </head>
 <body>
-	<div id="container">
-		<% String LoggedIn=null;%>
-		<header style="height:130px">
-		<% if(LoggedIn == null){ %>
-			<style>
-			.home{display:none;}
-			#userinfo{display:none;}
-			#logout-button{display:none;}
-			</style>
-		<% }
-		//관리자로 로그인 한 경우
-		else if(LoggedIn == "admin"){%>
-			<style>
-			#login-button{display:none;}
-			</style>
-		<%}	
-		//일반 회원으로 로그인 한 경우
-		else{%>
-		<style>
-		.home{display:none;}
-		#login-button{display:none;}
-		</style>
-		<%}	%>
-		<nav>
+				<nav>
 				<ul class="main-nav">
 					<a href="<%=request.getContextPath()%>/" class="home-logo"><!-- <div class="home-logo"></div> --></a>
 					<li class="home"><a href="<%=request.getContextPath()%>/admin/adminList">관리자 페이지</a></li>
@@ -67,8 +44,6 @@
 				</nav>
 		
 			
-		</header>
-	</div>
 	<script>
 	jQuery('#toggle').click(function () {  
 	    if($("#id").css("display") == "none"){   

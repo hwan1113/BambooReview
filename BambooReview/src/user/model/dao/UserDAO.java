@@ -84,7 +84,7 @@ public class UserDAO {
 				u.setPhone(rset.getString("phone"));
 				u.setEnrollDate(rset.getDate("enrolldate"));
 				u.setQuitDate(rset.getDate("quitdate"));
-				u.setStatus(rset.getInt("status"));
+				u.setStatus(rset.getString("status"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -157,6 +157,102 @@ public class UserDAO {
 		
 		return result;
 		
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public int insertGoogleUser(Connection conn, User u) {
+		int result = 0;
+		String sql = prop.getProperty("insertGoogleUser");
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, u.getEmail());
+			pstmt.setString(2, u.getPassword());
+			pstmt.setString(3, u.getUserName());
+			pstmt.setString(4, u.getPhone());
+			pstmt.setString(5, u.getStatus());
+			pstmt.setString(6, u.getProfile());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }
