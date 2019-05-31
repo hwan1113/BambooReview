@@ -35,7 +35,7 @@
 	<div id="container">
 		<% String LoggedIn=null;%>
 		<header style="height:130px">
-		<% if(LoggedIn == null){ %>
+		<% if(userLoggedIn == null){ %>
 			<style>
 			.home{display:none;}
 			#userinfo{display:none;}
@@ -62,7 +62,7 @@
 					<li class="notice"><a href="<%=request.getContextPath()%>/price/priceInfo">가격정보</a></li>
 					<li class="board" id="userinfo"><a href="<%=request.getContextPath()%>/user/userInfo">내 정보보기</a></li>
 					<li class="board" id="login-button"><a href="<%=request.getContextPath()%>/user/userLogin">로그인/회원가입</a></li>
-					<li class="board" id="logout-button"><a href="<%=request.getContextPath()%>/user/userLogout">로그아웃</a></li>
+					<li class="board" id="logout-button"><a href="<%=request.getContextPath()%>/user/logout">로그아웃</a></li>
 				</ul>
 				</nav>
 		
