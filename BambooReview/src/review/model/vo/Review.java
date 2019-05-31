@@ -4,7 +4,8 @@ import java.sql.Date;
 
 public class Review {
 	private int reviewNo; //게시글번호
-	private int customerNo;	//작성자 회원번호
+	private int customerNo; //작성자 회원번호
+	private String reviewWriter;	//작성자
 	private String hotelId;	//참조하는 호텔 고유 아이디값
 	private int reviewRate;	//리뷰 점수
 	private String reviewTitle;	//리뷰 제목
@@ -17,11 +18,12 @@ public class Review {
 	public Review() {
 		super();
 	}
-	public Review(int reviewNo, int customerNo, String hotelId, int reviewRate, String reviewTitle,
+	public Review(int reviewNo, int customerNo, String reviewWriter, String hotelId, int reviewRate, String reviewTitle,
 			String reviewContent, Date writtenDate, Date modifiedDate, int readCnt, int likeCnt, int disLikeCnt) {
 		super();
 		this.reviewNo = reviewNo;
 		this.customerNo = customerNo;
+		this.reviewWriter = reviewWriter;
 		this.hotelId = hotelId;
 		this.reviewRate = reviewRate;
 		this.reviewTitle = reviewTitle;
@@ -38,11 +40,20 @@ public class Review {
 	public void setReviewNo(int reviewNo) {
 		this.reviewNo = reviewNo;
 	}
+	
 	public int getCustomerNo() {
 		return customerNo;
 	}
+	
 	public void setCustomerNo(int customerNo) {
 		this.customerNo = customerNo;
+	}
+	
+	public String getReviewWriter() {
+		return reviewWriter;
+	}
+	public void setReviewWriter(String reviewWriter) {
+		this.reviewWriter = reviewWriter;
 	}
 	public String getHotelId() {
 		return hotelId;
@@ -100,7 +111,7 @@ public class Review {
 	}
 	@Override
 	public String toString() {
-		return "Review [reviewNo=" + reviewNo + ", customerNo=" + customerNo + ", hotelId=" + hotelId + ", reviewRate="
+		return "Review [reviewNo=" + reviewNo + ", customerNo=" + customerNo + ", reviewWriter=" + reviewWriter + ", hotelId=" + hotelId + ", reviewRate="
 				+ reviewRate + ", reviewTitle=" + reviewTitle + ", reviewContent=" + reviewContent + ", writtenDate="
 				+ writtenDate + ", modifiedDate=" + modifiedDate + ", readCnt=" + readCnt + ", likeCnt=" + likeCnt
 				+ ", disLikeCnt=" + disLikeCnt + "]";

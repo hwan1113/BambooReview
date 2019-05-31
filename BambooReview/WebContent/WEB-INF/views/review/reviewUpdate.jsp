@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
+<%@ page import="review.model.vo.*" %>
+<%
+	Review r = (Review)request.getAttribute("review");
+%>
 
-<title>Review 작성</title>
+<title>Review 수정</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/review.css" />
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/jquery-3.4.0.js"></script>
@@ -72,11 +76,12 @@
 	<form action="<%=request.getContextPath()%>/review/reviewFormEnd"
 		  method="post"
 		  enctype="multipart/form-data">
-	제목: <input id="title" type="text" name="reviewTitle" required />&nbsp;&nbsp;&nbsp;
+	제목: <input id="title" type="text" name="reviewTitle" 
+				value="<%=r.getReviewTitle() %>"required />&nbsp;&nbsp;&nbsp;
 	작성자: <input id="writer" type="text" name="reviewWriter" 
 				 value="<%=userLoggedIn.getCustomerNo()%>" readonly/>
-		<textarea id="summernote" name="reviewContent"></textarea>
-		<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">작성</button>
+		<textarea id="summernote" name="reviewContent"><%=b.getReviewContent() %></textarea>
+		<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">수정</button>
 		<button type="button" class="btn btn-warning">취소</button>
 	  
 	</form>

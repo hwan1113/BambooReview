@@ -1,25 +1,20 @@
 package review.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
-import com.oreilly.servlet.MultipartRequest;
-
 import review.model.service.ReviewService;
 import review.model.vo.Review;
 
 /**
- * Servlet implementation class ReviewFormEndServlet
+ * Servlet implementation class ReviewUpdateEndServlet
  */
-@WebServlet("/review/reviewFormEnd")
-public class ReviewFormEndServlet extends HttpServlet {
+@WebServlet("/review/reviewUpdateEnd")
+public class ReviewUpdateEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -37,7 +32,7 @@ public class ReviewFormEndServlet extends HttpServlet {
 		r.setReviewContent(reviewContent);
 		
 		//2. 업무로직
-		int result = new ReviewService().insertReview(r);
+		int result = new ReviewService().updateReview(r);
 		
 		String msg = "";
 		String loc = "/review/reviewList";
@@ -56,8 +51,6 @@ public class ReviewFormEndServlet extends HttpServlet {
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp")
 			   .forward(request, response);
-		
-		
 	}
 
 	/**
@@ -67,4 +60,5 @@ public class ReviewFormEndServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }
