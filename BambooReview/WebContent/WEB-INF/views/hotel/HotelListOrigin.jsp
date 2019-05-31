@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="org.json.*" %>
+<%@ page import="javax.servlet.*" %>
 <%@ include file="/WEB-INF/views/common/headerCommon.jsp" %>
 <%
 	String hotelData = (String)request.getAttribute("hotelData");

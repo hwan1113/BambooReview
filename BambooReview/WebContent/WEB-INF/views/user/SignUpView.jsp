@@ -47,17 +47,16 @@
 			      <label>개인정보 약관에 동의합니다.</label>
 			    </div>
 			  </div>
-			  
-  				<button class="ui button" type="submit">Submit</button>
-  				<button class="ui red button" type="submit">뒤로가기 </button>
+  				<button class="ui button" type="submit">회원가입</button>
+  				<input type="button" class="ui red button" value="뒤로가기"
+  				onclick="location.href='<%=request.getContextPath()%>/user/userLogin'">
+  			
 			</form>
   		</div>
   	</div>
  
  <script>
  function passwordCheck(){
-		
-	 
 	 if($("#password").val()!=$("#passwordCfrm").val()){
 			alert("비밀번호가 일치하지 않습니다");
 			$("#password").focus();

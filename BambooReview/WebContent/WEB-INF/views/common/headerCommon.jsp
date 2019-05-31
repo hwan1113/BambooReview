@@ -1,5 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="user.model.vo.*" %>
+<%@ page import="javax.servlet.*" %>
+<%   
+	User userLoggedIn = (User)session.getAttribute("userLoggedIn");
+	Cookie[] cookies = request.getCookies();
+	boolean saveIdFlag = false;
+	String userId = "";
+	if(cookies != null){
+		for(Cookie c: cookies){
+			String key = c.getName();
+			String value = c.getValue();
+			if("saveId".equals(key)){
+				saveIdFlag = true;
+				userId = value;
+			}
+		}
+	}
+%> 
 <!DOCTYPE html>
 <html>
 <head>
