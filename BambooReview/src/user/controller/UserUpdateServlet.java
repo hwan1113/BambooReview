@@ -16,7 +16,8 @@ import user.model.vo.User;
 /**
  * Servlet implementation class UserUpdateServlet
  */
-@WebServlet("/user/update")
+@WebServlet(name="UserUpdateServlet", 
+urlPatterns="/user/userUpdate")
 public class UserUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -24,7 +25,7 @@ public class UserUpdateServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		
-		String userName = request.getParameter("name");
+		String userName = request.getParameter("userName");
 		String phone = request.getParameter("phone");
 
 
@@ -36,7 +37,7 @@ public class UserUpdateServlet extends HttpServlet {
     	int result = new UserService().updateUser(u);
     	
     	
-    	String msg = "";
+    	/*String msg = "";
     	if(result > 0) {
 			msg = "회원수정성공!";
 		}
@@ -49,9 +50,9 @@ public class UserUpdateServlet extends HttpServlet {
 		String view = "/WEB-INF/views/common/msg.jsp";
 		request.getRequestDispatcher(view)
 			   .forward(request, response);
-	}
+	}*/
     	
-    	/*String view = "/WEB-INF/views/common/msg.jsp";
+    	String view = "/WEB-INF/views/common/msg.jsp";
 		String msg = "";
 		String loc = "/";
 		
@@ -68,7 +69,7 @@ public class UserUpdateServlet extends HttpServlet {
 		request.setAttribute("loc", loc);
 		
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
-		reqDispatcher.forward(request, response);*/
+		reqDispatcher.forward(request, response);
     	
     	
     	
@@ -76,7 +77,7 @@ public class UserUpdateServlet extends HttpServlet {
     	
     	
 		
-	/*}*/
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

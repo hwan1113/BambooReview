@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 
 public class User implements Serializable, HttpSessionBindingListener{
+	
 	private static final long serialVersionUID = 1L;
 	
 	private String email;
@@ -88,6 +89,9 @@ public class User implements Serializable, HttpSessionBindingListener{
 	}
 	public void setCustomer_no(int customer_no) {
 		this.customer_no = customer_no;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 	@Override

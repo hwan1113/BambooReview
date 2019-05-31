@@ -54,7 +54,9 @@
 		.home{display:none;}
 		#login-button{display:none;}
 		</style>
-			<a href="<%=request.getContextPath()%>/user/userView?email=<%=userLoggedIn.getEmail()%>" id="userinfo">내 정보보기</a>
+		<input type="button" value="내정보보기" 
+								   onclick="location.href='<%=request.getContextPath()%>/user/userView?email=<%=userLoggedIn.getEmail()%>'" id="userinfo"/>
+			<a href="<%=request.getContextPath()%>/user/userView?email=<%=userLoggedIn.getEmail()%>">내 정보보기</a>
 		<%}	%>
 		<nav>
 				<ul class="main-nav">
