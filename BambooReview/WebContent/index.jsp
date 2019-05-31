@@ -4,44 +4,32 @@
  <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Landing</title>
- 
- <script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
-  
-  <link rel="stylesheet" type="text/css" href="css/backgroundTransition.css" />
-  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script type="text/javascript" src="backgroundTransition.js"></script>
-   
-   <script src="<%=request.getContextPath()%>/slider.js"></script>
-   <link rel="stylesheet" href="<%=request.getContextPath()%>/css/slider.css" />
+ <title>Welcome, BambooReview</title>
 
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css"/>
+  <!--------------------Full page--------------------------->
+  <script src="<%=request.getContextPath()%>/js/slider.js"></script>
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/slider.css" />
+  <!----------------------------------------------->
+
+  <link rel="stylesheet" type="text/css" href="css/backgroundTransition.css" />
+  
  </head>
+ 
   <body>
     <div class="slides">
       <section id="first">
-      	<div class="ui menu" style="background-color:#68b30d; opacity: 0.8;">
-  			<div class="header item">
-    			<a href="<%=request.getContextPath()%>" class="home-logo"><img style= "height:85px"src="<%=request.getContextPath()%>/images/bambooHeader.png"></a>
- 			 </div>
-			  <a class="item right">
-  			  About Us
- 			 </a>
- 			 <a class="item">
-   			 Jobs
-  			</a>
-  			<a class="item">
-    		Locations
-  			</a>
-		</div>
+      	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	
+	<!--------------------Scroll page--------------------------->
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="js/backgroundTransition.js"></script>
+	<!----------------------------------------------->
+	
 		<div class="div1"></div>
 		<div class="backgroundTransition"></div>
 		
 		<img src="/BambooReview/images/bamboo.png" id="page1-logo" />
-      	<span id="page1-intro">전세계 모든 숙박 시설에 대해 솔직하고 믿을 수 있는 <br><br> 후기를 남길 수 있는 리뷰 커뮤니티</span>
+      	<span id="page1-intro">전세계 모든 숙박 시설에  <br>대해 솔직하고 믿을 수 있는 <br> 후기를 남길 수 있는 리뷰 커뮤니티</span>
       </section>
       
       <section id="second">
@@ -55,12 +43,17 @@
  			 <div class="results"></div>
  		</div>
  		<button class="ui green button" id="searh-button">search</button>
+ 		 <form action="<%=request.getContextPath()%>/hotel/hotelList"
+      				name="hotelDataFrm" id="hotelDataFrm" method="post">
+       			<input type="hidden" name="hotelData" id="hotelData"/>
+    			<input type="hidden" name="srchword" id="srchword">
+   		</form>
  		
       </section>
       
       <section id="third" class="animated">
     	 <!--1번-->
-      	<div class="card mb-3" style="max-width: 540px;" id="main-card1">
+      	<div class="card mb-3" id="main-card1">
   				<div class="row no-gutters">
     				<div class="col-md-4">
       					<img src="/BambooReview/images/main-review1.jpg" class="main-review">
@@ -75,7 +68,7 @@
   				</div>
 		</div>
 		<!--2번-->
-		<div class="card mb-3" style="max-width: 540px;" id="main-card2">
+		<div class="card mb-3"  id="main-card2">
   				<div class="row no-gutters">
     				<div class="col-md-4">
       					<img src="/BambooReview/images/main-review2.jpg" class="main-review">
@@ -90,7 +83,7 @@
   			</div>
 		</div>
 		<!--3번-->
-		<div class="card mb-3" style="max-width: 540px;" id="main-card3">
+		<div class="card mb-3" id="main-card3">
   				<div class="row no-gutters">
     				<div class="col-md-4">
       					<img src="/BambooReview/images/main-review3.jpg" class="main-review">
@@ -105,16 +98,20 @@
   			</div>
 		</div>
 		<div class="div3"></div>
-		<span>유저 후기로 인증된 신뢰 1위 커뮤니티</span>
+		<span>유저 후기로 인증된 <br>신뢰 1위 커뮤니티</span>
       </section>
       
       <section id="fourth">
-
-      </section>
-      
-      <section id="mandarin">
-   
-      
+		<div class="div4"></div>
+      	<span class="adver1">숙박 광고를 위한<br> 최고의 파트너  </span>
+      	<span class="adver2">여행을 계획하고있는 수많은 고객이 방문하는 <br>BamBooReview에서 최상의 광고효과를 얻을 수 있습니다!  </span>
+      	<div class="card" id="thanos">
+	  		<img src="/BambooReview/images/thanos.jpg" class="card-img-top">
+	  		<div class="card-body">
+	    	<p class="card-text">Team Thanos. contact:ageg123@naver.com</p>
+	  		</div>
+		</div>
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
       </section>
     </div>
 
@@ -135,6 +132,56 @@
 			  animationSpeed: 400
 		  });
 	  });
+      /* function callAjax(url, callback){
+	    var xmlhttp;
+	    xmlhttp = new XMLHttpRequest();
+	    xmlhttp.onreadystatechange = function(){
+	        if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+	            console.log(xmlhttp);
+	        }
+	    }
+	    xmlhttp.open("GET", 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=hotels+in+'+
+      		$("#srch-input").val()+
+      		'&key=AIzaSyBamfF6Gj9yf1Spt6oL6sX1GB86eMTtI6U', true);
+	    xmlhttp.send();
+	} */
+
+ 	$("#searh-button").click(function(){
+	  if($("#srch-input").val()==''){
+		  $("#srch-input").val("london")
+	  }
+    		$.ajax({
+          url:'https://maps.googleapis.com/maps/api/place/textsearch/json?query=hotels+in+'+
+          		$("#srch-input").val()+
+          		'&key=AIzaSyBamfF6Gj9yf1Spt6oL6sX1GB86eMTtI6U',
+          type:'GET',
+          success: function(data){
+          	console.dir(data.results)
+              Arr =[];
+              for(var i=0; i<3; i++){
+                  hotel = {};
+                  hotel.id = data.results[i].place_id
+                  hotel.name = data.results[i].name
+                  if(data.results[i].photos){
+                  hotel.photo = data.results[i].photos[0].photo_reference}
+                  hotel.address = data.results[i].formatted_address
+                  hotel.rate = data.results[i].rating
+                  hotel.info = data.results[i].types
+                  Arr.push(hotel)
+              }
+              var json = JSON.stringify(Arr);
+              $("#hotelData").val(json)
+       		$("#srchword").val($("#srch-input").val())
+              $("#hotelDataFrm").submit()
+          },
+          error:function(jqxhr, textStatus, errorThrown){
+              console.log("ajax처리실패!")
+              console.log(jqxhr);
+               console.log(textStatus);
+               console.log(errorThrown);
+          }
+      })
+})
     </script>
   </body>
 </html>

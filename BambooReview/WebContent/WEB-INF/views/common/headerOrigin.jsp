@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="user.model.vo.*" %>
-<%@ page import="javax.servlet.*" %>
-<%   
+<%
 	User userLoggedIn = (User)session.getAttribute("userLoggedIn");
 	Cookie[] cookies = request.getCookies();
 	boolean saveIdFlag = false;
@@ -17,22 +16,41 @@
 			}
 		}
 	}
-%> 
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/header.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css"/>
-<script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
-<!-- <meta name="google-signin-client_id" content="401915479611-85lnc5b082en3f07kq9jsd628oshv494.apps.googleusercontent.com">
-<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
 </head>
-<body>
-				<nav>
+<body style="width:1024px;" align="center" id="listbody">
+	<div id="container">
+	<% String LoggedIn=null;%>
+		<header>
+		<% if(LoggedIn == null){ %>
+			<style>
+			.home{display:none;}
+			#userinfo{display:none;}
+			#logout-button{display:none;}
+			</style>
+		<% }
+		//관리자로 로그인 한 경우
+		else if(LoggedIn == "admin"){%>
+			<style>
+			#login-button{display:none;}
+			</style>
+		<%}	
+		//일반 회원으로 로그인 한 경우
+		else{%>
+		<style>
+		.home{display:none;}
+		#login-button{display:none;}
+		</style>
+		<%}	%>
+		
+			<nav>
 				<ul class="main-nav">
 					<a href="<%=request.getContextPath()%>/" class="home-logo"><!-- <div class="home-logo"></div> --></a>
 					<li class="home"><a href="<%=request.getContextPath()%>/admin/adminList">관리자 페이지</a></li>
@@ -42,14 +60,5 @@
 					<li class="board" id="logout-button"><a href="<%=request.getContextPath()%>/user/userLogout">로그아웃</a></li>
 				</ul>
 				</nav>
-		
-			
-<script>
-jQuery('#toggle').click(function () {  
-    if($("#id").css("display") == "none"){   
-        jQuery('#id').show();  
-    } else {  
-        jQuery('#id').hide();  
-    }  
-});  
-</script>
+		</header>
+	</div>

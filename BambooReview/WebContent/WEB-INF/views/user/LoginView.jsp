@@ -6,7 +6,9 @@
  type:inline-block;
  }
  </style>
- <%@ include file="/WEB-INF/views/common/headerCommon.jsp" %>
+ <%@ include file="/WEB-INF/views/common/header.jsp" %>
+ <meta name="google-signin-client_id" content="401915479611-85lnc5b082en3f07kq9jsd628oshv494.apps.googleusercontent.com">
+ <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <title>LoginView</title>
 	<div class="ui two column centered grid">
   		<div class="column centered row">
@@ -40,7 +42,7 @@
  				 </div>
  				 <p><a href="<%=request.getContextPath()%>/user/userSignup">회원 가입하러가기!</a></p>
 			</div>
-			<div id="my-signin2"></div>
+				<div id="my-signin2"></div>
 			<a href="#" onclick="signOut();">Sign out</a>
 			
 			
