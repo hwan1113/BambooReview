@@ -55,23 +55,18 @@
   		<a class="item" href="<%=request.getContextPath()%>/user/userLogin">
     		로그인
   		</a>
- 		<%} else{
- 		switch(userLoggedIn.getStatus()) {
- 			case "A":{%>
- 			<p><%=userLoggedIn.getUserName() %>님 안녕하세요</p>
+ 		<%} else{%>
  			<a class="item right" href="<%=request.getContextPath()%>/admin/adminList">
   				 관리자페이지
- 			</a>
- 		<%} case "U":{%>	
+ 			</a>	
  			<a class="item" href="<%=request.getContextPath()%>/user/userInfo">
    				내 정보 보기
   			</a>
-  		<%} case "G": {%>
   			<a class="item" href="<%=request.getContextPath()%>/price/priceInfo">
    				가격정보
   			</a>
-  			<a class="item" href="<%=request.getContextPath()%>/user/userLogin">
+  			<a class="item" href="<%=request.getContextPath()%>/user/userLogout">
     			로그아웃하기
   			</a>
- 		<%}}} %>
+ 		<%} %>
 </div>

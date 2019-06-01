@@ -67,7 +67,7 @@ public class UserLoginServlet extends HttpServlet {
 		String msg = "";
 		if(result ==1) {
 			loc="/";
-			msg="로그인 성공!";
+			msg="로그인 성공!"+email+"님 환영합니다!";
 			User userLoggedIn = new UserService().selectOne(email);
 			HttpSession session = request.getSession();
 			session.setAttribute("userLoggedIn", userLoggedIn);
