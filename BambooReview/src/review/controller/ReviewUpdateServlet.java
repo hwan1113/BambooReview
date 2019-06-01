@@ -1,41 +1,37 @@
-package user.controller;
+package review.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import review.model.service.ReviewService;
+import review.model.vo.Review;
 
 /**
- * Servlet implementation class UserLogoutServlet
+ * Servlet implementation class ReviewUpdateServlet
  */
-@WebServlet(urlPatterns= {"/user/logout"})
-public class UserLogoutServlet extends HttpServlet {
+@WebServlet("/review/reviewUpdate")
+public class ReviewUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UserLogoutServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//세션가져오기
-				HttpSession session = request.getSession(false);
-				
-				//세션 무효화
-				if(session != null) {
-					session.invalidate();
-				}
-				
-				response.sendRedirect(request.getContextPath());
+		//1.파라미터
+		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		
+		//2. 업무로직
+		Review r = new ReviewService().selectOne(reviewNo);
+		
+		//3. view단처리
+		request.setAttribute("review", r);
+		request.getRequestDispatcher("/WEB-INF/views/review/reviewUpdate.jsp")
+			   .forward(request, response);
 	}
 
 	/**

@@ -41,6 +41,8 @@ public class ReviewListServlet extends HttpServlet {
 		List<Review> list = new ReviewService().selectReviewList(cPage, numPerPage);
 		System.out.println("list="+list);
 		
+		
+		
 		//2.2 전체게시글수, 전체페이지수 구하기
 		int totalReviewCount = new ReviewService().selectReviewCount();
 		//(공식2)전체페이지수 구하기

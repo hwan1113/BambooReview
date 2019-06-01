@@ -1,8 +1,14 @@
 package user.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class User {
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionBindingListener;
+
+public class User implements Serializable, HttpSessionBindingListener{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private String email;
 	private String password;
@@ -26,8 +32,9 @@ public class User {
 		this.status = status;
 		this.customer_no = customer_no;
 	}
+	
 	public User() {
-		
+		super();
 	}
 	public String getEmail() {
 		return email;
@@ -83,12 +90,25 @@ public class User {
 	public void setCustomer_no(int customer_no) {
 		this.customer_no = customer_no;
 	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 	@Override
 	public String toString() {
 		return "User [email=" + email + ", password=" + password + ", userName=" + userName + ", phone=" + phone
 				+ ", profile=" + profile + ", enrollDate=" + enrollDate + ", quitDate=" + quitDate + ", status="
 				+ status + ", customer_no=" + customer_no + "]";
+	}
+	@Override
+	public void valueBound(HttpSessionBindingEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void valueUnbound(HttpSessionBindingEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

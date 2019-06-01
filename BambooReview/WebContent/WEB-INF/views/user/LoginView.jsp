@@ -9,6 +9,11 @@
  <%@ include file="/WEB-INF/views/common/header.jsp" %>
  <meta name="google-signin-client_id" content="401915479611-85lnc5b082en3f07kq9jsd628oshv494.apps.googleusercontent.com">
  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+ 
+ <form name="checkIdDuplicateFrm" method="post">
+	<input type="hidden" name="email" />
+
+</form>
 <title>LoginView</title>
 	<div class="ui two column centered grid">
   		<div class="column centered row">
@@ -21,6 +26,7 @@
 			  <div class="field" >
 			    <label>이메일</label>
 			    <input type="email" name="email" placeholder="email" id="memberId"/>
+			    
 			  </div>
 			  <div class="field" >
 			    <label>비밀번호</label>
