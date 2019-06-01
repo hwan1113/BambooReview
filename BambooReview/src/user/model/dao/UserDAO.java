@@ -122,7 +122,7 @@ public class UserDAO {
 		int result = 0;
 		String sql = prop.getProperty("deleteUser");
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
+		/*ResultSet rset = null;*/
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -131,7 +131,7 @@ public class UserDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rset);
+			/*close(rset);*/
 			close(pstmt);
 		}
 		
@@ -140,9 +140,8 @@ public class UserDAO {
 
 	public int updateUser(Connection conn, User u) {
 		int result = 0;
-		String sql = prop.getProperty("updateuser");
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
+		String sql = prop.getProperty("updateuser");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -153,7 +152,7 @@ public class UserDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rset);
+			/*close(rset);*/
 			close(pstmt);
 		}
 		

@@ -1,6 +1,7 @@
 package user.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,33 +25,28 @@ public class UserUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		
+		String email= request.getParameter("email");
+		String password=null;
 		String userName = request.getParameter("userName");
 		String phone = request.getParameter("phone");
+		String profile= request.getParameter("profile");
+		Date enrollDate=null;
+		Date quitDate=null;
+		int status = 0;
+		int customer_no = 0;
+
 
 
 		
-    	User u = new User();
+    	/*User u = new User();
+    	u.setEmail(email);
     	u.setUserName(userName);
-    	u.setPhone(phone);
+    	u.setPhone(phone);*/
+		
+		User u=new User(email, password, userName, phone, profile, enrollDate, quitDate, status, customer_no);
     	
     	int result = new UserService().updateUser(u);
     	
-    	
-    	/*String msg = "";
-    	if(result > 0) {
-			msg = "회원수정성공!";
-		}
-		else {
-			msg = "회원수정실패!";
-		}
-    	request.setAttribute("msg", msg);
-		request.setAttribute("loc", "/");
-		
-		String view = "/WEB-INF/views/common/msg.jsp";
-		request.getRequestDispatcher(view)
-			   .forward(request, response);
-	}*/
     	
     	String view = "/WEB-INF/views/common/msg.jsp";
 		String msg = "";
@@ -60,7 +56,7 @@ public class UserUpdateServlet extends HttpServlet {
 			msg = "성공적으로 회원정보를 수정했습니다.";
 			loc = "/user/userView?email="+u.getEmail();
 			HttpSession session = request.getSession();
-			session.setAttribute("userLoggedIn", new UserService().selectOne(u.getEmail()));
+			session.setAttribute("userLoggedIn", new UserService().selectOne(email));
 		}
 		else 
 			msg = "회원정보수정에 실패했습니다.";	

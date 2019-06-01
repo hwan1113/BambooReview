@@ -26,6 +26,12 @@
 		$frm.attr("action", url);
 		$frm.submit();
 	}
+	function deleteUser(){
+		var bool = confirm("정말로 탈퇴하시겠습니까?");
+		if(bool){
+			location.href = "<%=request.getContextPath()%>/user/userDelete?email=<%=u.getEmail()%>"
+			}
+		}
 	
 	function passwordCheck(){
 		/* if($("#password").val()!=$("#passwordCfrm").val()){
@@ -44,6 +50,7 @@
 			return false;
 				} */
 			return true;
+				
 	}
 	</script>
 	<form name="checkIdDuplicateFrm" method="post">
@@ -106,6 +113,7 @@
 						   required/>
 			  </div>
 				<input type="button" onclick="updateUser();" value="회원정보수정" />
+				<input type="button" onclick="deleteUser();" value="회원탈퇴" />
   				<!-- <button class="ui button2" type="submit">수정하기</button>
   				<button class="ui red button" type="submit">뒤로가기 </button> -->
 			</form>

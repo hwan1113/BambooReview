@@ -19,7 +19,7 @@
   		  <form class="ui form" action="<%=request.getContextPath() %>/user/signup" onsubmit="return passwordCheck();">
 			  <div class="field">
 			    <label>이메일</label>
-			    <input type="email" name="email" placeholder="email" required/>
+			    <input type="text" name="email" placeholder="email" required/>
 			  </div>
 			  
 			  <div class="field">
