@@ -1,63 +1,44 @@
 package review.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
-import com.oreilly.servlet.MultipartRequest;
-
 import review.model.service.ReviewService;
-import review.model.vo.Review;
 
 /**
- * Servlet implementation class ReviewFormEndServlet
+ * Servlet implementation class ReviewDeleteServlet
  */
-@WebServlet("/review/reviewFormEnd")
-public class ReviewFormEndServlet extends HttpServlet {
+@WebServlet("/review/reviewDelete")
+public class ReviewDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1. 파라미터 핸들링
-		String reviewTitle = request.getParameter("reviewTitle");
-		String reviewWriter = request.getParameter("reviewWriter");
-		String reviewContent = request.getParameter("reviewContent");
-		
-		Review r = new Review();
-		r.setReviewTitle(reviewTitle);
-		r.setReviewWriter(reviewWriter);
-		r.setReviewContent(reviewContent);
-		
-		//2. 업무로직
-		int result = new ReviewService().insertReview(r);
-		
-		String msg = "";
-		String loc = "/review/reviewList";
+		//1.파라미터 핸들링
+		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 
+		//2. 업무로직
+		int result = new ReviewService().deleteReview(reviewNo);
+		
+		//3. view단 처리
+		String msg = "";
 		if(result>0) {
-			msg = "게시글 등록성공!";
-			//성공한 경우, result변수에 새로 등록된 글번호를 가져옴.
-			loc = "/review/reviewView?reviewNo="+result;
+			msg = "게시물 삭제 성공!";
 		}
 		else {
-			msg = "게시글 등록실패!";
+			msg = "게시물 삭제 실패!";
 		}
 		
-		//3.view단 처리
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc", loc);
+		request.setAttribute("loc", "/review/reviewList");
 		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp")
 			   .forward(request, response);
-		
-		
 	}
 
 	/**
@@ -67,4 +48,5 @@ public class ReviewFormEndServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

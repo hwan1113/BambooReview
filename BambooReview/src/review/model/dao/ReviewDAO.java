@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -20,10 +22,6 @@ public class ReviewDAO {
 	
 	public ReviewDAO() {
 		try {
-			//클래스객체 위치찾기 : 절대경로를 반환한다. 
-			// "/" : 루트디렉토리를 절대경로로 URL객체로 반환한다.
-			// "./" : 현재디렉토리를 절대경로로 URL객체로 반환한다.
-			// "./query.properties : 현재경로의 query.properties파일의 경로를 URL객체로 반환함.
 			String fileName = ReviewDAO.class.getResource("/sql/review/review-query.properties").getPath();
 			prop.load(new FileReader(fileName));
 			
@@ -44,7 +42,6 @@ public class ReviewDAO {
 		try{
 			pstmt = conn.prepareStatement(sql);
 			
-			//시작 rownum과 마지막 rownum 구하는 공식
 			pstmt.setInt(1, (cPage-1)*numPerPage+1);
 			pstmt.setInt(2, cPage*numPerPage);
 
@@ -52,13 +49,13 @@ public class ReviewDAO {
 			
 			while(rset.next()){
 				Review r = new Review();
-				//컬럼명은 대소문자 구분이 없다.
-				r.setReviewNo(rset.getInt("board_no"));
-				r.setReviewTitle(rset.getString("board_title"));
-				r.setCustomerNo(rset.getInt("customer_no"));
-				r.setReviewContent(rset.getString("board_content"));
-				r.setWrittenDate(rset.getDate("board_date"));
-				r.setReadCnt(rset.getInt("board_readcount"));
+				r.setReviewNo(rset.getInt("review_no"));
+				r.setReviewTitle(rset.getString("review_title"));
+				r.setReviewWriter(getUserName(conn, rset.getInt("customer_no")));
+				System.out.println(getUserName(conn, rset.getInt("customer_no")));
+				r.setReviewContent(rset.getString("review_content"));
+				r.setWrittenDate(rset.getDate("written_date"));
+				r.setReadCnt(rset.getInt("read_cnt"));
 				
 				list.add(r);
 			}
@@ -79,10 +76,8 @@ public class ReviewDAO {
 		String sql = prop.getProperty("selectReviewCount");
 		
 		try{
-			//미완성쿼리문을 가지고 객체생성. 
 			pstmt = conn.prepareStatement(sql);
-			
-			//쿼리문실행
+
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()){
@@ -96,6 +91,169 @@ public class ReviewDAO {
 		}
 		
 		return totalMember;
+	}
+
+	public int insertReview(Connection conn, Review r) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertReview"); 
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, r.getCustomerNo());
+			pstmt.setString(2, r.getReviewTitle());
+			pstmt.setString(3, r.getReviewContent());
+
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int selectLastSeq(Connection conn) {
+		int reviewNo = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectLastSeq");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
+			
+			if(rset.next()) {
+				reviewNo = rset.getInt("reviewno");
+				System.out.println("reviewNo@DAO="+reviewNo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return reviewNo;
+	}
+	
+	public String getUserName(Connection conn, int customerNo) {
+		String userName = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("getUserName");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, customerNo);
+			
+			rset = pstmt.executeQuery(sql);
+			
+			if(rset.next()) {
+				userName = rset.getString("username");
+				System.out.println("userName@DAO="+userName);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return userName;
+		
+	}
+
+	public Review selectOne(Connection conn, int reviewNo) {
+		Review review = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectOne");
+		try{
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()){
+				review = new Review();
+				review.setReviewNo(rset.getInt("review_no"));
+				review.setReviewTitle(rset.getString("review_title"));
+				review.setReviewWriter(rset.getString("review_writer"));
+				review.setReviewContent(rset.getString("review_content"));
+				review.setWrittenDate(rset.getDate("written_date"));
+				review.setReadCnt(rset.getInt("read_cnt"));
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		return review;
+	}
+
+	public int updateReview(Connection conn, Review r) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateReview"); 
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, r.getReviewTitle());
+			pstmt.setString(2, r.getReviewContent());
+			pstmt.setInt(3, r.getReviewNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int increaseReadCount(Connection conn, int reviewNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("increaseReadCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteReview(Connection conn, int reviewNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

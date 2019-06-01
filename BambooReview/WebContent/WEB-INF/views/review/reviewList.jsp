@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="review.model.vo.Review, java.util.*" %>
+<%@ page import="review.model.vo.Review, review.model.service.*, java.util.*" %>
 <%
 	List<Review> list = (List<Review>)request.getAttribute("list");
 	String pageBar = (String)request.getAttribute("pageBar");
+	String userName = "";
+	ReviewService reviewService = new ReviewService();
 
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
@@ -19,7 +21,6 @@
 			<th>제목</th>
 			<th>작성자</th>
 			<th>작성일</th>
-			<th>첨부파일</th>
 			<th>조회수</th>
 		</tr>
 		<% for(Review r : list){ %>
@@ -30,7 +31,7 @@
 					<%= r.getReviewTitle() %>
 				</a>
 			</td>
-			<td><%= r.getCustomerNo() %></td>
+			<td><%= userName = (String)reviewService.getUserName(r.getCustomerNo()) %></td>
 			<td><%= r.getWrittenDate() %></td>
 			
 			<td><%=r.getReadCnt() %></td>
