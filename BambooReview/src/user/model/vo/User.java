@@ -17,11 +17,11 @@ public class User implements Serializable, HttpSessionBindingListener{
 	private String profile;
 	private Date enrollDate;
 	private Date quitDate;
-	private int status;
+	private String status;
 	private int customer_no;
 
 	public User(String email, String password, String userName, String phone, String profile, Date enrollDate,
-			Date quitDate, int status, int customer_no) {
+			Date quitDate, String status, int customer_no) {
 		this.email = email;
 		this.password = password;
 		this.userName = userName;
@@ -78,10 +78,10 @@ public class User implements Serializable, HttpSessionBindingListener{
 	public void setQuitDate(Date quitDate) {
 		this.quitDate = quitDate;
 	}
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	public int getCustomer_no() {

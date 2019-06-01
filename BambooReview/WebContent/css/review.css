@@ -1,0 +1,27 @@
+/* Review 관련 css */
+html{
+	width:1024px; 
+	height:768px; 
+	margin:0 auto; 
+	text-align: center;
+}
+
+footer{
+	position:absolute;
+	top:698px;
+	width:1024px;
+}
+
+input#title{
+	width: 600px; 
+	height: 30px; 
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+input#writer{
+	width: 200px;
+	height: 30px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}

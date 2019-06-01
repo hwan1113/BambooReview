@@ -1,17 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%User u = (User)request.getAttribute("email");%>
- <%@ include file="/WEB-INF/views/common/headerCommon.jsp" %>
  <style>
  #space{
  height:100px;
  type:inline-block;
  }
  </style>
+ <%@ include file="/WEB-INF/views/common/header.jsp" %>
+ <meta name="google-signin-client_id" content="401915479611-85lnc5b082en3f07kq9jsd628oshv494.apps.googleusercontent.com">
+ <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+ 
  <form name="checkIdDuplicateFrm" method="post">
 	<input type="hidden" name="email" />
-</form>
 
+</form>
 <title>LoginView</title>
 	<div class="ui two column centered grid">
   		<div class="column centered row">
@@ -46,7 +48,7 @@
  				 </div>
  				 <p><a href="<%=request.getContextPath()%>/user/userSignup">회원 가입하러가기!</a></p>
 			</div>
-			<div id="my-signin2"></div>
+				<div id="my-signin2"></div>
 			<a href="#" onclick="signOut();">Sign out</a>
 			
 			
@@ -75,9 +77,9 @@ function onSuccess(googleUser) {
       console.log('Email: ' + profile.getEmail());
       var id_token = googleUser.getAuthResponse().id_token;
       
-      $("#userName").val(json)
+      $("#userName").val(profile.getName())
       $("#email").val(profile.getEmail())
-      $("#picture").val(json)
+      $("#picture").val(profile.getImageUrl())
       $("#googleUserFrm").submit()
       
       

@@ -57,4 +57,73 @@ public class UserService {
 		return result;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public int insertGoogleUser(User u) {
+		Connection conn = getConnection();
+		int result = new UserDAO().insertGoogleUser(conn, u);
+		close(conn);
+		return result;
+	}
+
 }

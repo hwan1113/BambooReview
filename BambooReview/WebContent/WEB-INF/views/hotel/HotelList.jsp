@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="org.json.*" %>
-<%@ include file="/WEB-INF/views/common/headerCommon.jsp" %>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%
 	String hotelData = (String)request.getAttribute("hotelData");
 	String srchWord  = (String)request.getAttribute("srchWord");
@@ -19,7 +19,6 @@
   	src="https://code.jquery.com/jquery-3.1.1.min.js"
   	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
  	crossorigin="anonymous"></script>
-<script src="<%=request.getContextPath() %>/Semantic/semantic.js"></script>
 <!----------------------------------------------->
 	<h3 class="ui block header centered">
  	 	<%=srchWord%>지역의 호텔 리스트 입니다.

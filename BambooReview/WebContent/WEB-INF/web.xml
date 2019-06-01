@@ -33,8 +33,6 @@
     <servlet-name>UserInfo</servlet-name>
     <url-pattern>/user/userInfo</url-pattern>
   </servlet-mapping>
-  
-  
   <servlet>
     <servlet-name>PriceView</servlet-name>
     <jsp-file>/WEB-INF/views/payment/PriceView.jsp</jsp-file>
@@ -43,6 +41,5 @@
     <servlet-name>PriceView</servlet-name>
     <url-pattern>/price/priceInfo</url-pattern>
   </servlet-mapping>
-  
 
 </web-app>

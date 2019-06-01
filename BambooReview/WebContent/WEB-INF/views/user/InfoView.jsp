@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="user.model.vo.*" %>
-<%User u = (User)request.getAttribute("user");%>
-<%@ include file="/WEB-INF/views/common/headerCommon.jsp" %>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
  <style>
  #space{
  height:100px;
@@ -121,8 +119,7 @@
   		<div class="three wide column"></div>
 	</div>
 	</form>
-	
-	
+
 
 
 
