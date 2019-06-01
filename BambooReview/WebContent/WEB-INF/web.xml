@@ -41,4 +41,5 @@
     <servlet-name>PriceView</servlet-name>
     <url-pattern>/price/priceInfo</url-pattern>
   </servlet-mapping>
+  
 </web-app>
