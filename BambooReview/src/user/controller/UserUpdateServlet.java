@@ -32,7 +32,7 @@ public class UserUpdateServlet extends HttpServlet {
 		String profile= request.getParameter("profile");
 		Date enrollDate=null;
 		Date quitDate=null;
-		int status = 0;
+		String status = null;
 		int customer_no = 0;
 
 

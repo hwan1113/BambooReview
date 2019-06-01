@@ -114,7 +114,6 @@ public class UserDAO {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return result;
 	}
 
@@ -141,18 +140,46 @@ public class UserDAO {
 	public int updateUser(Connection conn, User u) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("updateuser");
-		
+		String query = prop.getProperty("updateuser"); 
+
 		try {
-			pstmt = conn.prepareStatement(sql);
+			//미완성쿼리문을 가지고 객체생성.
+			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, u.getUserName());
 			pstmt.setString(2, u.getPhone());
 			pstmt.setString(3, u.getEmail());
+			
+			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
+			//DML은 executeUpdate()
 			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			/*close(rset);*/
+			close(pstmt);
+		}
+		System.out.println("dao@result= "+result);
+		return result;
+	}
+	public int updatePassword(Connection conn, User user) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("updatePassword"); 
+
+		try {
+			//미완성쿼리문을 가지고 객체생성.
+			pstmt = conn.prepareStatement(query);
+			//쿼리문미완성
+			pstmt.setString(1, user.getPassword());
+			pstmt.setString(2, user.getEmail());
+			
+			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
+			//DML은 executeUpdate()
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
 			close(pstmt);
 		}
 		
@@ -228,5 +255,7 @@ public class UserDAO {
 		
 		return result;
 	}
+
+	
 
 }

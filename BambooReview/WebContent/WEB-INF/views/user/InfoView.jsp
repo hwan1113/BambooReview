@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="java.util.*" %>
+<%User user = (User)request.getAttribute("user"); %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/info.css" />
  <style>
  #space{
  height:100px;
@@ -27,7 +30,7 @@
 	function deleteUser(){
 		var bool = confirm("정말로 탈퇴하시겠습니까?");
 		if(bool){
-			location.href = "<%=request.getContextPath()%>/user/userDelete?email=<%=u.getEmail()%>"
+			location.href = "<%=request.getContextPath()%>/user/userDelete?email=<%=user.getEmail()%>"
 			}
 		}
 	
@@ -50,6 +53,14 @@
 			return true;
 				
 	}
+	
+	function updatePassword(){
+		var url = "<%=request.getContextPath()%>/user/updatePassword?email=<%=user.getEmail()%>";
+	    var title = "updatePassword";
+	    var status =  "left=500px, top=200px, width=400px, height=210px";
+	    
+		var popup = window.open(url,title,status);
+	}
 	</script>
 	<form name="checkIdDuplicateFrm" method="post">
 	<input type="hidden" name="email" />
@@ -67,7 +78,7 @@
 		 	  			<img src="<%=request.getContextPath() %>/images/thanos.jpg">
 			  		</a>
 					<div class="content">
-		   	 			<a class="header" href="#">Thanos</a>
+		   	 			<a class="header" href="#"><%=user.getUserName()%></a>
 		  	 			<div class="meta">
 		     			<a>일반 회원</a>
 		   	 			</div>
@@ -77,46 +88,45 @@
   		</div>
  		 <div class="five wide column">
     		<form class="ui form" action="<%=request.getContextPath() %>/user/update" onsubmit="return passwordCheck();">
-			  <div class="field">
-			    <label>이메일</label>
-			   <!--  <input type="email" name="email" placeholder="email" required> -->
-						   <!-- readonly  -->
-			  <input type="text" name="memberId" id="memberId_" value="<%=u.getEmail()%>"
-						   required/>
-				</td>
+    		<h2 class="ui icon header" id="topimg">
+			  <i class="settings icon"></i>
+			  <div class="content">
+			    Account Settings
+			    <div class="sub header"><%=user.getUserName()%>회원님의 개인정보 수정 및 회원 탈퇴가 가능합니다</div>
 			  </div>
+			</h2>
+				<div class="ui input" id="email-div">
+				<label class="email-title">이메일</label>
+				  <input type="text" name="email" value="<%=user.getEmail()%>" required/ class="email-input-bar">
+				</div>
 			  
-			  <div class="field">
-			    <label>이름</label>
+			  
+			  <div class="ui input" id="name-div">
+			    <label class="name-title">이름</label>
 			    <!-- <input type="text" name="password" placeholder="name" required> -->
-			    <input type="text" name="memberName" id="memberName" value="<%=u.getUserName()%>"
-						   required/>
+			    <input type="text" name="password" value="<%=user.getUserName()%>" required />
 			  </div>
 			  
-			  <!-- <div class="field">
-			    <label>비밀번호</label>
-			    <input type="password" name="password" placeholder="password" id="password" required>
-			  </div>
-			  
-			  <div class="field">
-			    <label>비밀번호 확인</label>
-			    <input type="password" name="passwordCfm" placeholder="password" id="passwordCfm" required>
-			  </div> -->
-			  
-			  <div class="field">
-			    <label>전화 번호</label>
+			  <div class="ui input" id="phone-div">
+			    <label class="phone-title">전화 번호</label>
 			    <!-- <input type="number" name="password" placeholder="phone number" required> -->
-			    <input type="tel" name="phone" id="phone" placeholder="(-없이)01012345678" 
-						   value="<%=u.getPhone()%>"
-						   required/>
+			    <input type="tel" name="phone" id="phone" placeholder="전화번호" 
+						   value="<%=user.getPhone()%>"
+						   required/ class="phone-input-bar">
 			  </div>
-				<input type="button" onclick="updateUser();" value="회원정보수정" />
-				<input type="button" onclick="deleteUser();" value="회원탈퇴" />
-  				<!-- <button class="ui button2" type="submit">수정하기</button>
-  				<button class="ui red button" type="submit">뒤로가기 </button> -->
-			</form>
+			  	<div class="blue ui buttons" id="submit-button">
+				  <button class="ui button active" onclick="updateUser();" id="update-button">회원정보수정</button>
+				  <form action="<%=request.getContextPath() %>/user/passwordUpdate" onsubmit="return passwordCheck();">
+				  <button class="ui button" onclick="updatePassword();" id="password-button">비밀번호 변경</button>
+				  </form>
+				  <button class="ui button" onclick="deleteUser();" id="delete-button">회원 탈퇴</button>
+				</div>
+			  </div>
+			
   		</div>
-  		<div class="three wide column"></div>
+  		<form action="<%=request.getContextPath() %>/user/passwordUpdate" onsubmit="return passwordCheck();">
+				  <button class="ui button" onclick="updatePassword();">비밀번호 변경 22222ㅇㄴㄹ</button>
+				  </form>
 	</div>
 	</form>
 

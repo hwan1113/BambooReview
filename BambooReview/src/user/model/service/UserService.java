@@ -11,7 +11,9 @@ import user.model.dao.UserDAO;
 import user.model.vo.User;
 
 public class UserService {
-
+	
+	public static final int LOGIN_OK = 1;
+	
 	public int loginCheck(User u) {
 		Connection conn = getConnection();
 		int result = new UserDAO().loginCheck(conn, u);
@@ -56,6 +58,17 @@ public class UserService {
 		close(conn);
 		return result;
 	}
+	public int updatePassword(User user) {
+		Connection conn = getConnection();
+		int result = new UserDAO().updatePassword(conn, user);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+	
 
 	
 	
@@ -126,4 +139,5 @@ public class UserService {
 		return result;
 	}
 
+	
 }

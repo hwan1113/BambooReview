@@ -1,0 +1,67 @@
+#email-div{
+	margin-top:55px;
+	margin-left:100px;
+}
+.email-title{
+	position:absolute;
+	top:-25px;
+	display:inline-block;
+	width:auto;
+}
+#name-div{
+	top:34px;
+	margin-top:25px;
+	margin-left:100px;
+	
+}
+.name-title{
+	position:absolute;
+	top:-25px;
+	display:inline-block;
+	width:auto;
+}
+#phone-div{
+	top:75px;
+	margin-top:25px;
+	margin-left:100px;
+	
+}
+.phone-title{
+	position:absolute;
+	top:-25px;
+	display:inline-block;
+	width:auto;
+}
+.name-input-bar{
+	position:absolute;
+	height:50px;
+}
+#submit-button{
+	margin-top:123px;
+	margin-left:20px;
+	
+}
+#topimg{
+	margin-top:-70px;
+}
+#update-button{
+	background-color:#9dcc6e;
+}
+#password-button{
+	background-color:#abc15e;
+}
+#delete-button{
+	background-color:#cc0505;
+}
+.header{
+	text-align:center;
+}
+.meta{
+	text-align:center;
+}
+
+
+///////////////////////////////////////////UpdatePassword//////////////////
+#password-back{
+	background-color:#9dcc6e;
+}
