@@ -26,24 +26,17 @@ public class UserUpdateServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String email= request.getParameter("email");
-		String password=null;
-		String userName = request.getParameter("userName");
+		String userName = request.getParameter("name");
 		String phone = request.getParameter("phone");
-		String profile= request.getParameter("profile");
-		Date enrollDate=null;
-		Date quitDate=null;
-		String status = null;
-		int customer_no = 0;
 
 
 
 		
-    	/*User u = new User();
+		User u = new User();
     	u.setEmail(email);
     	u.setUserName(userName);
-    	u.setPhone(phone);*/
-		
-		User u=new User(email, password, userName, phone, profile, enrollDate, quitDate, status, customer_no);
+    	u.setPhone(phone);
+    	
     	
     	int result = new UserService().updateUser(u);
     	

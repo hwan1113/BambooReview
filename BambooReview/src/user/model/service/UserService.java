@@ -6,7 +6,6 @@ import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
-
 import user.model.dao.UserDAO;
 import user.model.vo.User;
 
@@ -68,7 +67,6 @@ public class UserService {
 		close(conn);
 		return result;
 	}
-	
 
 	
 	
@@ -138,6 +136,8 @@ public class UserService {
 		close(conn);
 		return result;
 	}
+
+	
 
 	
 }

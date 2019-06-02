@@ -146,6 +146,7 @@ public class UserDAO {
 			//미완성쿼리문을 가지고 객체생성.
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, u.getUserName());
+			System.out.println("dao@name= "+u.getUserName());
 			pstmt.setString(2, u.getPhone());
 			pstmt.setString(3, u.getEmail());
 			
@@ -185,9 +186,6 @@ public class UserDAO {
 		
 		return result;
 	}
-	
-	
-	
 	
 	
 	

@@ -33,7 +33,7 @@ public class UserDeleteServlet extends HttpServlet {
 			if(session!=null) {
 				session.invalidate();
 			}*/
-			loc = "/member/logout";
+			loc = "/user/userLogout";
 		}else {
 			msg = "회원정보삭제에 실패했습니다.";
 		}

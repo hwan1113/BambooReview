@@ -10,18 +10,20 @@
  </style>
  <title>SignUpView</title>
  
+	 <form name="checkIdDuplicateFrm" method="post">
+		<input type="hidden" name="email" />
+	</form>
  	<div class="ui two column centered grid">
   		<div class="column centered row">
     		<div class="column" id="space">
    			</div>
 		</div>
   		<div class="column">
-  		  <form class="ui form" action="<%=request.getContextPath() %>/user/signup" onsubmit="return passwordCheck();">
+  		  <form class="ui form" name="userEnrollFrm" action="<%=request.getContextPath() %>/user/signup" onsubmit="return passwordCheck();">
 			  <div class="field">
 			    <label>이메일</label>
-			    <input type="text" name="email" placeholder="email" required/>
+			    <input type="text" name="email" placeholder="email" id="email" required/>
 			  </div>
-			  
 			  <div class="field">
 			    <label>이름</label>
 			    <input type="text" name="name" placeholder="name" required/>
@@ -77,6 +79,7 @@
 			} */
 		return true;
 	}
+
  </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

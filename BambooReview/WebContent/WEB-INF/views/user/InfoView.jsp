@@ -104,7 +104,7 @@
 			  <div class="ui input" id="name-div">
 			    <label class="name-title">이름</label>
 			    <!-- <input type="text" name="password" placeholder="name" required> -->
-			    <input type="text" name="password" value="<%=user.getUserName()%>" required />
+			    <input type="text" name="name" value="<%=user.getUserName()%>" required />
 			  </div>
 			  
 			  <div class="ui input" id="phone-div">
@@ -119,14 +119,11 @@
 				  <form action="<%=request.getContextPath() %>/user/passwordUpdate" onsubmit="return passwordCheck();">
 				  <button class="ui button" onclick="updatePassword();" id="password-button">비밀번호 변경</button>
 				  </form>
-				  <button class="ui button" onclick="deleteUser();" id="delete-button">회원 탈퇴</button>
 				</div>
 			  </div>
-			
   		</div>
-  		<form action="<%=request.getContextPath() %>/user/passwordUpdate" onsubmit="return passwordCheck();">
-				  <button class="ui button" onclick="updatePassword();">비밀번호 변경 22222ㅇㄴㄹ</button>
-				  </form>
+				  <button class="ui button" onclick="deleteUser();" id="delete-button">회원 탈퇴</button>
+				  <!-- button class="ui button" onclick="deleteUser();" id="delete-button">회원 탈퇴</button> -->
 	</div>
 	</form>
 
