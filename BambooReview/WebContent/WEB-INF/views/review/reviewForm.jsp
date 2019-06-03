@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
-
+<% System.out.println(userLoggedIn.getCustomer_no()); %>
 <title>Review 작성</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/review.css" />
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
@@ -70,17 +70,18 @@
 
 <section id="review-container">
 	<form action="<%=request.getContextPath()%>/review/reviewFormEnd"
-		  method="post"
+		  method="get"
 		  enctype="multipart/form-data">
+		  
 	제목: <input id="title" type="text" name="reviewTitle" required />&nbsp;&nbsp;&nbsp;
 	작성자: <input id="writer" type="text" name="reviewWriter" 
 				 value="<%=service.getUserName(userLoggedIn.getCustomer_no())%>" readonly/>
 				 <%-- value="<%=service.getUserName(r.getCustomerNo())%>" readonly/> --%>
-		  <input id="customerNo" type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"/>
 		<textarea id="summernote" name="reviewContent"></textarea>
 		<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">작성</button>
 		<button type="button" class="btn btn-warning">취소</button>
 	  
+		 <input id="customerNo" type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"/>
 	</form>
 
 		

@@ -27,9 +27,9 @@
   </div>
 </div>
 <div class="ui buttons">
-  <button class="ui button" onclick="location.href='index.jsp' ">뒤로가기</button>
+  <button class="ui button" onclick="location.href='<%=request.getContextPath()%>/index.jsp'">뒤로가기</button>
   <div class="or"></div>
-  <button class="ui positive button">결제하기</button>
+  <button class="ui positive button" onclick="location.href='<%=request.getContextPath()%>/WEB-INF/views/payment/NaverPay.jsp'">결제하기</button>
 </div>
 
 

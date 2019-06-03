@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import="org.json.*" %>
 <%@ page import="javax.servlet.*" %>
-<%@ include file="/WEB-INF/views/common/headerCommon.jsp" %>
 <%
 	String hotelData = (String)request.getAttribute("hotelData");
 	String srchWord  = (String)request.getAttribute("srchWord");
