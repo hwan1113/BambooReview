@@ -25,6 +25,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-128561305-2', 'auto');
+
+if (document.location.pathname.indexOf('/user') > -1 ||
+		document.location.pathname.indexOf('/price') > -1 ||
+		document.location.pathname.indexOf('/review') > -1 ||
+		document.location.pathname.indexOf('/hotel') > -1) {
+	  var pathArr = document.location.pathname.split('/');
+
+	  var page = "/"+pathArr[1]+"/"+pathArr[2];
+
+
+	  // Sets the page value on the tracker.
+	  ga('set', 'page', page);
+
+	  // Sending the pageview no longer requires passing the page
+	  // value since it's now stored on the tracker object.
+	  ga('send', 'pageview');
+	}
+ga('send', 'pageview');
+</script>
 <meta charset="UTF-8">
   <!-- 시맨틱 UI -->
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css"/>
@@ -51,10 +76,12 @@
  		
  		
  		<%if(userLoggedIn==null){%>
- 		<a class="item right" href="<%=request.getContextPath()%>/price/priceInfo">
+ 		<a data-event-category="User"
+  			data-event-action="Price" class="item right" href="<%=request.getContextPath()%>/price/priceInfo">
    			가격정보
   		</a>
-  		<a class="item" href="<%=request.getContextPath()%>/user/userLogin">
+  		<a data-event-category="User"
+  			data-event-action="signout" class="item" href="<%=request.getContextPath()%>/user/userLogin">
     		로그인
   		</a>
  		<%} else{%>
