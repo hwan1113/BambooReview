@@ -162,13 +162,12 @@ public class ReviewDAO {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return userName;
 		
 	}
 
 	public Review selectOne(Connection conn, int reviewNo) {
-		Review review = null;
+		Review r = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -180,13 +179,13 @@ public class ReviewDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()){
-				review = new Review();
-				review.setReviewNo(rset.getInt("review_no"));
-				review.setReviewTitle(rset.getString("review_title"));
-				review.setReviewWriter(rset.getString("review_writer"));
-				review.setReviewContent(rset.getString("review_content"));
-				review.setWrittenDate(rset.getDate("written_date"));
-				review.setReadCnt(rset.getInt("read_cnt"));
+				r = new Review();
+				r.setReviewNo(rset.getInt("review_no"));
+				r.setReviewTitle(rset.getString("review_title"));
+				r.setReviewWriter(getUserName(conn, rset.getInt("customer_no")));
+				r.setReviewContent(rset.getString("review_content"));
+				r.setWrittenDate(rset.getDate("written_date"));
+				r.setReadCnt(rset.getInt("read_cnt"));
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -194,7 +193,7 @@ public class ReviewDAO {
 			close(rset);
 			close(pstmt);
 		}
-		return review;
+		return r;
 	}
 
 	public int updateReview(Connection conn, Review r) {
@@ -248,6 +247,44 @@ public class ReviewDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, reviewNo);
 			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int increaseLikeCount(Connection conn, int reviewNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("increaseLikeCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int increaseDisLikeCount(Connection conn, int reviewNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("increaseDisLikeCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			
+			result = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

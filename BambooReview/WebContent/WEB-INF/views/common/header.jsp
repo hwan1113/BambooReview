@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="user.model.vo.*" %>
+<%@ page import="user.model.vo.*, review.model.service.*, review.model.vo.*" %>
 <%@ page import="javax.servlet.http.*" %>
 <%
 	User userLoggedIn = (User)session.getAttribute("userLoggedIn");
+	ReviewService service = new ReviewService();
 	//Cookie[] cookies = request.getCookies();
 	boolean saveIdFlag = false;
 	String userId = "";

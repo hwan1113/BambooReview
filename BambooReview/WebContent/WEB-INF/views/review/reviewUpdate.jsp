@@ -79,8 +79,8 @@
 	제목: <input id="title" type="text" name="reviewTitle" 
 				value="<%=r.getReviewTitle() %>"required />&nbsp;&nbsp;&nbsp;
 	작성자: <input id="writer" type="text" name="reviewWriter" 
-				 value="<%=userLoggedIn.getCustomerNo()%>" readonly/>
-		<textarea id="summernote" name="reviewContent"><%=b.getReviewContent() %></textarea>
+				 value="<%=userLoggedIn.getCustomer_no()%>" readonly/>
+		<textarea id="summernote" name="reviewContent"><%=r.getReviewContent() %></textarea>
 		<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">수정</button>
 		<button type="button" class="btn btn-warning">취소</button>
 	  
