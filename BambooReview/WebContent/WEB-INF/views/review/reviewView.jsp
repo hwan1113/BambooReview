@@ -62,14 +62,20 @@
             <input type="button" value="삭제하기" class="btn btn-warning" onclick="deleteReview();"/>
         </th>
     </tr>
+    <tr>
+    	<th>
+    		<button type="button" class="btn btn-link"
+    				onclick="location.href='<%=request.getContextPath()%>/review/reviewList'">목록으로</button>
+    	</th>
+    </tr>
     
     <%} %>	
 </table>
 </section>
 
-<% if(userLoggedIn!=null && 
-        (r.getCustomerNo() == (userLoggedIn.getCustomer_no())
-        || "A".equals(userLoggedIn.getStatus())) ){ %>
+<% if(userLoggedIn != null &&
+    		((userLoggedIn.getCustomer_no() == r.getCustomerNo())
+    		|| "A".equals(userLoggedIn.getStatus()))) {%>
 <form action="<%=request.getContextPath()%>/review/reviewDelete"
 	  id="reviewDelFrm"
 	  method="post">
@@ -85,13 +91,6 @@ function deleteReview(){
 	$("#reviewDelFrm").submit();
 }
 
-function likeCnt(){
-	return <%=r.getLikeCnt()%>+1;
-}
-
-function disLikeCnt(){
-	service.increaseDisLikeCount(r.getReviewNo());
-}
 
 </script>
 
