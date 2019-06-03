@@ -1,21 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head></head>
-<body>
-<!--// mode : development or production-->
-<script src="https://nsp.pay.naver.com/sdk/js/naverpay.min.js"
-    data-client-id="u86j4ripEt8LRfPGzQ8"
-    data-mode="production"
-    data-merchant-user-key="가맹점 사용자 식별키"
-    data-merchant-pay-key="가맹점 주문 번호"
-    data-product-name="상품명을 입력하세요"
-    data-total-pay-amount="1000"
-    data-tax-scope-amount="1000"
-    data-tax-ex-scope-amount="0"
-    data-return-url="사용자 결제 완료 후 결제 결과를 받을 URL">
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script>
+IMP.init("imp28947597");
+IMP.request_pay({ // param
+    pg: "html5_inicis",
+    pay_method: "card",
+    merchant_uid: "ORD20180131-0000011",
+    name: "노르웨이 회전 의자",
+    amount: 64900,
+    buyer_email: "gildong@gmail.com",
+    buyer_name: "홍길동",
+    buyer_tel: "010-4242-4242",
+    buyer_addr: "서울특별시 강남구 신사동",
+    buyer_postcode: "01181"
+}, function (rsp) { // callback
+    if (rsp.success) {
+        console.log(rsp.success)
+        // 결제 성공 시 로직,
+    } else {
+    	console.log("fail")
+    }
+});
+
 </script>
+<body>
+
 
 </body>
 </html>
