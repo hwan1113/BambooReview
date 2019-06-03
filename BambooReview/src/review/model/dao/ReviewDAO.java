@@ -150,8 +150,7 @@ public class ReviewDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, customerNo);
 			
-			rset = pstmt.executeQuery(sql);
-			
+			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				userName = rset.getString("username");
 				System.out.println("userName@DAO="+userName);
@@ -181,8 +180,10 @@ public class ReviewDAO {
 			if(rset.next()){
 				r = new Review();
 				r.setReviewNo(rset.getInt("review_no"));
+				r.setCustomerNo(rset.getInt("customer_no"));
 				r.setReviewTitle(rset.getString("review_title"));
 				r.setReviewWriter(getUserName(conn, rset.getInt("customer_no")));
+				System.out.println("writer@dao="+getUserName(conn, rset.getInt("customer_no")));
 				r.setReviewContent(rset.getString("review_content"));
 				r.setWrittenDate(rset.getDate("written_date"));
 				r.setReadCnt(rset.getInt("read_cnt"));

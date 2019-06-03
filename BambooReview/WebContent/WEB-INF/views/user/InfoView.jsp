@@ -76,6 +76,9 @@
 				<div class="ui card">
 			  		<a class="image" href="#">
 		 	  			<img src="<%=request.getContextPath() %>/images/thanos.jpg">
+		 	  			<!-- 회원사진 저장하면 이름을 특정한 형식으로 변경해 저장해 그 경로를 저장
+		 	  			ex) 회원번호 1인 회원이 사진을 저장한다면
+		 	  				1.(확장자) 등의 형태로 images 폴더에 저장하고 그 경로를 태그에 리턴 -->
 			  		</a>
 					<div class="content">
 		   	 			<a class="header" href="#"><%=user.getUserName()%></a>

@@ -23,7 +23,7 @@
     </tr>
     <tr>
         <th>작성자</th>
-        <td><%=service.getUserName(r.getCustomerNo()) %></td>
+        <td><%=r.getReviewWriter() %></td>
     </tr>
     <tr>
         <th>조회수</th>
@@ -52,9 +52,9 @@
     </tr>
     
     <%--글작성자/관리자인경우 수정삭제 가능 --%>
-    <% if(userLoggedIn!=null && 
-        (r.getCustomerNo() == (userLoggedIn.getCustomer_no())
-        || "A".equals(userLoggedIn.getStatus())) ){%>
+    <% if(userLoggedIn != null &&
+    		((userLoggedIn.getCustomer_no() == r.getCustomerNo())
+    		|| "A".equals(userLoggedIn.getStatus()))) {%>
     <tr>
         <th colspan="2">
             <input type="button" value="수정하기" class="btn btn-success"
@@ -86,7 +86,7 @@ function deleteReview(){
 }
 
 function likeCnt(){
-	service.increaseLikeCount(r.getReviewNo());
+	return <%=r.getLikeCnt()%>+1;
 }
 
 function disLikeCnt(){

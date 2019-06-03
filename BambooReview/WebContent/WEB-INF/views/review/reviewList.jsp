@@ -32,7 +32,7 @@
 					<%= r.getReviewTitle() %>
 				</a>
 			</td>
-			<td><%= service.getUserName(r.getCustomerNo()) %></td>
+			<td><%= r.getReviewWriter() %></td>
 			<td><%= r.getWrittenDate() %></td>
 			
 			<td><%=r.getReadCnt() %></td>

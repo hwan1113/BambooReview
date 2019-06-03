@@ -28,11 +28,14 @@ public class ReviewFormEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 파라미터 핸들링
 		String reviewTitle = request.getParameter("reviewTitle");
+		int customerNo = Integer.parseInt(request.getParameter("customerNo"));
+		System.out.println("customerNo@serv="+customerNo);
 		String reviewWriter = request.getParameter("reviewWriter");
 		String reviewContent = request.getParameter("reviewContent");
 		
 		Review r = new Review();
 		r.setReviewTitle(reviewTitle);
+		r.setCustomerNo(customerNo);
 		r.setReviewWriter(reviewWriter);
 		r.setReviewContent(reviewContent);
 		
