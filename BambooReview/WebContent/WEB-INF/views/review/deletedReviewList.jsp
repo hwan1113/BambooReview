@@ -10,10 +10,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" />		
 <section id="review-container">
-	<h2>리뷰 게시판</h2>
-		<input type="button" value="글쓰기" 
-			   id="btn-add"
-			   onclick="location.href='<%=request.getContextPath()%>/review/reviewForm'"/>
+	<h2>삭제 게시판</h2>
 	<table id="tbl-review">
 		<tr>
 			<th>번호</th>

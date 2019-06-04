@@ -122,4 +122,11 @@ public class ReviewService {
 		return userName;
 	}
 
+	public List<Review> selectDeletedReviewList(int cPage, int numPerPage) {
+		Connection conn = getConnection();
+		List<Review> list = new ReviewDAO().selectDeletedReviewList(conn, cPage, numPerPage);
+		close(conn);
+		return list;
+	}
+
 }

@@ -56,6 +56,8 @@ public class ReviewDAO {
 				r.setReviewContent(rset.getString("review_content"));
 				r.setWrittenDate(rset.getDate("written_date"));
 				r.setReadCnt(rset.getInt("read_cnt"));
+				r.setLikeCnt(rset.getInt("like_cnt"));
+				r.setDisLikeCnt(rset.getInt("dislike_cnt"));
 				
 				list.add(r);
 			}
@@ -291,6 +293,45 @@ public class ReviewDAO {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public List<Review> selectDeletedReviewList(Connection conn, int cPage, int numPerPage) {
+		List<Review> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectDeletedReviewList");
+		
+		try{
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				Review r = new Review();
+				r.setReviewNo(rset.getInt("review_no"));
+				r.setReviewTitle(rset.getString("review_title"));
+				r.setReviewWriter(getUserName(conn, rset.getInt("customer_no")));
+				System.out.println(getUserName(conn, rset.getInt("customer_no")));
+				r.setReviewContent(rset.getString("review_content"));
+				r.setWrittenDate(rset.getDate("written_date"));
+				r.setReadCnt(rset.getInt("read_cnt"));
+				r.setLikeCnt(rset.getInt("like_cnt"));
+				r.setDisLikeCnt(rset.getInt("dislike_cnt"));
+				
+				list.add(r);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }
