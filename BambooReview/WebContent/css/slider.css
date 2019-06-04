@@ -50,25 +50,28 @@ body.slider__body {
 
 /*    --------------------자체 css-------------------            */
 .div1{
+	display:line-block;
+	height:auto;
         position: absolute;
-		top: 20%;
+		top: 190px;
 		left: 26%;
 		margin: 0 auto;
 		width: 50%;
-		height: 65%;
+		height: 500px;
 		background: black;
 		opacity: 0.5;
 }
 #page1-logo{
         position: absolute;
-    	top: 14%;
-   		right: 27%;
-    	width: 50%;
-    	height: 50%;
+    	top: 184px;
+   		right: 250px;
+    	width: 500px;
+    	height: 370px;
 }
  #page1-intro{
      	position: absolute;
-	    top: 60%;
+	    top: 520px;
+	    text-align:center;
 	    left: 57%;
 	    transform: translate(-65%, 30%);
         font-size:24px;
@@ -80,21 +83,20 @@ body.slider__body {
 #second{
       background-image: url("/BambooReview/images/main-page2-back.jpg");
       background-repeat: no-repeat;
-  	  background-size: cover;
       }
 .div2{
         position: absolute;
-		top: 40%;
+		top: 300px;
 		left: 0%;
 		margin: 0 auto;
-		width: 100%;
+		width: 1024px;
 		height: 200px;
 		background: black;
 		opacity: 0.8;
 }
- #second span{
+#second span{
      	position: absolute;
-      	top: 42%;
+      	top: 322px;
         left: 38%;
         transform: translate(-15%, 30%);
         font-size:34px;
@@ -103,33 +105,31 @@ body.slider__body {
  }
 #search-location{
      	position: absolute;
-      	top: 56%;
+      	top: 426px;
         left: 31%;
-        width:40%;
 }
 #searh-button{
       	position: absolute;
-      	top: 56%;
-    	left: 55%;
+      	top: 426px;
+    	left: 60%;
       	border-radius:4rem;
       	width: 10%;
       	padding: 0.78571429em 0.6em 0.78571429em;
       	line-height: 1.2em;
 }
 
+
 #third{
        background-image: url("/BambooReview/images/main-page3-back.jpg");
        background-repeat: no-repeat;
-  	  	background-size: cover;
       }
 
 .div3{
         position: absolute;
 		top: 0;
-		left: 60%;
-		margin: 0 auto;
-		width: 40%;
-		height: 100%;
+		left: 618px;
+		width: 406px;
+		height: 768px;
 		background: black;
 		opacity: 0.8;
 }
@@ -147,22 +147,22 @@ body.slider__body {
 		position: absolute;
 		left: 4.56%;
 		border:2px solid black;
-		width: 50%;
-    	height: 23%;
+		width: 530px;
+    	height: 164px;
     	transition-duration: 0.6s;
-        opacity: 0;
+        opacity: 0.8;
 		}
 #main-card1{
 		transform: translateX(-430px);
-      	top: 13.0%;
+      	top: 100px;
 		}
 #main-card2{
-    top: 38.0%;
+    top: 300px;
     transform: translateX(-430px);
     transition-delay: .2s;
 }
 #main-card3{
-    top: 64.0%;
+    top: 500px;
     transform: translateX(-430px);
     transition-delay: .2s;
 }
@@ -179,12 +179,12 @@ body.slider__body {
         opacity: 1;
 }
 #third span{
-	position: absolute;
-      	top: 40%;
-   		left: 67%;
+		position:relative;
+      	top: 330px;
+   		left: 676px;
     	width: 300px;
     	text-align: center;
-        transform: translate(-15%, 30%);
+        transform: translate(-15px, 30px);
         font-size:34px;
       	font-family: sans-serif;
         color: #fff;
@@ -195,44 +195,44 @@ body.slider__body {
 
  #fourth{
        background-image: url("/BambooReview/images/main-page3-back.jpg");
-       background-repeat: no-repeat;
-  	  background-size: cover;       
+       background-repeat: no-repeat;    
 }
 .div4{
         position: absolute;
 		top: 0;
-		left: 23.5%;
+		left: 230px;
 		margin: 0 auto;
-		width: 60%;
-		height: 100%;
+		width: 600px;
+		height: 780px;
 		background: black;
 		opacity: 0.8;
 }
 
+
 .adver1{
 	position: absolute;
-    top: 5%;
-    left: 40%;
+    top: 20px;
+    left: 400px;
     width: 300px;
     text-align: center;
-    transform: translate(-15%, 30%);
+    transform: translate(-15px, 30px);
     font-size: 34px;
     font-family: sans-serif;
     color: #fff;
 }
 .adver2{
 	position: absolute;
-    top: 23%;
-    left: 36%;
+    top: 223px;
+    left: 33%;
     width: 53%;
-    xt-align: center;
+    text-align: center;
     transform: translate(-15%, 30%);
     font-size: 20px;
     font-family: sans-serif;
     color: #fff;
 }
 #thanos{
-	top: 36%;
+	top: 330px;
     position: absolute;
     left: 39%;
     transition-duration: 0.6s;
@@ -243,6 +243,9 @@ body.slider__body {
 #fourth:hover #thanos{
         transform: translateY(0);
         opacity: 1;
+}
+.prompt{
+	width:330px;
 }
 footer{
 	top:250px;

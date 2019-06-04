@@ -83,21 +83,32 @@ ga('send', 'pageview');
   			data-event-action="signout" class="item" href="<%=request.getContextPath()%>/user/userLogin">
     		로그인
   		</a>
- 		<%} else{%>
+ 		<%} else if(userLoggedIn!=null && "admin@naver.com".equals(userLoggedIn.getEmail())){%>
  			<a class="item right" href="<%=request.getContextPath()%>/admin/adminList">
   				 관리자페이지
- 			</a>	
+ 			</a>		
  			<a class="item" href="<%=request.getContextPath()%>/user/userView?email=<%=userLoggedIn.getEmail()%>">
    				내 정보 보기
   			</a>
-  			<%-- <input type="button" value="내정보보기" 
-								   onclick="location.href='<%=request.getContextPath()%>/user/userView?email=<%=userLoggedIn.getEmail()%>'" id="userinfo"/>
-			<a href="<%=request.getContextPath()%>/user/userView?email=<%=userLoggedIn.getEmail()%>">내 정보보기</a> --%>
   			<a class="item" href="<%=request.getContextPath()%>/price/priceInfo">
    				가격정보
   			</a>
   			<a class="item" href="<%=request.getContextPath()%>/user/userLogout">
     			로그아웃하기
   			</a>
- 		<%} %>
+ 		<%}else{%>
+ 		<a class="item right" href="<%=request.getContextPath()%>/admin/adminList" style="visibility:hidden;" id="admin-board">
+  				 관리자페이지
+ 			</a>		
+ 			<a class="item" href="<%=request.getContextPath()%>/user/userView?email=<%=userLoggedIn.getEmail()%>">
+   				내 정보 보기
+  			</a>
+  			<a class="item" href="<%=request.getContextPath()%>/price/priceInfo">
+   				가격정보
+  			</a>
+  			<a class="item" href="<%=request.getContextPath()%>/user/userLogout">
+    			로그아웃하기
+  			</a>
+ 		<%}%>
+ 
 </div>

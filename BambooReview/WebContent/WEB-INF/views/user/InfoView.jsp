@@ -34,32 +34,27 @@
 			}
 		}
 	
-	function passwordCheck(){
-		/* if($("#password").val()!=$("#passwordCfrm").val()){
-			alert("비밀번호가 일치하지 않습니다");
-			$("#password").focus();
-			return false;
-			} */
-		
-		//////////////비밀번호 정규화, 최종버전에서 사용할것
-		/* var password = $("#password").val();
-		var check1 = /^(?=.*[a-zA-Z])(?=.*[0-9]).{10,12}$/.test(password);   //영문,숫자
-		var check2 = /^(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{10,12}$/.test(password);  //영문,특수문자
-		var check3 = /^(?=.*[^a-zA-Z0-9])(?=.*[0-9]).{10,12}$/.test(password);  //특수문자, 숫자
-		if(!(check1||check2||check3)){
-			alert("10자~12자리의 영문+숫자+특수문자 중 2종류 이상을 조합하여 사용할 수 있습니다.");
-			return false;
-				} */
-			return true;
-				
-	}
-	
 	function updatePassword(){
 		var url = "<%=request.getContextPath()%>/user/updatePassword?email=<%=user.getEmail()%>";
 	    var title = "updatePassword";
 	    var status =  "left=500px, top=200px, width=400px, height=210px";
 	    
 		var popup = window.open(url,title,status);
+	}
+	function loadImg(f){
+	    console.log(f.files); //FileList
+	    console.log(f.files[0]); //File 실제 업로드한 파일
+	    
+	    if(f.files && f.files[0]){
+	    	var reader = new FileReader();
+	    	//파일 읽기 메소드 호출. 읽기완료하면 onload에 등록된 함수를 호출
+	    	reader.readAsDataURL(f.files[0]);
+	    	
+	    	reader.onload = function(){
+	    		//result속성에는 파일 컨텐츠가 담겨있음.
+	    		$("#img-viewer").attr("src", reader.result);
+	    	}
+	    }
 	}
 	</script>
 	<form name="checkIdDuplicateFrm" method="post">
@@ -75,11 +70,15 @@
     		<div class="column">
 				<div class="ui card">
 			  		<a class="image" href="#">
-		 	  			<img src="<%=request.getContextPath() %>/images/thanos.jpg">
+			  		<img id="img-viewer" width=350 />
+		 	  			<%-- <img src="<%=request.getContextPath() %>/images/thanos.jpg" > --%>
 		 	  			<!-- 회원사진 저장하면 이름을 특정한 형식으로 변경해 저장해 그 경로를 저장
 		 	  			ex) 회원번호 1인 회원이 사진을 저장한다면
 		 	  				1.(확장자) 등의 형태로 images 폴더에 저장하고 그 경로를 태그에 리턴 -->
 			  		</a>
+            <input type="file" name="upfile" onchange="loadImg(this);" required/>
+            
+            
 					<div class="content">
 		   	 			<a class="header" href="#"><%=user.getUserName()%></a>
 		  	 			<div class="meta">
