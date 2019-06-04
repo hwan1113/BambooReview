@@ -7,17 +7,6 @@
  }
  </style>
  <%@ include file="/WEB-INF/views/common/header.jsp" %>
- <script src="https://apis.google.com/js/api.js"></script>
- <script>
- gapi.load('auth2', function() {
-	  auth2 = gapi.auth2.init({
-	    client_id: '1048068622103-udnmctl1b1p2p8g9tqtcaflcb3c7p1e7.apps.googleusercontent.com',
-	    scope: 'email'
-	  }).then(()=>{
-		  console.log('fetched perfectly!')
-		  })
-}) 
- </script>
  <form name="checkIdDuplicateFrm" method="post">
 	<input type="hidden" name="email" />
 
@@ -60,7 +49,6 @@
  				 </div>
  				 <p><a href="<%=request.getContextPath()%>/user/userSignup">회원 가입하러가기!</a></p>
 			</div>
-			<a href="#" onclick="signOut();">Sign out</a>
 			
 			
   		</div>
@@ -83,32 +71,9 @@ function signIn() {
 		console.log('user Signed In')
 	})
 }
-function signOut() {
-   var auth2 = gapi.auth2.getAuthInstance();
-   auth2.signOut().then(function () {
-     console.log('User signed out.');
-   });
- }
 
-function onSuccess(googleUser) {
-     var profile = googleUser.getBasicProfile();
-      console.log('ID: ' + profile.getId());
-      console.log('Name: ' + profile.getName());
-      console.log('Image URL: ' + profile.getImageUrl());
-      console.log('Email: ' + profile.getEmail());
-      var id_token = googleUser.getAuthResponse().id_token;
-      
-      $("#userName").val(profile.getName())
-      $("#email").val(profile.getEmail())
-      $("#picture").val(profile.getImageUrl())
-      $("#googleUserFrm").submit()
-      
-      
-      
-      var param={
-          id_token:id_token
-      }
-      $.ajax({
+
+      /* $.ajax({
         url:'https://oauth2.googleapis.com/tokeninfo',
         data:param,
         success: function(data){
@@ -118,8 +83,7 @@ function onSuccess(googleUser) {
         error:function(){
             
         }
-        })
-}
+        }) */
 
 function loginValidate(){
 	if($("#memberId").val().trim().length == 0){

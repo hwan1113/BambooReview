@@ -99,7 +99,6 @@ public class UserDAO {
 		int result = 0;
 		String sql = prop.getProperty("insertUser");
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -111,7 +110,6 @@ public class UserDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rset);
 			close(pstmt);
 		}
 		return result;

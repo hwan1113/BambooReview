@@ -30,22 +30,40 @@ public class PaymentDAO {
 		}
 	}
 
-	public Payment getPaymentInfo(Connection conn, String customer_no) {
-		Payment p  = null;
+	public int insertPaymentInfo(Connection conn, int customer_no) {
+		int result = 0;
+		String sql = prop.getProperty("insertPaymentInfo");
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("getPaymentInfo");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, customer_no);
+			pstmt.setInt(1, customer_no);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+
+	}
+
+	public payment.model.vo.Payment selectPaymentInfo(Connection conn, int customer_no) {
+		Payment p  = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectOne");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, customer_no);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				p = new Payment();
 				p.setCustomer_no(rset.getInt("customer_no"));
 				p.setPayment_no(rset.getInt("payment_no"));
-				
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -53,8 +71,5 @@ public class PaymentDAO {
 			close(pstmt);
 		}
 		return p;
-
-		
 	}
-
 }

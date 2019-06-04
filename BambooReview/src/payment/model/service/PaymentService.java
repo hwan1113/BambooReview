@@ -13,9 +13,18 @@ import user.model.vo.User;
 public class PaymentService {
 	
 	
-	public Payment getPaymentInfo(String customer_no) {
+	public int insertPaymentInfo(int customer_no) {
+		int result = 0;
 		Connection conn = getConnection();
-		Payment p= new PaymentDAO().getPaymentInfo(conn, customer_no);
+		result= new PaymentDAO().insertPaymentInfo(conn, customer_no);
+		close(conn);
+		return result;
+	}
+
+	public Payment selectPaymentInfo(int customer_no) {
+		Payment p =null;
+		Connection conn = getConnection();
+		p= new PaymentDAO().selectPaymentInfo(conn, customer_no);
 		close(conn);
 		return p;
 	}

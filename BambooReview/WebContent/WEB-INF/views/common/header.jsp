@@ -49,6 +49,7 @@ if (document.location.pathname.indexOf('/user') > -1 ||
 	}
 ga('send', 'pageview');
 </script>
+
 <meta charset="UTF-8">
   <!-- 시맨틱 UI -->
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css"/>
@@ -83,7 +84,7 @@ ga('send', 'pageview');
   			data-event-action="signout" class="item" href="<%=request.getContextPath()%>/user/userLogin">
     		로그인
   		</a>
- 		<%} else if(userLoggedIn!=null && "admin@naver.com".equals(userLoggedIn.getEmail())){%>
+ 		<%} else if(userLoggedIn!=null && "A".equals(userLoggedIn.getStatus())){%>
  			<a class="item right" href="<%=request.getContextPath()%>/admin/adminList">
   				 관리자페이지
  			</a>		
@@ -93,7 +94,7 @@ ga('send', 'pageview');
   			<a class="item" href="<%=request.getContextPath()%>/price/priceInfo">
    				가격정보
   			</a>
-  			<a class="item" href="<%=request.getContextPath()%>/user/userLogout">
+  			<a class="item" href="<%=request.getContextPath()%>/user/userLogout" onclick="signOut();">
     			로그아웃하기
   			</a>
  		<%}else{%>
@@ -106,9 +107,26 @@ ga('send', 'pageview');
   			<a class="item" href="<%=request.getContextPath()%>/price/priceInfo">
    				가격정보
   			</a>
-  			<a class="item" href="<%=request.getContextPath()%>/user/userLogout">
+  			<a class="item" href="<%=request.getContextPath()%>/user/userLogout" onclick="signOut();">
     			로그아웃하기
   			</a>
  		<%}%>
  
 </div>
+<script src="https://apis.google.com/js/api.js"></script>
+<script>
+ gapi.load('auth2', function() {
+	  auth2 = gapi.auth2.init({
+	    client_id: '1048068622103-udnmctl1b1p2p8g9tqtcaflcb3c7p1e7.apps.googleusercontent.com',
+	    scope: 'email'
+	  }).then(()=>{
+		  console.log('fetched perfectly!')
+		  })
+})
+function signOut() {
+   var auth2 = gapi.auth2.getAuthInstance();
+   auth2.signOut().then(function () {
+     console.log('User signed out.');
+   });
+ }
+ </script>

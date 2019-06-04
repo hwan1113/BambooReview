@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import payment.model.service.PaymentService;
 import payment.model.vo.Payment;
 
@@ -21,14 +23,18 @@ public class PaymentInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String customer_no = request.getParameter("customer_no");
+		int customer_no = Integer.parseInt(request.getParameter("customer_no"));
+	
+		Payment p = null;
+		int result = new PaymentService().insertPaymentInfo(customer_no);
+		if(result>0) {
+			p = new PaymentService().selectPaymentInfo(customer_no);
+		}else {
+			
+		}
 		
-		Payment p = new PaymentService().getPaymentInfo(customer_no);
-		
-		
-		
-		
-		
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(p,response.getWriter());
 		
 		
 	}
