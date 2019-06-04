@@ -19,9 +19,11 @@ public class User implements Serializable, HttpSessionBindingListener{
 	private Date quitDate;
 	private String status;
 	private int customer_no;
+	private String originalFile;
+	private String renamedFile;
 
 	public User(String email, String password, String userName, String phone, String profile, Date enrollDate,
-			Date quitDate, String status, int customer_no) {
+			Date quitDate, String status, int customer_no,String originalFile, String renamedFile) {
 		this.email = email;
 		this.password = password;
 		this.userName = userName;
@@ -31,6 +33,9 @@ public class User implements Serializable, HttpSessionBindingListener{
 		this.quitDate = quitDate;
 		this.status = status;
 		this.customer_no = customer_no;
+		this.originalFile=originalFile;
+		this.renamedFile=renamedFile;
+		
 	}
 	
 	public User() {
@@ -94,12 +99,32 @@ public class User implements Serializable, HttpSessionBindingListener{
 		return serialVersionUID;
 	}
 	
+	
+	public String getOriginalFile() {
+		return originalFile;
+	}
+
+	public void setOriginalFile(String originalFile) {
+		this.originalFile = originalFile;
+	}
+
+	public String getRenamedFile() {
+		return renamedFile;
+	}
+
+	public void setRenamedFile(String renamedFile) {
+		this.renamedFile = renamedFile;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "User [email=" + email + ", password=" + password + ", userName=" + userName + ", phone=" + phone
 				+ ", profile=" + profile + ", enrollDate=" + enrollDate + ", quitDate=" + quitDate + ", status="
-				+ status + ", customer_no=" + customer_no + "]";
+				+ status + ", customer_no=" + customer_no + ", originalFile=" + originalFile
+				+ ", renamedFile=" + renamedFile + "]";
 	}
+
 	@Override
 	public void valueBound(HttpSessionBindingEvent arg0) {
 		// TODO Auto-generated method stub

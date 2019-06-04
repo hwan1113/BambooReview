@@ -63,7 +63,7 @@ function requestPay() {
 		alert("로그인 후 이용가능합니다.")
 		return location.href='<%=request.getContextPath()%>/user/userLogin'
 	}else{
-	<%=userLoggedIn.class%>
+	<%-- <%=userLoggedIn.class%> --%>
 	
 	
 	IMP.request_pay({ // param
