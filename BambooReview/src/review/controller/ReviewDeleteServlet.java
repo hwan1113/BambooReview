@@ -22,6 +22,7 @@ public class ReviewDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1.파라미터 핸들링
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		System.out.println("reviewNo@serv="+reviewNo);
 
 		//2. 업무로직
 		int result = new ReviewService().deleteReview(reviewNo);

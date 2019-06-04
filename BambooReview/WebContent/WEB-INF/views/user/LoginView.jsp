@@ -7,9 +7,17 @@
  }
  </style>
  <%@ include file="/WEB-INF/views/common/header.jsp" %>
- <meta name="google-signin-client_id" content="401915479611-85lnc5b082en3f07kq9jsd628oshv494.apps.googleusercontent.com">
- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
- 
+ <script src="https://apis.google.com/js/api.js"></script>
+ <script>
+ gapi.load('auth2', function() {
+	  auth2 = gapi.auth2.init({
+	    client_id: '1048068622103-udnmctl1b1p2p8g9tqtcaflcb3c7p1e7.apps.googleusercontent.com',
+	    scope: 'email'
+	  }).then(()=>{
+		  console.log('fetched perfectly!')
+		  })
+}) 
+ </script>
  <form name="checkIdDuplicateFrm" method="post">
 	<input type="hidden" name="email" />
 
@@ -41,6 +49,10 @@
 			  </div>
 			  
   				<button class="ui button" type="submit">로그인</button>
+  				<button class="ui google plus button" onClick="signIn()" type="button">
+  					<i class="google plus icon"></i>
+  					Google로 로그인하기
+				</button>
 			</form>
 			 <div class="ui message">
  				 <div class="header">
@@ -48,7 +60,6 @@
  				 </div>
  				 <p><a href="<%=request.getContextPath()%>/user/userSignup">회원 가입하러가기!</a></p>
 			</div>
-				<div id="my-signin2"></div>
 			<a href="#" onclick="signOut();">Sign out</a>
 			
 			
@@ -61,7 +72,13 @@
     			<input type="hidden" name="picture" id="picture">
    	</form>
 <script>
-
+function signIn() {
+	var auth2 = gapi.auth2.getAuthInstance();
+	var profile = auth2.currentUser.get().getBasicProfile();
+	auth2.signIn().then(function(){
+		console.log('user Signed In')
+	})
+}
 function signOut() {
    var auth2 = gapi.auth2.getAuthInstance();
    auth2.signOut().then(function () {
@@ -98,22 +115,6 @@ function onSuccess(googleUser) {
             
         }
         })
-}
-
-function onFailure(error) {
-   console.log(error);
-}
-
-function renderButton() {
-   gapi.signin2.render('my-signin2', {
-     'scope': 'profile email',
-     'width': 240,
-     'height': 50,
-     'longtitle': true,
-     'theme': 'dark',
-     'onsuccess': onSuccess,
-     'onfailure': onFailure
-   });
 }
 
 function loginValidate(){

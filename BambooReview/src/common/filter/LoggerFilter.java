@@ -1,6 +1,7 @@
 package common.filter;
 
 import java.io.IOException;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -8,17 +9,18 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 
 /**
- * Servlet Filter implementation class ExampleFilter
+ * Servlet Filter implementation class LoggerFilter
  */
-@WebFilter("/ExampleFilter")
-public class ExampleFilter implements Filter {
+@WebFilter("/*")
+public class LoggerFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public ExampleFilter() {
+    public LoggerFilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -33,11 +35,16 @@ public class ExampleFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
-
+		HttpServletRequest httpReq = (HttpServletRequest)request;
+		String uri = httpReq.getRequestURI();
+		System.out.println("====================================");
+		System.out.println(uri);
+		System.out.println("------------------------------------");
+		
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
+
+		System.out.println("====================================\n");
 	}
 
 	/**

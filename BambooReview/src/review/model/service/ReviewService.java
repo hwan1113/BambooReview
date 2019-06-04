@@ -30,9 +30,11 @@ public class ReviewService {
 	public int insertReview(Review r) {
 		Connection conn = getConnection();
 		int result = new ReviewDAO().insertReview(conn, r);
+		System.out.println(result);
 		if(result>0) {
 			commit(conn);
 			result = new ReviewDAO().selectLastSeq(conn);
+			System.out.println(result);
 		}	
 		else 
 			rollback(conn);
@@ -75,6 +77,32 @@ public class ReviewService {
 		return result;
 		
 	}
+	
+	public int increaseLikeCount(int reviewNo) {
+		Connection conn = getConnection();
+		int result = new ReviewDAO().increaseLikeCount(conn, reviewNo);
+		if(result>0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		
+		return result;
+		
+	}
+	
+	public int increaseDisLikeCount(int reviewNo) {
+		Connection conn = getConnection();
+		int result = new ReviewDAO().increaseDisLikeCount(conn, reviewNo);
+		if(result>0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		
+		return result;
+		
+	}
 
 	public int deleteReview(int reviewNo) {
 		Connection conn = getConnection();
@@ -86,6 +114,12 @@ public class ReviewService {
 		close(conn);
 		
 		return result;
+	}
+	
+	public String getUserName(int customerNo) {
+		Connection conn = getConnection();
+		String userName = new ReviewDAO().getUserName(conn, customerNo);
+		return userName;
 	}
 
 }

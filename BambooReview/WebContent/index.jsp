@@ -2,6 +2,14 @@
     pageEncoding="UTF-8"%>
  <html>
  <head>
+ <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-128561305-2', 'auto');
+ga('send', 'pageview');
+</script>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Welcome, BambooReview</title>
@@ -44,7 +52,7 @@
  		</div>
  		<button class="ui green button" id="searh-button">search</button>
  		 <form action="<%=request.getContextPath()%>/hotel/hotelList"
-      				name="hotelDataFrm" id="hotelDataFrm" method="post">
+      				name="hotelDataFrm" id="hotelDataFrm" method="get">
        			<input type="hidden" name="hotelData" id="hotelData"/>
     			<input type="hidden" name="srchword" id="srchword">
    		</form>

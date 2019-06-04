@@ -4,8 +4,7 @@
 <%
 	List<Review> list = (List<Review>)request.getAttribute("list");
 	String pageBar = (String)request.getAttribute("pageBar");
-	String userName = "";
-	ReviewService reviewService = new ReviewService();
+	/* String userName = ""; */
 
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
@@ -22,6 +21,8 @@
 			<th>작성자</th>
 			<th>작성일</th>
 			<th>조회수</th>
+			<th>추천수</th>
+			<th>신고수</th>
 		</tr>
 		<% for(Review r : list){ %>
 		<tr>
@@ -31,10 +32,12 @@
 					<%= r.getReviewTitle() %>
 				</a>
 			</td>
-			<td><%= userName = (String)reviewService.getUserName(r.getCustomerNo()) %></td>
+			<td><%= r.getReviewWriter() %></td>
 			<td><%= r.getWrittenDate() %></td>
 			
 			<td><%=r.getReadCnt() %></td>
+			<td><%=r.getLikeCnt() %></td>
+			<td><%=r.getDisLikeCnt() %></td>
 		</tr>
 		<% } %>
 		
