@@ -33,7 +33,7 @@
   		  <form class="ui form" action="<%=request.getContextPath() %>/user/login" onsubmit="return loginValidate();">
 			  <div class="field" >
 			    <label>이메일</label>
-			    <input type="text" name="email" placeholder="email" id="memberId"/>
+			    <input type="email" name="email" placeholder="email" id="memberId"/>
 			    
 			  </div>
 			  <div class="field" >

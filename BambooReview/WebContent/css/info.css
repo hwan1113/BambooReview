@@ -51,6 +51,10 @@
 	background-color:#abc15e;
 }
 #delete-button{
+	position:absolute;
+	top:660px;
+	left:732px;
+	color:rgb(241, 241, 241);
 	background-color:#cc0505;
 }
 .header{

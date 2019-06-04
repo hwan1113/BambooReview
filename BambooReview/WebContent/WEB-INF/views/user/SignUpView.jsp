@@ -22,7 +22,7 @@
   		  <form class="ui form" name="userEnrollFrm" action="<%=request.getContextPath() %>/user/signup"  onsubmit="return enrollValidation();">
 			  <div class="field">
 			    <label>이메일</label>
-			    <input type="text" name="email" placeholder="email" id="email" value="email" required/>
+			    <input type="email" name="email" placeholder="email" id="email" value="email" required/>
 			  </div>
 			  <input type="button" value="아이디 중복검사"
 						   onclick="checkIdDuplicate();" />
