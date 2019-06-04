@@ -6,6 +6,7 @@ import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+
 import user.model.dao.UserDAO;
 import user.model.vo.User;
 
@@ -67,7 +68,12 @@ public class UserService {
 		close(conn);
 		return result;
 	}
-
+	public boolean checkIdDuplicate(String email) {
+		Connection conn = getConnection();
+		boolean isUsable = new UserDAO().checkIdDuplicate(conn, email);
+		close(conn);
+		return isUsable;
+	}
 	
 	
 	

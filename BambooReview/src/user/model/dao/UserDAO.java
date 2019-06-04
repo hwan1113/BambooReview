@@ -186,7 +186,46 @@ public class UserDAO {
 		
 		return result;
 	}
-	
+	public boolean checkIdDuplicate(Connection conn, String email) {
+		boolean isUsable = false;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("checkIdDuplicate");
+		
+		try {
+			//1.statement객체생성(미완성 sql문전달)
+			pstmt = conn.prepareStatement(sql);
+			
+			//2.sql문 데이터대입
+			pstmt.setString(1, email);
+			
+			//3.statement객체 실행 및 rset에 담기
+			rset = pstmt.executeQuery();
+			
+			//4.rset의 데이터를 자바 변수에 담기
+			if(rset.next()) {
+				int cnt = rset.getInt("cnt");
+				
+				//현재 아이디가 사용가능한 경우
+				if(cnt == 0) {
+					isUsable = true;
+					System.out.println("cnt= "+cnt);
+					System.out.println("isUsable is ="+isUsable);
+				}
+				
+			}
+			
+//			System.out.println("isUsble@dao="+isUsable);
+					
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return isUsable;
+	}
 	
 	
 	

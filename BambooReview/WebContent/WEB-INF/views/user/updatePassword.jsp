@@ -28,6 +28,7 @@ function fn_password_validate(){
 		$("#password_new").select();
 		return false;
 	}
+
 	
 	return true;	
 }

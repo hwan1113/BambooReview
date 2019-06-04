@@ -62,6 +62,7 @@ public class UserUpdatePasswordEndServlet extends HttpServlet {
 			if(result>0){
 				msg = "패스워드 변경 성공";
 				request.setAttribute("script", "self.close();");
+				
 			}
 				
 		}
@@ -71,7 +72,6 @@ public class UserUpdatePasswordEndServlet extends HttpServlet {
 		}
 		request.setAttribute("msg", msg);
 		//팝업창 닫기용 스크립트생성
-		
 		request.setAttribute("loc", loc);
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
 		reqDispatcher.forward(request, response);
