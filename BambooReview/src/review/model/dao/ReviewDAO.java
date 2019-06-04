@@ -153,7 +153,6 @@ public class ReviewDAO {
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				userName = rset.getString("username");
-				System.out.println("userName@DAO="+userName);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
