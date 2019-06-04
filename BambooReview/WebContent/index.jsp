@@ -140,56 +140,45 @@ ga('send', 'pageview');
 			  animationSpeed: 400
 		  });
 	  });
-      /* function callAjax(url, callback){
-	    var xmlhttp;
-	    xmlhttp = new XMLHttpRequest();
-	    xmlhttp.onreadystatechange = function(){
-	        if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
-	            console.log(xmlhttp);
-	        }
-	    }
-	    xmlhttp.open("GET", 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=hotels+in+'+
-      		$("#srch-input").val()+
-      		'&key=AIzaSyBamfF6Gj9yf1Spt6oL6sX1GB86eMTtI6U', true);
-	    xmlhttp.send();
-	} */
 
- 	$("#searh-button").click(function(){
-	  if($("#srch-input").val()==''){
-		  $("#srch-input").val("london")
-	  }
-    		$.ajax({
-          url:'https://maps.googleapis.com/maps/api/place/textsearch/json?query=hotels+in+'+
-          		$("#srch-input").val()+
-          		'&key=AIzaSyBamfF6Gj9yf1Spt6oL6sX1GB86eMTtI6U',
-          type:'GET',
-          success: function(data){
-          	console.dir(data.results)
-              Arr =[];
-              for(var i=0; i<3; i++){
-                  hotel = {};
-                  hotel.id = data.results[i].place_id
-                  hotel.name = data.results[i].name
-                  if(data.results[i].photos){
-                  hotel.photo = data.results[i].photos[0].photo_reference}
-                  hotel.address = data.results[i].formatted_address
-                  hotel.rate = data.results[i].rating
-                  hotel.info = data.results[i].types
-                  Arr.push(hotel)
-              }
-              var json = JSON.stringify(Arr);
+$("#searh-button").click(function(){
+	if($("#srch-input").val()==''){
+		$("#srch-input").val("london")
+	}
+	param = {keyword:$("#srch-input").val()}
+	$.ajax({
+	url: "<%=request.getContextPath()%>/hotel/hotelInfo",
+	dataType: "json",
+	data:param,
+	success: function(data){
+	    Arr =[];
+        for(var i=0; i<5; i++){
+            hotel = {};
+            hotel.id = data.results[i].place_id
+            hotel.name = data.results[i].name
+            if(data.results[i].photos){
+            hotel.photo = data.results[i].photos[0].photo_reference}
+            hotel.address = data.results[i].formatted_address
+            hotel.rate = data.results[i].rating
+            hotel.info = data.results[i].types
+            Arr.push(hotel)
+             var json = JSON.stringify(Arr);
               $("#hotelData").val(json)
        		$("#srchword").val($("#srch-input").val())
               $("#hotelDataFrm").submit()
-          },
-          error:function(jqxhr, textStatus, errorThrown){
-              console.log("ajax처리실패!")
-              console.log(jqxhr);
-               console.log(textStatus);
-               console.log(errorThrown);
-          }
-      })
+        }
+	},
+	error:function(jqxhr, textStatus, errorThrown){
+        console.log("ajax처리실패!")
+        console.log(jqxhr);
+         console.log(textStatus);
+         console.log(errorThrown);
+    }
+	});
 })
+	
+	
+	
     </script>
   </body>
 </html>

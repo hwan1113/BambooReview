@@ -32,9 +32,31 @@
   <div class="or"></div>
   <button class="ui positive button" onclick="requestPay()">결제하기</button>
 </div>
+<form action="/payment/paid">
+<input type="hidden" name="merchantid" id="merchantid">
+</form>
 
 <script>
 IMP.init("imp28947597");
+$.ajax({
+	url: "<%=request.getContextPath()%>/payment/paymentInfo",
+	type: "get",
+	success: function(data){
+		
+		
+		
+	},
+	error:function(jqxhr,textStatus,errorThrown){
+		console.log("ajax처리 실패!")
+		console.log(jqxhr);
+		console.log(textStatus);
+		console.log(errorThrown);
+	}
+	
+	
+})
+
+
 function requestPay() {
 	IMP.request_pay({ // param
 	    pg: "html5_inicis",
@@ -51,7 +73,7 @@ function requestPay() {
 	    if (rsp.success) {
 	        alert('결제가 성공하였습니다.')
 	    } else {
-	    	alert('결제가 취소되었습니다.')
+	    	
 	    }
 	});
 }

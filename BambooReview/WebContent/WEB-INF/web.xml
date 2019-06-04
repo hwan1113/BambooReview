@@ -41,8 +41,7 @@
     <servlet-name>PriceView</servlet-name>
     <url-pattern>/price/priceInfo</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
+  <servlet>
     <servlet-name>Payment</servlet-name>
     <jsp-file>/WEB-INF/views/payment/NaverPay.jsp</jsp-file>
   </servlet>
@@ -50,7 +49,6 @@
     <servlet-name>Payment</servlet-name>
     <url-pattern>/payment/pay</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ReviewForm</servlet-name>
     <jsp-file>/WEB-INF/views/review/reviewForm.jsp</jsp-file>
@@ -59,7 +57,6 @@
     <servlet-name>ReviewForm</servlet-name>
     <url-pattern>/review/reviewForm</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>AdminView</servlet-name>
     <jsp-file>/WEB-INF/views/admin/AdminView.jsp</jsp-file>
@@ -68,5 +65,4 @@
     <servlet-name>AdminView</servlet-name>
     <url-pattern>/admin/adminList</url-pattern>
   </servlet-mapping>
-  
 </web-app>
