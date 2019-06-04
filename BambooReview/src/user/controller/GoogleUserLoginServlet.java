@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import user.model.service.UserService;
 import user.model.vo.User;
@@ -27,21 +28,25 @@ public class GoogleUserLoginServlet extends HttpServlet {
 		User userLoggedIn = new UserService().selectOne(email);
 		User u = new User();
 		String msg = "";
+		HttpSession session = request.getSession();
 		if(userLoggedIn==null) {
 			u.setEmail(email);
 			u.setUserName(userName);
-			u.setProfile("change");
-			u.setPassword("change later");
-			u.setPhone("change");
-			u.setStatus("U");
+			u.setProfile(picture);
+			u.setStatus("G");
 			int result= new UserService().insertGoogleUser(u);
 			if(result>0) {
 				msg="BambooReview 구글 처음 로그인 성공!";
+				userLoggedIn = new UserService().selectOne(email);
+				session.setAttribute("userLoggedIn", userLoggedIn);
+				session.setMaxInactiveInterval(60*60);
 			}else {
 				msg="BambooReview 구글 처음 로그인 실패!";
 			}
 		}else {
 			msg="구글 로그인 성공!";
+			session.setAttribute("userLoggedIn", userLoggedIn);
+			session.setMaxInactiveInterval(60*60);
 		}
 		
 		request.setAttribute("msg", msg);

@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import payment.model.service.PaymentService;
+import payment.model.vo.Payment;
+
 /**
  * Servlet implementation class PaymentInfoServlet
  */
@@ -18,6 +21,9 @@ public class PaymentInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String customer_no = request.getParameter("customer_no");
+		
+		Payment p = new PaymentService().getPaymentInfo(customer_no);
 		
 		
 		

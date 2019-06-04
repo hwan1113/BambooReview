@@ -24,8 +24,6 @@ public class HotelInfoServlet extends HttpServlet {
     public HotelInfoServlet() {
     	
     	
-    	
-    	
     }
 
 	/**
@@ -36,7 +34,7 @@ public class HotelInfoServlet extends HttpServlet {
 		String query ="hotels%20in%20"+request.getParameter("keyword");
 		String key = "AIzaSyBamfF6Gj9yf1Spt6oL6sX1GB86eMTtI6U";
 		String urlStr = "https://maps.googleapis.com/maps/api/place/textsearch/json?"
-					  + "query="+query+"&"
+					  + "query="+query+"&"+"language=en&"
 					  + "key="+key;
 		
 		

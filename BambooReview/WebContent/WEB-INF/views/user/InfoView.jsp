@@ -83,7 +83,11 @@
 					<div class="content">
 		   	 			<a class="header" href="#"><%=user.getUserName()%></a>
 		  	 			<div class="meta">
+		  	 			<%if("U".equals(user.getStatus())) {%>
 		     			<a>일반 회원</a>
+		     			<%}else{ %>
+		     			<a>관리자</a>
+		     			<%} %>
 		   	 			</div>
 		  			</div>
 				</div>
@@ -100,7 +104,7 @@
 			</h2>
 				<div class="ui input" id="email-div">
 				<label class="email-title">이메일</label>
-				  <input type="text" name="email" value="<%=user.getEmail()%>" required/ class="email-input-bar">
+				  <input type="text" name="email" value="<%=user.getEmail()%>" required readonly class="email-input-bar">
 				</div>
 			  
 			  

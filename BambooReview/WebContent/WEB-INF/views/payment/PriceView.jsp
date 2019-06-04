@@ -38,9 +38,10 @@
 
 <script>
 IMP.init("imp28947597");
-$.ajax({
+<%-- $.ajax({
 	url: "<%=request.getContextPath()%>/payment/paymentInfo",
 	type: "get",
+	data:param,
 	success: function(data){
 		
 		
@@ -54,10 +55,17 @@ $.ajax({
 	}
 	
 	
-})
+}) --%>
 
 
 function requestPay() {
+	if(<%=userLoggedIn%>==null){
+		alert("로그인 후 이용가능합니다.")
+		return location.href='<%=request.getContextPath()%>/user/userLogin'
+	}else{
+	<%=userLoggedIn.class%>
+	
+	
 	IMP.request_pay({ // param
 	    pg: "html5_inicis",
 	    pay_method: "card",
@@ -76,6 +84,7 @@ function requestPay() {
 	    	
 	    }
 	});
+	}
 }
 
 </script>

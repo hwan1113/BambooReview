@@ -1,7 +1,6 @@
 package hotel.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,9 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
-
-import hotel.model.service.HotelService;
-import hotel.model.vo.Hotel;
 
 /**
  * Servlet implementation class HotelListServlet

@@ -76,6 +76,10 @@ function signIn() {
 	var auth2 = gapi.auth2.getAuthInstance();
 	var profile = auth2.currentUser.get().getBasicProfile();
 	auth2.signIn().then(function(){
+		  $("#userName").val(profile.getName())
+	      $("#email").val(profile.getEmail())
+	      $("#picture").val(profile.getImageUrl())
+	      $("#googleUserFrm").submit()
 		console.log('user Signed In')
 	})
 }

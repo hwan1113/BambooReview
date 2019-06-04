@@ -4,7 +4,6 @@
 <%@ page import="javax.servlet.http.*" %>
 <%
 	User userLoggedIn = (User)session.getAttribute("userLoggedIn");
-
 	ReviewService service = new ReviewService();
 	//Cookie[] cookies = request.getCookies();
 	boolean saveIdFlag = false;
