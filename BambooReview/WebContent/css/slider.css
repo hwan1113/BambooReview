@@ -150,7 +150,7 @@ body.slider__body {
 		width: 530px;
     	height: 164px;
     	transition-duration: 0.6s;
-        opacity: 0.8;
+        opacity: 0;
 		}
 #main-card1{
 		transform: translateX(-430px);
@@ -232,7 +232,7 @@ body.slider__body {
     color: #fff;
 }
 #thanos{
-	top: 330px;
+	top: 310px;
     position: absolute;
     left: 39%;
     transition-duration: 0.6s;

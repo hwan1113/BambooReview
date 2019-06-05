@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/payment.css" />
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 <div class="all"></div>
-<div class="ui small message">이용권 안내</div>
+<div class="ui small message" style="text-align:center; font-size:14px; font-family:sans-serif; font-weight:bold">이용권 안내</div>
 <div class="ui placeholder segment">
 <div class="ui green message" id="month">베이직(한달 이용권)</div>
 <div class="ui teal message" id="year">프리미엄(1년 이용권)</div>
@@ -27,7 +27,7 @@
     Or
   </div>
 </div>
-<div class="ui buttons">
+<div class="ui buttons" style="position:absolute; left:41%; top:610px; ">
   <button class="ui button" onclick="location.href='<%=request.getContextPath()%>/index.jsp'">뒤로가기</button>
   <div class="or"></div>
   <%if(userLoggedIn==null) {%>

@@ -29,8 +29,8 @@ font-family: 'Nanum Gothic Coding', monospace;
     width: 155px;
 }
 footer{
-	position:absolute;
-	top:698px;
+	display:inline-block;
+	top:718px;
 	width:1024px;
 }
 .all{
