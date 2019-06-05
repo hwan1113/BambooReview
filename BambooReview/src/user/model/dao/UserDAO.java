@@ -36,7 +36,7 @@ public class UserDAO {
 		ResultSet rset = null;
 		
 		try {
-			System.out.println(sql);
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, u.getEmail());
 			rset = pstmt.executeQuery();
@@ -86,7 +86,7 @@ public class UserDAO {
 				u.setEnrollDate(rset.getDate("enrolldate"));
 				u.setQuitDate(rset.getDate("quitdate"));
 				u.setStatus(rset.getString("status"));
-				System.out.println("selectOne email ="+email);
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -146,15 +146,15 @@ public class UserDAO {
 			//미완성쿼리문을 가지고 객체생성.
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, u.getUserName());
-			System.out.println("dao update@name= "+u.getUserName());
+			
 			pstmt.setString(2, u.getPhone());
-			System.out.println("dao update@phone= "+u.getPhone());
+			
 			pstmt.setString(3, u.getOriginalFile());
-			System.out.println("dao update@ori= "+u.getOriginalFile());
+			
 			pstmt.setString(4, u.getRenamedFile());
-			System.out.println("dao update@re= "+u.getRenamedFile());
+			
 			pstmt.setString(5, u.getEmail());
-			System.out.println("dao update@email= "+u.getEmail());
+			
 			
 			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
 			//DML은 executeUpdate()
@@ -165,7 +165,7 @@ public class UserDAO {
 		} finally {
 			close(pstmt);
 		}
-		System.out.println("dao@result= "+result);
+		
 		return result;
 	}
 	public int updatePassword(Connection conn, User user) {
@@ -215,13 +215,11 @@ public class UserDAO {
 				//현재 아이디가 사용가능한 경우
 				if(cnt == 0) {
 					isUsable = true;
-					System.out.println("cnt= "+cnt);
-					System.out.println("isUsable is ="+isUsable);
+	
 				}
 				
 			}
 			
-//			System.out.println("isUsble@dao="+isUsable);
 					
 		} catch (SQLException e) {
 			e.printStackTrace();

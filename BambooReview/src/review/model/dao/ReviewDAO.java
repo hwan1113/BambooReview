@@ -204,7 +204,6 @@ public class ReviewDAO {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateReview"); 
-		
 		try {
 			pstmt = conn.prepareStatement(sql);
 
@@ -213,6 +212,7 @@ public class ReviewDAO {
 			pstmt.setInt(3, r.getReviewNo());
 			
 			result = pstmt.executeUpdate();
+			System.out.println("result@dao= "+result);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

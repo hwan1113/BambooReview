@@ -28,12 +28,12 @@ public class ReviewUpdateEndServlet extends HttpServlet {
 		String reviewWriter = request.getParameter("reviewWriter");
 		String reviewContent = request.getParameter("reviewContent");
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
-		
-		
+
 		Review r = new Review();
 		r.setReviewTitle(reviewTitle);
 		r.setReviewWriter(reviewWriter);
 		r.setReviewContent(reviewContent);
+		r.setReviewNo(reviewNo);
 		
 		//2. 업무로직
 		int result = new ReviewService().updateReview(r);
