@@ -31,7 +31,6 @@ public class ReviewViewServlet extends HttpServlet {
 		
 		//2.비지니스로직 호출
 		ReviewService reviewService = new ReviewService();
-		//int totalLikeCount = reviewService.selectLikeCount(reviewNo);
 		
 		//사용자 읽음여부 쿠키검사
 		Cookie[] cookies = request.getCookies();
@@ -56,7 +55,6 @@ public class ReviewViewServlet extends HttpServlet {
 		//쿠키에 읽은 값이 없는 경우
 		if(!hasRead) {
 			reviewService.increaseReadCount(reviewNo);
-			reviewService.increaseLikeCount(reviewNo);
 			
 			//쿠키생성
 			Cookie reviewCookie = new Cookie("reviewCookie", reviewCookieVal+"|"+reviewNo+"|");
