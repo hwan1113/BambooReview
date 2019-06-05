@@ -11,93 +11,58 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" />		
 <section id="review-container">
 	<h2><%=hotelName %>의 리뷰 게시판</h2>
-		<input type="button" value="글쓰기" 
-			   id="btn-add"
-			   onclick="location.href='<%=request.getContextPath()%>/review/reviewForm?hotelName=<%=hotelName %>&hotelid=<%=hotelid%>'"/>
-	<table id="tbl-review">
-
-
-
-  <div class="ui three column centered grid">
-	  <div class="three column row">
-	  <div class="column"></div> 
-	    		<div class="column"><h2 style="text-align:center;">리뷰 목록</h2></div>
-				<!-- <div class="column"></div> -->
-				<div class="right floated column">
-					
-				</div>
-	  </div>
+  	<div class="ui three column centered grid">
+	  	<div class="three column row">
+	  		<div class="column"></div> 
+	    	<div class="column"><h2 style="text-align:center;">리뷰 목록</h2></div>
+			<div class="right floated column">
+			</div>
+	  	</div>
 	 	<div class="ui breadcrumb">
 		  <a href="<%=request.getContextPath()%>" class="section">Home</a>
 		  <i class="right chevron icon divider"></i>
 		  <a href="javascript:history.back();" class="section">location</a>
 		  <i class="right arrow icon divider"></i>
-	  	<div class="active section"><%=hotelName %></div>
-	</div>
+	  	  <div class="active section"><%=hotelName %></div>
+		</div>
 	 </div>
 	<table class="ui olive table">
 		  <thead>
-		    <tr><th style="text-align:center; width:10%;">작성자</th>
-		    <th style="width:60%; text-align:center">제목</th>
-			<th style="text-align:center;">작성일</th>
-			<th style="text-align:center;">조회수</th>
-			<th style="text-align:center;">추천수</th>
-			<th style="text-align:center;">신고수</th>
-		  </tr></thead><tbody>
+		    <tr>
+		    	<th style="text-align:center; width:10%;">번호</th>
+			    <th style="text-align:center; width:10%;">작성자</th>
+			    <th style="width:40%; text-align:center">제목</th>
+				<th style="text-align:center;">작성일</th>
+				<th style="text-align:center;">조회수</th>
+				<th style="text-align:center;">추천수</th>
+				<th style="text-align:center;">신고수</th>
+		    </tr>
+		  </thead>
+		  <tbody>
 		    <% for(Review r : list){ %>
-		<tr>
-			<%-- <td><%= r.getReviewNo() %></td> --%>
-			<td><%= r.getReviewWriter() %></td>
-			<td>
-				<a href="<%=request.getContextPath() %>/review/reviewView?reviewNo=<%= r.getReviewNo() %>"><%= r.getReviewTitle() %></a>
-			</td>
-			<td style="text-align:center;"><%= r.getWrittenDate() %></td>
-			<td style="text-align:center;"><%=r.getReadCnt() %></td>
-			<td style="text-align:center;"><%=r.getLikeCnt() %></td>
-			<td style="text-align:center;"><%=r.getDisLikeCnt() %></td>
-		</tr>
-		<% } %>
+			<tr>
+				<td><%= r.getReviewNo() %></td>
+				<td><%= r.getReviewWriter() %></td>
+				<td>
+					<a href="<%=request.getContextPath() %>/review/reviewView?reviewNo=<%= r.getReviewNo()%>&hotelName=<%=hotelName%>&hotelId=<%=hotelid%>"><%= r.getReviewTitle() %></a>
+				</td>
+				<td style="text-align:center;"><%= r.getWrittenDate() %></td>
+				<td style="text-align:center;"><%=r.getReadCnt() %></td>
+				<td style="text-align:center;"><%=r.getLikeCnt() %></td>
+				<td style="text-align:center;"><%=r.getDisLikeCnt() %></td>
+			</tr>
+			<% } %>
 		  </tbody>
-		  </table>
-		  <input type="button" value="글쓰기" id="btn-add" class="ui olive button"
-					style="float:right; background-color:#68b30d"onclick="location.href='<%=request.getContextPath()%>/review/reviewForm'"/>
-	<%-- 	<tr>
-			<th>번호</th>
->>>>>>> refs/heads/hslee
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>조회수</th>
-			<th>추천수</th>
-			<th>신고수</th>
-		</tr>
-		<% for(Review r : list){ %>
-		<tr>
-<<<<<<< HEAD
-=======
-			<td><%= r.getReviewNo() %></td>
->>>>>>> refs/heads/hslee
-			<td>
-				<a href="<%=request.getContextPath() %>/review/reviewView?reviewNo=<%= r.getReviewNo()%>&hotelName=<%=hotelName%>&hotelId=<%=hotelid%>">
-					<%= r.getReviewTitle() %>
-				</a>
-			</td>
-			<td><%= r.getReviewWriter() %></td>
-			<td><%= r.getWrittenDate() %></td>
-			
-			<td><%=r.getReadCnt() %></td>
-			<td><%=r.getLikeCnt() %></td>
-			<td><%=r.getDisLikeCnt() %></td>
-		</tr>
-		<% } %> --%>
-		
-	
-	
-	<div id="pageBar">
+	</table>
+	<div class="ui grid centered">
+	<div class="seven wide column"></div>
+	<div class="seven wide column"id="pageBar">
 		<%=pageBar %>
 	</div>
-<%-- ?hotelid=<%=HotelArr.getJSONObject(i).getString("id")%>"><%=HotelArr.getJSONObject(i).getString("name")%> --%>
-
+	<input type="button" value="글쓰기" id="btn-add" class="ui olive button"
+		style="float:right; background-color:#68b30d"onclick="location.href='<%=request.getContextPath()%>/review/reviewForm?hotelName=<%=hotelName %>&hotelid=<%=hotelid%>'"/>
+	
+	</div>
 
 </section>
 	
