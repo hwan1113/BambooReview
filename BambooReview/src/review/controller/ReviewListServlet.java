@@ -28,6 +28,7 @@ public class ReviewListServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		//파라미터 핸들링
+		System.out.println("호텔아이디ReviewListServ= "+request.getParameter("hotelid"));
 		int numPerPage = 5;//한페이지당 수
 		int cPage = 1;//요청페이지
 		try{

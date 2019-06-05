@@ -25,7 +25,6 @@ public class HotelListServlet extends HttpServlet {
 		
 		String srchWord= request.getParameter("srchword");
 		String dataString = request.getParameter("hotelData");
-		System.out.println(srchWord);
 		request.setAttribute("hotelData", dataString);
 		request.setAttribute("srchWord", srchWord);
 		request.getRequestDispatcher("/WEB-INF/views/hotel/HotelList.jsp").forward(request, response);

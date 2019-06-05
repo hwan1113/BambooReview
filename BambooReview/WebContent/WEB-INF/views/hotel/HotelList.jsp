@@ -9,6 +9,7 @@
 	hotelData = "{\"results\":"+hotelData+"}";
 	JSONObject obj = new JSONObject(hotelData);
 	JSONArray HotelArr = obj.getJSONArray("results");	
+	
 %>
 <title>Hotel List</title>
 
@@ -52,7 +53,7 @@
       				<img src="https://maps.googleapis.com/maps/api/place/photo?photoreference=<%=HotelArr.getJSONObject(i).getString("photo")%>&key=AIzaSyBamfF6Gj9yf1Spt6oL6sX1GB86eMTtI6U&maxheight=70&maxwidth=100">
     			</div>
     			<div class="content">
-     			 	<a class="header"><%=HotelArr.getJSONObject(i).getString("name")%></a>
+     			 	<a class="header" href="<%=request.getContextPath()%>/review/reviewList?hotelid=<%=HotelArr.getJSONObject(i).getString("id")%>"><%=HotelArr.getJSONObject(i).getString("name")%></a>
      				 <div class="meta">
         			<span><%=HotelArr.getJSONObject(i).getString("address") %></span>
       				</div>
@@ -82,10 +83,6 @@
 
 
 <script>
-$('.ui.rating')
-.rating({
-  initialRating: 3,
-  maxRating: 5
-})
+
 </script>
 

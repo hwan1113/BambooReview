@@ -49,18 +49,29 @@ function sendBack() {
 	return location.href='<%=request.getContextPath()%>/user/userLogin'
 }
 
+
 function requestPay() {
-	if(<%=userLoggedIn%>==null){
-		alert("로그인 후 이용가능합니다.")
-		return location.href='<%=request.getContextPath()%>/user/userLogin'
-	}else{
-	<%-- <%=userLoggedIn.class%> --%>
-	
+	param={ customer_no: $("#pay_cust_no").val()}
+	var merchant_uid;
+	$.ajax({
+		url: '<%=request.getContextPath()%>/payment/paymentInfo',
+		type: "get",
+		data:param,
+		success: function(data){
+			merchant_uid = data.payment_no;	
+		},
+		error:function(jqxhr,textStatus,errorThrown){
+			console.log("ajax처리 실패!")
+			console.log(jqxhr);
+			console.log(textStatus);
+			console.log(errorThrown);
+		}
+	})
 	
 	IMP.request_pay({ // param
 	    pg: "html5_inicis",
 	    pay_method: "card",
-	    merchant_uid: merchant_uid;,
+	    merchant_uid: merchant_uid,
 	    name: "베이직(한달 이용권)",
 	    amount: 1000,
 	    buyer_email: "gildong@gmail.com",
@@ -70,9 +81,6 @@ function requestPay() {
 	    buyer_postcode: "01181"
 	}, function (rsp) { // callback
 	    if (rsp.success) {
-	        
-	    	
-	    	
 	    	
 	    } else {
 	    	
@@ -81,7 +89,6 @@ function requestPay() {
 }
 
 </script>
-
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
