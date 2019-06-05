@@ -46,10 +46,11 @@
 	제목: <input id="title" type="text" name="reviewTitle" required />&nbsp;&nbsp;&nbsp;
 	작성자: <input id="writer" type="text" name="reviewWriter" 
 				 value="<%=service.getUserName(userLoggedIn.getCustomer_no())%>" readonly/>
-		<textarea id="summernote" name="reviewContent">Upload Test</textarea>
+		<textarea id="summernote" name="reviewContent"></textarea>
 		<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">작성</button>
-		<button type="button" class="btn btn-warning">취소</button>
-	  
+		<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/review/reviewList'">취소</button>
+
+	  	<input id="hotelId" type="hidden" name="hotelId" value="" />
 		<input id="customerNo" type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"/>
 	</form>
 	

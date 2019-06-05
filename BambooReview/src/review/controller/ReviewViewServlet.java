@@ -27,9 +27,11 @@ public class ReviewViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1.파리미터 글번호
 		int reviewNo  = Integer.parseInt(request.getParameter("reviewNo"));
+		String hotelName = request.getParameter("hotelname");
 		
 		//2.비지니스로직 호출
 		ReviewService reviewService = new ReviewService();
+		//int totalLikeCount = reviewService.selectLikeCount(reviewNo);
 		
 		//사용자 읽음여부 쿠키검사
 		Cookie[] cookies = request.getCookies();
@@ -54,6 +56,7 @@ public class ReviewViewServlet extends HttpServlet {
 		//쿠키에 읽은 값이 없는 경우
 		if(!hasRead) {
 			reviewService.increaseReadCount(reviewNo);
+			reviewService.increaseLikeCount(reviewNo);
 			
 			//쿠키생성
 			Cookie reviewCookie = new Cookie("reviewCookie", reviewCookieVal+"|"+reviewNo+"|");
@@ -89,6 +92,7 @@ public class ReviewViewServlet extends HttpServlet {
 		
 		
 		//3.view단 처리위임
+		request.setAttribute("hotelName", hotelName);
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
 		reqDispatcher.forward(request, response);
 	}

@@ -73,7 +73,7 @@
 </script>
 
 <section id="review-container">
-	<form action="<%=request.getContextPath()%>/review/reviewFormEnd"
+	<form action="<%=request.getContextPath()%>/review/reviewUpdateEnd"
 		  method="get"
 		  enctype="multipart/form-data">
 	제목: <input id="title" type="text" name="reviewTitle" 

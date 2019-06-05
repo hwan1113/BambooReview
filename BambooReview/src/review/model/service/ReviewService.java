@@ -13,16 +13,16 @@ import review.model.vo.Review;
 
 public class ReviewService {
 
-	public List<Review> selectReviewList(int cPage, int numPerPage) {
+	public List<Review> selectReviewList(String hotelId, int cPage, int numPerPage) {
 		Connection conn = getConnection();
-		List<Review> list = new ReviewDAO().selectReviewList(conn, cPage, numPerPage);
+		List<Review> list = new ReviewDAO().selectReviewList(conn, hotelId, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
 
-	public int selectReviewCount() {
+	public int selectReviewCount(String hotelId) {
 		Connection conn = getConnection();
-		int totalReviewCount = new ReviewDAO().selectReviewCount(conn);
+		int totalReviewCount = new ReviewDAO().selectReviewCount(conn, hotelId);
 		close(conn);
 		return totalReviewCount;
 	}
@@ -78,18 +78,23 @@ public class ReviewService {
 		
 	}
 	
-	public int increaseLikeCount(int reviewNo) {
+	public void increaseLikeCount(int reviewNo) {
 		Connection conn = getConnection();
-		int result = new ReviewDAO().increaseLikeCount(conn, reviewNo);
-		if(result>0)
-			commit(conn);
-		else
-			rollback(conn);
+		new ReviewDAO().increaseLikeCount(conn, reviewNo);
 		close(conn);
 		
+	}
+
+	/*
+	public int selectLikeCount(int reviewNo) {
+		Connection conn = getConnection();
+		int result = new ReviewDAO().selectLikeCount(conn, reviewNo);
+		close(conn);
 		return result;
 		
 	}
+	*/
+
 	
 	public int increaseDisLikeCount(int reviewNo) {
 		Connection conn = getConnection();
@@ -129,4 +134,5 @@ public class ReviewService {
 		return list;
 	}
 
+	
 }

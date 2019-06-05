@@ -32,7 +32,7 @@ public class ReviewDAO {
 		}	
 	}
 
-	public List<Review> selectReviewList(Connection conn, int cPage, int numPerPage) {
+	public List<Review> selectReviewList(Connection conn, String hotelId, int cPage, int numPerPage) {
 		List<Review> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -42,8 +42,9 @@ public class ReviewDAO {
 		try{
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, (cPage-1)*numPerPage+1);
-			pstmt.setInt(2, cPage*numPerPage);
+			pstmt.setString(1, hotelId);
+			pstmt.setInt(2, (cPage-1)*numPerPage+1);
+			pstmt.setInt(3, cPage*numPerPage);
 
 			rset = pstmt.executeQuery();
 			
@@ -71,7 +72,7 @@ public class ReviewDAO {
 		return list;
 	}
 
-	public int selectReviewCount(Connection conn) {
+	public int selectReviewCount(Connection conn, String hotelId) {
 		PreparedStatement pstmt = null;
 		int totalMember = 0;
 		ResultSet rset = null;
@@ -79,6 +80,7 @@ public class ReviewDAO {
 		
 		try{
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, hotelId);
 
 			rset = pstmt.executeQuery();
 			
@@ -104,8 +106,9 @@ public class ReviewDAO {
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setInt(1, r.getCustomerNo());
-			pstmt.setString(2, r.getReviewTitle());
-			pstmt.setString(3, r.getReviewContent());
+			pstmt.setString(2, r.getHotelId());
+			pstmt.setString(3, r.getReviewTitle());
+			pstmt.setString(4, r.getReviewContent());
 
 			result = pstmt.executeUpdate();
 			
@@ -184,10 +187,11 @@ public class ReviewDAO {
 				r.setCustomerNo(rset.getInt("customer_no"));
 				r.setReviewTitle(rset.getString("review_title"));
 				r.setReviewWriter(getUserName(conn, rset.getInt("customer_no")));
-				System.out.println("writer@dao="+getUserName(conn, rset.getInt("customer_no")));
 				r.setReviewContent(rset.getString("review_content"));
 				r.setWrittenDate(rset.getDate("written_date"));
 				r.setReadCnt(rset.getInt("read_cnt"));
+				r.setLikeCnt(rset.getInt("like_cnt"));
+				r.setDisLikeCnt(rset.getInt("dislike_cnt"));
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -256,9 +260,8 @@ public class ReviewDAO {
 		}
 		return result;
 	}
-
-	public int increaseLikeCount(Connection conn, int reviewNo) {
-		int result = 0;
+	
+	public void increaseLikeCount(Connection conn, int reviewNo) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("increaseLikeCount");
 		
@@ -266,15 +269,42 @@ public class ReviewDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, reviewNo);
 			
-			result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
+	}
+	
+/*
+	public int selectLikeCount(Connection conn, int reviewNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectLikeCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			
+			pstmt.executeUpdate();
+			
+			if(rset.next())
+				result = rset.getInt("like_cnt");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
 		return result;
 	}
+	
+	*/
+
 	
 	public int increaseDisLikeCount(Connection conn, int reviewNo) {
 		int result = 0;
@@ -315,7 +345,6 @@ public class ReviewDAO {
 				r.setReviewNo(rset.getInt("review_no"));
 				r.setReviewTitle(rset.getString("review_title"));
 				r.setReviewWriter(getUserName(conn, rset.getInt("customer_no")));
-				System.out.println(getUserName(conn, rset.getInt("customer_no")));
 				r.setReviewContent(rset.getString("review_content"));
 				r.setWrittenDate(rset.getDate("written_date"));
 				r.setReadCnt(rset.getInt("read_cnt"));
@@ -333,5 +362,7 @@ public class ReviewDAO {
 		
 		return list;
 	}
+
+	
 
 }
