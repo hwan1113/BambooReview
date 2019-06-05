@@ -52,10 +52,12 @@
 }
 #delete-button{
 	position:absolute;
-	top:660px;
-	left:732px;
 	color:rgb(241, 241, 241);
-	background-color:#cc0505;
+	background-color:#cc0505; 
+	left:734px;
+	top:660px;
+
+
 }
 .header{
 	text-align:center;
