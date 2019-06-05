@@ -107,6 +107,7 @@ public class UserUpdateServlet extends HttpServlet {
 		String msg = "";
 		String loc = "/";
 		
+		System.out.println("servlet email"+email);
 		if(result>0) {
 			msg = "성공적으로 회원정보를 수정했습니다.";
 			loc = "/user/userView?email="+u.getEmail();
