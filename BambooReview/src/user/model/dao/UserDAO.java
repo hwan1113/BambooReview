@@ -80,11 +80,13 @@ public class UserDAO {
 				u.setEmail(rset.getString("email"));
 				u.setPassword(rset.getString("password"));
 				u.setUserName(rset.getString("name"));
-				u.setProfile(rset.getString("profile"));
+				u.setOriginalFile(rset.getString("originalFile"));
+				u.setRenamedFile(rset.getString("RenamedFile"));
 				u.setPhone(rset.getString("phone"));
 				u.setEnrollDate(rset.getDate("enrolldate"));
 				u.setQuitDate(rset.getDate("quitdate"));
 				u.setStatus(rset.getString("status"));
+				System.out.println("selectOne email ="+email);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -144,9 +146,15 @@ public class UserDAO {
 			//미완성쿼리문을 가지고 객체생성.
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, u.getUserName());
-			System.out.println("dao@name= "+u.getUserName());
+			System.out.println("dao update@name= "+u.getUserName());
 			pstmt.setString(2, u.getPhone());
-			pstmt.setString(3, u.getEmail());
+			System.out.println("dao update@phone= "+u.getPhone());
+			pstmt.setString(3, u.getOriginalFile());
+			System.out.println("dao update@ori= "+u.getOriginalFile());
+			pstmt.setString(4, u.getRenamedFile());
+			System.out.println("dao update@re= "+u.getRenamedFile());
+			pstmt.setString(5, u.getEmail());
+			System.out.println("dao update@email= "+u.getEmail());
 			
 			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
 			//DML은 executeUpdate()

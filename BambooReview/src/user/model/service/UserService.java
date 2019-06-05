@@ -29,6 +29,12 @@ public class UserService {
 		close(conn);
 		return u;
 	}
+	public User updateUser(String email) {
+		Connection conn = getConnection();
+		User u = new UserDAO().selectOne(conn, email);
+		close(conn);
+		return u;
+	}
 
 	public int insertUser(User u) {
 		Connection conn = getConnection();

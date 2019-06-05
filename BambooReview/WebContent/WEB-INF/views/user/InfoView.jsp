@@ -3,6 +3,7 @@
     <%@ page import="java.util.*" %>
 <%User user = (User)request.getAttribute("user"); %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/info.css" />
  <style>
  #space{
@@ -63,6 +64,7 @@
   	<div class="column" id="space"></div>
   	<form name="userUpdateFrm"
 		  method="post"
+		  enctype="multipart/form-data"
 		  onsubmit="return updateValidation();">
   	<div class="ui grid">
   		<div class="three wide column"></div>
@@ -76,7 +78,25 @@
 		 	  			ex) 회원번호 1인 회원이 사진을 저장한다면
 		 	  				1.(확장자) 등의 형태로 images 폴더에 저장하고 그 경로를 태그에 리턴 -->
 			  		</a>
-            <input type="file" name="upfile" onchange="loadImg(this);" required/>
+            <td style="position:relative;"  >
+					<input type="file" 
+						   name="upFile" 
+						   value="<%=user.getOriginalFile()%>"/>
+					<span id="fname"><%=user.getOriginalFile()!=null?user.getOriginalFile():"" %></span>
+					
+					<!-- 사용자가 첨부파일관련해서 아무런 수정도 하지 않은경우 -->
+					<input type="hidden" name="originalFileNameOld" value="<%=user.getOriginalFile()!=null?user.getOriginalFile():""%>"/>
+					<input type="hidden" name="renamedFileNameOld" value="<%=user.getRenamedFile()!=null?user.getRenamedFile():""%>"/>
+						
+					<!-- 사용자가 업로드한 첨부파일을 삭제하는 경우 -->
+					<%if(user.getOriginalFile()!=null) { %>
+						<br />
+						<input type="checkbox" name="delFile" 
+							   id="delFile" />
+						<label for="delFile">첨부파일삭제</label>
+						   
+					<%} %>
+				</td>
             
             
 					<div class="content">
@@ -92,8 +112,9 @@
 				</div>
 			</div>
   		</div>
+  		
  		 <div class="five wide column">
-    		<form class="ui form" action="<%=request.getContextPath() %>/user/update" onsubmit="return passwordCheck();">
+    		<%-- <form class="ui form" action="<%=request.getContextPath() %>/user/userUpdate" enctype="multipart/form-data" method="post" onsubmit="return passwordCheck();"> --%>
     		<h2 class="ui icon header" id="topimg">
 			  <i class="settings icon"></i>
 			  <div class="content">
@@ -128,10 +149,11 @@
 				</div>
 			  </div>
   		</div>
+  		</form>
 				  <button class="ui button" onclick="deleteUser();" id="delete-button">회원 탈퇴</button>
 				  <!-- button class="ui button" onclick="deleteUser();" id="delete-button">회원 탈퇴</button> -->
 	</div>
-	</form>
+	<!-- </form> -->
 
 
 
