@@ -28,7 +28,8 @@ public class ReviewListServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		//파라미터 핸들링
-		System.out.println("호텔아이디ReviewListServ= "+request.getParameter("hotelid"));
+		String hotelId = request.getParameter("hotelid");
+		String hotelName = request.getParameter("hotelname");
 		int numPerPage = 5;//한페이지당 수
 		int cPage = 1;//요청페이지
 		try{
@@ -38,14 +39,12 @@ public class ReviewListServlet extends HttpServlet {
 		}
 		
 		//2.업무로직처리
-		//2.1 현재페이지의 회원구하기
-		List<Review> list = new ReviewService().selectReviewList(cPage, numPerPage);
+		//2.1 리뷰 리스트 객체 생성
+		List<Review> list = new ReviewService().selectReviewList(hotelId, cPage, numPerPage);
 		System.out.println("list="+list);
-		
-		
-		
+				
 		//2.2 전체게시글수, 전체페이지수 구하기
-		int totalReviewCount = new ReviewService().selectReviewCount();
+		int totalReviewCount = new ReviewService().selectReviewCount(hotelId);
 		//(공식2)전체페이지수 구하기
 		int totalPage = (int)Math.ceil((double)totalReviewCount/numPerPage);
 		System.out.println("totalReviewCount="+totalReviewCount+", totalPage="+totalPage);
@@ -95,6 +94,7 @@ public class ReviewListServlet extends HttpServlet {
 		
 		//4.뷰단 포워딩		
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/review/reviewList.jsp");
+		request.setAttribute("hotelName", hotelName);
 		request.setAttribute("list",list);
 		request.setAttribute("pageBar",pageBar);	
 		//request.setAttribute("cPage",cPage);		

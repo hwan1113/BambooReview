@@ -28,6 +28,7 @@ public class DeletedReviewListServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		//파라미터 핸들링
+		String hotelId = request.getParameter("hotelid");
 		int numPerPage = 5;//한페이지당 수
 		int cPage = 1;//요청페이지
 		try{
@@ -44,7 +45,7 @@ public class DeletedReviewListServlet extends HttpServlet {
 		
 		
 		//2.2 전체게시글수, 전체페이지수 구하기
-		int totalReviewCount = new ReviewService().selectReviewCount();
+		int totalReviewCount = new ReviewService().selectReviewCount(hotelId);
 		//(공식2)전체페이지수 구하기
 		int totalPage = (int)Math.ceil((double)totalReviewCount/numPerPage);
 		System.out.println("totalReviewCount="+totalReviewCount+", totalPage="+totalPage);
