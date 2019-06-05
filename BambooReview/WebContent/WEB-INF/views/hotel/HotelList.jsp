@@ -60,7 +60,7 @@
       				<div class="description">
         			<p>편의시설: <%=HotelArr.getJSONObject(i).getJSONArray("info").toString()%></p>
       				</div>
-      				<div class="extra" data-rating=<%=HotelArr.getJSONObject(i).getDouble("rate")%> data-max-rating="5"> 평점: 
+      				<div class="extra"> 평점: 
         			<%=HotelArr.getJSONObject(i).getDouble("rate")%>
       				</div>
     			</div>

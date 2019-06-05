@@ -5,7 +5,7 @@
 	List<Review> list = (List<Review>)request.getAttribute("list");
 	String pageBar = (String)request.getAttribute("pageBar");
 	String hotelName = (String)request.getAttribute("hotelName");
-
+	String hotelid = (String)request.getAttribute("hotelid");
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" />		
@@ -13,7 +13,7 @@
 	<h2><%=hotelName %>의 리뷰 게시판</h2>
 		<input type="button" value="글쓰기" 
 			   id="btn-add"
-			   onclick="location.href='<%=request.getContextPath()%>/review/reviewForm'"/>
+			   onclick="location.href='<%=request.getContextPath()%>/review/reviewForm?hotelName=<%=hotelName %>&hotelid=<%=hotelid%>'"/>
 	<table id="tbl-review">
 		<tr>
 			<!-- <th>번호</th> -->

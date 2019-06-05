@@ -24,8 +24,6 @@ public class ReviewListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1. 한글 인코딩
-		request.setCharacterEncoding("UTF-8");
 		
 		//파라미터 핸들링
 		String hotelId = request.getParameter("hotelid");
@@ -95,6 +93,7 @@ public class ReviewListServlet extends HttpServlet {
 		//4.뷰단 포워딩		
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/review/reviewList.jsp");
 		request.setAttribute("hotelName", hotelName);
+		request.setAttribute("hotelid", hotelId);
 		request.setAttribute("list",list);
 		request.setAttribute("pageBar",pageBar);	
 		//request.setAttribute("cPage",cPage);		
