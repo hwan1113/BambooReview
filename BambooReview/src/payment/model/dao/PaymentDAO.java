@@ -30,7 +30,7 @@ public class PaymentDAO {
 		}
 	}
 
-	public int insertPaymentInfo(Connection conn, int customer_no) {
+	public int insertPaymentInfo(Connection conn, int customer_no, int amount) {
 		int result = 0;
 		String sql = prop.getProperty("insertPaymentInfo");
 		PreparedStatement pstmt = null;
@@ -38,6 +38,7 @@ public class PaymentDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, customer_no);
+			pstmt.setInt(2, amount);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -62,6 +63,7 @@ public class PaymentDAO {
 				p = new Payment();
 				p.setCustomer_no(rset.getInt("customer_no"));
 				p.setPayment_no(rset.getInt("payment_no"));
+				p.setAmount(rset.getInt("amount"));
 			}
 
 		} catch (SQLException e) {
@@ -71,5 +73,23 @@ public class PaymentDAO {
 			close(pstmt);
 		}
 		return p;
+	}
+
+	public int updatePaymentInfo(Connection conn, int payment_no) {
+		int result = 0;
+		String sql = prop.getProperty("updatePaymentInfo");
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, payment_no);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
 	}
 }

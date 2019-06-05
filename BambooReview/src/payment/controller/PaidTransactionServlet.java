@@ -1,43 +1,50 @@
 package payment.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
 import payment.model.service.PaymentService;
-import payment.model.vo.Payment;
 
 /**
- * Servlet implementation class PaymentInfoServlet
+ * Servlet implementation class PaidTransactionServlet
  */
-@WebServlet("/payment/paymentInfo")
-public class PaymentInfoServlet extends HttpServlet {
+@WebServlet("/payment/paid")
+public class PaidTransactionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public PaidTransactionServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int customer_no = Integer.parseInt(request.getParameter("customer_no"));
-		int amount = Integer.parseInt(request.getParameter("amount"));
-		
-		Payment p = null;
-		int result = new PaymentService().insertPaymentInfo(customer_no, amount);
+		int payment_no = Integer.parseInt(request.getParameter("merchantid"));
+		int result = new PaymentService().updatePaymentInfo(payment_no);
+		System.out.println("result값="+result);
+		String view = "/WEB-INF/views/common/msg.jsp";
+		String msg = "";
+		String loc = "/";
 		if(result>0) {
-			p = new PaymentService().selectPaymentInfo(customer_no);
+			msg= "결제를 완료하였습니다.";
 		}else {
-			p=null;
+			msg= "결제를 실패하였습니다.";
 		}
-		
-		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(p,response.getWriter());
-		
-		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
+		reqDispatcher.forward(request, response);
 	}
 
 	/**

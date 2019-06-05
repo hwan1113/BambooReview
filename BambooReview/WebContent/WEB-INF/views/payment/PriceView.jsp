@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
@@ -35,11 +35,14 @@
   <%}else{ %>
   <button class="ui positive button" onclick="requestPay()">결제하기</button>
   <input type="hidden" value="<%=userLoggedIn.getCustomer_no()%>" id="pay_cust_no"/>
+  <input type="hidden" value="<%=userLoggedIn.getEmail()%>" id="pay_eamil"/>
+  <input type="hidden" value="<%=userLoggedIn.getUserName()%>" id="pay_name"/>
   <%} %>
 </div>
-<form action="/payment/paid">
+<form action="<%=request.getContextPath()%>/payment/paid" id="paidFrm">
 <input type="hidden" name="merchantid" id="merchantid">
 </form>
+
 
 <script>
 IMP.init("imp28947597");
@@ -51,14 +54,40 @@ function sendBack() {
 
 
 function requestPay() {
-	param={ customer_no: $("#pay_cust_no").val()}
+	const email = $("#pay_email").val()
+	const name = $("#pay_name").val()
+	param={ customer_no: $("#pay_cust_no").val(),
+			amount: 1000}
 	var merchant_uid;
 	$.ajax({
 		url: '<%=request.getContextPath()%>/payment/paymentInfo',
 		type: "get",
 		data:param,
 		success: function(data){
-			merchant_uid = data.payment_no;	
+			if(data==null){
+				alert("현재 거래가 불가능합니다.")
+			}
+			$("#merchantid").val(data.payment_no)
+			IMP.request_pay({ // param
+			    pg: "html5_inicis",
+			    pay_method: "card",
+			    merchant_uid: data.payment_no,
+			    name: "베이직(한달 이용권)",
+			    amount: data.amount,
+			    buyer_email: email,
+			    buyer_name: name,
+			    buyer_tel: "010-4242-4242",
+			    buyer_addr: "서울특별시 강남구 신사동",
+			    buyer_postcode: "01181"
+			}, function (rsp) { // callback
+			    if (rsp.success) {
+			    	
+			    } else {
+			    	$("#paidFrm").submit()
+			    }
+			});
+			
+			
 		},
 		error:function(jqxhr,textStatus,errorThrown){
 			console.log("ajax처리 실패!")
@@ -68,24 +97,6 @@ function requestPay() {
 		}
 	})
 	
-	IMP.request_pay({ // param
-	    pg: "html5_inicis",
-	    pay_method: "card",
-	    merchant_uid: merchant_uid,
-	    name: "베이직(한달 이용권)",
-	    amount: 1000,
-	    buyer_email: "gildong@gmail.com",
-	    buyer_name: '홍길동',
-	    buyer_tel: "010-4242-4242",
-	    buyer_addr: "서울특별시 강남구 신사동",
-	    buyer_postcode: "01181"
-	}, function (rsp) { // callback
-	    if (rsp.success) {
-	    	
-	    } else {
-	    	
-	    }
-	});
 }
 
 </script>
