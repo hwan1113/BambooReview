@@ -23,17 +23,17 @@ public class ReviewUpdateEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 파라미터 핸들링
 		String hotelId = request.getParameter("hotelId");
+		String hotelName = request.getParameter("hotelName");
 		String reviewTitle = request.getParameter("reviewTitle");
 		String reviewWriter = request.getParameter("reviewWriter");
 		String reviewContent = request.getParameter("reviewContent");
+		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		
 		
 		Review r = new Review();
-		r.setHotelId(hotelId);
 		r.setReviewTitle(reviewTitle);
 		r.setReviewWriter(reviewWriter);
 		r.setReviewContent(reviewContent);
-		
-		System.out.println(r);
 		
 		//2. 업무로직
 		int result = new ReviewService().updateReview(r);
@@ -43,8 +43,9 @@ public class ReviewUpdateEndServlet extends HttpServlet {
 
 		if(result>0) {
 			msg = "게시글 등록성공!";
+			r = new ReviewService().selectOne(reviewNo);
 			//성공한 경우, result변수에 새로 등록된 글번호를 가져옴.
-			loc = "/review/reviewView?reviewNo="+result;
+			loc = "/review/reviewView?reviewNo="+r.getReviewNo()+"&hotelName="+hotelName+"&hotelId="+hotelId;
 		}
 		else {
 			msg = "게시글 등록실패!";

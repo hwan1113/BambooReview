@@ -53,7 +53,6 @@ public class ReviewDAO {
 				r.setReviewNo(rset.getInt("review_no"));
 				r.setReviewTitle(rset.getString("review_title"));
 				r.setReviewWriter(getUserName(conn, rset.getInt("customer_no")));
-				System.out.println(getUserName(conn, rset.getInt("customer_no")));
 				r.setReviewContent(rset.getString("review_content"));
 				r.setWrittenDate(rset.getDate("written_date"));
 				r.setReadCnt(rset.getInt("read_cnt"));
@@ -133,7 +132,6 @@ public class ReviewDAO {
 			
 			if(rset.next()) {
 				reviewNo = rset.getInt("reviewno");
-				System.out.println("reviewNo@DAO="+reviewNo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

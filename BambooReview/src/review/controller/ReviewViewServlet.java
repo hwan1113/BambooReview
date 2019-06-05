@@ -27,7 +27,8 @@ public class ReviewViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1.파리미터 글번호
 		int reviewNo  = Integer.parseInt(request.getParameter("reviewNo"));
-		String hotelName = request.getParameter("hotelname");
+		String hotelName = request.getParameter("hotelName");
+		String hotelId = request.getParameter("hotelId");
 		
 		//2.비지니스로직 호출
 		ReviewService reviewService = new ReviewService();
@@ -90,6 +91,7 @@ public class ReviewViewServlet extends HttpServlet {
 		
 		
 		//3.view단 처리위임
+		request.setAttribute("hotelId", hotelId);
 		request.setAttribute("hotelName", hotelName);
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher(view);
 		reqDispatcher.forward(request, response);

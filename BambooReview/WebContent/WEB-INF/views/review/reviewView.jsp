@@ -5,9 +5,7 @@
 <%
     Review r = (Review)request.getAttribute("review");
 	String hotelName = (String)request.getAttribute("hotelName");
-	
-	/* List<reviewComment> commentList = (List<reviewComment>)request.getAttribute("commentList"); */
-	//System.out.println("commentList@jsp="+commentList);
+	String hotelId = (String)request.getAttribute("hotelId");
 %>
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" />
@@ -65,14 +63,14 @@
     <tr>
         <th colspan="2">
             <input type="button" value="수정하기" class="btn btn-success"
-            	   onclick="location.href='<%=request.getContextPath()%>/review/reviewUpdate?reviewNo=<%=r.getReviewNo()%>';"/>
+            	   onclick="location.href='<%=request.getContextPath()%>/review/reviewUpdate?reviewNo=<%=r.getReviewNo()%>&hotelName=<%=hotelName%>'"/>
             <input type="button" value="삭제하기" class="btn btn-warning" onclick="deleteReview();"/>
         </th>
     </tr>
     <tr>
     	<th>
     		<button type="button" class="btn btn-link"
-    				onclick="location.href='<%=request.getContextPath()%>/review/reviewList'">목록으로</button>
+    				onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelname=<%=hotelName %>&hotelid=<%=hotelId%>'">목록으로</button>
     	</th>
     </tr>
     

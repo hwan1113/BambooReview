@@ -4,6 +4,7 @@
 <%@ page import="review.model.vo.*" %>
 <%
 	Review r = (Review)request.getAttribute("review");
+	String hotelName = (String)request.getAttribute("hotelName");
 %>
 
 <title>Review 수정</title>
@@ -81,10 +82,15 @@
 	작성자: <input id="writer" type="text" name="reviewWriter" 
 				 value="<%=service.getUserName(userLoggedIn.getCustomer_no())%>" readonly/>
 		<textarea id="summernote" name="reviewContent"><%=r.getReviewContent() %></textarea>
+
+		<input id="hotelName" type="hidden" name="hotelName" value="<%=hotelName%>" />
+		<input id="hotelId" type="hidden" name="hotelId" value="<%=r.getHotelId()%>" />
+		<input id="customerNo" type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"/>
+		<input id="reviewNo" type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>"/>
+		
 		<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">수정</button>
 		<button type="button" class="btn btn-warning">취소</button>
-		<input id="customerNo" type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"/>
-	  
+			  
 	</form>
 
 		

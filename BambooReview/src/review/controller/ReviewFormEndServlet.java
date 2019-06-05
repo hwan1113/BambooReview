@@ -33,10 +33,10 @@ public class ReviewFormEndServlet extends HttpServlet {
 		//1. 파라미터 핸들링
 		String reviewTitle = request.getParameter("reviewTitle");
 		int customerNo = Integer.parseInt(request.getParameter("customerNo"));
-		System.out.println("customerNo@serv="+customerNo);
-		String hotelId = request.getParameter("hotelid");
+		String hotelId = request.getParameter("hotelId");
 		String reviewWriter = request.getParameter("reviewWriter");
 		String reviewContent = request.getParameter("reviewContent");
+		String hotelName = request.getParameter("hotelName");
 		
 		Review r = new Review();
 		r.setReviewTitle(reviewTitle);
@@ -47,14 +47,14 @@ public class ReviewFormEndServlet extends HttpServlet {
 		
 		//2. 업무로직
 		int result = new ReviewService().insertReview(r);
-		
 		String msg = "";
 		String loc = "/review/reviewList";
 
 		if(result>0) {
 			msg = "게시글 등록성공!";
+			
 			//성공한 경우, result변수에 새로 등록된 글번호를 가져옴.
-			loc = "/review/reviewView?reviewNo="+result;
+			loc = "/review/reviewView?reviewNo="+result+"&hotelName="+hotelName+"&hotelId="+hotelId;
 		}
 		else {
 			msg = "게시글 등록실패!";

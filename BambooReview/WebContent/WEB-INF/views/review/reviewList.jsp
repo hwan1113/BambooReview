@@ -26,7 +26,7 @@
 		<% for(Review r : list){ %>
 		<tr>
 			<td>
-				<a href="<%=request.getContextPath() %>/review/reviewView?reviewNo=<%= r.getReviewNo() %>">
+				<a href="<%=request.getContextPath() %>/review/reviewView?reviewNo=<%= r.getReviewNo()%>&hotelName=<%=hotelName%>&hotelId=<%=hotelid%>">
 					<%= r.getReviewTitle() %>
 				</a>
 			</td>
