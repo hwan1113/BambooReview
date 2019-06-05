@@ -93,6 +93,8 @@ public class UserUpdateServlet extends HttpServlet {
 			//기존첨부파일만 삭제
 			boolean bool = new File(saveDirectory+"/"+renamedFileNameOld).delete();
 			System.out.println(bool?"파일삭제성공!":"파일삭제실패!");
+			originalFile=null;
+			renamedFile=null;
 		}
 		//업로드한 파일이 없는 경우
 		else {

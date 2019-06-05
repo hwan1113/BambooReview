@@ -4,26 +4,19 @@
 <%User user = (User)request.getAttribute("user"); %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/info.css" />
- <style>
- #space{
- height:100px;
- type:inline-block;
- }
- 
- </style>
- <script>
-function updateUser(){
-	var $frm = $("[name=userUpdateFrm]");
-	var url = "<%=request.getContextPath()%>/user/userUpdate";
-	$frm.attr("action", url);
-	$frm.submit();
+<style>
+#space{
+height:100px;
+type:inline-block;
 }
+</style>
+<script>
 function deleteUser(){
 	var bool = confirm("정말로 탈퇴하시겠습니까?");
 	if(bool){
 		location.href = "<%=request.getContextPath()%>/user/userDelete?email=<%=user.getEmail()%>"
 		}
-	}
+}
 	
 function updatePassword(){
 	var url = "<%=request.getContextPath()%>/user/updatePassword?email=<%=user.getEmail()%>";
@@ -50,20 +43,22 @@ function loadImg(f){
 <form name="checkIdDuplicateFrm" method="post">
 	<input type="hidden" name="email" />
 </form>
-	
+<form action="<%=request.getContextPath() %>/user/passwordUpdate" onsubmit="return passwordCheck();">
+</form>
+
 	
 <div class="column" id="space"></div>
 
-<form name="userUpdateFrm" method="post" enctype="multipart/form-data">
+<form name="userUpdateFrm" method="post" enctype="multipart/form-data" action="<%=request.getContextPath()%>/user/userUpdate">
 <div class="ui grid centered">
 	
   		<div class="four wide column">
     		<div class="column">
 				<div class="ui card">
 				  	<a class="image" href="#">
-				  		<img src="<%=request.getContextPath()%>/upload/profile/thanos.jpg" id="img-viewer" width=350 />
+				  		<img src="<%=request.getContextPath()%>/upload/profile/Yondu.png" id="img-viewer" width=350 />
 				  	</a>	
-					<input type="file" name="upFile" onchange="loadImg(this)" />
+					<input type="file" name="upFile" onchange="loadImg(this)"/>
 					<span id="fname"><%=user.getOriginalFile()!=null?user.getOriginalFile():"" %></span>
 					
 					<!-- 사용자가 첨부파일관련해서 아무런 수정도 하지 않은경우 -->
@@ -115,9 +110,9 @@ function loadImg(f){
 		  </div>
 		  
 		  <div class="blue ui buttons" id="submit-button">
-			  <button class="ui button active" onclick="updateUser();" id="update-button">회원정보수정</button>
-			  <button class="ui button" onclick="updatePassword();" id="password-button">비밀번호 변경</button>
-			  <button class="ui button" onclick="deleteUser();" id="delete-button">회원 탈퇴</button>
+			  <button type="submit" class="ui button active" onclick="updateUser();" id="update-button">회원정보수정</button>
+			  <button type="button" class="ui button" onclick="updatePassword();" id="password-button">비밀번호 변경</button>
+			  <button type="button" class="ui button" onclick="deleteUser();" id="delete-button">회원 탈퇴</button>
 		  </div>
 		</div>
 	</div>
@@ -127,18 +122,9 @@ if(userLoggedIn.getRenamedFile()!=null){
 %>
 <input type="hidden" value="<%=userLoggedIn.getRenamedFile()%>" id="getFile"/>	
 <%} %>
-
-
 <script>
 if($('#getFile').val()){
 $("#img-viewer").attr("src", "<%=request.getContextPath()%>/upload/profile/"+$('#getFile').val());
 }
 </script>
-
-
-<form action="<%=request.getContextPath() %>/user/passwordUpdate" onsubmit="return passwordCheck();">
-</form>
-
-
-
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
