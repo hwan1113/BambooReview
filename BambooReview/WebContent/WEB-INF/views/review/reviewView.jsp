@@ -15,10 +15,6 @@
 <h2><%=hotelName %>의 리뷰 게시판</h2>
 <table id="tbl-review-view">
     <tr>
-        <th>글번호</th>
-        <td><%=r.getReviewNo() %></td>
-    </tr>
-    <tr>
         <th>제 목</th>
         <td><%=r.getReviewTitle() %></td>
     </tr>
@@ -56,7 +52,7 @@
     			</table> 
     		</form>
             <input type="button" id="disLike" value="신고하기" class="btn btn-danger"
-            	   onclick="location.href='<%=request.getContextPath()%>/review/reviewDisLike?reviewNo=<%=r.getReviewNo()%>';"/>
+            	   onclick="location.href='<%=request.getContextPath()%>/review/reviewDisLikeCnt?reviewNo=<%=r.getReviewNo()%>';"/>
         </th>
     </tr>
 
@@ -108,7 +104,7 @@ function deleteReview(){
 <script>
 function like(){ 
 	$.ajax({ 
-		url: "<%=request.getContextPath()%>/review/reviewView", 
+		url: "<%=request.getContextPath()%>/review/reviewLikeCnt??reviewNo=<%=r.getReviewNo()%>", 
 		type: "POST", 
 		cache: false, 
 		dataType: "json", 

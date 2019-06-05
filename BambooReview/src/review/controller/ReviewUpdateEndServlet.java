@@ -22,14 +22,12 @@ public class ReviewUpdateEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 파라미터 핸들링
-		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 		String hotelId = request.getParameter("hotelId");
 		String reviewTitle = request.getParameter("reviewTitle");
 		String reviewWriter = request.getParameter("reviewWriter");
 		String reviewContent = request.getParameter("reviewContent");
 		
 		Review r = new Review();
-		r.setReviewNo(reviewNo);
 		r.setHotelId(hotelId);
 		r.setReviewTitle(reviewTitle);
 		r.setReviewWriter(reviewWriter);

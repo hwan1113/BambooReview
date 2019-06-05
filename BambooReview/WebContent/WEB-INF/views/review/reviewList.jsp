@@ -16,7 +16,6 @@
 			   onclick="location.href='<%=request.getContextPath()%>/review/reviewForm'"/>
 	<table id="tbl-review">
 		<tr>
-			<!-- <th>번호</th> -->
 			<th>제목</th>
 			<th>작성자</th>
 			<th>작성일</th>
@@ -26,7 +25,6 @@
 		</tr>
 		<% for(Review r : list){ %>
 		<tr>
-			<%-- <td><%= r.getReviewNo() %></td> --%>
 			<td>
 				<a href="<%=request.getContextPath() %>/review/reviewView?reviewNo=<%= r.getReviewNo() %>">
 					<%= r.getReviewTitle() %>
