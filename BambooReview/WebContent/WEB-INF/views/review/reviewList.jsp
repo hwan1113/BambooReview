@@ -10,7 +10,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" />		
 <section id="review-container">
-	<h2><%=hotelName %>의 리뷰 게시판</h2>
+	<%-- <h2><%=hotelName %>의 리뷰 게시판</h2> --%>
   	<div class="ui three column centered grid">
 	  	<div class="three column row">
 	  		<div class="column"></div> 

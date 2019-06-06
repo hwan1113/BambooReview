@@ -5,6 +5,9 @@ html{
 	margin:0 auto; 
 	text-align: center;
 }
+body{
+	background-color:#f1f1f1;
+}
 
 footer{
 	position:absolute;
@@ -24,4 +27,12 @@ input#writer{
 	height: 30px;
 	margin-top: 10px;
 	margin-bottom: 10px;
+}
+.area{
+	background-color:white;
+	width:700px;
+	height:768px;
+}
+#writer{
+	float:left;
 }
