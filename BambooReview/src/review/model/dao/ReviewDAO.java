@@ -53,6 +53,7 @@ public class ReviewDAO {
 				r.setReviewNo(rset.getInt("review_no"));
 				r.setReviewTitle(rset.getString("review_title"));
 				r.setReviewWriter(getUserName(conn, rset.getInt("customer_no")));
+				System.out.println(getUserName(conn, rset.getInt("customer_no")));
 				r.setReviewContent(rset.getString("review_content"));
 				r.setWrittenDate(rset.getDate("written_date"));
 				r.setReadCnt(rset.getInt("read_cnt"));
@@ -132,6 +133,7 @@ public class ReviewDAO {
 			
 			if(rset.next()) {
 				reviewNo = rset.getInt("reviewno");
+				System.out.println("reviewNo@DAO="+reviewNo);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -204,6 +206,7 @@ public class ReviewDAO {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateReview"); 
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 
@@ -212,7 +215,6 @@ public class ReviewDAO {
 			pstmt.setInt(3, r.getReviewNo());
 			
 			result = pstmt.executeUpdate();
-			System.out.println("result@dao= "+result);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -258,9 +260,28 @@ public class ReviewDAO {
 		}
 		return result;
 	}
-	
-	public int increaseLikeCount(Connection conn, int reviewNo) {
+
+	public int likeCheck(Connection conn, int reviewNo, int customerNo) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("likeCheck");
+		
 		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(2, customerNo);
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public void increaseLikeCount(Connection conn, int reviewNo) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("increaseLikeCount");
 		
@@ -268,14 +289,13 @@ public class ReviewDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, reviewNo);
 			
-			result = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-		return result;
 	}
 	
 	public int selectLikeCount(Connection conn, int reviewNo) {
@@ -288,7 +308,7 @@ public class ReviewDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, reviewNo);
 			
-			rset = pstmt.executeQuery();
+			pstmt.executeUpdate();
 			
 			if(rset.next())
 				result = rset.getInt("like_cnt");
@@ -296,11 +316,13 @@ public class ReviewDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(rset);
 			close(pstmt);
 		}
 		
 		return result;
 	}
+
 	
 	public int increaseDisLikeCount(Connection conn, int reviewNo) {
 		int result = 0;

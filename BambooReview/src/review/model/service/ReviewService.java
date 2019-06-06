@@ -78,15 +78,18 @@ public class ReviewService {
 		
 	}
 	
-	public int increaseLikeCount(int reviewNo) {
+	public int increaseLikeCount(int reviewNo, int customerNo) {
+		int result = 0;
 		Connection conn = getConnection();
-		int result = new ReviewDAO().increaseLikeCount(conn, reviewNo);
-		if(result>0)
-			commit(conn);
-		else
-			rollback(conn);
-		close(conn);
+		if (new ReviewDAO().likeCheck(conn, reviewNo, customerNo) > 0) {
+			new ReviewDAO().increaseLikeCount(conn, reviewNo);
+			result = 1;
+		}
+		else {
+			result = 0;
+		}
 		
+		close(conn);
 		return result;
 		
 	}
@@ -98,6 +101,7 @@ public class ReviewService {
 		return result;
 		
 	}
+
 	
 	public int increaseDisLikeCount(int reviewNo) {
 		Connection conn = getConnection();
