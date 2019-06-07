@@ -4,7 +4,7 @@
 <%
 	String hotelName = (String)request.getAttribute("hotelName");
 	String hotelId = (String)request.getAttribute("hotelid");
-	System.out.println("hotelId11"+hotelId);
+
 %>
 <title>Review 작성</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/review.css" />
@@ -30,7 +30,14 @@
 	 	        processData : false,
 	 	        success : function(data) { // 처리가 성공할 경우
                     // 에디터에 이미지 출력
-	 	        	$(editor).summernote('editor.insertImage', data.url);
+                    console.dir(file)
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    
+                    reader.onload=function(){
+	 	        		$(editor).summernote('editor.insertImage', reader.result);
+                    }
+               
 	 	        },
 	 	   		error: function(jqxhr, textStatus, errorThrown){
 				console.log("ajax처리 실패!!");
@@ -40,7 +47,7 @@
 				}
 	 	    });
 	 	}
-	</script>
+</script>
 
 <section id="review-container">
 	<form action="<%=request.getContextPath()%>/review/reviewFormEnd"

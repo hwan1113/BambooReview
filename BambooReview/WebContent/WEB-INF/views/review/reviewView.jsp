@@ -103,7 +103,7 @@ function like(){
 				console.log(status);
 				console.log(error);
 			} 
-		}
+		})
 	}; 
 }
 </script>

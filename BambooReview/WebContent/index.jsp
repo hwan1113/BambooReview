@@ -53,8 +53,9 @@ ga('send', 'pageview');
  		<button class="ui green button" id="searh-button">search</button>
  		 <form action="<%=request.getContextPath()%>/hotel/hotelList"
       				name="hotelDataFrm" id="hotelDataFrm" method="get">
-       			<input type="hidden" name="hotelData" id="hotelData"/>
     			<input type="hidden" name="srchword" id="srchword">
+      			<input type="hidden" name="userId" id="userId" value="<%=userLoggedIn %>"/>
+       			<input type="hidden" name="hotelData" id="hotelData"/>
    		</form>
  		
       </section>
@@ -123,29 +124,33 @@ ga('send', 'pageview');
       </section>
     </div>
 
-   <script>
-      slider('.slides');
-      $(document).ready(function(){
-		  $('.backgroundTransition').backgroundTransition({
-			  backgrounds:[
-				  { src: "<%=request.getContextPath()%>/images/main-back1.jpg" },
-				  { src: "<%=request.getContextPath()%>/images/main-back2.jpg" },
-				  { src: "<%=request.getContextPath()%>/images/main-back3.jpg" },
-				  { src: "<%=request.getContextPath()%>/images/main-back4.jpg" },
-				  { src: "<%=request.getContextPath()%>/images/main-back5.jpg" },
-				  { src: "<%=request.getContextPath()%>/images/main-back6.jpg" },
-				  { src: "<%=request.getContextPath()%>/images/main-back7.jpg" }
-			  ],
-			  transitionDelay: 2,
-			  animationSpeed: 400
-		  });
+<script>
+    slider('.slides');
+    $(document).ready(function(){
+	  $('.backgroundTransition').backgroundTransition({
+		  backgrounds:[
+			  { src: "<%=request.getContextPath()%>/images/main-back1.jpg" },
+			  { src: "<%=request.getContextPath()%>/images/main-back2.jpg" },
+			  { src: "<%=request.getContextPath()%>/images/main-back3.jpg" },
+			  { src: "<%=request.getContextPath()%>/images/main-back4.jpg" },
+			  { src: "<%=request.getContextPath()%>/images/main-back5.jpg" },
+			  { src: "<%=request.getContextPath()%>/images/main-back6.jpg" },
+			  { src: "<%=request.getContextPath()%>/images/main-back7.jpg" }
+		  ],
+		  transitionDelay: 2,
+		  animationSpeed: 400
 	  });
+	});
 
 $("#searh-button").click(function(){
+	if($("#userId").val()=="null"){
+		return alert("로그인후 사용해주세요.")
+	}
 	if($("#srch-input").val()==''){
 		$("#srch-input").val("london")
 	}
 	param = {keyword:$("#srch-input").val()}
+	
 	$.ajax({
 	url: "<%=request.getContextPath()%>/hotel/hotelInfo",
 	dataType: "json",
