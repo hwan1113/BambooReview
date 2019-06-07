@@ -29,7 +29,7 @@ public class ImageUploadServlet extends HttpServlet {
 		System.out.println("테스트");
 		//String uploadPath = "/BambooReview/WebContent/upload";
 		//path가 아닌 실제 경로를 가져와야 함?
-		String uploadPath = "C:/Workspaces/bamboo_workspace/BambooReview/BambooReview/WebContent/upload";
+		String uploadPath = "C:/Workspaces/semi-git/BambooReview/WebContent/upload";
 		
 	    int size = 10 * 1024 * 1024;  // 업로드 사이즈 제한 10M 이하
 		

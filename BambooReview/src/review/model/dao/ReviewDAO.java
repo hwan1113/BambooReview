@@ -192,6 +192,7 @@ public class ReviewDAO {
 				r.setReadCnt(rset.getInt("read_cnt"));
 				r.setLikeCnt(rset.getInt("like_cnt"));
 				r.setDisLikeCnt(rset.getInt("dislike_cnt"));
+				r.setHotelId(rset.getString("hotel_id"));
 			}
 		}catch(Exception e){
 			e.printStackTrace();

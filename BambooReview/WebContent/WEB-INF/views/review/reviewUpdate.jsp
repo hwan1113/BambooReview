@@ -5,6 +5,7 @@
 <%
 	Review r = (Review)request.getAttribute("review");
 	String hotelName = (String)request.getAttribute("hotelName");
+	System.out.println("r@review Update= "+r);
 %>
 
 <title>Review 수정</title>
