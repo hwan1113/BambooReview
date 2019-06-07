@@ -22,6 +22,8 @@ public class ReviewDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1.파라미터 핸들링
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
+		String hotelId = request.getParameter("hotelId");
+		String hotelName = request.getParameter("hotelName");
 		System.out.println("reviewNo@serv="+reviewNo);
 
 		//2. 업무로직
@@ -37,7 +39,7 @@ public class ReviewDeleteServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc", "/review/reviewList");
+		request.setAttribute("loc", "/review/reviewList?hotelname="+hotelName+"&hotelid="+hotelId);
 		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp")
 			   .forward(request, response);
 	}

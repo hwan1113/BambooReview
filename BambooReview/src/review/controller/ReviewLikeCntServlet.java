@@ -15,16 +15,13 @@ import review.model.service.ReviewService;
 /**
  * Servlet implementation class ReviewLikeCntServlet
  */
-@WebServlet("/BambooReview/review/reviewLikeCnt")
+@WebServlet("/review/reviewLikeCnt")
 public class ReviewLikeCntServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
-	ReviewService service = new ReviewService(); 
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		ReviewService service = new ReviewService();
 		
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 		int customerNo = Integer.parseInt(request.getParameter("customerNo"));  
@@ -57,8 +54,6 @@ public class ReviewLikeCntServlet extends HttpServlet {
 		obj.put("result", result); //request.setAttribute("json", json);
 		response.setContentType("application/x-json; charset=UTF-8"); 
 		response.getWriter().print(obj);
-		
-		
 
 	}
 
