@@ -68,10 +68,10 @@ ga('send', 'pageview');
   <!----------------------------------------------->
   
 </head>
-<div class="ui menu" style="background-color:#68b30d; opacity: 0.8;">
+<div class="ui menu" style="background-color:#68b30d; opacity: 0.8; height:67px; width:1024px;">
 
   		<div class="header item">
-    		<a href="<%=request.getContextPath()%>" class="home-logo"><img style= "height:85px"src="<%=request.getContextPath()%>/images/bambooHeader.png"></a>
+    		<a href="<%=request.getContextPath()%>" class="home-logo"><img style= "height:68px"src="<%=request.getContextPath()%>/images/bambooHeader.png"></a>
  		</div>
  		
  		

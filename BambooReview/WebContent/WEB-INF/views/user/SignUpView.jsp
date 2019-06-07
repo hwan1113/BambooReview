@@ -2,29 +2,22 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.regex.*" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
- <style>
- #space{
- height:100px;
- type:inline-block;
- }
- </style>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/signup.css" />
  <title>회원가입</title>
  
 	 <form name="checkIdDuplicateFrm" method="post">
 		<input type="hidden" name="email" />
 	</form>
  	<div class="ui two column centered grid">
-  		<div class="column centered row">
-    		<div class="column" id="space">
-   			</div>
-		</div>
+  		
   		<div class="column">
   		  <form class="ui form" name="userEnrollFrm" action="<%=request.getContextPath() %>/user/signup"  onsubmit="return enrollValidation();">
 			  <div class="field">
 			    <label>이메일</label>
-			    <input type="text" name="email" placeholder="email" id="email" required/>
+			    <input type="text" name="email" placeholder="email" id="email" required style="width:370px;"/>
 			  </div>
-			  <input type="button" value="아이디 중복검사"
+			  <input type="button" value="이메일 중복검사" class="ui olive button" 
+			  style="position:absolute; height:38px; top:23px; left:366px; font-size:13px;"
 						   onclick="checkIdDuplicate();" />
 					<!-- 아이디중복검사를 마친후 value는 1이 됨. -->
 					<input type="hidden" id="isValid" value="0"/>
@@ -54,9 +47,14 @@
 			      <label>개인정보 약관에 동의합니다.</label>
 			    </div>
 			  </div>
-  				<button class="ui button" type="submit">회원가입</button>
-  				<input type="button" class="ui red button" value="뒤로가기"
+			  <div class="ui centered grid" style="padding:20px;">
+			  	<div class="ui buttons">
+				  <button class="ui positive button" type="submit">회원가입</button>
+				  <div class="or"></div>
+  				<input type="button" class="ui button" value="뒤로가기"
   				onclick="location.href='<%=request.getContextPath()%>/user/userLogin'">
+			  </div>
+			  </div>
   			
 			</form>
   		</div>

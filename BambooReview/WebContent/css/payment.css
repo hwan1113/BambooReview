@@ -1,32 +1,32 @@
 @charset "UTF-8";
-html	{width:1024px; height:768px; margin:0 auto; text-align: center; }
+html	{width:1024px; height:697px; margin:0 auto; text-align: center; }
 #month{
 	display: inline-block;
 	width: auto;
     top: -43px;
     left: -10px;
-    width: 502px;
+    width: 427px;
 font-family: 'Nanum Gothic Coding', monospace;
 }
 #year{
 	display: inline-block;
 	width: auto;
     top: -118px;
-    left: 501.5px;
-    width: 502px;
+    left: 427px;
+    width: 426px;
     font-family: 'Nanum Gothic Coding', monospace;
 }
 .month-detail{
 	position:absolute;
     top:120px;
-    left: 160.5px;
+    left:130px;
     width: 190px;
 }
 .year-detail{
 	position:absolute;
     top:-60px;
-    left: 200.5px;
-    width: 155px;
+    left: 145px;
+    width: 160px;
 }
 footer{
 	display:inline-block;
@@ -35,4 +35,7 @@ footer{
 }
 .all{
 	height:100px;
+}
+.all-content{
+	width:900px;
 }

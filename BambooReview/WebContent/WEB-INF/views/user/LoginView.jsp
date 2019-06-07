@@ -7,6 +7,7 @@
  }
  </style>
  <%@ include file="/WEB-INF/views/common/header.jsp" %>
+ <script src="<%=request.getContextPath()%>/js/jquery-3.4.0.js"></script>
  <form name="checkIdDuplicateFrm" method="post">
 	<input type="hidden" name="email" />
 
@@ -29,25 +30,23 @@
 			    <label>비밀번호</label>
 			    <input type="password" name="password" placeholder="password" id="password"/>
 			  </div>
-			  
-			  <div class="field">
-			    <div class="ui checkbox">
-			      <input type="checkbox" name="saveId">
-			      <label>remember me!</label>
-			    </div>
-			  </div>
-			  
+			  <div class="ui centered grid" style="padding:20px;">
   				<button class="ui button" type="submit">로그인</button>
   				<button class="ui google plus button" onClick="signIn()" type="button">
   					<i class="google plus icon"></i>
   					Google로 로그인하기
 				</button>
+				</div>
 			</form>
 			 <div class="ui message">
- 				 <div class="header">
-  					  아직도 회원이 아니세요?
+				 <div class="ui centered grid" >
+	 				 <div class="header">
+	  					  아직도 회원이 아니세요?
+	 				 </div>
  				 </div>
+ 				 <div class="ui centered grid" style="padding:5px;">
  				 <p><a href="<%=request.getContextPath()%>/user/userSignup">회원 가입하러가기!</a></p>
+ 				 </div>
 			</div>
 			
 			
@@ -99,6 +98,10 @@ function loginValidate(){
 	}
 	return true;
 }
+      
+     
+}
+
 </script>
 
 
