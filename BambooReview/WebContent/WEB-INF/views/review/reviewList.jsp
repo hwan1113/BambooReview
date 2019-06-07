@@ -59,8 +59,8 @@
 	<div class="seven wide column"id="pageBar">
 		<%=pageBar %>
 	</div>
-	<input type="button" value="글쓰기" id="btn-add" class="ui olive button"
-		style="float:right; background-color:#68b30d"onclick="location.href='<%=request.getContextPath()%>/review/reviewForm?hotelName=<%=hotelName %>&hotelid=<%=hotelid%>'"/>
+	<button  id="btn-add" class="ui olive button" 
+		style="float:right; background-color:#68b30d"onclick="location.href='<%=request.getContextPath()%>/review/reviewForm?hotelName=<%=hotelName %>&hotelid=<%=hotelid%>'"/><i class="pencil alternate icon"></i>글쓰기</button>
 	
 	</div>
 

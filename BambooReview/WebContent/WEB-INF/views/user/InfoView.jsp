@@ -112,9 +112,9 @@ function loadImg(f){
 		  </div>
 		  
 		  <div class="blue ui buttons" id="submit-button">
-			  <button type="submit" class="ui button active" onclick="updateUser();" id="update-button">회원정보수정</button>
-			  <button type="button" class="ui button" onclick="updatePassword();" id="password-button">비밀번호 변경</button>
-			  <button type="button" class="ui button" onclick="deleteUser();" id="delete-button">회원 탈퇴</button>
+			  <button type="submit" class="ui button active" onclick="updateUser();" id="update-button"><i class="edit icon"></i>회원정보수정</button>
+			  <button type="button" class="ui button" onclick="updatePassword();" id="password-button"><i class="file powerpoint outline icon"></i>비밀번호 변경</button>
+			  <button type="button" class="ui button" onclick="deleteUser();" id="delete-button"><i class="trash alternate outline icon"></i>회원 탈퇴</button>
 		  </div>
 		</div>
 	</div>
