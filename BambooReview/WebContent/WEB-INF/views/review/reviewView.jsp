@@ -126,8 +126,7 @@ function like(){
 function disLike(){ 
 	$.ajax({ 
 		url: "<%=request.getContextPath()%>/review/reviewDisLikeCnt", 
-		type: "POST", 
-		cache: false, 
+		type: "POST",
 		dataType: "json", 
 		data: $('#disLike_form').serialize(), 
 		success: 

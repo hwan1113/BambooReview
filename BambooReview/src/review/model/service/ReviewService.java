@@ -84,9 +84,11 @@ public class ReviewService {
 		if (new ReviewDAO().likeCheck(conn, reviewNo, customerNo) > 0) {
 			new ReviewDAO().increaseLikeCount(conn, reviewNo);
 			result = 1;
+			commit(conn);
 		}
 		else {
 			result = 0;
+			rollback(conn);
 		}
 		
 		close(conn);
@@ -94,26 +96,36 @@ public class ReviewService {
 		
 	}
 
-	public int selectLikeCount(int reviewNo) {
+	public Review selectLikeCount(int reviewNo) {
 		Connection conn = getConnection();
-		int result = new ReviewDAO().selectLikeCount(conn, reviewNo);
+		Review r = new ReviewDAO().selectLikeCount(conn, reviewNo);
 		close(conn);
-		return result;
-		
+		return r;
 	}
 
 	
-	public int increaseDisLikeCount(int reviewNo) {
+	public int increaseDisLikeCount(int reviewNo, int customerNo) {
+		int result = 0;
 		Connection conn = getConnection();
-		int result = new ReviewDAO().increaseDisLikeCount(conn, reviewNo);
-		if(result>0)
+		if(new ReviewDAO().disLikeCheck(conn, reviewNo, customerNo) > 0) {
+			new ReviewDAO().increaseDisLikeCount(conn, reviewNo);
+			result =1;
 			commit(conn);
-		else
+		}
+		else {
+			result=0;
 			rollback(conn);
+		}
 		close(conn);
 		
 		return result;
-		
+	}
+	
+	public Review selectDisLikeCount(int reviewNo) {
+		Connection conn = getConnection();
+		Review r = new ReviewDAO().selectDisLikeCount(conn, reviewNo);
+		close(conn);
+		return r;
 	}
 
 	public int deleteReview(int reviewNo) {

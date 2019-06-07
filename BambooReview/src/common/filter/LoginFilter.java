@@ -17,7 +17,7 @@ import user.model.vo.User;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter(servletNames = { "UserViewServlet" })
+@WebFilter("/user/a")
 public class LoginFilter implements Filter {
 
     /**

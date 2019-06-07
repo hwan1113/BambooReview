@@ -299,8 +299,8 @@ public class ReviewDAO {
 		}
 	}
 	
-	public int selectLikeCount(Connection conn, int reviewNo) {
-		int result = 0;
+	public Review selectLikeCount(Connection conn, int reviewNo) {
+		Review r = new Review();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectLikeCount");
@@ -309,10 +309,10 @@ public class ReviewDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, reviewNo);
 			
-			pstmt.executeUpdate();
+			rset = pstmt.executeQuery();
 			
 			if(rset.next())
-				result = rset.getInt("like_cnt");
+				r.setLikeCnt(rset.getInt("like_cnt"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -321,7 +321,7 @@ public class ReviewDAO {
 			close(pstmt);
 		}
 		
-		return result;
+		return r;
 	}
 
 	
@@ -380,6 +380,51 @@ public class ReviewDAO {
 		}
 		
 		return list;
+	}
+	
+	public int disLikeCheck(Connection conn, int reviewNo, int customerNo) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("dislikeCheck");
+		
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(2, customerNo);
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public Review selectDisLikeCount(Connection conn, int reviewNo) {
+		Review r = new Review();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectDisLikeCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next())
+				r.setLikeCnt(rset.getInt("dislike_cnt"));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return r;
 	}
 
 	
