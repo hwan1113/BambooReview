@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import review.model.service.ReviewService;
 import review.model.vo.Review;
+import review.model.vo.ReviewComment;
 
 /**
  * Servlet implementation class ReviewViewServlet
@@ -74,12 +75,12 @@ public class ReviewViewServlet extends HttpServlet {
 		Review review = reviewService.selectOne(reviewNo);
 		
 		//댓글목록가져오기
-//		List<ReviewComment> commentList = reviewService.selectreviewComment(reviewNo);
+		List<ReviewComment> commentList = reviewService.selectReviewComment(reviewNo);
 		
 		String view = "/WEB-INF/views/review/reviewView.jsp";
 		
 		request.setAttribute("review", review);
-//		request.setAttribute("commentList", commentList);
+		request.setAttribute("commentList", commentList);
 		
 		//게시글 가져오기에 실패한경우
 		if(review == null){

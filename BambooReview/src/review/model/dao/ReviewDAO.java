@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Properties;
 
 import review.model.vo.Review;
+import review.model.vo.ReviewComment;
 
 import static common.JDBCTemplate.close;
 
@@ -382,6 +384,79 @@ public class ReviewDAO {
 		return list;
 	}
 
-	
+	public int insertReviewComment(Connection conn, ReviewComment rc) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertReviewComment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		
+			pstmt.setInt(1, rc.getCustomerNo());
+			pstmt.setInt(2, rc.getReviewNo());
+			pstmt.setString(3, rc.getCommentContent());
+			
+			//쿼리실행
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally  {
+			close(pstmt);
+		}
+		return result;
+	}
 
+	public List<ReviewComment> selectReviewComment(Connection conn, int reviewNo) {
+		List<ReviewComment> commentList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectCommentList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			
+			rset = pstmt.executeQuery();
+
+			while(rset.next()) {
+				ReviewComment rc = new ReviewComment();
+				rc.setCommentNo(rset.getInt("comment_no"));
+				rc.setCustomerNo(rset.getInt("customer_no"));
+				rc.setReviewNo(rset.getInt("review_no"));
+				rc.setWrittenDate(rset.getDate("written_date"));
+				rc.setCommentContent(rset.getString("comment_content"));
+
+				commentList.add(rc);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return commentList;
+	}
+
+	public int deleteReviewComment(Connection conn, int commentNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("deleteReviewComment"); 
+		
+		try {
+			//미완성쿼리문을 가지고 객체생성.
+			pstmt = conn.prepareStatement(query);
+			//쿼리문미완성
+			pstmt.setInt(1, commentNo);
+			
+			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
+			//DML은 executeUpdate()
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
