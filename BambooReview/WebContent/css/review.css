@@ -1,7 +1,7 @@
 /* Review 관련 css */
 html{
 	width:1024px; 
-	height:768px; 
+	height:697px; 
 	margin:0 auto; 
 	text-align: center;
 }
@@ -11,7 +11,7 @@ body{
 
 footer{
 	position:absolute;
-	top:698px;
+	top:697px;
 	width:1024px;
 }
 
@@ -31,8 +31,11 @@ input#writer{
 .area{
 	background-color:white;
 	width:700px;
-	height:768px;
+	height:560px;
 }
 #writer{
 	float:left;
+}
+.ui.menu{
+	top:600px;
 }

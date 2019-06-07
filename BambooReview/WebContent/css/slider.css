@@ -53,7 +53,7 @@ body.slider__body {
 	display:line-block;
 	height:auto;
         position: absolute;
-		top: 190px;
+		top: 110px;
 		left: 26%;
 		margin: 0 auto;
 		width: 50%;
@@ -63,14 +63,14 @@ body.slider__body {
 }
 #page1-logo{
         position: absolute;
-    	top: 184px;
+    	top: 104px;
    		right: 250px;
     	width: 500px;
     	height: 370px;
 }
  #page1-intro{
      	position: absolute;
-	    top: 520px;
+	    top: 420px;
 	    text-align:center;
 	    left: 57%;
 	    transform: translate(-65%, 30%);
@@ -84,19 +84,19 @@ body.slider__body {
       background-image: url("/BambooReview/images/main-page2-back.jpg");
       background-repeat: no-repeat;
       }
-.div2{
-        position: absolute;
-		top: 300px;
-		left: 0%;
-		margin: 0 auto;
-		width: 1024px;
-		height: 200px;
-		background: black;
-		opacity: 0.8;
+.div2 {
+    position: absolute;
+    top: 240px;
+    left: 0%;
+    margin: 0 auto;
+    width: 1024px;
+    height: 200px;
+    background: black;
+    opacity: 0.8;
 }
 #second span{
      	position: absolute;
-      	top: 322px;
+      	top: 242px;
         left: 38%;
         transform: translate(-15%, 30%);
         font-size:34px;
@@ -105,18 +105,19 @@ body.slider__body {
  }
 #search-location{
      	position: absolute;
-      	top: 426px;
+      	top: 356px;
         left: 31%;
 }
 #searh-button{
       	position: absolute;
-      	top: 426px;
+      	top: 356px;
     	left: 60%;
       	border-radius:4rem;
       	width: 10%;
       	padding: 0.78571429em 0.6em 0.78571429em;
       	line-height: 1.2em;
 }
+
 
 
 #third{
@@ -154,15 +155,15 @@ body.slider__body {
 		}
 #main-card1{
 		transform: translateX(-430px);
-      	top: 100px;
+      	top: 50px;
 		}
 #main-card2{
-    top: 300px;
+    top: 250px;
     transform: translateX(-430px);
     transition-delay: .2s;
 }
 #main-card3{
-    top: 500px;
+    top: 450px;
     transform: translateX(-430px);
     transition-delay: .2s;
 }
@@ -180,7 +181,7 @@ body.slider__body {
 }
 #third span{
 		position:relative;
-      	top: 330px;
+      	top: 300px;
    		left: 676px;
     	width: 300px;
     	text-align: center;
@@ -220,9 +221,9 @@ body.slider__body {
     font-family: sans-serif;
     color: #fff;
 }
-.adver2{
-	position: absolute;
-    top: 223px;
+.adver2 {
+    position: absolute;
+    top: 153px;
     left: 33%;
     width: 53%;
     text-align: center;
@@ -232,13 +233,13 @@ body.slider__body {
     color: #fff;
 }
 #thanos{
-	top: 310px;
+	top: 240px;
     position: absolute;
     left: 39%;
     transition-duration: 0.6s;
-    opacity: 0;
+    opacity: 1;
     transform: translateY(430px);
-    width: 20rem;
+    width: 18rem;
 }
 #fourth:hover #thanos{
         transform: translateY(0);

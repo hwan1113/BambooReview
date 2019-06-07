@@ -52,14 +52,14 @@ function loadImg(f){
 <form name="userUpdateFrm" method="post" enctype="multipart/form-data" action="<%=request.getContextPath()%>/user/userUpdate">
 <div class="ui grid centered">
 	
-  		<div class="four wide column">
+  		<div class="four wide column" id="profile-img">
     		<div class="column">
 				<div class="ui card">
 				  	<a class="image" href="#">
 				  		<img src="<%=request.getContextPath()%>/upload/profile/Yondu.png" id="img-viewer" width=350 />
+					<input type="file" name="upFile" id="profile-img-change-btn" onchange="loadImg(this)"/>
+					<%-- <span id="fname"><%=user.getOriginalFile()!=null?user.getOriginalFile():"" %></span> --%>
 				  	</a>	
-					<input type="file" name="upFile" onchange="loadImg(this)"/>
-					<span id="fname"><%=user.getOriginalFile()!=null?user.getOriginalFile():"" %></span>
 					
 					<!-- 사용자가 첨부파일관련해서 아무런 수정도 하지 않은경우 -->
 					<input type="hidden" name="originalFileNameOld" value="<%=user.getOriginalFile()!=null?user.getOriginalFile():""%>"/>
@@ -68,8 +68,10 @@ function loadImg(f){
 					<!-- 사용자가 업로드한 첨부파일을 삭제하는 경우 -->
 					<%if(user.getOriginalFile()!=null) { %>
 					<br />
-					<input type="checkbox" name="delFile" id="delFile" />
-					<label for="delFile">첨부파일삭제</label>
+					<div id="profile-img-delete">
+						<input type="checkbox" name="delFile" id="delFile" />
+						<label for="delFile">사진삭제</label>
+					</div>
 					<%} %>
 					<div class="content">
 		   	 			<a class="header" href="#"><%=user.getUserName()%></a>
