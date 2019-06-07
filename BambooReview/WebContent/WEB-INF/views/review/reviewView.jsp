@@ -39,16 +39,19 @@
 	  	<div class="ui centered grid">
 	  
 		  <div class="ui buttons">
-		 		<form id="like_form" >  
-	    			<input type="hidden" name="command" value="likeCnt"> 
-	    			<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>"> 
-	    			<button type="button" class="btn btn-primary" onclick="return like()" style="height:100%;"><i class="thumbs up outline icon"></i>좋아요!</button>
+		 		<form id="like_form" action="<%=request.getContextPath()%>/review/reviewLikeCnt?reviewNo=<%=r.getReviewNo()%>">  
+    				<input type="hidden" name="command" value="likeCnt"> 
+    				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
+    				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
+    				<button type="button" class="btn btn-primary" onclick="return like()" style="height:100%;"><i class="thumbs up outline icon"></i>좋아요!</button>
 	    		</form>
 				 <div class="or"></div>
-				 <button type="button" id="disLike" class="btn btn-danger"  onclick="location.href='<%=request.getContextPath()%>/review/reviewDisLikeCnt?reviewNo=<%=r.getReviewNo()%>';">
-				  <i class="thumbs down outline icon"></i>신고하기</button>
-				  <button type="button" class="btn btn-link"
-    				onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelname=<%=hotelName %>&hotelid=<%=hotelId%>'">목록으로</button>
+				 <form id="disLike_form" action="<%=request.getContextPath()%>/review/reviewDisLikeCnt?reviewNo=<%=r.getReviewNo()%>">  
+    				<input type="hidden" name="command" value="disLikeCnt"> 
+    				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
+    				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
+    				<button type="button" class="btn btn-danger" onclick="return disLike()" style="height:100%;"><i class="thumbs down outline icon"></i>신고하기</button>
+	    		</form>
 		  </div>
 	      
        </div>
@@ -63,12 +66,28 @@
 		            <input type="button" value="수정하기" class="btn btn-success"
 		            	   onclick="location.href='<%=request.getContextPath()%>/review/reviewUpdate?reviewNo=<%=r.getReviewNo()%>&hotelName=<%=hotelName%>'"/>
 		            <input type="button" value="삭제하기" class="btn btn-warning" onclick="deleteReview();"/>
+		            <input type="button" value="목록으로" class="btn btn-success" style="background-color:#aacc19; border:1px solid #aacc19"
+		    				onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelname=<%=hotelName %>&hotelid=<%=hotelId%>'"/>
 		        </th>
 		    </tr>
 		    <%} %>
 	     </section>
 	</div>
 </div>
+
+<% if(userLoggedIn != null &&
+		((userLoggedIn.getCustomer_no() == r.getCustomerNo())
+		|| "A".equals(userLoggedIn.getStatus()))) {%>
+<form action="<%=request.getContextPath()%>/review/reviewDelete"
+  id="reviewDelFrm"
+  method="post">
+<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>"/>
+<input type="hidden" name="hotelId" value="<%=hotelId%>"/>
+<input type="hidden" name="hotelName" value="<%=hotelName%>"/>
+	   
+
+</form>
+<%} %>
 <script>
 
 function deleteReview(){
@@ -80,32 +99,56 @@ function deleteReview(){
 }
 
 function like(){ 
-		$.ajax({ 
-			url: "<%=request.getContextPath()%>/review/reviewLikeCnt", 
-			type: "POST", 
-			cache: false, 
-			dataType: "json", 
-			data: $('#like_form').serialize(), //아이디가 like_form인 곳의 모든 정보를 가져와 파라미터 전송 형태(표준 쿼리형태)로 만들어줌 
-			success: 
-				function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data 
-					if (data.result == "0"){
-						alert("이미 좋아요를 누르셨어요");
-					}
-					else{
-						alert("좋아요");
-					}
-					$("#like_result").html(data.like); //id값이 like_result인 html을 찾아서 data.like값으로 바꿔준다. 
-				}, 
-			error: 
-				function (request, status, error){ 
-				alert("ajax실패");
-				console.log(request);
-				console.log(status);
-				console.log(error);
-			} 
-		})
-	}; 
+	$.ajax({ 
+		url: "<%=request.getContextPath()%>/review/reviewLikeCnt", 
+		type: "POST",
+		data: $('#like_form').serialize(), //아이디가 like_form인 곳의 모든 정보를 가져와 파라미터 전송 형태(표준 쿼리형태)로 만들어줌 
+		success: 
+			function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data 
+				if (data.result == "0"){
+					alert("이미 좋아요를 누르셨어요");
+				}
+				else{
+					alert("좋아요");
+				} 
+			}, 
+		error: 
+			function (request, status, error){ 
+			alert("ajax실패");
+			console.log(request);
+			console.log(status);
+			console.log(error);
+		} 
+	});
+
 }
+
+function disLike(){ 
+	$.ajax({ 
+		url: "<%=request.getContextPath()%>/review/reviewDisLikeCnt", 
+		type: "POST", 
+		cache: false, 
+		dataType: "json", 
+		data: $('#disLike_form').serialize(), 
+		success: 
+			function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data 
+				if (data.result == "0"){
+					alert("이미 신고하기를 누르셨어요.");
+				}
+				else{
+					alert("이 글을 신고 하셨어요.");
+				} 
+			}, 
+		error: 
+			function (request, status, error){ 
+			alert("ajax실패");
+			console.log(request);
+			console.log(status);
+			console.log(error);
+		} 
+	});
+}
+
 </script>
 		    
 		    
@@ -156,14 +199,5 @@ function like(){
 		</section>
 	</div>
 </div> --%>
-<%-- <% if(userLoggedIn != null &&
-    		((userLoggedIn.getCustomer_no() == r.getCustomerNo())
-    		|| "A".equals(userLoggedIn.getStatus()))) {%>
-<form action="<%=request.getContextPath()%>/review/reviewDelete"
-	  id="reviewDelFrm"
-	  method="post">
-	<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>"/>
-</form>
-<%} %> --%>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

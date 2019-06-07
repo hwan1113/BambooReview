@@ -4,7 +4,6 @@
 <%
 	String hotelName = (String)request.getAttribute("hotelName");
 	String hotelId = (String)request.getAttribute("hotelid");
-
 %>
 <title>Review 작성</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/review.css" />
@@ -14,6 +13,7 @@
 <link href="<%=request.getContextPath()%>/dist/summernote.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/dist/summernote.js"></script>
 <script src="<%=request.getContextPath()%>/dist/lang/summernote-ko-KR.js"></script>
+
 
 <script type="text/javascript">
         /* summernote에서 이미지 업로드시 실행할 함수 */
@@ -59,7 +59,8 @@
 				 value="<%=service.getUserName(userLoggedIn.getCustomer_no())%>" readonly/>
 		<textarea id="summernote" name="reviewContent"></textarea>
 		<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">작성</button>
-		<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/review/reviewList'">취소</button>
+		<button type="button" class="btn btn-warning" 
+			    onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelname=<%=hotelName %>&hotelid=<%=hotelId%>'">취소</button>
 		
 		<input id="hotelName" type="hidden" name="hotelName" value="<%=hotelName%>" />
 	  	<input id="hotelId" type="hidden" name="hotelId" value="<%=hotelId%>" />
