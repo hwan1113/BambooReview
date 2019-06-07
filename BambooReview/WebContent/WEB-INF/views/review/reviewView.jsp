@@ -4,6 +4,7 @@
 <%@ page import="review.model.vo.*, java.util.*, review.model.service.* " %>
 <%
     Review r = (Review)request.getAttribute("review");
+	List<ReviewComment> commentList = (List<ReviewComment>)request.getAttribute("commentList");
 	String hotelName = (String)request.getAttribute("hotelName");
 	String hotelId = (String)request.getAttribute("hotelId");
 %>
@@ -12,6 +13,7 @@
 <div class="ui centered grid">
 	<div class="area">
 		<section id="review-container">
+
 		<%-- <h2><%=hotelName %>의 리뷰 게시판</h2> --%>
 
         <h3><%=r.getReviewTitle() %></h3>
@@ -76,19 +78,117 @@
 	</div>
 </div>
 
+<!-- 댓글 부분 -->
+<hr style="margin-top:30px;" />
+
+<div id="comment-container">
+	<div class="comment-editor">
+		<form action="<%=request.getContextPath()%>/review/reviewCommentInsert"
+			  name="reviewCommentFrm"
+			  method="post">
+			<textarea name="reviewCommentContent" 
+					  cols="60" rows="3"></textarea>
+			<button type="submit" id="btn-insert">등록</button>	  
+			<input type="hidden" name="reviewRef" value="<%=r.getReviewNo() %>" />  
+			<input type="hidden" name="reviewCommentWriter" value="<%=userLoggedIn!=null?userLoggedIn.getUserName():""%>" />
+			<!-- <input type="hidden" name="reviewCommentLevel" value="1" /> -->
+			<!-- <input type="hidden" name="reviewCommentRef" value="0" /> -->
+		
+		</form>
+	</div>
+	
+	<!-- 댓글목록 테이블 -->
+	<table id="tbl-comment">
+	<%if(!commentList.isEmpty()) {
+		for(ReviewComment bc: commentList){
+	%>
+			<tr class="level1">
+				<td>
+					<sub class="comment-writer"><%=userLoggedIn.getUserName() %></sub>
+					<sub class="comment-date"><%=bc.getWrittenDate() %></sub>
+					<br />
+					<%=bc.getCommentContent() %>
+					
+				</td>
+				<td>
+					<button class="btn-reply" value="<%=bc.getCommentNo() %>" >답글</button>
+					<%-- 삭제버튼 추가 --%>
+					<% if(userLoggedIn != null &&
+						((userLoggedIn.getCustomer_no() == bc.getCustomerNo())
+						|| "A".equals(userLoggedIn.getStatus()))) {%>
+					<button class="btn-delete" value="<%=bc.getCommentNo()%>">삭제</button>
+					<%} %>
+				</td>
+			</tr>
+	<%			
+			}
+		
+		}
+	%>
+	</table>
+	
+	
+</div>
+<script>
+$(function(){
+	//댓글 textarea focus시에 로그인여부확인
+	$("[name=boardCommentContent]").focus(function(){
+		if(<%=userLoggedIn==null%>){
+			loginAlert();
+		}
+	});
+	
+	//댓글폼 submit이벤트처리
+	$("[name=boardCommentFrm]").submit(function(e){
+		//로그인여부검사
+		if(<%=userLoggedIn==null%>){
+			loginAlert();
+			e.preventDefault();//기본행위인 submit을 하지 않는다.
+			return;
+		}
+		
+		//댓글작성여부 검사
+		var content = $("[name=reviewCommentContent]").val().trim();
+		if(content.length == 0){
+			alert("댓글을 작성해 주세요.");
+			e.preventDefault();
+		}
+		
+	});
+
+	
+	//삭제버튼 클릭시
+	$(".btn-delete").click(function(){
+		if(!confirm("정말 삭제하시겠습니까?")) return;
+		//삭제처리후 돌아올 현재게시판번호도 함께 전송함.
+		location.href="<%=request.getContextPath()%>/review/reviewCommentDelete?reviewNo=<%=r.getReviewNo() %>&del="+$(this).val();
+	});
+	
+	
+});
+
+function loginAlert(){
+	alert("로그인 후 이용할 수 있습니다.");
+	$("#memberId").focus();
+}
+
+
+
+
+
+
 <% if(userLoggedIn != null &&
 		((userLoggedIn.getCustomer_no() == r.getCustomerNo())
 		|| "A".equals(userLoggedIn.getStatus()))) {%>
-<form action="<%=request.getContextPath()%>/review/reviewDelete"
-  id="reviewDelFrm"
-  method="post">
-<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>"/>
-<input type="hidden" name="hotelId" value="<%=hotelId%>"/>
-<input type="hidden" name="hotelName" value="<%=hotelName%>"/>
-	   
-
-</form>
+	<form action="<%=request.getContextPath()%>/review/reviewDelete"
+		id="reviewDelFrm"
+  		method="post">
+		<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>"/>
+		<input type="hidden" name="hotelId" value="<%=hotelId%>"/>
+		<input type="hidden" name="hotelName" value="<%=hotelName%>"/>
+	</form>
 <%} %>
+
 <script>
 
 function deleteReview(){
@@ -121,7 +221,6 @@ function like(){
 			console.log(error);
 		} 
 	});
-
 }
 
 function disLike(){ 

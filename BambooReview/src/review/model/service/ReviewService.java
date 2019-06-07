@@ -10,6 +10,7 @@ import java.util.List;
 
 import review.model.dao.ReviewDAO;
 import review.model.vo.Review;
+import review.model.vo.ReviewComment;
 
 public class ReviewService {
 
@@ -152,6 +153,39 @@ public class ReviewService {
 		close(conn);
 		return list;
 	}
+
+	public int insertReviewComment(ReviewComment rc) {
+		Connection conn = getConnection();
+		int result = new ReviewDAO().insertReviewComment(conn, rc);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public List<ReviewComment> selectReviewComment(int reviewNo) {
+		Connection conn = getConnection();
+		List<ReviewComment> commentList 
+			= new ReviewDAO().selectReviewComment(conn, reviewNo);
+		close(conn);
+		return commentList;
+	}
+
+	public int deletereviewComment(int commentNo) {
+		Connection conn = getConnection();
+		int result = new ReviewDAO().deleteReviewComment(conn, commentNo);
+		if(result>0)
+			commit(conn);
+		else 
+			rollback(conn);
+		close(conn);
+		
+		return result;
+	}
+
+	
 
 	
 }
