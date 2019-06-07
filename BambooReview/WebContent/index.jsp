@@ -50,7 +50,7 @@ ga('send', 'pageview');
  			</div>
  			 <div class="results"></div>
  		</div>
- 		<button class="ui green button" id="searh-button">search</button>
+ 		<button class="ui green button" id="searh-button"><i class="search icon"></i>search</button>
  		 <form action="<%=request.getContextPath()%>/hotel/hotelList"
       				name="hotelDataFrm" id="hotelDataFrm" method="get">
     			<input type="hidden" name="srchword" id="srchword">

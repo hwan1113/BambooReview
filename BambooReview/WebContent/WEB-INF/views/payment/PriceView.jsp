@@ -31,23 +31,24 @@
     Or
   </div>
 </div>
-<div class="ui buttons" style="position:absolute; left:41%; top:510px; ">
-  <button class="ui button" onclick="location.href='<%=request.getContextPath()%>/index.jsp'">뒤로가기</button>
-  <div class="or"></div>
+<div class="ui buttons" style="position:absolute; left:38.5%; top:510px; ">
   <%if(userLoggedIn==null) {%>
-  <button class="ui positive button" onclick="sendBack()">결제하기</button>
+  <button class="ui positive button" onclick="sendBack()"><i class="won sign icon"></i>결제하기</button>
   <%}else{ %>
-  <button class="ui positive button" onclick="requestPay()">결제하기</button>
+  <button class="ui positive button" onclick="requestPay()"><i class="won sign icon"></i>결제하기</button>
   <input type="hidden" value="<%=userLoggedIn.getCustomer_no()%>" id="pay_cust_no"/>
   <input type="hidden" value="<%=userLoggedIn.getEmail()%>" id="pay_eamil"/>
   <input type="hidden" value="<%=userLoggedIn.getUserName()%>" id="pay_name"/>
   <%} %>
+  <div class="or"></div>
+  <button class="ui button" onclick="location.href='<%=request.getContextPath()%>/index.jsp'"><i class="undo icon"></i>뒤로가기</button>
 </div>
 <form action="<%=request.getContextPath()%>/payment/paid" id="paidFrm">
 <input type="hidden" name="merchantid" id="merchantid">
 </form>
 </div>
 </div>
+
 <script>
 IMP.init("imp28947597");
 

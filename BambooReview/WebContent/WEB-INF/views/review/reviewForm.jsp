@@ -14,7 +14,11 @@
 <script src="<%=request.getContextPath()%>/dist/summernote.js"></script>
 <script src="<%=request.getContextPath()%>/dist/lang/summernote-ko-KR.js"></script>
 
-
+<style>
+.ui.menu{
+top:659px;
+}
+</style>
 <script type="text/javascript">
         /* summernote에서 이미지 업로드시 실행할 함수 */
 	 	function sendFile(file, editor) {
@@ -49,18 +53,21 @@
 	 	}
 </script>
 
-<section id="review-container">
+<section id="review-container" style="height:300px;">
 	<form action="<%=request.getContextPath()%>/review/reviewFormEnd"
 		  method="get"
 		  enctype="multipart/form-data">
-		  
-	제목: <input id="title" type="text" name="reviewTitle" required />&nbsp;&nbsp;&nbsp;
-	작성자: <input id="writer" type="text" name="reviewWriter" 
-				 value="<%=service.getUserName(userLoggedIn.getCustomer_no())%>" readonly/>
+	   <div class="ui centered grid">  
+	제목: <input id="title" type="text" name="reviewTitle" style="height:25px; margin-top:0px;" required />&nbsp;&nbsp;
+	 작성자: <input id="writer" type="text" name="reviewWriter" style="width:100px; height:25px; margin-top:0px;"
+				 value="<%=service.getUserName(userLoggedIn.getCustomer_no())%>님" readonly/>
+	   </div>
 		<textarea id="summernote" name="reviewContent"></textarea>
-		<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">작성</button>
-		<button type="button" class="btn btn-warning" 
-			    onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelname=<%=hotelName %>&hotelid=<%=hotelId%>'">취소</button>
+
+		<div class="ui centered grid">
+			<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">작성</button>
+			<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelname=<%=hotelName %>&hotelid=<%=hotelId%>'">취소</button>
+		</div>
 		
 		<input id="hotelName" type="hidden" name="hotelName" value="<%=hotelName%>" />
 	  	<input id="hotelId" type="hidden" name="hotelId" value="<%=hotelId%>" />

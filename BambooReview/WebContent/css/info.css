@@ -50,15 +50,13 @@
 #password-button{
 	background-color:#abc15e;
 }
-#delete-button{
+##delete-button{
 	position:absolute;
 	color:rgb(241, 241, 241);
 	background-color:#cc0505; 
-	width:105px;
-	left:289px;
+	width:121px;
+	left:327px;
 	top:372px;
-
-
 }
 .header{
 	text-align:center;
@@ -92,6 +90,12 @@
 	left:70px;
 	top:290px;
 }
+
 #img-viewer{
 	height:290px;
+}
+.ui.menu{
+	margin:0 auto;
+	top:px;
+	padding:0px;
 }

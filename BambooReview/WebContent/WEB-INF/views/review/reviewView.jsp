@@ -31,7 +31,7 @@
 			    	</div>
 		 	 	</div>
   			</div>
-	 		 <div class="ui green segment" style="height:440px;">
+	 		 <div class="ui green segment" style="height:355px;">
 	  			<div class="ui grid">
 	  				<div><%=r.getReviewContent()%></div>
 	  			</div>
@@ -50,8 +50,9 @@
     				<input type="hidden" name="command" value="disLikeCnt"> 
     				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
     				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
-    				<button type="button" class="btn btn-danger" onclick="return disLike()" style="height:100%;"><i class="thumbs down outline icon"></i>신고하기</button>
+    				<button type="button" id="disLike" class="btn btn-danger" onclick="return disLike()" style="height:100%;"><i class="thumbs down outline icon"></i>신고하기</button>
 	    		</form>
+
 		  </div>
 	      
        </div>
@@ -149,54 +150,5 @@ function disLike(){
 }
 
 </script>
-		    
-		    
-<%-- <h2><%=hotelName %>의 리뷰 게시판</h2>
-
-        <th colspan="2">
-            <!-- <input type="button" id="like" value="좋아요" class="btn btn-primary"
-            	   onclick="likeCnt();"/> --> 
-            	   onclick="location.href='<%=request.getContextPath()%>/review/reviewLike?reviewNo=<%=r.getReviewNo()%>';"/>
-            <form id="like_form" action="<%=request.getContextPath()%>/review/reviewLikeCnt"/> 
-    			<table id="list"> 
-    				<input type="hidden" name="command" value="likeCnt">
-    				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>">  
-    				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>"> 
-    				<tr><input type="button" value="좋아요!" class="btn btn-primary" onclick="return like()" > </tr> 
-    				<tr><div id="like_result"><%=r.getLikeCnt() %></div> </tr> 
-    			</table> 
-    		</form>
-            <input type="button" id="disLike" value="신고하기" class="btn btn-danger"
-            	   onclick="location.href='<%=request.getContextPath()%>/review/reviewDisLike?reviewNo=<%=r.getReviewNo()%>';"/>
-        </th>
-    </tr>
-    
-    
-    글작성자/관리자인경우 수정삭제 가능
-    <% if(userLoggedIn != null &&
-    		((userLoggedIn.getCustomer_no() == r.getCustomerNo())
-    		|| "A".equals(userLoggedIn.getStatus()))) {%>
-    <tr>
-        <th colspan="2">
-            <input type="button" value="수정하기" class="btn btn-success"
-            	   onclick="location.href='<%=request.getContextPath()%>/review/reviewUpdate?reviewNo=<%=r.getReviewNo()%>&hotelName=<%=hotelName%>'"/>
-            <input type="button" value="삭제하기" class="btn btn-warning" onclick="deleteReview();"/>
-        </th>
-    </tr>
-    <tr>
-    	<th>
-    		<button type="button" class="btn btn-link"
-    				onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelname=<%=hotelName %>&hotelid=<%=hotelId%>'">목록으로</button>
-    	</th>
-    </tr>
-    
-    <%} %>	
-     <button type="button" class="btn btn-success" style="background-color:#aacc19; border:1px solid #aacc19"
-		    				onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelname=<%=hotelName %>&hotelid=<%=hotelId%>'">목록으로</button>
-        
-   
-		</section>
-	</div>
-</div> --%>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
