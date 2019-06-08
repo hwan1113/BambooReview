@@ -33,9 +33,9 @@
 			    	</div>
 		 	 	</div>
   			</div>
-	 		 <div class="ui green segment" style="height:355px;">
+	 		 <div class="ui green segment" style="height:355px; overflow:scroll;">
 	  			<div class="ui grid">
-	  				<div><%=r.getReviewContent()%></div>
+	  				<div class=reviewContent><%=r.getReviewContent()%></div>
 	  			</div>
 	  		</div>
 	  	<div class="ui centered grid">
