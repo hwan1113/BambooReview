@@ -17,11 +17,9 @@ import review.model.vo.Review;
  */
 @WebServlet("/review/reviewDisLikeCnt")
 public class ReviewDisLikeCntServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ReviewService service = new ReviewService();
 		
@@ -29,12 +27,10 @@ public class ReviewDisLikeCntServlet extends HttpServlet {
 		int customerNo = Integer.parseInt(request.getParameter("customerNo"));  
 		int result = service.increaseDisLikeCount(reviewNo, customerNo);
 		Review r = service.selectDisLikeCount(reviewNo); 
-		System.out.println("dislike개수@serv="+ r.getDisLikeCnt()); 
 		
-
 		JSONObject obj = new JSONObject(); 
 		
-		obj.put("dislikeCnt", r.getDisLikeCnt()); //request.setAttribute("json", json);
+		obj.put("disLikeCnt", r.getDisLikeCnt()); //request.setAttribute("json", json);
 		obj.put("result", result); //request.setAttribute("json", json);
 		response.setContentType("application/x-json; charset=UTF-8"); 
 		response.getWriter().print(obj);

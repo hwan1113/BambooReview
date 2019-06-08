@@ -5,7 +5,7 @@
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%
     // 이미지 업로드할 경로
-	String uploadPath = "C:\\Users\\kys03\\git\\BambooReview\\BambooReview\\WebContent\\upload";
+	String uploadPath = "request.getContextPath()/upload";
     int size = 10 * 1024 * 1024;  // 업로드 사이즈 제한 10M 이하
 	
 	String fileName = ""; // 파일명

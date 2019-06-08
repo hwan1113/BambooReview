@@ -52,7 +52,7 @@
     				<input type="hidden" name="command" value="disLikeCnt"> 
     				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
     				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
-    				<button type="button" id="disLike" class="btn btn-danger" onclick="return disLike()" style="height:100%;"><i class="thumbs down outline icon"></i>신고하기</button>
+    				<button type="button" class="btn btn-danger" onclick="return disLike()" style="height:100%;"><i class="thumbs down outline icon"></i>신고하기</button>
 	    		</form>
 
 		  </div>
@@ -86,10 +86,11 @@
 		<form action="<%=request.getContextPath()%>/review/reviewCommentInsert"
 			  name="reviewCommentFrm"
 			  method="post">
-			<textarea name="reviewCommentContent" 
+			<textarea name="commentContent" 
 					  cols="60" rows="3"></textarea>
 			<button type="submit" id="btn-insert">등록</button>	  
-			<input type="hidden" name="reviewRef" value="<%=r.getReviewNo() %>" />  
+			<input type="hidden" name="reviewNo" value="<%=r.getReviewNo() %>" />  
+			<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no() %>" />
 			<input type="hidden" name="reviewCommentWriter" value="<%=userLoggedIn!=null?userLoggedIn.getUserName():""%>" />
 			<!-- <input type="hidden" name="reviewCommentLevel" value="1" /> -->
 			<!-- <input type="hidden" name="reviewCommentRef" value="0" /> -->
@@ -111,7 +112,6 @@
 					
 				</td>
 				<td>
-					<button class="btn-reply" value="<%=bc.getCommentNo() %>" >답글</button>
 					<%-- 삭제버튼 추가 --%>
 					<% if(userLoggedIn != null &&
 						((userLoggedIn.getCustomer_no() == bc.getCustomerNo())
@@ -172,7 +172,7 @@ function loginAlert(){
 	$("#memberId").focus();
 }
 
-
+</script>
 
 
 
@@ -207,10 +207,10 @@ function like(){
 		success: 
 			function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data 
 				if (data.result == "0"){
-					alert("이미 좋아요를 누르셨어요");
+					alert("이미 좋아요를 누르셨어요.");
 				}
 				else{
-					alert("좋아요");
+					alert("이 글에 좋아요를 눌렀습니다.");
 				} 
 			}, 
 		error: 
@@ -224,10 +224,12 @@ function like(){
 }
 
 function disLike(){ 
+	if(!confirm("이 게시글을 정말 신고 하시겠습니까?")){
+		return;
+	}
 	$.ajax({ 
 		url: "<%=request.getContextPath()%>/review/reviewDisLikeCnt", 
 		type: "POST",
-		dataType: "json", 
 		data: $('#disLike_form').serialize(), 
 		success: 
 			function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data 

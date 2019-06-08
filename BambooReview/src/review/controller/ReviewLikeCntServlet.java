@@ -28,8 +28,7 @@ public class ReviewLikeCntServlet extends HttpServlet {
 		int customerNo = Integer.parseInt(request.getParameter("customerNo"));  
 		int result = service.increaseLikeCount(reviewNo, customerNo);
 		Review r = service.selectLikeCount(reviewNo); 
-		
-		
+				
 		JSONObject obj = new JSONObject(); 
 		
 		obj.put("likeCnt", r.getLikeCnt()); //request.setAttribute("json", json);

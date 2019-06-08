@@ -283,6 +283,26 @@ public class ReviewDAO {
 		}
 		return result;
 	}
+
+	public int disLikeCheck(Connection conn, int reviewNo, int customerNo) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("disLikeCheck");
+		
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(2, customerNo);
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	public void increaseLikeCount(Connection conn, int reviewNo) {
 		PreparedStatement pstmt = null;
@@ -300,6 +320,24 @@ public class ReviewDAO {
 			close(pstmt);
 		}
 	}
+	
+	public void increaseDisLikeCount(Connection conn, int reviewNo) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("increaseDisLikeCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	}
+
 	
 	public Review selectLikeCount(Connection conn, int reviewNo) {
 		Review r = new Review();
@@ -325,27 +363,32 @@ public class ReviewDAO {
 		
 		return r;
 	}
-
 	
-	public int increaseDisLikeCount(Connection conn, int reviewNo) {
-		int result = 0;
+	public Review selectDisLikeCount(Connection conn, int reviewNo) {
+		Review r = new Review();
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("increaseDisLikeCount");
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectDisLikeCount");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, reviewNo);
 			
-			result = pstmt.executeUpdate();
+			rset = pstmt.executeQuery();
+			
+			if(rset.next())
+				r.setLikeCnt(rset.getInt("dislike_cnt"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(rset);
 			close(pstmt);
 		}
-		return result;
+		
+		return r;
 	}
-
+	
 	public List<Review> selectDeletedReviewList(Connection conn, int cPage, int numPerPage) {
 		List<Review> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -382,51 +425,6 @@ public class ReviewDAO {
 		}
 		
 		return list;
-	}
-	
-	public int disLikeCheck(Connection conn, int reviewNo, int customerNo) {
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("dislikeCheck");
-		
-		int result = 0;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewNo);
-			pstmt.setInt(2, customerNo);
-			
-			result = pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
-	}
-
-	public Review selectDisLikeCount(Connection conn, int reviewNo) {
-		Review r = new Review();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("selectDisLikeCount");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewNo);
-			
-			rset = pstmt.executeQuery();
-			
-			if(rset.next())
-				r.setLikeCnt(rset.getInt("dislike_cnt"));
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return r;
 	}
 
 	public int insertReviewComment(Connection conn, ReviewComment rc) {
