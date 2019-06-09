@@ -34,7 +34,7 @@ span.star-prototype > * {
 
     	<div class="ui olive segment">
 	    	<div class="ui grid">
-		  		<div class="four column row">
+		  		<div class="four column row" id="wwww">
 		    		<div class="left floated column"><%=r.getReviewWriter() %>님
 		    		</div>
 		    		평가 : <span class="star-prototype"><%=avgRate%></span>(<%= avgRate%>)
@@ -53,7 +53,6 @@ span.star-prototype > * {
 	  				<div class=reviewContent><%=r.getReviewContent()%></div>
 	  			</div>
 	  		</div>
-	  	<div class="ui centered grid">
 	  
 		  <div class="ui buttons">
 		 		<form id="like_form" action="<%=request.getContextPath()%>/review/reviewLikeCnt?reviewNo=<%=r.getReviewNo()%>">  
@@ -72,12 +71,32 @@ span.star-prototype > * {
 		  </div>
 	      
        </div>
-     </div>
 
            	     <%--글작성자/관리자인경우 수정삭제 가능 --%>
-		   <% if(userLoggedIn != null &&
+           	     <div class="ui centered grid">
+	  
+					  <div class="ui buttons" id="like-form">
+					 		<form id="like_form" action="<%=request.getContextPath()%>/review/reviewLikeCnt?reviewNo=<%=r.getReviewNo()%>">  
+			    				<input type="hidden" name="command" value="likeCnt"> 
+			    				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
+			    				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
+			    				<button type="button" class="btn btn-primary" onclick="return like()" style="height:100%;"><i class="thumbs up outline icon"></i>좋아요!</button>
+				    		</form>
+							 <div class="or"></div>
+							 <form id="disLike_form" action="<%=request.getContextPath()%>/review/reviewDisLikeCnt?reviewNo=<%=r.getReviewNo()%>">  
+			    				<input type="hidden" name="command" value="disLikeCnt"> 
+			    				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
+			    				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
+			    				<button type="button" class="btn btn-danger" onclick="return disLike()" style="height:100%;"><i class="thumbs down outline icon"></i>신고하기</button>
+				    		</form>
+			
+					  </div>
+	      
+       			</div>
+       			<% if(userLoggedIn != null &&
 		    		((userLoggedIn.getCustomer_no() == r.getCustomerNo())
 		    		|| "A".equals(userLoggedIn.getStatus()))) {%>
+		    <div class="listbtn">
 		    <tr>
 		        <th colspan="2">
 		            <input type="button" value="수정하기" class="btn btn-success"
@@ -109,11 +128,13 @@ span.star-prototype > * {
 				<button onclick="return rate()" >평가</button>
 			</form>
 			<%} %>
+		    </div>
+
 	     </section>
 	</div>
 </div>
-
-<!-- 댓글 부분 -->
+	     
+	         <!-- 댓글 부분 -->
 <hr style="margin-top:30px;" />
 
 <div id="comment-container">
@@ -121,9 +142,9 @@ span.star-prototype > * {
 		<form action="<%=request.getContextPath()%>/review/reviewCommentInsert"
 			  name="reviewCommentFrm"
 			  method="post">
-			<textarea name="commentContent" 
-					  cols="60" rows="3"></textarea>
-			<button type="submit" id="btn-insert">등록</button>	  
+			<textarea name="commentContent" style="resize: none;"
+					  cols="60" rows="2"></textarea>
+			<button type="submit" id="btn-insert">댓글쓰기</button>	  
 			<input type="hidden" name="reviewNo" value="<%=r.getReviewNo() %>" />  
 			<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no() %>" />
 			<input type="hidden" name="reviewCommentWriter" value="<%=userLoggedIn!=null?userLoggedIn.getUserName():""%>" />
@@ -134,6 +155,7 @@ span.star-prototype > * {
 	</div>
 	
 	<!-- 댓글목록 테이블 -->
+	<div class="ui centered grid">
 	<table id="tbl-comment">
 	<%if(!commentList.isEmpty()) {
 		for(ReviewComment bc: commentList){
@@ -156,14 +178,23 @@ span.star-prototype > * {
 				</td>
 			</tr>
 	<%			
-			}
-		
+			}	
 		}
 	%>
 	</table>
-	
-	
+	</div>
 </div>
+	<div class="bottom area"></div>
+	     
+	     
+	     
+	<div class="ui menu" style="background-color:#68b30d; height:2.5rem; bottom:0; width:1024px; margin-top:0px;">
+		  <div style="left:34%; top:6px; width:1024px;">
+		    <p style="font-size:17px;">&lt;Copyright 2019. Team Thanos. All rights reserved.&gt;</p>
+  	</div>
+  
+  
+	</div>
 <script>
 $(function(){
 	//댓글 textarea focus시에 로그인여부확인
@@ -283,7 +314,6 @@ function disLike(){
 	});
 }
 </script>
-
 <%  //글작성자와 관리자가 아닌 사람만 평가가 가능
 	if(userLoggedIn != null &&
 		((userLoggedIn.getCustomer_no() != r.getCustomerNo())
