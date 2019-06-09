@@ -20,7 +20,7 @@
 
     	<div class="ui olive segment">
 	    	<div class="ui grid">
-		  		<div class="four column row">
+		  		<div class="four column row" id="wwww">
 		    		<div class="left floated column"><%=r.getReviewWriter() %>님
 		    		</div>
 		    		<div class="right floated column">
@@ -38,32 +38,33 @@
 	  				<div class=reviewContent><%=r.getReviewContent()%></div>
 	  			</div>
 	  		</div>
-	  	<div class="ui centered grid">
 	  
-		  <div class="ui buttons">
-		 		<form id="like_form" action="<%=request.getContextPath()%>/review/reviewLikeCnt?reviewNo=<%=r.getReviewNo()%>">  
-    				<input type="hidden" name="command" value="likeCnt"> 
-    				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
-    				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
-    				<button type="button" class="btn btn-primary" onclick="return like()" style="height:100%;"><i class="thumbs up outline icon"></i>좋아요!</button>
-	    		</form>
-				 <div class="or"></div>
-				 <form id="disLike_form" action="<%=request.getContextPath()%>/review/reviewDisLikeCnt?reviewNo=<%=r.getReviewNo()%>">  
-    				<input type="hidden" name="command" value="disLikeCnt"> 
-    				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
-    				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
-    				<button type="button" class="btn btn-danger" onclick="return disLike()" style="height:100%;"><i class="thumbs down outline icon"></i>신고하기</button>
-	    		</form>
-
-		  </div>
-	      
-       </div>
-     </div>
-
+   
            	     <%--글작성자/관리자인경우 수정삭제 가능 --%>
-		   <% if(userLoggedIn != null &&
+           	     <div class="ui centered grid">
+	  
+					  <div class="ui buttons" id="like-form">
+					 		<form id="like_form" action="<%=request.getContextPath()%>/review/reviewLikeCnt?reviewNo=<%=r.getReviewNo()%>">  
+			    				<input type="hidden" name="command" value="likeCnt"> 
+			    				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
+			    				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
+			    				<button type="button" class="btn btn-primary" onclick="return like()" style="height:100%;"><i class="thumbs up outline icon"></i>좋아요!</button>
+				    		</form>
+							 <div class="or"></div>
+							 <form id="disLike_form" action="<%=request.getContextPath()%>/review/reviewDisLikeCnt?reviewNo=<%=r.getReviewNo()%>">  
+			    				<input type="hidden" name="command" value="disLikeCnt"> 
+			    				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
+			    				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
+			    				<button type="button" class="btn btn-danger" onclick="return disLike()" style="height:100%;"><i class="thumbs down outline icon"></i>신고하기</button>
+				    		</form>
+			
+					  </div>
+	      
+       			</div>
+       			<% if(userLoggedIn != null &&
 		    		((userLoggedIn.getCustomer_no() == r.getCustomerNo())
 		    		|| "A".equals(userLoggedIn.getStatus()))) {%>
+		    <div class="listbtn">
 		    <tr>
 		        <th colspan="2">
 		            <input type="button" value="수정하기" class="btn btn-success"
@@ -73,12 +74,11 @@
 		    				onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelname=<%=hotelName %>&hotelid=<%=hotelId%>'"/>
 		        </th>
 		    </tr>
+		    </div>
 		    <%} %>
 	     </section>
-	</div>
-</div>
-
-<!-- 댓글 부분 -->
+	     
+	         <!-- 댓글 부분 -->
 <hr style="margin-top:30px;" />
 
 <div id="comment-container">
@@ -86,9 +86,9 @@
 		<form action="<%=request.getContextPath()%>/review/reviewCommentInsert"
 			  name="reviewCommentFrm"
 			  method="post">
-			<textarea name="commentContent" 
-					  cols="60" rows="3"></textarea>
-			<button type="submit" id="btn-insert">등록</button>	  
+			<textarea name="commentContent" style="resize: none;"
+					  cols="60" rows="2"></textarea>
+			<button type="submit" id="btn-insert">댓글쓰기</button>	  
 			<input type="hidden" name="reviewNo" value="<%=r.getReviewNo() %>" />  
 			<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no() %>" />
 			<input type="hidden" name="reviewCommentWriter" value="<%=userLoggedIn!=null?userLoggedIn.getUserName():""%>" />
@@ -99,6 +99,7 @@
 	</div>
 	
 	<!-- 댓글목록 테이블 -->
+	<div class="ui centered grid">
 	<table id="tbl-comment">
 	<%if(!commentList.isEmpty()) {
 		for(ReviewComment bc: commentList){
@@ -121,12 +122,24 @@
 				</td>
 			</tr>
 	<%			
-			}
-		
+			}	
 		}
 	%>
 	</table>
-	
+	</div>
+     </div>
+	<div class="bottom area"></div>
+	     
+	     
+	     
+</div>
+	<div class="ui menu" style="background-color:#68b30d; height:2.5rem; bottom:0; width:1024px; margin-top:0px;">
+		  <div style="left:34%; top:6px; width:1024px;">
+		    <p style="font-size:17px;">&lt;Copyright 2019. Team Thanos. All rights reserved.&gt;</p>
+  	</div>
+  
+  
+	</div>
 	
 </div>
 <script>
@@ -251,5 +264,3 @@ function disLike(){
 }
 
 </script>
-
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
