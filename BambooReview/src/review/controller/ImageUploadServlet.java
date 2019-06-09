@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 
 import javax.imageio.ImageIO;
@@ -29,6 +30,9 @@ public class ImageUploadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//한글 인코딩
+		request.setCharacterEncoding("UTF-8");
+		
 		//이미지 파일이 저장될 실제 주소
 		String uploadPath = request.getSession().getServletContext().getRealPath("upload");
 		
@@ -73,11 +77,12 @@ public class ImageUploadServlet extends HttpServlet {
     private String makeThumbnail(String filePath, String fileName) throws Exception { 
     	try {
             //썸네일 가로, 세로사이즈 설정
-            int thumbnailWidth = 480;
-            int thumbnailHeight = 320;
-            
-            //썸네일 파일명 설정(원본파일 기준으로 .앞에 _thumb추가, 확장자 구분위해)
-            String tgtFileName = fileName.replace(".", "_thumb.");
+            int thumbnailWidth = 600;
+            int thumbnailHeight = 480;
+
+            //원본파일을 현재시간+파일이름 형식으로 rename
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+            String tgtFileName = sdf.format(System.currentTimeMillis()) + "_" + fileName;
             
             //원본이미지파일의 경로+파일명
             File originalFileName = new File(filePath+"/"+fileName);

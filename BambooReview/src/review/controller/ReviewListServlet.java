@@ -45,7 +45,6 @@ public class ReviewListServlet extends HttpServlet {
 		int totalReviewCount = new ReviewService().selectReviewCount(hotelId);
 		//(공식2)전체페이지수 구하기
 		int totalPage = (int)Math.ceil((double)totalReviewCount/numPerPage);
-		System.out.println("totalReviewCount="+totalReviewCount+", totalPage="+totalPage);
 		
 		//2.3 페이지바구성
 		String pageBar = "";	
@@ -57,8 +56,6 @@ public class ReviewListServlet extends HttpServlet {
 		//종료페이지 번호 세팅
 		int pageEnd = pageStart+pageBarSize-1;
 		int pageNo = pageStart;
-		
-		System.out.println("pageStart["+pageNo+"] ~ pageEnd["+pageEnd+"]");
 		
 		//[이전] section
 		if(pageNo == 1 ){

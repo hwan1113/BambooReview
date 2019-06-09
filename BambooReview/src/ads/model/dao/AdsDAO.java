@@ -1,10 +1,11 @@
-package review.model.dao;
+package ads.model.dao;
+
+import static common.JDBCTemplate.close;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,18 +14,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import ads.model.vo.Ads;
 import review.model.vo.Review;
 import review.model.vo.ReviewComment;
 
-import static common.JDBCTemplate.close;
-
-public class ReviewDAO {
+public class AdsDAO {
 	
 	private Properties prop = new Properties();
 	
-	public ReviewDAO() {
+	public AdsDAO() {
 		try {
-			String fileName = ReviewDAO.class.getResource("/sql/review/review-query.properties").getPath();
+			String fileName = AdsDAO.class.getResource("/sql/ads/ads-query.properties").getPath();
 			prop.load(new FileReader(fileName));
 			
 		} catch (FileNotFoundException e) {
@@ -34,34 +34,33 @@ public class ReviewDAO {
 		}	
 	}
 
-	public List<Review> selectReviewList(Connection conn, String hotelId, int cPage, int numPerPage) {
-		List<Review> list = new ArrayList<>();
+	public List<Ads> selectAdsList(Connection conn, int cPage, int numPerPage) {
+		List<Ads> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectReviewList");
+		String sql = prop.getProperty("selectAdsList");
 		
 		try{
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, hotelId);
-			pstmt.setInt(2, (cPage-1)*numPerPage+1);
-			pstmt.setInt(3, cPage*numPerPage);
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
 
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()){
-				Review r = new Review();
-				r.setReviewNo(rset.getInt("review_no"));
-				r.setReviewTitle(rset.getString("review_title"));
-				r.setReviewWriter(getUserName(conn, rset.getInt("customer_no")));
-				r.setReviewContent(rset.getString("review_content"));
-				r.setWrittenDate(rset.getDate("written_date"));
-				r.setReadCnt(rset.getInt("read_cnt"));
-				r.setLikeCnt(rset.getInt("like_cnt"));
-				r.setDisLikeCnt(rset.getInt("dislike_cnt"));
+				Ads ads = new Ads();
+				ads.setAdsNo(rset.getInt("ads_no"));
+				ads.setAdsTitle(rset.getString("ads_title"));
+				ads.setAdsWriter(getUserName(conn, rset.getInt("customer_no")));
+				ads.setAdsContent(rset.getString("ads_content"));
+				ads.setWrittenDate(rset.getDate("written_date"));
+				ads.setReadCnt(rset.getInt("read_cnt"));
+				ads.setLikeCnt(rset.getInt("like_cnt"));
+				ads.setDisLikeCnt(rset.getInt("dislike_cnt"));
 				
-				list.add(r);
+				list.add(ads);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -73,20 +72,18 @@ public class ReviewDAO {
 		return list;
 	}
 
-	public int selectReviewCount(Connection conn, String hotelId) {
+	public int selectAdsCount(Connection conn) {
 		PreparedStatement pstmt = null;
-		int totalMember = 0;
+		int totalAdsCount = 0;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectReviewCount");
+		String sql = prop.getProperty("selectAdsCount");
 		
 		try{
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, hotelId);
-
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()){
-				totalMember = rset.getInt("cnt");
+				totalAdsCount = rset.getInt("cnt");
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -95,7 +92,7 @@ public class ReviewDAO {
 			close(pstmt);
 		}
 		
-		return totalMember;
+		return totalAdsCount;
 	}
 
 	public int insertReview(Connection conn, Review r) {
