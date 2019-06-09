@@ -104,6 +104,9 @@ ga('send', 'pageview');
  			<a class="item" href="<%=request.getContextPath()%>/user/userView?email=<%=userLoggedIn.getEmail()%>">
    				내 정보 보기
   			</a>
+  			<a class="item" href="<%=request.getContextPath()%>/ads/adsList">
+   				광고게시판
+  			</a>
   			<a class="item" href="<%=request.getContextPath()%>/price/priceInfo">
    				가격정보
   			</a>

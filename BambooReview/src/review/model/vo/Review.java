@@ -6,8 +6,9 @@ public class Review {
 	private int reviewNo; //게시글번호
 	private int customerNo; //작성자 회원번호
 	private String reviewWriter;	//작성자
-	private String hotelId;	//참조하는 호텔 고유 아이디값
+	private String hotelId;	//참조하는 api의 호텔아이디
 	private int reviewRate;	//리뷰 점수
+	private int rateTotal;//리뷰 점수 합계
 	private String reviewTitle;	//리뷰 제목
 	private String reviewContent;	//리뷰 내용
 	private Date writtenDate;	//작성한 날짜
@@ -15,17 +16,21 @@ public class Review {
 	private int readCnt;	//조회수
 	private int likeCnt;	//추천수
 	private int disLikeCnt;	//비추천수
+	private int rateCnt;	//평가수
+	
 	public Review() {
 		super();
 	}
-	public Review(int reviewNo, int customerNo, String reviewWriter, String hotelId, int reviewRate, String reviewTitle,
-			String reviewContent, Date writtenDate, Date modifiedDate, int readCnt, int likeCnt, int disLikeCnt) {
+	public Review(int reviewNo, int customerNo, String reviewWriter, String hotelId, int reviewRate, int rateTotal,
+			String reviewTitle, String reviewContent, Date writtenDate, Date modifiedDate, int readCnt, int likeCnt,
+			int disLikeCnt, int rateCnt) {
 		super();
 		this.reviewNo = reviewNo;
 		this.customerNo = customerNo;
 		this.reviewWriter = reviewWriter;
 		this.hotelId = hotelId;
 		this.reviewRate = reviewRate;
+		this.rateTotal = rateTotal;
 		this.reviewTitle = reviewTitle;
 		this.reviewContent = reviewContent;
 		this.writtenDate = writtenDate;
@@ -33,6 +38,7 @@ public class Review {
 		this.readCnt = readCnt;
 		this.likeCnt = likeCnt;
 		this.disLikeCnt = disLikeCnt;
+		this.rateCnt = rateCnt;
 	}
 	public int getReviewNo() {
 		return reviewNo;
@@ -40,15 +46,12 @@ public class Review {
 	public void setReviewNo(int reviewNo) {
 		this.reviewNo = reviewNo;
 	}
-	
 	public int getCustomerNo() {
 		return customerNo;
 	}
-	
 	public void setCustomerNo(int customerNo) {
 		this.customerNo = customerNo;
 	}
-	
 	public String getReviewWriter() {
 		return reviewWriter;
 	}
@@ -66,6 +69,12 @@ public class Review {
 	}
 	public void setReviewRate(int reviewRate) {
 		this.reviewRate = reviewRate;
+	}
+	public int getRateTotal() {
+		return rateTotal;
+	}
+	public void setRateTotal(int rateTotal) {
+		this.rateTotal = rateTotal;
 	}
 	public String getReviewTitle() {
 		return reviewTitle;
@@ -109,11 +118,19 @@ public class Review {
 	public void setDisLikeCnt(int disLikeCnt) {
 		this.disLikeCnt = disLikeCnt;
 	}
+	public int getRateCnt() {
+		return rateCnt;
+	}
+	public void setRateCnt(int rateCnt) {
+		this.rateCnt = rateCnt;
+	}
 	@Override
 	public String toString() {
-		return "Review [reviewNo=" + reviewNo + ", customerNo=" + customerNo + ", reviewWriter=" + reviewWriter + ", hotelId=" + hotelId + ", reviewRate="
-				+ reviewRate + ", reviewTitle=" + reviewTitle + ", reviewContent=" + reviewContent + ", writtenDate="
-				+ writtenDate + ", modifiedDate=" + modifiedDate + ", readCnt=" + readCnt + ", likeCnt=" + likeCnt
-				+ ", disLikeCnt=" + disLikeCnt + "]";
+		return "Review [reviewNo=" + reviewNo + ", customerNo=" + customerNo + ", reviewWriter=" + reviewWriter
+				+ ", hotelId=" + hotelId + ", reviewRate=" + reviewRate + ", rateTotal=" + rateTotal + ", reviewTitle="
+				+ reviewTitle + ", reviewContent=" + reviewContent + ", writtenDate=" + writtenDate + ", modifiedDate="
+				+ modifiedDate + ", readCnt=" + readCnt + ", likeCnt=" + likeCnt + ", disLikeCnt=" + disLikeCnt
+				+ ", rateCnt=" + rateCnt + "]";
 	}
+
 }

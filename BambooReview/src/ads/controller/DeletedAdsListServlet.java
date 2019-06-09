@@ -16,18 +16,19 @@ import review.model.vo.Review;
 /**
  * Servlet implementation class ReviewListServlet
  */
-@WebServlet("/review/reviewList")
-public class ReviewListServlet extends HttpServlet {
+@WebServlet("/review/deletedReviewList")
+public class DeletedReviewListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//1. 한글 인코딩
+		request.setCharacterEncoding("UTF-8");
 		
 		//파라미터 핸들링
 		String hotelId = request.getParameter("hotelid");
-		String hotelName = request.getParameter("hotelname");
 		int numPerPage = 5;//한페이지당 수
 		int cPage = 1;//요청페이지
 		try{
@@ -37,14 +38,17 @@ public class ReviewListServlet extends HttpServlet {
 		}
 		
 		//2.업무로직처리
-		//2.1 리뷰 리스트 객체 생성
-		List<Review> list = new ReviewService().selectReviewList(hotelId, cPage, numPerPage);
+		//2.1 현재페이지의 회원구하기
+		List<Review> list = new ReviewService().selectDeletedReviewList(cPage, numPerPage);
 		System.out.println("list="+list);
-				
+		
+		
+		
 		//2.2 전체게시글수, 전체페이지수 구하기
 		int totalReviewCount = new ReviewService().selectReviewCount(hotelId);
 		//(공식2)전체페이지수 구하기
 		int totalPage = (int)Math.ceil((double)totalReviewCount/numPerPage);
+		System.out.println("totalReviewCount="+totalReviewCount+", totalPage="+totalPage);
 		
 		//2.3 페이지바구성
 		String pageBar = "";	
@@ -57,12 +61,14 @@ public class ReviewListServlet extends HttpServlet {
 		int pageEnd = pageStart+pageBarSize-1;
 		int pageNo = pageStart;
 		
+		System.out.println("pageStart["+pageNo+"] ~ pageEnd["+pageEnd+"]");
+		
 		//[이전] section
 		if(pageNo == 1 ){
 			//pageBar += "<span>[이전]</span>"; 
 		}
 		else {
-			pageBar += "<a href='"+request.getContextPath()+"/review/reviewList?cPage="+(pageNo-1)+"'>[이전]</a> ";
+			pageBar += "<a href='"+request.getContextPath()+"/review/deletedReviewList?cPage="+(pageNo-1)+"'>[이전]</a> ";
 		}
 			
 		// pageNo section
@@ -74,7 +80,7 @@ public class ReviewListServlet extends HttpServlet {
 				pageBar += "<span class='cPage'>"+pageNo+"</span> ";
 			} 
 			else {
-				pageBar += "<a href='"+request.getContextPath()+"/review/reviewList?cPage="+pageNo+"'>"+pageNo+"</a> ";
+				pageBar += "<a href='"+request.getContextPath()+"/review/deletedReviewList?cPage="+pageNo+"'>"+pageNo+"</a> ";
 			}
 			pageNo++;
 		}
@@ -83,14 +89,12 @@ public class ReviewListServlet extends HttpServlet {
 		if(pageNo > totalPage){
 			//pageBar += "<span>[다음]</span>";
 		} else {
-			pageBar += "<a href='"+request.getContextPath()+"/review/reviewList?cPage="+pageNo+"'>[다음]</a>";
+			pageBar += "<a href='"+request.getContextPath()+"/review/deletedReviewList?cPage="+pageNo+"'>[다음]</a>";
 		}
 		
 		
 		//4.뷰단 포워딩		
-		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/review/reviewList.jsp");
-		request.setAttribute("hotelName", hotelName);
-		request.setAttribute("hotelid", hotelId);
+		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/review/deletedReviewList.jsp");
 		request.setAttribute("list",list);
 		request.setAttribute("pageBar",pageBar);	
 		//request.setAttribute("cPage",cPage);		

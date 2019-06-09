@@ -30,9 +30,6 @@ public class ImageUploadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//한글 인코딩
-		request.setCharacterEncoding("UTF-8");
-		
 		//이미지 파일이 저장될 실제 주소
 		String uploadPath = request.getSession().getServletContext().getRealPath("upload");
 		

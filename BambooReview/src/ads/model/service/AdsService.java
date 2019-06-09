@@ -1,31 +1,33 @@
-package review.model.service;
+package ads.model.service;
 
 import static common.JDBCTemplate.close;
 import static common.JDBCTemplate.commit;
-import static common.JDBCTemplate.rollback;
 import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
 
+import ads.model.dao.AdsDAO;
+import ads.model.vo.Ads;
 import review.model.dao.ReviewDAO;
 import review.model.vo.Review;
 import review.model.vo.ReviewComment;
 
-public class ReviewService {
+public class AdsService {
 
-	public List<Review> selectReviewList(String hotelId, int cPage, int numPerPage) {
+	public List<Ads> selectAdsList(int cPage, int numPerPage) {
 		Connection conn = getConnection();
-		List<Review> list = new ReviewDAO().selectReviewList(conn, hotelId, cPage, numPerPage);
+		List<Ads> list = new AdsDAO().selectAdsList(conn, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
 
-	public int selectReviewCount(String hotelId) {
+	public int selectAdsCount() {
 		Connection conn = getConnection();
-		int totalReviewCount = new ReviewDAO().selectReviewCount(conn, hotelId);
+		int totalAdsCount = new AdsDAO().selectAdsCount(conn);
 		close(conn);
-		return totalReviewCount;
+		return totalAdsCount;
 	}
 
 	public int insertReview(Review r) {
