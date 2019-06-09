@@ -39,7 +39,6 @@ public class ReviewListServlet extends HttpServlet {
 		//2.업무로직처리
 		//2.1 리뷰 리스트 객체 생성
 		List<Review> list = new ReviewService().selectReviewList(hotelId, cPage, numPerPage);
-		System.out.println("list="+list);
 				
 		//2.2 전체게시글수, 전체페이지수 구하기
 		int totalReviewCount = new ReviewService().selectReviewCount(hotelId);

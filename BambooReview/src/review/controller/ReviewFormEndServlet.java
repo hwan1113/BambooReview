@@ -1,20 +1,12 @@
 package review.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-import org.json.simple.JSONObject;
-
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import review.model.service.ReviewService;
 import review.model.vo.Review;
@@ -58,6 +50,8 @@ public class ReviewFormEndServlet extends HttpServlet {
 		}
 		else {
 			msg = "게시글 등록실패!";
+			//실패한 경우, 해당 호텔 리뷰 리스트로 돌아감
+			loc = "/review/reviewList?hotelId="+hotelId+"&hotelName="+hotelName;
 		}
 		
 		//3.view단 처리

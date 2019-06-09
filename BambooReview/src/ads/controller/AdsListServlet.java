@@ -22,7 +22,7 @@ public class AdsListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int numPerPage = 5;
+		int numPerPage = 10;
 		int cPage = 1;
 		try{
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -30,8 +30,8 @@ public class AdsListServlet extends HttpServlet {
 		
 		}
 
-		List<Ads> list = new AdsService().selectAdsList(cPage, numPerPage);
-		System.out.println("list="+list);
+		List<Ads> adsList = new AdsService().selectAdsList(cPage, numPerPage);
+		System.out.println("adsList=" + adsList);
 				
 		int totalAdsCount = new AdsService().selectAdsCount();
 		int totalPage = (int)Math.ceil((double)totalAdsCount/numPerPage);	
@@ -66,7 +66,7 @@ public class AdsListServlet extends HttpServlet {
 		
 		//4.뷰단 포워딩		
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/ads/adsList.jsp");
-		request.setAttribute("list",list);
+		request.setAttribute("adsList",adsList);
 		request.setAttribute("pageBar",pageBar);			
 		reqDispatcher.forward(request, response);
 	}

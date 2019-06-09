@@ -65,8 +65,6 @@ public class ReviewViewServlet extends HttpServlet {
 			
 			//응답객체 cookie 전송
 			response.addCookie(reviewCookie);
-			
-			System.out.println("reviewCookie생성: "+reviewCookie.getValue());
 		}
 		
 		

@@ -1,0 +1,76 @@
+/* Ads 관련 css */
+html{
+	width:1024px; 
+	/* height:697px; */ 
+	margin:0 auto; 
+	text-align: center;
+}
+body{
+	background-color:#f1f1f1;
+}
+
+/* footer{
+	position:absolute;
+	top:697px;
+	width:1024px;
+} */
+
+input#title{
+	width: 600px; 
+	height: 25px; 
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
+
+input#writer{
+	width: 200px;
+	height: 25px;
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
+.area{
+	background-color:white;
+	width:1024px;
+	min-height: 355px;
+}
+#writer{
+	float:left;
+}
+#wwww{
+	padding:6px;
+}
+#footer{
+	/* top:642px; */
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:70px;   
+    background:#ccc;
+} 
+.listbtn{
+	margin-top:25px;
+}
+#like-form{
+	margin-top:25px;
+}
+.bottom.area{
+	width:100px;
+	height:30px;
+}
+#btn-insert{
+	position:relative;
+	top:-18px;
+	width:70px;
+	height:48px;
+	right:4px;
+	background-color:#02b502;
+	border:1px solid black;
+	color:white;
+}
+.btn-delete{
+	width:50px;
+	height:32px;
+	background-color:red;
+	color:white;
+	border:1px solid gray;
+}

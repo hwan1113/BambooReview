@@ -65,10 +65,15 @@
 	<div class="seven wide column"id="pageBar">
 		<%=pageBar %>
 	</div>
+	<!-- 글쓰기 권한은 일반회원과 관리자만 가능 -->
+	<% if(userLoggedIn != null &&
+		    		("U".equals(userLoggedIn.getStatus())
+		    		|| "A".equals(userLoggedIn.getStatus()))) {%>
 	<button  id="btn-add" class="ui olive button" 
 		style="float:right; background-color:#68b30d"onclick="location.href='<%=request.getContextPath()%>/review/reviewForm?hotelName=<%=hotelName %>&hotelid=<%=hotelid%>'"/><i class="pencil alternate icon"></i>글쓰기</button>
 	
 	</div>
+	<%} %>
 
 </section>
 	

@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<%@ page import="review.model.vo.*, java.util.*, review.model.service.* " %>
+<%@ page import="ads.model.vo.*, java.util.*, ads.model.service.* " %>
 <%
-    Review r = (Review)request.getAttribute("review");
-	List<ReviewComment> commentList = (List<ReviewComment>)request.getAttribute("commentList");
-	String hotelName = (String)request.getAttribute("hotelName");
-	String hotelId = (String)request.getAttribute("hotelId");
+    Ads ads = (Ads)request.getAttribute("ads");
+	List<AdsComment> adsCommentList = (List<AdsComment>)request.getAttribute("adsCommentList");
 	double avgRate = 1.5;
 %>
 <style>
@@ -23,49 +21,51 @@ span.star-prototype > * {
     width:80px; 
 }
 </style>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/ads.css" />
 <div class="ui centered grid">
 	<div class="area">
-		<section id="review-container">
+		<section id="ads-container">
 
-		<%-- <h2><%=hotelName %>의 리뷰 게시판</h2> --%>
-
-        <h3><%=r.getReviewTitle() %></h3>
+        <h3><%=ads.getAdsTitle() %></h3>
 
     	<div class="ui olive segment">
 	    	<div class="ui grid">
 		  		<div class="four column row">
-		    		<div class="left floated column"><%=r.getReviewWriter() %>님
+		    		<div class="left floated column"><%=ads.getAdsWriter() %>님
 		    		</div>
 		    		평가 : <span class="star-prototype"><%=avgRate%></span>(<%= avgRate%>)
 		    		<div class="right floated column">
 			    		<i class="eye icon"></i>
-			    		<%=r.getReadCnt() %>
+			    		<%=ads.getReadCnt() %>
 			    		<i class="thumbs up outline icon"></i>
-			    		<%=r.getLikeCnt()%>
+			    		<%=ads.getLikeCnt()%>
 			    		<i class="thumbs down outline icon"></i>
-			    		<%=r.getDisLikeCnt()%>
+			    		<%=ads.getDisLikeCnt()%>
 			    	</div>
 		 	 	</div>
   			</div>
+  			<div>
+  				주소: <span><%=ads.getFullAddress() %></span>
+  				편의시설: <span><%=ads.getFacilities() %></span>
+  			</div>
 	 		 <div class="ui green segment" style="height:355px; overflow:scroll;">
 	  			<div class="ui grid">
-	  				<div class=reviewContent><%=r.getReviewContent()%></div>
+	  				<div class=adsContent><%=ads.getAdsContent()%></div>
 	  			</div>
 	  		</div>
 	  	<div class="ui centered grid">
 	  
 		  <div class="ui buttons">
-		 		<form id="like_form" action="<%=request.getContextPath()%>/review/reviewLikeCnt?reviewNo=<%=r.getReviewNo()%>">  
+		 		<form id="like_form" action="<%=request.getContextPath()%>/ads/adsLikeCnt?adsNo=<%=ads.getAdsNo()%>">  
     				<input type="hidden" name="command" value="likeCnt"> 
-    				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
+    				<input type="hidden" name="adsNo" value="<%=ads.getAdsNo()%>">
     				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
     				<button type="button" class="btn btn-primary" onclick="return like()" style="height:100%;"><i class="thumbs up outline icon"></i>좋아요!</button>
 	    		</form>
 				 <div class="or"></div>
-				 <form id="disLike_form" action="<%=request.getContextPath()%>/review/reviewDisLikeCnt?reviewNo=<%=r.getReviewNo()%>">  
+				 <form id="disLike_form" action="<%=request.getContextPath()%>/ads/adsDisLikeCnt?adsNo=<%=ads.getAdsNo()%>">  
     				<input type="hidden" name="command" value="disLikeCnt"> 
-    				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
+    				<input type="hidden" name="adsNo" value="<%=ads.getAdsNo()%>">
     				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
     				<button type="button" class="btn btn-danger" onclick="return disLike()" style="height:100%;"><i class="thumbs down outline icon"></i>신고하기</button>
 	    		</form>
@@ -76,29 +76,29 @@ span.star-prototype > * {
 
            	     <%--글작성자/관리자인경우 수정삭제 가능 --%>
 		   <% if(userLoggedIn != null &&
-		    		((userLoggedIn.getCustomer_no() == r.getCustomerNo())
+		    		((userLoggedIn.getCustomer_no() == ads.getCustomerNo())
 		    		|| "A".equals(userLoggedIn.getStatus()))) {%>
 		    <tr>
 		        <th colspan="2">
 		            <input type="button" value="수정하기" class="btn btn-success"
-		            	   onclick="location.href='<%=request.getContextPath()%>/review/reviewUpdate?reviewNo=<%=r.getReviewNo()%>&hotelName=<%=hotelName%>'"/>
-		            <input type="button" value="삭제하기" class="btn btn-warning" onclick="deleteReview();"/>
+		            	   onclick="location.href='<%=request.getContextPath()%>/ads/adsUpdate?adsNo=<%=ads.getAdsNo()%>'"/>
+		            <input type="button" value="삭제하기" class="btn btn-warning" onclick="deleteAds();"/>
 		        </th>
 		    </tr>
 		    <%} %>
 		    <input type="button" value="목록으로" class="btn btn-success" style="background-color:#aacc19; border:1px solid #aacc19"
-		           onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelname=<%=hotelName %>&hotelid=<%=hotelId%>'"/>
+		           onclick="location.href='<%=request.getContextPath()%>/ads/adsList'"/>
 		    
 		    <%  //글작성자와 관리자가 아닌 사람만 평가가 가능
 			if(userLoggedIn != null &&
-				((userLoggedIn.getCustomer_no() != r.getCustomerNo())
+				((userLoggedIn.getCustomer_no() != ads.getCustomerNo())
 					&& !"A".equals(userLoggedIn.getStatus()))) {%>
-		    <form id="rate_form" action="<%=request.getContextPath()%>/review/reviewRate?reviewNo=<%=r.getReviewNo()%>">
+		    <form id="rate_form" action="<%=request.getContextPath()%>/ads/adsRate?adsNo=<%=ads.getAdsNo()%>">
 				<input type="hidden" name="command" value="rateCnt">
 				<input type="hidden" name="command" value="rateTotal">
-				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
+				<input type="hidden" name="adsNo" value="<%=ads.getAdsNo()%>">
    				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
-   				<select name="reviewRate">
+   				<select name="adsRate">
 				    <option value="" disabled selected>점수선택</option>
 				    <option value="5">아주 만족해요(5)</option>
 				    <option value="4">만족해요(4)</option>
@@ -118,40 +118,37 @@ span.star-prototype > * {
 
 <div id="comment-container">
 	<div class="comment-editor">
-		<form action="<%=request.getContextPath()%>/review/reviewCommentInsert"
-			  name="reviewCommentFrm"
+		<form action="<%=request.getContextPath()%>/ads/adsCommentInsert"
+			  name="adsCommentFrm"
 			  method="post">
-			<textarea name="commentContent" 
+			<textarea name="adsCommentContent" 
 					  cols="60" rows="3"></textarea>
 			<button type="submit" id="btn-insert">등록</button>	  
-			<input type="hidden" name="reviewNo" value="<%=r.getReviewNo() %>" />  
+			<input type="hidden" name="adsNo" value="<%=ads.getAdsNo() %>" />  
 			<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no() %>" />
-			<input type="hidden" name="reviewCommentWriter" value="<%=userLoggedIn!=null?userLoggedIn.getUserName():""%>" />
-			<!-- <input type="hidden" name="reviewCommentLevel" value="1" /> -->
-			<!-- <input type="hidden" name="reviewCommentRef" value="0" /> -->
-		
+			<input type="hidden" name="adsCommentWriter" value="<%=userLoggedIn!=null?userLoggedIn.getUserName():""%>" />
 		</form>
 	</div>
 	
 	<!-- 댓글목록 테이블 -->
 	<table id="tbl-comment">
-	<%if(!commentList.isEmpty()) {
-		for(ReviewComment bc: commentList){
+	<%if(!adsCommentList.isEmpty()) {
+		for(AdsComment ac: adsCommentList){
 	%>
 			<tr class="level1">
 				<td>
 					<sub class="comment-writer"><%=userLoggedIn.getUserName() %></sub>
-					<sub class="comment-date"><%=bc.getWrittenDate() %></sub>
+					<sub class="comment-date"><%=ac.getWrittenDate() %></sub>
 					<br />
-					<%=bc.getCommentContent() %>
+					<%=ac.getAdsCommentContent() %>
 					
 				</td>
 				<td>
 					<%-- 삭제버튼 추가 --%>
 					<% if(userLoggedIn != null &&
-						((userLoggedIn.getCustomer_no() == bc.getCustomerNo())
+						((userLoggedIn.getCustomer_no() == ac.getCustomerNo())
 						|| "A".equals(userLoggedIn.getStatus()))) {%>
-					<button class="btn-delete" value="<%=bc.getCommentNo()%>">삭제</button>
+					<button class="btn-delete" value="<%=ac.getAdsCommentNo()%>">삭제</button>
 					<%} %>
 				</td>
 			</tr>
@@ -167,14 +164,14 @@ span.star-prototype > * {
 <script>
 $(function(){
 	//댓글 textarea focus시에 로그인여부확인
-	$("[name=boardCommentContent]").focus(function(){
+	$("[name=adsCommentContent]").focus(function(){
 		if(<%=userLoggedIn==null%>){
 			loginAlert();
 		}
 	});
 	
 	//댓글폼 submit이벤트처리
-	$("[name=boardCommentFrm]").submit(function(e){
+	$("[name=adsCommentFrm]").submit(function(e){
 		//로그인여부검사
 		if(<%=userLoggedIn==null%>){
 			loginAlert();
@@ -183,7 +180,7 @@ $(function(){
 		}
 		
 		//댓글작성여부 검사
-		var content = $("[name=reviewCommentContent]").val().trim();
+		var content = $("[name=adsCommentContent]").val().trim();
 		if(content.length == 0){
 			alert("댓글을 작성해 주세요.");
 			e.preventDefault();
@@ -196,7 +193,7 @@ $(function(){
 	$(".btn-delete").click(function(){
 		if(!confirm("정말 삭제하시겠습니까?")) return;
 		//삭제처리후 돌아올 현재게시판번호도 함께 전송함.
-		location.href="<%=request.getContextPath()%>/review/reviewCommentDelete?reviewNo=<%=r.getReviewNo() %>&del="+$(this).val();
+		location.href="<%=request.getContextPath()%>/ads/adsCommentDelete?adsNo=<%=ads.getAdsNo() %>&del="+$(this).val();
 	});
 	
 	
@@ -204,37 +201,34 @@ $(function(){
 
 function loginAlert(){
 	alert("로그인 후 이용할 수 있습니다.");
-	$("#memberId").focus();
 }
 
 </script>
 
 <% if(userLoggedIn != null &&
-		((userLoggedIn.getCustomer_no() == r.getCustomerNo())
+		((userLoggedIn.getCustomer_no() == ads.getCustomerNo())
 		|| "A".equals(userLoggedIn.getStatus()))) {%>
-	<form action="<%=request.getContextPath()%>/review/reviewDelete"
-		id="reviewDelFrm"
+	<form action="<%=request.getContextPath()%>/ads/adsDelete"
+		id="adsDelFrm"
   		method="post">
-		<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>"/>
-		<input type="hidden" name="hotelId" value="<%=hotelId%>"/>
-		<input type="hidden" name="hotelName" value="<%=hotelName%>"/>
+		<input type="hidden" name="adsNo" value="<%=ads.getAdsNo()%>"/>
 	</form>
 <%} %>
 
 <script>
 
-function deleteReview(){
+function deleteAds(){
 	if(!confirm("이 게시글을 정말 삭제 하시겠습니까?")){
 		return;
 	}
 	//폼을 사용해서 삭제요청
-	$("#reviewDelFrm").submit();
+	$("#adsDelFrm").submit();
 }
 </script>
 <script>
 function like(){ 
 	$.ajax({ 
-		url: "<%=request.getContextPath()%>/review/reviewLikeCnt", 
+		url: "<%=request.getContextPath()%>/ads/adsLikeCnt", 
 		type: "POST",
 		data: $('#like_form').serialize(), //아이디가 like_form인 곳의 모든 정보를 가져와 파라미터 전송 형태(표준 쿼리형태)로 만들어줌 
 		success: 
@@ -261,7 +255,7 @@ function disLike(){
 		return;
 	}
 	$.ajax({ 
-		url: "<%=request.getContextPath()%>/review/reviewDisLikeCnt", 
+		url: "<%=request.getContextPath()%>/ads/adsDisLikeCnt", 
 		type: "POST",
 		data: $('#disLike_form').serialize(), 
 		success: 
@@ -286,12 +280,12 @@ function disLike(){
 
 <%  //글작성자와 관리자가 아닌 사람만 평가가 가능
 	if(userLoggedIn != null &&
-		((userLoggedIn.getCustomer_no() != r.getCustomerNo())
+		((userLoggedIn.getCustomer_no() != ads.getCustomerNo())
 		&& !"A".equals(userLoggedIn.getStatus()))) {%>
 <script>
 function rate(){ 
 	$.ajax({ 
-		url: "<%=request.getContextPath()%>/review/reviewRate", 
+		url: "<%=request.getContextPath()%>/ads/adsRate", 
 		type: "POST",
 		data: $('#rate_form').serialize(), 
 		success: 

@@ -10,9 +10,7 @@ import java.util.List;
 
 import ads.model.dao.AdsDAO;
 import ads.model.vo.Ads;
-import review.model.dao.ReviewDAO;
-import review.model.vo.Review;
-import review.model.vo.ReviewComment;
+import ads.model.vo.AdsComment;
 
 public class AdsService {
 
@@ -30,12 +28,12 @@ public class AdsService {
 		return totalAdsCount;
 	}
 
-	public int insertReview(Review r) {
+	public int insertAds(Ads ads) {
 		Connection conn = getConnection();
-		int result = new ReviewDAO().insertReview(conn, r);
+		int result = new AdsDAO().insertAds(conn, ads);
 		if(result>0) {
 			commit(conn);
-			result = new ReviewDAO().selectLastSeq(conn);
+			result = new AdsDAO().selectLastSeq(conn);
 		}	
 		else 
 			rollback(conn);
@@ -45,16 +43,16 @@ public class AdsService {
 		return result;
 	}
 
-	public Review selectOne(int reviewNo) {
+	public Ads selectOne(int adsNo) {
 		Connection conn = getConnection();
-		Review review = new ReviewDAO().selectOne(conn, reviewNo);
+		Ads ads = new AdsDAO().selectOne(conn, adsNo);
 		close(conn);
-		return review;
+		return ads;
 	}
 
-	public int updateReview(Review r) {
+	public int updateAds(Ads ads) {
 			Connection conn = getConnection();
-			int result = new ReviewDAO().updateReview(conn, r);
+			int result = new AdsDAO().updateAds(conn, ads);
 			if(result>0){
 				commit(conn);
 			}
@@ -66,9 +64,9 @@ public class AdsService {
 			return result;
 	}
 
-	public int increaseReadCount(int reviewNo) {
+	public int increaseReadCount(int adsNo) {
 		Connection conn = getConnection();
-		int result = new ReviewDAO().increaseReadCount(conn, reviewNo);
+		int result = new AdsDAO().increaseReadCount(conn, adsNo);
 		if(result>0)
 			commit(conn);
 		else
@@ -79,11 +77,11 @@ public class AdsService {
 		
 	}
 	
-	public int increaseLikeCount(int reviewNo, int customerNo) {
+	public int increaseLikeCount(int adsNo, int customerNo) {
 		int result = 0;
 		Connection conn = getConnection();
-		if (new ReviewDAO().likeCheck(conn, reviewNo, customerNo) > 0) {
-			new ReviewDAO().increaseLikeCount(conn, reviewNo);
+		if (new AdsDAO().likeCheck(conn, adsNo, customerNo) > 0) {
+			new AdsDAO().increaseLikeCount(conn, adsNo);
 			result = 1;
 			commit(conn);
 		}
@@ -96,11 +94,11 @@ public class AdsService {
 		return result;
 	}
 	
-	public int increaseDisLikeCount(int reviewNo, int customerNo) {
+	public int increaseDisLikeCount(int adsNo, int customerNo) {
 		int result = 0;
 		Connection conn = getConnection();
-		if(new ReviewDAO().disLikeCheck(conn, reviewNo, customerNo) > 0) {
-			new ReviewDAO().increaseDisLikeCount(conn, reviewNo);
+		if(new AdsDAO().disLikeCheck(conn, adsNo, customerNo) > 0) {
+			new AdsDAO().increaseDisLikeCount(conn, adsNo);
 			result = 1;
 			commit(conn);
 		}
@@ -113,11 +111,11 @@ public class AdsService {
 		return result;
 	}
 
-	public int updateRateTotal(int reviewNo, int customerNo, int reviewRate) {
+	public int updateRateTotal(int adsNo, int customerNo, int adsRate) {
 		int result = 0;
 		Connection conn = getConnection();
-		if(new ReviewDAO().rateCheck(conn, reviewNo, customerNo) > 0) {
-			new ReviewDAO().updateRateTotal(conn, reviewNo, reviewRate);
+		if(new AdsDAO().rateCheck(conn, adsNo, customerNo) > 0) {
+			new AdsDAO().updateRateTotal(conn, adsNo, adsRate);
 			
 			result = 1;
 			commit(conn);
@@ -131,38 +129,38 @@ public class AdsService {
 		return result;
 	}
 	
-	public Review selectLikeCount(int reviewNo) {
+	public Ads selectLikeCount(int adsNo) {
 		Connection conn = getConnection();
-		Review r = new ReviewDAO().selectLikeCount(conn, reviewNo);
+		Ads r = new AdsDAO().selectLikeCount(conn, adsNo);
 		close(conn);
 		return r;
 	}
 
-	public Review selectDisLikeCount(int reviewNo) {
+	public Ads selectDisLikeCount(int adsNo) {
 		Connection conn = getConnection();
-		Review r = new ReviewDAO().selectDisLikeCount(conn, reviewNo);
+		Ads r = new AdsDAO().selectDisLikeCount(conn, adsNo);
 		close(conn);
 		return r;
 	}
 	
-	public Review selectRateCount(int reviewNo) {
+	public Ads selectRateCount(int adsNo) {
 		Connection conn = getConnection();
-		Review r = new ReviewDAO().selectRateCount(conn, reviewNo);
+		Ads r = new AdsDAO().selectRateCount(conn, adsNo);
 		close(conn);
 		return r;
 	}
 	
 
-	public int getTotalRate(int reviewNo) {
+	public int getTotalRate(int adsNo) {
 		Connection conn = getConnection();
-		int result = new ReviewDAO().getTotalRate(conn, reviewNo);
+		int result = new AdsDAO().getTotalRate(conn, adsNo);
 		close(conn);
 		return result;
 	}
 
-	public int deleteReview(int reviewNo) {
+	public int deleteAds(int adsNo) {
 		Connection conn = getConnection();
-		int result = new ReviewDAO().deleteReview(conn, reviewNo);
+		int result = new AdsDAO().deleteAds(conn, adsNo);
 		if(result>0)
 			commit(conn);
 		else
@@ -174,20 +172,20 @@ public class AdsService {
 	
 	public String getUserName(int customerNo) {
 		Connection conn = getConnection();
-		String userName = new ReviewDAO().getUserName(conn, customerNo);
+		String userName = new AdsDAO().getUserName(conn, customerNo);
 		return userName;
 	}
 
-	public List<Review> selectDeletedReviewList(int cPage, int numPerPage) {
+	public List<Ads> selectDeletedAdsList(int cPage, int numPerPage) {
 		Connection conn = getConnection();
-		List<Review> list = new ReviewDAO().selectDeletedReviewList(conn, cPage, numPerPage);
+		List<Ads> list = new AdsDAO().selectDeletedAdsList(conn, cPage, numPerPage);
 		close(conn);
 		return list;
 	}
 
-	public int insertReviewComment(ReviewComment rc) {
+	public int insertAdsComment(AdsComment ac) {
 		Connection conn = getConnection();
-		int result = new ReviewDAO().insertReviewComment(conn, rc);
+		int result = new AdsDAO().insertAdsComment(conn, ac);
 		if(result>0)
 			commit(conn);
 		else 
@@ -196,17 +194,17 @@ public class AdsService {
 		return result;
 	}
 	
-	public List<ReviewComment> selectReviewComment(int reviewNo) {
+	public List<AdsComment> selectAdsComment(int adsNo) {
 		Connection conn = getConnection();
-		List<ReviewComment> commentList 
-			= new ReviewDAO().selectReviewComment(conn, reviewNo);
+		List<AdsComment> adsCommentList 
+			= new AdsDAO().selectAdsComment(conn, adsNo);
 		close(conn);
-		return commentList;
+		return adsCommentList;
 	}
 
-	public int deletereviewComment(int commentNo) {
+	public int deleteadsComment(int adsCommentNo) {
 		Connection conn = getConnection();
-		int result = new ReviewDAO().deleteReviewComment(conn, commentNo);
+		int result = new AdsDAO().deleteAdsComment(conn, adsCommentNo);
 		if(result>0)
 			commit(conn);
 		else 

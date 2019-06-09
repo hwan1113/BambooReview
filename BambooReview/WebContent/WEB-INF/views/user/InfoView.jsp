@@ -78,6 +78,8 @@ function loadImg(f){
 		  	 			<div class="meta">
 		  	 				<%if("U".equals(user.getStatus())) {%>
 		     				<a>일반 회원</a>
+		     				<%}if("B".equals(user.getStatus())) {%>
+		     				<a>사업자 회원</a>
 		     				<%}else{ %>
 		     				<a>관리자</a>
 		     				<%} %>

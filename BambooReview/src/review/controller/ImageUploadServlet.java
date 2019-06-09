@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.util.URLEncoder;
 import org.json.simple.JSONObject;
 
 import com.oreilly.servlet.MultipartRequest;
@@ -46,15 +47,20 @@ public class ImageUploadServlet extends HttpServlet {
 			Enumeration files = multi.getFileNames();
 			String file = (String)files.nextElement(); 
 			fileName = multi.getFilesystemName(file); 
+			System.out.println(fileName);
+			fileName = java.net.URLEncoder.encode(fileName, "UTF-8");
+			System.out.println("afterEncode="+fileName);
 
 			//이미지 크기를 view창에 맞추기 위해 썸네일 이미지 생성해서 파일이름으로 가져옴
-			fileName = makeThumbnail(uploadPath, fileName);
+			//수정사항: reviewContent창을 확대해 자동리사이즈 되므로 필요없어짐
+//			fileName = makeThumbnail(uploadPath, fileName);
+
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
 	    // 업로드된 경로와 파일명을 통해 이미지의 경로를 생성
-		uploadPath = request.getContextPath()+ "/upload/" + fileName;		
+		uploadPath = request.getContextPath()+ "/upload/" + fileName;	
 
 	    // 생성된 경로를 JSON 형식으로 보내주기 위한 설정
 		JSONObject json = new JSONObject();
@@ -74,7 +80,7 @@ public class ImageUploadServlet extends HttpServlet {
 	}
 
 	
-    private String makeThumbnail(String filePath, String fileName) throws Exception { 
+    /*private String makeThumbnail(String filePath, String fileName) throws Exception { 
     	try {
             //썸네일 가로, 세로사이즈 설정
             int thumbnailWidth = 600;
@@ -110,7 +116,7 @@ public class ImageUploadServlet extends HttpServlet {
             BufferedImage buffer_thumbnail_image = new BufferedImage(thumbnailWidth, thumbnailHeight, BufferedImage.TYPE_3BYTE_BGR);
             Graphics2D graphic = buffer_thumbnail_image.createGraphics();
             graphic.drawImage(bufferedOriginal_Image, 0, 0, thumbnailWidth, thumbnailHeight, null);
-            ImageIO.write(buffer_thumbnail_image, "jpg", thumbFileName);   	
+            ImageIO.write(buffer_thumbnail_image, "jpg", thumbFileName);
             
             return tgtFileName;
             }
@@ -119,5 +125,5 @@ public class ImageUploadServlet extends HttpServlet {
         }
     	return fileName;
 
-    }
+    }*/
 }

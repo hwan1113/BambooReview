@@ -30,7 +30,6 @@ public class ReviewCommentInsertServlet extends HttpServlet {
 		String commentContent = request.getParameter("commentContent");
 		
 		ReviewComment rc = new ReviewComment(0, customerNo, reviewNo, null, commentContent);
-		System.out.println("reviewComment@servlet="+rc);
 		
 		//2.업무로직
 		int result = new ReviewService().insertReviewComment(rc);

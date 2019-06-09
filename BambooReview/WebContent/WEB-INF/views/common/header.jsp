@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="user.model.vo.*, review.model.service.*, review.model.vo.*" %>
+<%@ page import="user.model.vo.*, review.model.service.*, review.model.vo.*, ads.model.service.*, ads.model.vo.*" %>
 <%@ page import="javax.servlet.http.*" %>
 <%
 	User userLoggedIn = (User)session.getAttribute("userLoggedIn");
 	ReviewService service = new ReviewService();
+	AdsService adsService = new AdsService();
 	//Cookie[] cookies = request.getCookies();
 	boolean saveIdFlag = false;
 	String userId = "";
@@ -90,6 +91,9 @@ ga('send', 'pageview');
  			</a>		
  			<a class="item" href="<%=request.getContextPath()%>/user/userView?email=<%=userLoggedIn.getEmail()%>">
    				내 정보 보기
+  			</a>
+  			<a class="item" href="<%=request.getContextPath()%>/ads/adsList">
+   				광고게시판
   			</a>
   			<a class="item" href="<%=request.getContextPath()%>/price/priceInfo">
    				가격정보

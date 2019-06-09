@@ -17,20 +17,21 @@ body{
 
 input#title{
 	width: 600px; 
-	height: 30px; 
+	height: 25px; 
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
 input#writer{
 	width: 200px;
-	height: 30px;
+	height: 25px;
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 .area{
 	background-color:white;
-	width:700px;
+	width:1024px;
+	min-height: 355px;
 }
 #writer{
 	float:left;
