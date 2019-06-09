@@ -53,23 +53,56 @@ span.star-prototype > * {
 	  				<div class=reviewContent><%=r.getReviewContent()%></div>
 	  			</div>
 	  		</div>
-	  
-		  <div class="ui buttons">
-		 		<form id="like_form" action="<%=request.getContextPath()%>/review/reviewLikeCnt?reviewNo=<%=r.getReviewNo()%>">  
-    				<input type="hidden" name="command" value="likeCnt"> 
-    				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
-    				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
-    				<button type="button" class="btn btn-primary" onclick="return like()" style="height:100%;"><i class="thumbs up outline icon"></i>좋아요!</button>
-	    		</form>
-				 <div class="or"></div>
-				 <form id="disLike_form" action="<%=request.getContextPath()%>/review/reviewDisLikeCnt?reviewNo=<%=r.getReviewNo()%>">  
-    				<input type="hidden" name="command" value="disLikeCnt"> 
-    				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
-    				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
-    				<button type="button" class="btn btn-danger" onclick="return disLike()" style="height:100%;"><i class="thumbs down outline icon"></i>신고하기</button>
-	    		</form>
-		  </div>
-	      
+	      	         <!-- 댓글 부분 -->
+<hr style="margin-top:30px;" />
+
+<div id="comment-container">
+	<div class="comment-editor">
+		<form action="<%=request.getContextPath()%>/review/reviewCommentInsert"
+			  name="reviewCommentFrm"
+			  method="post">
+			<textarea name="commentContent" style="resize: none;"
+					  cols="60" rows="2"></textarea>
+			<button type="submit" id="btn-insert">댓글쓰기</button>	  
+			<input type="hidden" name="reviewNo" value="<%=r.getReviewNo() %>" />  
+			<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no() %>" />
+			<input type="hidden" name="reviewCommentWriter" value="<%=userLoggedIn!=null?userLoggedIn.getUserName():""%>" />
+			<!-- <input type="hidden" name="reviewCommentLevel" value="1" /> -->
+			<!-- <input type="hidden" name="reviewCommentRef" value="0" /> -->
+		
+		</form>
+	</div>
+	
+	<!-- 댓글목록 테이블 -->
+	<div class="ui centered grid">
+	<table id="tbl-comment">
+	<%if(!commentList.isEmpty()) {
+		for(ReviewComment bc: commentList){
+	%>
+			<tr class="level1">
+				<td>
+					<sub class="comment-writer"><%=userLoggedIn.getUserName() %></sub>
+					<sub class="comment-date"><%=bc.getWrittenDate() %></sub>
+					<br />
+					<%=bc.getCommentContent() %>
+					
+				</td>
+				<td>
+					<%-- 삭제버튼 추가 --%>
+					<% if(userLoggedIn != null &&
+						((userLoggedIn.getCustomer_no() == bc.getCustomerNo())
+						|| "A".equals(userLoggedIn.getStatus()))) {%>
+					<button class="btn-delete" value="<%=bc.getCommentNo()%>">삭제</button>
+					<%} %>
+				</td>
+			</tr>
+	<%			
+			}	
+		}
+	%>
+	</table>
+	</div>
+</div>
        </div>
 
            	     <%--글작성자/관리자인경우 수정삭제 가능 --%>
@@ -132,63 +165,16 @@ span.star-prototype > * {
 
 	     </section>
 	</div>
-</div>
-	     
-	         <!-- 댓글 부분 -->
-<hr style="margin-top:30px;" />
-
-<div id="comment-container">
-	<div class="comment-editor">
-		<form action="<%=request.getContextPath()%>/review/reviewCommentInsert"
-			  name="reviewCommentFrm"
-			  method="post">
-			<textarea name="commentContent" style="resize: none;"
-					  cols="60" rows="2"></textarea>
-			<button type="submit" id="btn-insert">댓글쓰기</button>	  
-			<input type="hidden" name="reviewNo" value="<%=r.getReviewNo() %>" />  
-			<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no() %>" />
-			<input type="hidden" name="reviewCommentWriter" value="<%=userLoggedIn!=null?userLoggedIn.getUserName():""%>" />
-			<!-- <input type="hidden" name="reviewCommentLevel" value="1" /> -->
-			<!-- <input type="hidden" name="reviewCommentRef" value="0" /> -->
-		
-		</form>
-	</div>
 	
-	<!-- 댓글목록 테이블 -->
-	<div class="ui centered grid">
-	<table id="tbl-comment">
-	<%if(!commentList.isEmpty()) {
-		for(ReviewComment bc: commentList){
-	%>
-			<tr class="level1">
-				<td>
-					<sub class="comment-writer"><%=userLoggedIn.getUserName() %></sub>
-					<sub class="comment-date"><%=bc.getWrittenDate() %></sub>
-					<br />
-					<%=bc.getCommentContent() %>
-					
-				</td>
-				<td>
-					<%-- 삭제버튼 추가 --%>
-					<% if(userLoggedIn != null &&
-						((userLoggedIn.getCustomer_no() == bc.getCustomerNo())
-						|| "A".equals(userLoggedIn.getStatus()))) {%>
-					<button class="btn-delete" value="<%=bc.getCommentNo()%>">삭제</button>
-					<%} %>
-				</td>
-			</tr>
-	<%			
-			}	
-		}
-	%>
-	</table>
-	</div>
+	
 </div>
-	<div class="bottom area"></div>
+	     
+
+	<!-- <div class="bottom area"></div> -->
 	     
 	     
 	     
-	<div class="ui menu" style="background-color:#68b30d; height:2.5rem; bottom:0; width:1024px; margin-top:0px;">
+	<div class="ui menu" style="background-color:#68b30d; height:2.5rem; bottom:0; width:1024px; margin-top:16px; text-align:center;">
 		  <div style="left:34%; top:6px; width:1024px;">
 		    <p style="font-size:17px;">&lt;Copyright 2019. Team Thanos. All rights reserved.&gt;</p>
   	</div>
@@ -353,4 +339,4 @@ return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
 $('.star-prototype').generateStars();
 </script>
 
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/common/footer.jsp" %> --%>

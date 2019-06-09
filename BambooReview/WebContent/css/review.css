@@ -47,7 +47,7 @@ input#writer{
     background:#ccc;
 } 
 .listbtn{
-	margin-top:25px;
+	margin:25px;
 }
 #like-form{
 	margin-top:25px;
@@ -58,7 +58,7 @@ input#writer{
 }
 #btn-insert{
 	position:relative;
-	top:-18px;
+	top:-19px;
 	width:70px;
 	height:48px;
 	right:4px;
