@@ -115,14 +115,14 @@ ga('send', 'pageview');
 </div>
 <script src="https://apis.google.com/js/api.js"></script>
 <script>
-gapi.load('auth2', function() {
+/* gapi.load('auth2', function() {
 	  auth2 = gapi.auth2.init({
 	    client_id: '1048068622103-udnmctl1b1p2p8g9tqtcaflcb3c7p1e7.apps.googleusercontent.com',
 	    scope: 'email'
 	  }).then(()=>{
 		  console.log('fetched perfectly!')
 		  })
-})
+}) */
 function signOut() {
    var auth2 = gapi.auth2.getAuthInstance();
    auth2.signOut().then(function () {

@@ -99,8 +99,7 @@ function loginValidate(){
 	return true;
 }
       
-     
-}
+    
 
 </script>
 
