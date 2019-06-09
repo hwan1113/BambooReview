@@ -48,7 +48,7 @@ span.star-prototype > * {
 			    	</div>
 		 	 	</div>
   			</div>
-	 		 <div class="ui green segment" style="height:355px; overflow:scroll;">
+	 		 <div class="ui green segment" style="height:505px; overflow:scroll;">
 	  			<div class="ui grid">
 	  				<div class=reviewContent><%=r.getReviewContent()%></div>
 	  			</div>
