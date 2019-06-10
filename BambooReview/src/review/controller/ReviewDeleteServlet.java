@@ -39,7 +39,7 @@ public class ReviewDeleteServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("msg", msg);
-		request.setAttribute("loc", "/review/reviewList?hotelname="+hotelName+"&hotelid="+hotelId);
+		request.setAttribute("loc", "/review/reviewList?hotelName="+hotelName+"&hotelId="+hotelId);
 		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp")
 			   .forward(request, response);
 	}

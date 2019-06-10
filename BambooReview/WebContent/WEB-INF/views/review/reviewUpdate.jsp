@@ -84,16 +84,18 @@
 		  id="main-form">
 		<div class="ui centered grid">  
 		<h4 style="margin-top:10px;">제목: </h4>
-		<input id="title" type="text" name="reviewTitle" required />&nbsp;&nbsp;
+		<input id="title" type="text" name="reviewTitle" required 
+		 value = "<%=r.getReviewTitle()%>" />&nbsp;&nbsp;
 		<h4 style="margin-top:10px;">작성자: </h4>
 		<input id="writer" type="text" name="reviewWriter"
 				 value="<%=service.getUserName(userLoggedIn.getCustomer_no())%>" readonly/>
 	   </div>
-		<textarea style="margin-top:10px;" id="summernote" name="reviewContent"></textarea>
+		<textarea style="margin-top:10px;" id="summernote" name="reviewContent"
+		><%=r.getReviewContent() %></textarea>
 
 		<div class="ui centered grid">
 			<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">작성</button>
-			<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelname=<%=hotelName %>&hotelid=<%=r.getHotelId()%>'">취소</button>
+			<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelName=<%=hotelName %>&hotelId=<%=r.getHotelId()%>'">취소</button>
 		</div>
 		
 		<input id="hotelName" type="hidden" name="hotelName" value="<%=hotelName%>" />

@@ -7,7 +7,10 @@
 	List<ReviewComment> commentList = (List<ReviewComment>)request.getAttribute("commentList");
 	String hotelName = (String)request.getAttribute("hotelName");
 	String hotelId = (String)request.getAttribute("hotelId");
-	double avgRate = 1.5;
+	double avg = (double)r.getRateTotal() / r.getRateCnt();
+	if(Double.isNaN(avg)){
+		avg=0;
+	}
 %>
 <style>
 span.star-prototype, span.star-prototype > * {
@@ -19,8 +22,8 @@ span.star-prototype, span.star-prototype > * {
  
 span.star-prototype > * {
 	float: left;
-    background-position: 0 0;
-    width:80px; 
+    background-position: 0, 0;
+    width:80px;
 }
 </style>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" />
@@ -37,7 +40,7 @@ span.star-prototype > * {
 		  		<div class="four column row" id="wwww">
 		    		<div class="left floated column"><%=r.getReviewWriter() %>님
 		    		</div>
-		    		평가 : <span class="star-prototype"><%=avgRate%></span>(<%= avgRate%>)
+		    		평가 : <span class="star-prototype"><%=avg %></span><%=avg %>
 		    		<div class="right floated column">
 			    		<i class="eye icon"></i>
 			    		<%=r.getReadCnt() %>
@@ -63,7 +66,9 @@ span.star-prototype > * {
 			  method="post">
 			<textarea name="commentContent" style="resize: none;"
 					  cols="60" rows="2"></textarea>
-			<button type="submit" id="btn-insert">댓글쓰기</button>	  
+			<button type="submit" id="btn-insert">댓글쓰기</button>
+			<input type="hidden" name="hotelId" value="<%=hotelId%>"/>
+			<input type="hidden" name="hotelName" value="<%=hotelName%>"/>
 			<input type="hidden" name="reviewNo" value="<%=r.getReviewNo() %>" />  
 			<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no() %>" />
 			<input type="hidden" name="reviewCommentWriter" value="<%=userLoggedIn!=null?userLoggedIn.getUserName():""%>" />
@@ -139,7 +144,7 @@ span.star-prototype > * {
 		    </tr>
 		    <%} %>
 		    <input type="button" value="목록으로" class="btn btn-success" style="background-color:#aacc19; border:1px solid #aacc19"
-		           onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelname=<%=hotelName %>&hotelid=<%=hotelId%>'"/>
+		           onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelName=<%=hotelName %>&hotelId=<%=hotelId%>'"/>
 		    
 		    <%  //글작성자와 관리자가 아닌 사람만 평가가 가능
 			if(userLoggedIn != null &&
@@ -156,9 +161,9 @@ span.star-prototype > * {
 				    <option value="4">만족해요(4)</option>
 				    <option value="3">보통이에요(3)</option>
 				    <option value="2">그냥 그래요(2)</option>
-				    <option value="1">별로에요(1)</option>
+				    <option value="1">별로에요(1)</option>	
 				</select>
-				<button onclick="return rate()" >평가</button>
+				<button type="button" onclick="return rate()" >평가</button>
 			</form>
 			<%} %>
 		    </div>
@@ -175,6 +180,19 @@ span.star-prototype > * {
   </div>
 	</div>
  
+<% if(userLoggedIn != null &&
+		((userLoggedIn.getCustomer_no() == r.getCustomerNo())
+		|| "A".equals(userLoggedIn.getStatus()))) {%>
+	<form action="<%=request.getContextPath()%>/review/reviewDelete"
+		id="reviewDelFrm"
+  		method="post">
+		<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>"/>
+		<input type="hidden" name="hotelId" value="<%=hotelId%>"/>
+		<input type="hidden" name="hotelName" value="<%=hotelName%>"/>
+	</form>
+<%} %>
+
+
 <script>
 $(function(){
 	//댓글 textarea focus시에 로그인여부확인
@@ -192,7 +210,6 @@ $(function(){
 			e.preventDefault();//기본행위인 submit을 하지 않는다.
 			return;
 		}
-		
 		//댓글작성여부 검사
 		var content = $("[name=reviewCommentContent]").val().trim();
 		if(content.length == 0){
@@ -207,7 +224,7 @@ $(function(){
 	$(".btn-delete").click(function(){
 		if(!confirm("정말 삭제하시겠습니까?")) return;
 		//삭제처리후 돌아올 현재게시판번호도 함께 전송함.
-		location.href="<%=request.getContextPath()%>/review/reviewCommentDelete?reviewNo=<%=r.getReviewNo() %>&del="+$(this).val();
+		location.href="<%=request.getContextPath()%>/review/reviewCommentDelete?reviewNo=<%=r.getReviewNo()%>&del="+$(this).val()+"&hotelName=<%=hotelName%>&hotelId=<%=hotelId%>";
 	});
 	
 	
@@ -217,23 +234,6 @@ function loginAlert(){
 	alert("로그인 후 이용할 수 있습니다.");
 	$("#memberId").focus();
 }
-
-</script>
-
-<% if(userLoggedIn != null &&
-		((userLoggedIn.getCustomer_no() == r.getCustomerNo())
-		|| "A".equals(userLoggedIn.getStatus()))) {%>
-	<form action="<%=request.getContextPath()%>/review/reviewDelete"
-		id="reviewDelFrm"
-  		method="post">
-		<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>"/>
-		<input type="hidden" name="hotelId" value="<%=hotelId%>"/>
-		<input type="hidden" name="hotelName" value="<%=hotelName%>"/>
-	</form>
-<%} %>
-
-<script>
-
 function deleteReview(){
 	if(!confirm("이 게시글을 정말 삭제 하시겠습니까?")){
 		return;
@@ -241,8 +241,6 @@ function deleteReview(){
 	//폼을 사용해서 삭제요청
 	$("#reviewDelFrm").submit();
 }
-</script>
-<script>
 function like(){ 
 	$.ajax({ 
 		url: "<%=request.getContextPath()%>/review/reviewLikeCnt", 
@@ -252,6 +250,7 @@ function like(){
 			function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data 
 				if (data.result == "0"){
 					alert("이미 좋아요를 누르셨어요.");
+					location.reload();
 				}
 				else{
 					alert("이 글에 좋아요를 눌렀습니다.");
@@ -282,6 +281,7 @@ function disLike(){
 				}
 				else{
 					alert("이 글을 신고 하셨어요.");
+					location.reload();
 				} 
 			}, 
 		error: 
@@ -293,13 +293,7 @@ function disLike(){
 		} 
 	});
 }
-</script>
-<%  //글작성자와 관리자가 아닌 사람만 평가가 가능
-	if(userLoggedIn != null &&
-		((userLoggedIn.getCustomer_no() != r.getCustomerNo())
-		&& !"A".equals(userLoggedIn.getStatus()))) {%>
-<script>
-function rate(){ 
+function rate(){
 	$.ajax({ 
 		url: "<%=request.getContextPath()%>/review/reviewRate", 
 		type: "POST",
@@ -308,9 +302,11 @@ function rate(){
 			function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data 
 				if (data.result == "0"){
 					alert("이미 평가를 하셨어요.");
+					location.reload();
 				}
 				else{
 					alert("평가해 주셔서 감사합니다.");
+					location.reload();
 				} 
 			}, 
 		error: 
@@ -322,9 +318,7 @@ function rate(){
 		} 
 	});
 }
-<% }%>
-</script>
-<script>
+
 $.fn.generateStars = function() {
 return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
 };

@@ -23,11 +23,12 @@ public class ReviewCommentInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		//1.파라미터핸들링
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 		int customerNo = Integer.parseInt(request.getParameter("customerNo"));
 		String commentContent = request.getParameter("commentContent");
+		String hotelName = request.getParameter("hotelName");
+		String hotelId = request.getParameter("hotelId");
 		
 		ReviewComment rc = new ReviewComment(0, customerNo, reviewNo, null, commentContent);
 		
@@ -37,8 +38,7 @@ public class ReviewCommentInsertServlet extends HttpServlet {
 		//3.view단처리
 		String view = "/WEB-INF/views/common/msg.jsp";
 		String msg = "";
-		String loc = "/review/reviewView?reviewNo="+reviewNo;
-		
+		String loc = "/review/reviewView?reviewNo="+reviewNo+"&hotelName="+hotelName+"&hotelId="+hotelId;
 		if(result>0) {
 			msg = "댓글 등록 성공!";
 		}

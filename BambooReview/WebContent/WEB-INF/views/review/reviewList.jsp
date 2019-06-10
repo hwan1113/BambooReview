@@ -5,7 +5,7 @@
 	List<Review> list = (List<Review>)request.getAttribute("list");
 	String pageBar = (String)request.getAttribute("pageBar");
 	String hotelName = (String)request.getAttribute("hotelName");
-	String hotelid = (String)request.getAttribute("hotelid");
+	String hotelid = (String)request.getAttribute("hotelId");
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" />		
@@ -70,8 +70,10 @@
 		    		("U".equals(userLoggedIn.getStatus())
 		    		|| "A".equals(userLoggedIn.getStatus()))) {%>
 	<button  id="btn-add" class="ui olive button" 
-		style="float:right; background-color:#68b30d"onclick="location.href='<%=request.getContextPath()%>/review/reviewForm?hotelName=<%=hotelName %>&hotelid=<%=hotelid%>'"/><i class="pencil alternate icon"></i>글쓰기</button>
-	
+		style="float:right; background-color:#68b30d"
+		onclick="location.href='<%=request.getContextPath()%>/review/reviewForm?hotelName=<%=hotelName %>&hotelId=<%=hotelid%>'">
+		<i class="pencil alternate icon"></i>글쓰기</button>
+
 	</div>
 	<%} %>
 

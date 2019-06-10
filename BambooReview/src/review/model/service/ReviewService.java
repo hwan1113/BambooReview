@@ -116,7 +116,6 @@ public class ReviewService {
 		Connection conn = getConnection();
 		if(new ReviewDAO().rateCheck(conn, reviewNo, customerNo) > 0) {
 			new ReviewDAO().updateRateTotal(conn, reviewNo, reviewRate);
-			
 			result = 1;
 			commit(conn);
 		}
@@ -125,7 +124,6 @@ public class ReviewService {
 			rollback(conn);
 		}
 		close(conn);
-		
 		return result;
 	}
 	
@@ -151,12 +149,12 @@ public class ReviewService {
 	}
 	
 
-	public int getTotalRate(int reviewNo) {
+/*	public int getTotalRate(int reviewNo) {
 		Connection conn = getConnection();
 		int result = new ReviewDAO().getTotalRate(conn, reviewNo);
 		close(conn);
 		return result;
-	}
+	}*/
 
 	public int deleteReview(int reviewNo) {
 		Connection conn = getConnection();
