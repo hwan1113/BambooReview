@@ -26,21 +26,6 @@
 	</h3>
 	<input id="srchedWord" name="srchedWord" type="hidden" value="<%=srchWord%>">
 	
-	<!-- <div class="ui visible message">
-		<p>정렬 방식</p>
-		<div class="ui text menu ">
-			  <div class="header item">Sort By</div>
-			  <a class="active item">
-			    Closest
-			  </a>
-			  <a class="item">
-			    Most Comments
-			  </a>
-			  <a class="item">
-			    Most Popular
-			  </a>
-		</div>	
-	</div> -->
 	<% if(HotelArr.length()==0){ %>
 			<div>검색결과가 없습니다.</div>
 	<% }else {
@@ -54,7 +39,7 @@
       				<img src="https://maps.googleapis.com/maps/api/place/photo?photoreference=<%=HotelArr.getJSONObject(i).getString("photo")%>&key=AIzaSyBamfF6Gj9yf1Spt6oL6sX1GB86eMTtI6U&maxheight=70&maxwidth=100" style="border:3px solid black; height:150px;">
     			</div>
     			<div class="content">
-     			 	<a class="header" href="<%=request.getContextPath()%>/review/reviewList?hotelid=<%=HotelArr.getJSONObject(i).getString("id")%>&hotelname=<%=HotelArr.getJSONObject(i).getString("name")%>&srchWord=<%=srchWord%>"><%=HotelArr.getJSONObject(i).getString("name")%></a>
+     			 	<a class="header" href="<%=request.getContextPath()%>/review/reviewList?hotelId=<%=HotelArr.getJSONObject(i).getString("id")%>&hotelName=<%=HotelArr.getJSONObject(i).getString("name")%>&srchWord=<%=srchWord%>"><%=HotelArr.getJSONObject(i).getString("name")%></a>
      				 <div class="meta">
         			<span><%=HotelArr.getJSONObject(i).getString("address") %></span>
       				</div>

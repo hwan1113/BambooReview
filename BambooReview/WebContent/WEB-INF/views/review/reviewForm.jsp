@@ -4,6 +4,7 @@
 <%
 	String hotelName = (String)request.getAttribute("hotelName");
 	String hotelId = (String)request.getAttribute("hotelid");
+	String srchWord = (String)request.getAttribute("srchWord");
 %>
 <title>Review 작성</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/review.css" />

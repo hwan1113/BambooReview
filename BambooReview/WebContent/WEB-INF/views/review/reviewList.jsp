@@ -74,7 +74,7 @@
 		    		|| "G".equals(userLoggedIn.getStatus()))) {%>
 	<button  id="btn-add" class="ui olive button" 
 		style="float:right; background-color:#68b30d"
-		onclick="location.href='<%=request.getContextPath()%>/review/reviewForm?hotelName=<%=hotelName %>&hotelId=<%=hotelid%>'">
+		onclick="location.href='<%=request.getContextPath()%>/review/reviewForm?hotelName=<%=hotelName %>&hotelId=<%=hotelid%>&srchWord=<%=srchWord%>'">
 		<i class="pencil alternate icon"></i>글쓰기</button>
 
 	</div>

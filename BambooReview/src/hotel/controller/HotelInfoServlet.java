@@ -18,40 +18,24 @@ import javax.servlet.http.HttpServletResponse;
 public class HotelInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public HotelInfoServlet() {
-    	
-    	
-    }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String query ="hotels%20in%20"+request.getParameter("keyword");
 		String key = "AIzaSyBamfF6Gj9yf1Spt6oL6sX1GB86eMTtI6U";
 		String urlStr = "https://maps.googleapis.com/maps/api/place/textsearch/json?"
-					  + "query="+query+"&"+"language=en&"
+					  + "query="+query+"&language=en&"
 					  + "key="+key;
-		
-		
-		URL url = new URL(urlStr);  
-		
+		URL url = new URL(urlStr);
 		String line = ""; 
 		StringBuilder jsonStr = new StringBuilder();
-		
 		//url객체.openStream(): 해당 URL에 접속후 Stream객체로 반환함.
 		BufferedReader bf = new BufferedReader(new InputStreamReader(url.openStream())); 
 		while((line=bf.readLine())!=null){ 
 			jsonStr.append(line); 
 		}
-		
 		response.getWriter().append(jsonStr);
-		
-		
 	}
 
 	/**

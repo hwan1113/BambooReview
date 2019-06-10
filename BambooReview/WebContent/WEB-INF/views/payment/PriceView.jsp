@@ -50,30 +50,18 @@ body {overflow-y: hidden; overflow-x: hidden;}
 </form>
 </div>
 </div>
-
 <script>
 IMP.init("imp28947597");
-
-function sendBack() {
-	alert("로그인 후 이용가능합니다.")
-	return location.href='<%=request.getContextPath()%>/user/userLogin'
-}
-
-
 function requestPay() {
 	const email = $("#pay_email").val()
 	const name = $("#pay_name").val()
-	param={ customer_no: $("#pay_cust_no").val(),
-			amount: 1000}
-	var merchant_uid;
+	param={customer_no: $("#pay_cust_no").val(), amount: 1000}
 	$.ajax({
 		url: '<%=request.getContextPath()%>/payment/paymentInfo',
 		type: "get",
 		data:param,
 		success: function(data){
-			if(data==null){
-				alert("현재 거래가 불가능합니다.")
-			}
+			if(data==null){alert("현재 거래가 불가능합니다.")}
 			$("#merchantid").val(data.payment_no)
 			IMP.request_pay({ // param
 			    pg: "html5_inicis",
@@ -93,8 +81,6 @@ function requestPay() {
 			    	$("#paidFrm").submit()
 			    }
 			});
-			
-			
 		},
 		error:function(jqxhr,textStatus,errorThrown){
 			console.log("ajax처리 실패!")
@@ -105,7 +91,10 @@ function requestPay() {
 	})
 	
 }
-
+function sendBack() {
+	alert("로그인 후 이용가능합니다.")
+	return location.href='<%=request.getContextPath()%>/user/userLogin'
+}
 </script>
 
 

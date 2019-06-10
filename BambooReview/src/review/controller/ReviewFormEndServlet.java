@@ -29,6 +29,7 @@ public class ReviewFormEndServlet extends HttpServlet {
 		String reviewWriter = request.getParameter("reviewWriter");
 		String reviewContent = request.getParameter("reviewContent");
 		String hotelName = request.getParameter("hotelName");
+		String srchWord = request.getParameter("srchWord");
 		
 		Review r = new Review();
 		r.setReviewTitle(reviewTitle);

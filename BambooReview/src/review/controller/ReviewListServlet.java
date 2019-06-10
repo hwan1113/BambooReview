@@ -26,8 +26,8 @@ public class ReviewListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//파라미터 핸들링
-		String hotelId = request.getParameter("hotelid");
-		String hotelName = request.getParameter("hotelname");
+		String hotelId = request.getParameter("hotelId");
+		String hotelName = request.getParameter("hotelName");
 		String srchWord = request.getParameter("srchWord");
 
 		int numPerPage = 5;//한페이지당 수

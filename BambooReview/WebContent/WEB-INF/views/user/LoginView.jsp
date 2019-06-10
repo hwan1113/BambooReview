@@ -61,7 +61,6 @@
 <script>
 function signIn() {
 	var auth2 = gapi.auth2.getAuthInstance();
-	
 	auth2.signIn().then(function(){
 	var profile = auth2.currentUser.get().getBasicProfile();
 		  $("#userName").val(profile.getName())
