@@ -1,7 +1,6 @@
 package common.filter;
 
 import java.io.IOException;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -10,23 +9,17 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import user.model.vo.User;
 
 /**
- * Servlet Filter implementation class LoginFilter
+ * Servlet Filter implementation class OnLoginFilter
  */
-@WebFilter(
-		urlPatterns = {"/user/updatePassword",
-				"/user/updatePasswordEnd",
-				"/user/userView"})
-public class LoginFilter implements Filter {
+@WebFilter("/user/login")
+public class OnLoginFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public LoginFilter() {
+    public OnLoginFilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -40,23 +33,18 @@ public class LoginFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, 
-						 ServletResponse response, 
-						 FilterChain chain) throws IOException, ServletException {
-		//현재로그인한 사용자와 요청사용자 비교
-		HttpServletRequest httpRequest = (HttpServletRequest)request; 
-		HttpSession session = httpRequest.getSession();
-		User userLoggedIn = (User)session.getAttribute("userLoggedIn");
-		
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		// TODO Auto-generated method stub
+		// place your code here
+		HttpServletRequest httpRequest = (HttpServletRequest)request;
 		String reqUserId = httpRequest.getParameter("email");
+		String reqUserPassword = httpRequest.getParameter("password");
 		
-		//비교후, 동일하지 않다면, msg.jsp를 view단으로 forwarding함.
-		if(userLoggedIn != null)
-			
-		System.out.println("userLoggedIn = "+userLoggedIn);
+		if(reqUserId!=null&&reqUserPassword!=null)
 		
-		if(userLoggedIn == null ||
-		   reqUserId == null) {
+		System.out.println("email = "+reqUserId);
+		if(reqUserId == null ||
+			  reqUserPassword == null) {	
 			System.out.println("applied!");
 			request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
 			request.setAttribute("loc", "/");
@@ -64,10 +52,9 @@ public class LoginFilter implements Filter {
 				   .forward(request, response);
 			return;
 		}
+		
 
 		// pass the request along the filter chain
-		//다음 필터가 있다면, 해당필터의 doFilter메소드를 호출,
-		//없다면, servlet객체의 service()를 호출한다.
 		chain.doFilter(request, response);
 	}
 
