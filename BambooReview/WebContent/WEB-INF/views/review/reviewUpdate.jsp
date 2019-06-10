@@ -15,7 +15,9 @@
 <link href="<%=request.getContextPath()%>/dist/summernote.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/dist/summernote.js"></script>
 <script src="<%=request.getContextPath()%>/dist/lang/summernote-ko-KR.js"></script>
-
+<style>
+body {overflow-y: hidden; overflow-x: hidden;}
+</style>
 <script type="text/javascript">
     /* summernote에서 이미지 업로드시 실행할 함수 */
  	function sendFile(file, editor) {
@@ -83,11 +85,21 @@
 		  enctype="multipart/form-data"
 		  id="main-form">
 		<div class="ui centered grid">  
-		<h4 style="margin-top:10px;">제목: </h4>
-		<input id="title" type="text" name="reviewTitle" required />&nbsp;&nbsp;
-		<h4 style="margin-top:10px;">작성자: </h4>
-		<input id="writer" type="text" name="reviewWriter"
-				 value="<%=service.getUserName(userLoggedIn.getCustomer_no())%>" readonly/>
+		
+		 <div class="ui labeled input" style="margin:0px 0px 6px 0px;">
+			  <div class="ui label" style="height:25px; position:absolute; top:10px; width:50px; left:-40px;" >
+			    <p style="position:absolute; top:4px;">제목</p>
+			  </div>
+			  <input id="title" type="text" name="reviewTitle" required />
+			</div>
+		
+		<div class="ui labeled input" style="margin:0px 0px 6px 0px; left:60px;">
+			  <div class="ui label" style="height:25px; position:absolute; top:10px; width:50px; left:-40px;" >
+			    <p style="position:absolute; top:4px; left:4px;">작성자</p>
+			  </div>
+			 <input id="writer" type="text" name="reviewWriter"
+				 value="<%=service.getUserName(userLoggedIn.getCustomer_no())%>" style="width:80px;" readonly/>
+			</div>
 	   </div>
 		<textarea style="margin-top:10px;" id="summernote" name="reviewContent"></textarea>
 

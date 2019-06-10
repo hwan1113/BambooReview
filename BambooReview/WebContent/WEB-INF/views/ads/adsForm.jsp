@@ -24,7 +24,9 @@
 </script>
 
 <style>
-body {overflow-y: hidden; overflow-x: hidden;}
+#footer{
+position:relative;
+}
 </style>
 <script type="text/javascript">
        /* summernote에서 이미지 업로드시 실행할 함수 */
@@ -98,7 +100,7 @@ body {overflow-y: hidden; overflow-x: hidden;}
 			  <div class="ui label" style="font-size:11px; height:33px; margin:0 auto;">
 			     <p>작성자</p>
 			  </div>
-			  <input id="writer" type="text" name="adsWriter" style="margin:0px 0px 16px 0px; width:80px; text-align:center;"
+			  <input id="writer" type="text" name="adsWriter" style="margin:0px 0px 16px 0px; width:100px; text-align:center;"
 					 value="<%=adsService.getUserName(userLoggedIn.getCustomer_no())%>" readonly/>
 			</div>
 				 
@@ -107,52 +109,70 @@ body {overflow-y: hidden; overflow-x: hidden;}
 			  <div class="ui label" style="font-size:11px; height:33px; margin:0 auto;">
 			     <p>제목</p>
 			  </div>
-			  <input id="title" type="text" name="adsTitle" required style="margin:0px 0px 16px 0px; width:300px;
+			  <input id="title" type="text" name="adsTitle" required style="margin:0px 0px 16px 0px; width:780px;
 				"/>&nbsp;&nbsp;
 			</div>	 
 				 
-		<fieldset style="text-align:center;">
-                              인터넷<input type="checkbox" name="facilities" value="인터넷" />
-                SPA<input type="checkbox" name="facilities" value="SPA" />
-                              피트니스<input type="checkbox" name="facilities" value="피트니스" />
-               	수영장<input type="checkbox" name="facilities" value="수영장" />
-               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
-               	<div class="ui labeled input" style="height:33px; top:-3px;">
-				  <div class="ui label" style="font-size:11px; height:33px; margin:0 auto;">
-				     <p>기타</p>
-				  </div>
-				  <input type="text" name="facilities" value="" style="width:80px;"/>
-				</div>	 
-            </fieldset>
+		
+		
+		<div class="ui grid">
 		
 	    <!-- 검색 기능을 표시할 <div>를 생성한다 -->
 		<div id="postcodify" style="margin-bottom:15px;">
- 
-		<!-- 주소와 우편번호를 입력할 <input>들을 생성하고 적당한 name과 id를 부여한다 -->
-		<div class="ui action input" style="height:80%;">
-  			<input type="text" placeholder="주소를 검색하세요" name="searchedAddress" id="searchedAddress" value="" style="width: 350px;" required/>
-  			<button class="ui button" id="postcodify_search_button">주소 검색</button>
+ 		
+ 		<div class="ui labeled input" style="height:80%; top:-3px; right:-10px;">
+		  <div class="ui label" style="font-size:11px; margin:0 auto;">
+		     <p>주소</p>
+		  </div>
+		  <input type="text" placeholder="주소를 검색하세요" name="searchedAddress" id="searchedAddress" value="" style="width: 430px;" required/>
 		</div>
-		
-		<div class="ui labeled input" style="height:80%; top:-3px;">
+		</div>
+			<fieldset style="text-align:center; position:relative;left:150px; top:-10px; width:370px;">
+			<div class="ui centered grid" style="margin-top:5px; position:absolute; right:100px;">  
+	                              인터넷<input type="checkbox" name="facilities" value="인터넷" />
+	                SPA<input type="checkbox" name="facilities" value="SPA" />
+	                              피트니스<input type="checkbox" name="facilities" value="피트니스" />
+	               	수영장<input type="checkbox" name="facilities" value="수영장" />
+	               	<div class="row">
+	               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
+	               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
+	               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
+	               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
+	               	</div>
+	               	<div class="row">
+	               	<div class="ui labeled input" style="height:26px;  position:relative; top:-10px;">
+					  <div class="ui label" style="font-size:11px; height:26px;">
+					     <p>기타</p>
+					  </div>
+					  <input type="text" name="facilities" value="" style="width:80px;"/>
+					  </div>
+					</div>
+					</div> 
+	            </fieldset>
+		<div class="row">
+		<div class="ui labeled input" style="height:80%; top:-25px; left:35px;">
 		  <div class="ui label" style="font-size:11px; margin:0 auto;">
 		     <p>상세주소</p>
 		  </div>
 		  <input type="text" placeholder="상세 주소를 입력하세요" name="detailedAddress" id="detailedAddress" value="" 
-		  style="width: 350px;">
+		  style="width: 370px;">
+		</div>
+  			<button class="ui button" id="postcodify_search_button" style="height:30px; width:72px; position:relative;top:-25px;">주소 검색</button>
+		</div>
+		</div>
 		</div>
 		
-		</div>
-		
-		</div>
-		
-		<textarea id="summernote" name="adsContent" required></textarea>
+		<textarea id="summernote" name="adsContent" required style="height:2px;"></textarea>
 
-		<div class="ui centered grid">
+		<div class="ui centered grid" ">
 			<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">작성</button>
 			<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/ads/adsList'">취소</button>
 		</div>
 		<input id="customerNo" type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"/>
 	</form>	
+	<div class="ui menu" style="background-color:#68b30d; height:2.5rem; bottom:0; width:1024px; margin-top:14px;" id="footer">
+  <div style="position:absolute; left:34%; top:6px; width:1024px;">
+    <p style="font-size:17px;">&lt;Copyright 2019. Team Thanos. All rights reserved.&gt;</p>
+  </div>
+	
 </section>
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>

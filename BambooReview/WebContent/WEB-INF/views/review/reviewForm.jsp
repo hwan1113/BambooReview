@@ -105,10 +105,6 @@ body {overflow-y: hidden; overflow-x: hidden;}
 			</div>
 	   
 	   
-		
-		<%-- <h4 style="margin-top:10px;">작성자: </h4>
-		<input id="writer" type="text" name="reviewWriter"
-				 value="<%=service.getUserName(userLoggedIn.getCustomer_no())%>" readonly/> --%>
 	   </div>
 		<textarea style="margin-top:10px;" id="summernote" name="reviewContent"></textarea>
 
