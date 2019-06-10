@@ -127,37 +127,44 @@ position:relative;
 		  <input type="text" placeholder="주소를 검색하세요" name="searchedAddress" id="searchedAddress" value="" style="width: 430px;" required/>
 		</div>
 		</div>
+		
 			<fieldset style="text-align:center; position:relative;left:150px; top:-10px; width:370px;">
-			<div class="ui centered grid" style="margin-top:5px; position:absolute; right:100px;">  
-	                              인터넷<input type="checkbox" name="facilities" value="인터넷" />
-	                SPA<input type="checkbox" name="facilities" value="SPA" />
-	                              피트니스<input type="checkbox" name="facilities" value="피트니스" />
-	               	수영장<input type="checkbox" name="facilities" value="수영장" />
-	               	<div class="row">
-	               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
-	               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
-	               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
-	               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
-	               	</div>
-	               	<div class="row">
-	               	<div class="ui labeled input" style="height:26px;  position:relative; top:-10px;">
-					  <div class="ui label" style="font-size:11px; height:26px;">
-					     <p>기타</p>
-					  </div>
-					  <input type="text" name="facilities" value="" style="width:80px;"/>
-					  </div>
+				<div class="ui centered grid" style="margin-top:5px; position:absolute; right:100px;">  
+	        		<div class="ui centered grid">            
+	        		<div class="ui steps">
+  					<div class="step" style=" width: 240px;height:70px; padding:0px;">
+			                              인터넷<input type="checkbox" name="facilities" value="인터넷" />
+			              SPA<input type="checkbox" name="facilities" value="SPA" />
+			                              피트니스<input type="checkbox" name="facilities" value="피트니스" />
+			                              수영장<input type="checkbox" name="facilities" value="수영장" />
+			               	<div class="row">
+			               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
+			               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
+			               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
+			               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
+	               			</div>
+	               			<div class="row">
+	               				<div class="ui labeled input" style="height:26px;  position:relative; top:-1px;">
+					  				<div class="ui label" style="font-size:11px; height:26px;">
+					     				<p>기타</p>
+					  				</div>
+					  				<input type="text" name="facilities" value="" style="width:80px;"/>
+					  			</div>
+						   </div>
 					</div>
-					</div> 
+					</div>
+					</div>
+				</div> 
 	            </fieldset>
-		<div class="row">
-		<div class="ui labeled input" style="height:80%; top:-25px; left:35px;">
+		<!-- <div class="row"> -->
+		<div class="ui labeled input" style="height:33px; top:-20px; left:10px;">
 		  <div class="ui label" style="font-size:11px; margin:0 auto;">
 		     <p>상세주소</p>
 		  </div>
 		  <input type="text" placeholder="상세 주소를 입력하세요" name="detailedAddress" id="detailedAddress" value="" 
-		  style="width: 370px;">
+		  style="width: 335px; ">
 		</div>
-  			<button class="ui button" id="postcodify_search_button" style="height:30px; width:72px; position:relative;top:-25px;">주소 검색</button>
+  			<button class="ui button" id="postcodify_search_button" style="height:33px; width:72px; position:relative;top:-20px;">주소 검색</button>
 		</div>
 		</div>
 		</div>
