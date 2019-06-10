@@ -15,8 +15,7 @@ import java.util.List;
 import java.util.Properties;
 
 import ads.model.vo.Ads;
-import review.model.vo.Review;
-import review.model.vo.ReviewComment;
+import ads.model.vo.AdsComment;
 
 public class AdsDAO {
 	
@@ -35,7 +34,7 @@ public class AdsDAO {
 	}
 
 	public List<Ads> selectAdsList(Connection conn, int cPage, int numPerPage) {
-		List<Ads> list = new ArrayList<>();
+		List<Ads> adsList = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -54,13 +53,14 @@ public class AdsDAO {
 				ads.setAdsNo(rset.getInt("ads_no"));
 				ads.setAdsTitle(rset.getString("ads_title"));
 				ads.setAdsWriter(getUserName(conn, rset.getInt("customer_no")));
+				System.out.println("userName@DAOlist="+getUserName(conn, rset.getInt("customer_no")));
 				ads.setAdsContent(rset.getString("ads_content"));
 				ads.setWrittenDate(rset.getDate("written_date"));
 				ads.setReadCnt(rset.getInt("read_cnt"));
 				ads.setLikeCnt(rset.getInt("like_cnt"));
 				ads.setDisLikeCnt(rset.getInt("dislike_cnt"));
 				
-				list.add(ads);
+				adsList.add(ads);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -69,7 +69,7 @@ public class AdsDAO {
 			close(pstmt);
 		}
 		
-		return list;
+		return adsList;
 	}
 
 	public int selectAdsCount(Connection conn) {
@@ -95,18 +95,19 @@ public class AdsDAO {
 		return totalAdsCount;
 	}
 
-	public int insertReview(Connection conn, Review r) {
+	public int insertAds(Connection conn, Ads ads) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertReview"); 
+		String sql = prop.getProperty("insertAds"); 
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setInt(1, r.getCustomerNo());
-			pstmt.setString(2, r.getHotelId());
-			pstmt.setString(3, r.getReviewTitle());
-			pstmt.setString(4, r.getReviewContent());
+			//pstmt.setInt(1, ads.getCustomerNo());
+			pstmt.setString(1, ads.getAdsTitle());
+			pstmt.setString(2, ads.getFullAddress());
+			pstmt.setString(3, ads.getFacilities());
+			pstmt.setString(4, ads.getAdsContent());
 
 			result = pstmt.executeUpdate();
 			
@@ -120,7 +121,7 @@ public class AdsDAO {
 	}
 
 	public int selectLastSeq(Connection conn) {
-		int reviewNo = 0;
+		int adsNo = 0;
 		Statement stmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectLastSeq");
@@ -130,7 +131,7 @@ public class AdsDAO {
 			rset = stmt.executeQuery(sql);
 			
 			if(rset.next()) {
-				reviewNo = rset.getInt("reviewno");
+				adsNo = rset.getInt("adsno");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -139,7 +140,7 @@ public class AdsDAO {
 			close(stmt);
 		}
 		
-		return reviewNo;
+		return adsNo;
 	}
 	
 	public String getUserName(Connection conn, int customerNo) {
@@ -166,30 +167,32 @@ public class AdsDAO {
 		
 	}
 
-	public Review selectOne(Connection conn, int reviewNo) {
-		Review r = null;
+	public Ads selectOne(Connection conn, int adsNo) {
+		Ads ads = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectOne");
 		try{
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(1, adsNo);
 
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()){
-				r = new Review();
-				r.setReviewNo(rset.getInt("review_no"));
-				r.setCustomerNo(rset.getInt("customer_no"));
-				r.setReviewTitle(rset.getString("review_title"));
-				r.setReviewWriter(getUserName(conn, rset.getInt("customer_no")));
-				r.setReviewContent(rset.getString("review_content"));
-				r.setWrittenDate(rset.getDate("written_date"));
-				r.setReadCnt(rset.getInt("read_cnt"));
-				r.setLikeCnt(rset.getInt("like_cnt"));
-				r.setDisLikeCnt(rset.getInt("dislike_cnt"));
-				r.setHotelId(rset.getString("hotel_id"));
+				ads = new Ads();
+				ads.setAdsNo(rset.getInt("ads_no"));
+				ads.setCustomerNo(rset.getInt("customer_no"));
+				ads.setAdsTitle(rset.getString("ads_title"));
+				ads.setFullAddress(rset.getString("address"));
+				ads.setFacilities(rset.getString("facilities"));
+				ads.setAdsWriter(getUserName(conn, rset.getInt("customer_no")));
+				System.out.println("userName@DAO="+getUserName(conn, rset.getInt("customer_no")));
+				ads.setAdsContent(rset.getString("ads_content"));
+				ads.setWrittenDate(rset.getDate("written_date"));
+				ads.setReadCnt(rset.getInt("read_cnt"));
+				ads.setLikeCnt(rset.getInt("like_cnt"));
+				ads.setDisLikeCnt(rset.getInt("dislike_cnt"));
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -197,20 +200,22 @@ public class AdsDAO {
 			close(rset);
 			close(pstmt);
 		}
-		return r;
+		return ads;
 	}
 
-	public int updateReview(Connection conn, Review r) {
+	public int updateAds(Connection conn, Ads ads) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("updateReview"); 
+		String sql = prop.getProperty("updateAds"); 
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, r.getReviewTitle());
-			pstmt.setString(2, r.getReviewContent());
-			pstmt.setInt(3, r.getReviewNo());
+			pstmt.setString(1, ads.getAdsTitle());
+			pstmt.setString(2, ads.getFullAddress());
+			pstmt.setString(3, ads.getFacilities());
+			pstmt.setString(4, ads.getAdsContent());
+			pstmt.setInt(5, ads.getAdsNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -223,14 +228,14 @@ public class AdsDAO {
 		return result;
 	}
 
-	public int increaseReadCount(Connection conn, int reviewNo) {
+	public int increaseReadCount(Connection conn, int adsNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("increaseReadCount");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(1, adsNo);
 			
 			result = pstmt.executeUpdate();
 			
@@ -242,14 +247,14 @@ public class AdsDAO {
 		return result;
 	}
 
-	public int deleteReview(Connection conn, int reviewNo) {
+	public int deleteAds(Connection conn, int adsNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("deleteReview");
+		String sql = prop.getProperty("deleteAds");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(1, adsNo);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -259,14 +264,14 @@ public class AdsDAO {
 		return result;
 	}
 
-	public int likeCheck(Connection conn, int reviewNo, int customerNo) {
+	public int likeCheck(Connection conn, int adsNo, int customerNo) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("likeCheck");
 		
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(1, adsNo);
 			pstmt.setInt(2, customerNo);
 			
 			result = pstmt.executeUpdate();
@@ -279,14 +284,14 @@ public class AdsDAO {
 		return result;
 	}
 
-	public int disLikeCheck(Connection conn, int reviewNo, int customerNo) {
+	public int disLikeCheck(Connection conn, int adsNo, int customerNo) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("disLikeCheck");
 		
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(1, adsNo);
 			pstmt.setInt(2, customerNo);
 			
 			result = pstmt.executeUpdate();
@@ -299,14 +304,14 @@ public class AdsDAO {
 		return result;
 	}
 	
-	public int rateCheck(Connection conn, int reviewNo, int customerNo) {
+	public int rateCheck(Connection conn, int adsNo, int customerNo) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("rateCheck");
 		
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(1, adsNo);
 			pstmt.setInt(2, customerNo);
 			
 			result = pstmt.executeUpdate();
@@ -319,13 +324,13 @@ public class AdsDAO {
 		return result;
 	}
 	
-	public void increaseLikeCount(Connection conn, int reviewNo) {
+	public void increaseLikeCount(Connection conn, int adsNo) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("increaseLikeCount");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(1, adsNo);
 			
 			pstmt.executeUpdate();
 			
@@ -336,13 +341,13 @@ public class AdsDAO {
 		}
 	}
 	
-	public void increaseDisLikeCount(Connection conn, int reviewNo) {
+	public void increaseDisLikeCount(Connection conn, int adsNo) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("increaseDisLikeCount");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(1, adsNo);
 			
 			pstmt.executeUpdate();
 			
@@ -353,13 +358,13 @@ public class AdsDAO {
 		}
 	}
 	
-	public void increaseRateCount(Connection conn, int reviewNo) {
+	public void increaseRateCount(Connection conn, int adsNo) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("increaseRateCount");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(1, adsNo);
 			
 			pstmt.executeUpdate();
 			
@@ -370,14 +375,14 @@ public class AdsDAO {
 		}
 	}
 	
-	public void updateRateTotal(Connection conn, int reviewNo, int reviewRate) {
+	public void updateRateTotal(Connection conn, int adsNo, int adsRate) {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateRateTotal");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewRate);
-			pstmt.setInt(2, reviewNo);
+			pstmt.setInt(1, adsRate);
+			pstmt.setInt(2, adsNo);
 			
 			pstmt.executeUpdate();
 			
@@ -388,20 +393,20 @@ public class AdsDAO {
 		}
 	}
 	
-	public Review selectLikeCount(Connection conn, int reviewNo) {
-		Review r = new Review();
+	public Ads selectLikeCount(Connection conn, int adsNo) {
+		Ads ads = new Ads();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectLikeCount");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(1, adsNo);
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next())
-				r.setLikeCnt(rset.getInt("like_cnt"));
+				ads.setLikeCnt(rset.getInt("like_cnt"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -410,23 +415,23 @@ public class AdsDAO {
 			close(pstmt);
 		}
 		
-		return r;
+		return ads;
 	}
 	
-	public Review selectDisLikeCount(Connection conn, int reviewNo) {
-		Review r = new Review();
+	public Ads selectDisLikeCount(Connection conn, int adsNo) {
+		Ads ads = new Ads();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectDisLikeCount");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(1, adsNo);
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next())
-				r.setDisLikeCnt(rset.getInt("dislike_cnt"));
+				ads.setDisLikeCnt(rset.getInt("dislike_cnt"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -435,24 +440,24 @@ public class AdsDAO {
 			close(pstmt);
 		}
 		
-		return r;
+		return ads;
 	}
 	
 
-	public Review selectRateCount(Connection conn, int reviewNo) {
-		Review r = new Review();
+	public Ads selectRateCount(Connection conn, int adsNo) {
+		Ads ads = new Ads();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectRateCount");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(1, adsNo);
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next())
-				r.setRateCnt(rset.getInt("rate_cnt"));
+				ads.setRateCnt(rset.getInt("rate_cnt"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -461,12 +466,12 @@ public class AdsDAO {
 			close(pstmt);
 		}
 		
-		return r;
+		return ads;
 	}
 	
 
-	public int getTotalRate(Connection conn, int reviewNo) {
-		Review r = new Review();
+	public int getTotalRate(Connection conn, int adsNo) {
+		Ads ads = new Ads();
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -474,13 +479,13 @@ public class AdsDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(1, adsNo);
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next())
-				r.setRateTotal(rset.getInt("rate_total"));
-				result = r.getRateTotal();
+				ads.setRateTotal(rset.getInt("rate_total"));
+				result = ads.getRateTotal();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -493,12 +498,12 @@ public class AdsDAO {
 		
 	}
 	
-	public List<Review> selectDeletedReviewList(Connection conn, int cPage, int numPerPage) {
-		List<Review> list = new ArrayList<>();
+	public List<Ads> selectDeletedAdsList(Connection conn, int cPage, int numPerPage) {
+		List<Ads> adsList = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectDeletedReviewList");
+		String sql = prop.getProperty("selectDeletedAdsList");
 		
 		try{
 			pstmt = conn.prepareStatement(sql);
@@ -509,17 +514,17 @@ public class AdsDAO {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()){
-				Review r = new Review();
-				r.setReviewNo(rset.getInt("review_no"));
-				r.setReviewTitle(rset.getString("review_title"));
-				r.setReviewWriter(getUserName(conn, rset.getInt("customer_no")));
-				r.setReviewContent(rset.getString("review_content"));
-				r.setWrittenDate(rset.getDate("written_date"));
-				r.setReadCnt(rset.getInt("read_cnt"));
-				r.setLikeCnt(rset.getInt("like_cnt"));
-				r.setDisLikeCnt(rset.getInt("dislike_cnt"));
+				Ads ads = new Ads();
+				ads.setAdsNo(rset.getInt("ads_no"));
+				ads.setAdsTitle(rset.getString("ads_title"));
+				ads.setAdsWriter(getUserName(conn, rset.getInt("customer_no")));
+				ads.setAdsContent(rset.getString("ads_content"));
+				ads.setWrittenDate(rset.getDate("written_date"));
+				ads.setReadCnt(rset.getInt("read_cnt"));
+				ads.setLikeCnt(rset.getInt("like_cnt"));
+				ads.setDisLikeCnt(rset.getInt("dislike_cnt"));
 				
-				list.add(r);
+				adsList.add(ads);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -528,20 +533,20 @@ public class AdsDAO {
 			close(pstmt);
 		}
 		
-		return list;
+		return adsList;
 	}
 
-	public int insertReviewComment(Connection conn, ReviewComment rc) {
+	public int insertAdsComment(Connection conn, AdsComment ac) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertReviewComment");
+		String sql = prop.getProperty("insertAdsComment");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 		
-			pstmt.setInt(1, rc.getCustomerNo());
-			pstmt.setInt(2, rc.getReviewNo());
-			pstmt.setString(3, rc.getCommentContent());
+			pstmt.setInt(1, ac.getCustomerNo());
+			pstmt.setInt(2, ac.getAdsNo());
+			pstmt.setString(3, ac.getAdsCommentContent());
 			
 			//쿼리실행
 			result = pstmt.executeUpdate();
@@ -553,27 +558,27 @@ public class AdsDAO {
 		return result;
 	}
 
-	public List<ReviewComment> selectReviewComment(Connection conn, int reviewNo) {
-		List<ReviewComment> commentList = new ArrayList<>();
+	public List<AdsComment> selectAdsComment(Connection conn, int adsNo) {
+		List<AdsComment> adsCommentList = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectCommentList");
+		String sql = prop.getProperty("selectAdsCommentList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(1, adsNo);
 			
 			rset = pstmt.executeQuery();
 
 			while(rset.next()) {
-				ReviewComment rc = new ReviewComment();
-				rc.setCommentNo(rset.getInt("comment_no"));
-				rc.setCustomerNo(rset.getInt("customer_no"));
-				rc.setReviewNo(rset.getInt("review_no"));
-				rc.setWrittenDate(rset.getDate("written_date"));
-				rc.setCommentContent(rset.getString("comment_content"));
+				AdsComment ac = new AdsComment();
+				ac.setAdsCommentNo(rset.getInt("ads_comment_no"));
+				ac.setCustomerNo(rset.getInt("customer_no"));
+				ac.setAdsNo(rset.getInt("ads_no"));
+				ac.setWrittenDate(rset.getDate("written_date"));
+				ac.setAdsCommentContent(rset.getString("ads_comment_content"));
 
-				commentList.add(rc);
+				adsCommentList.add(ac);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -582,22 +587,17 @@ public class AdsDAO {
 			close(pstmt);
 		}
 
-		return commentList;
+		return adsCommentList;
 	}
 
-	public int deleteReviewComment(Connection conn, int commentNo) {
+	public int deleteAdsComment(Connection conn, int adsCommentNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String query = prop.getProperty("deleteReviewComment"); 
+		String query = prop.getProperty("deleteAdsComment"); 
 		
 		try {
-			//미완성쿼리문을 가지고 객체생성.
 			pstmt = conn.prepareStatement(query);
-			//쿼리문미완성
-			pstmt.setInt(1, commentNo);
-			
-			//쿼리문실행 : 완성된 쿼리를 가지고 있는 pstmt실행(파라미터 없음)
-			//DML은 executeUpdate()
+			pstmt.setInt(1, adsCommentNo);
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {

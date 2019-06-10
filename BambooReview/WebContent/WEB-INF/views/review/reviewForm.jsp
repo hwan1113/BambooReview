@@ -13,14 +13,13 @@
 <link href="<%=request.getContextPath()%>/dist/summernote.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/dist/summernote.js"></script>
 <script src="<%=request.getContextPath()%>/dist/lang/summernote-ko-KR.js"></script>
-
 <style>
-.ui.menu{
-top:659px;
+form#main-form{
+	min-height: 650px;
 }
 </style>
 <script type="text/javascript">
-       /* summernote에서 이미지 업로드시 실행할 함수 */
+    /* summernote에서 이미지 업로드시 실행할 함수 */
  	function sendFile(file, editor) {
  		// 파일 전송을 위한 폼생성
  		data = new FormData();
@@ -33,7 +32,7 @@ top:659px;
  	        contentType : false,
  	        processData : false,
  	        success : function(data) { // 처리가 성공할 경우
-                   // 에디터에 이미지 출력
+            		// 에디터에 이미지 출력
                     $(editor).summernote('editor.insertImage', data.url);
               	},
  	   		error: function(jqxhr, textStatus, errorThrown){
@@ -45,27 +44,6 @@ top:659px;
  	    });
  	}
 </script>
-
-<section id="review-container" style="height:300px;">
-	<form action="<%=request.getContextPath()%>/review/reviewFormEnd"
-		  method="get"
-		  enctype="multipart/form-data">
-	   <div class="ui centered grid">  
-	제목: <input id="title" type="text" name="reviewTitle" style="height:25px; margin-top:0px;" required />&nbsp;&nbsp;
-	 작성자: <input id="writer" type="text" name="reviewWriter" style="width:100px; height:25px; margin-top:0px;"
-				 value="<%=service.getUserName(userLoggedIn.getCustomer_no())%>" readonly/>
-	   </div>
-		<textarea id="summernote" name="reviewContent"></textarea>
-
-		<div class="ui centered grid">
-			<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">작성</button>
-			<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelname=<%=hotelName %>&hotelid=<%=hotelId%>'">취소</button>
-		</div>
-		
-		<input id="hotelName" type="hidden" name="hotelName" value="<%=hotelName%>" />
-	  	<input id="hotelId" type="hidden" name="hotelId" value="<%=hotelId%>" />
-		<input id="customerNo" type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"/>
-	</form>
 	
 <script>
     $(document).ready(function() {
@@ -100,9 +78,30 @@ top:659px;
     	return true;
     }
 
- 
 </script>
-		
 
+<section id="review-container" style="height:300px;">
+	<form action="<%=request.getContextPath()%>/review/reviewFormEnd"
+		  method="get"
+		  enctype="multipart/form-data"
+		  id="main-form">
+	   <div class="ui centered grid">  
+		<h4 style="margin-top:10px;">제목: </h4>
+		<input id="title" type="text" name="reviewTitle" required />&nbsp;&nbsp;
+		<h4 style="margin-top:10px;">작성자: </h4>
+		<input id="writer" type="text" name="reviewWriter"
+				 value="<%=service.getUserName(userLoggedIn.getCustomer_no())%>" readonly/>
+	   </div>
+		<textarea style="margin-top:10px;" id="summernote" name="reviewContent"></textarea>
+
+		<div class="ui centered grid">
+			<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">작성</button>
+			<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelname=<%=hotelName %>&hotelid=<%=hotelId%>'">취소</button>
+		</div>
+		
+		<input id="hotelName" type="hidden" name="hotelName" value="<%=hotelName%>" />
+	  	<input id="hotelId" type="hidden" name="hotelId" value="<%=hotelId%>" />
+		<input id="customerNo" type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"/>
+	</form>
 </section>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

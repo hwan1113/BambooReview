@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ page import="ads.model.vo.Ads, ads.model.service.*, java.util.*" %>
 <%
-	List<Ads> list = (List<Ads>)request.getAttribute("list");
+	List<Ads> adsList = (List<Ads>)request.getAttribute("adsList");
 	String pageBar = (String)request.getAttribute("pageBar");
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" />		
-<section id="review-container">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/ads.css" />		
+<section id="ads-container">
   	<div class="ui three column centered grid">
 	  	<div class="three column row">
 	  		<div class="column"></div> 
@@ -29,20 +29,20 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		    <% for(Ads r : list){ %>
+		    <% for(Ads ads : adsList){ %>
 			<tr>
-				<td><%= r.getAdsNo() %></td>
-				<td><%= r.getAdsWriter() %></td>
+				<td><%= ads.getAdsNo() %></td>
+				<td><%= ads.getAdsWriter() %></td>
 				<td>
-					<a href="<%=request.getContextPath() %>/review/reviewView?reviewNo=<%= r.getAdsNo()%>"><%= r.getAdsTitle() %></a>
+					<a href="<%=request.getContextPath() %>/ads/adsView?adsNo=<%= ads.getAdsNo()%>"><%= ads.getAdsTitle() %></a>
 				</td>
-				<td style="text-align:center;"><%= r.getWrittenDate() %></td>
-				<td style="text-align:center;"><%=r.getReadCnt() %></td>
-				<td style="text-align:center;"><%=r.getLikeCnt() %></td>
-				<td style="text-align:center;"><%=r.getDisLikeCnt() %></td>
+				<td style="text-align:center;"><%= ads.getWrittenDate() %></td>
+				<td style="text-align:center;"><%=ads.getReadCnt() %></td>
+				<td style="text-align:center;"><%=ads.getLikeCnt() %></td>
+				<td style="text-align:center;"><%=ads.getDisLikeCnt() %></td>
 			</tr>
 			<% } 
-				if(list.size() < 1) {%>
+				if(adsList.size() < 1) {%>
 				<tr>
 				<td style="text-align:center;" colspan="7">등록된 광고가 없습니다.
 				</td>
@@ -59,10 +59,11 @@
 	<% if(userLoggedIn != null &&
 		    		("B".equals(userLoggedIn.getStatus())
 		    		|| "A".equals(userLoggedIn.getStatus()))) {%>
-	<button  id="btn-add" class="ui olive button" 
-		style="float:right; background-color:#68b30d"onclick="location.href='<%=request.getContextPath()%>/review/reviewForm?hotelName=<%=hotelName %>&hotelid=<%=hotelid%>'"/><i class="pencil alternate icon"></i>글쓰기</button>
+	<button id="btn-add" class="ui olive button" 
+			style="float:right; background-color:#68b30d" onclick="location.href='<%=request.getContextPath()%>/ads/adsForm'"/><i class="pencil alternate icon"></i>글쓰기</button>
 	
 	</div>
+	<%} %>
 
 </section>
 	

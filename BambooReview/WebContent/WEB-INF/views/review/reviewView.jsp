@@ -106,26 +106,6 @@ span.star-prototype > * {
        </div>
 
            	     <%--글작성자/관리자인경우 수정삭제 가능 --%>
-           	     <div class="ui centered grid">
-	  
-					  <div class="ui buttons" id="like-form">
-					 		<form id="like_form" action="<%=request.getContextPath()%>/review/reviewLikeCnt?reviewNo=<%=r.getReviewNo()%>">  
-			    				<input type="hidden" name="command" value="likeCnt"> 
-			    				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
-			    				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
-			    				<button type="button" class="btn btn-primary" onclick="return like()" style="height:100%;"><i class="thumbs up outline icon"></i>좋아요!</button>
-				    		</form>
-							 <div class="or"></div>
-							 <form id="disLike_form" action="<%=request.getContextPath()%>/review/reviewDisLikeCnt?reviewNo=<%=r.getReviewNo()%>">  
-			    				<input type="hidden" name="command" value="disLikeCnt"> 
-			    				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
-			    				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
-			    				<button type="button" class="btn btn-danger" onclick="return disLike()" style="height:100%;"><i class="thumbs down outline icon"></i>신고하기</button>
-				    		</form>
-			
-					  </div>
-	      
-       			</div>
        			<% if(userLoggedIn != null &&
 		    		((userLoggedIn.getCustomer_no() == r.getCustomerNo())
 		    		|| "A".equals(userLoggedIn.getStatus()))) {%>
@@ -166,7 +146,36 @@ span.star-prototype > * {
 	     </section>
 	</div>
 	
-	
+	<!-- 댓글목록 테이블 -->
+	<div class="ui centered grid">
+	<table id="tbl-comment">
+	<%if(!commentList.isEmpty()) {
+		for(ReviewComment rc: commentList){
+	%>
+			<tr class="level1">
+				<td>
+					<sub class="comment-writer"><%=userLoggedIn.getUserName() %></sub>
+					<sub class="comment-date"><%=rc.getWrittenDate() %></sub>
+					<br />
+					<%=rc.getCommentContent() %>
+					
+				</td>
+				<td>
+					<%-- 삭제버튼 추가 --%>
+					<% if(userLoggedIn != null &&
+						((userLoggedIn.getCustomer_no() == rc.getCustomerNo())
+						|| "A".equals(userLoggedIn.getStatus()))) {%>
+					<button class="btn-delete" value="<%=rc.getCommentNo()%>">삭제</button>
+					<%} %>
+				</td>
+			</tr>
+	<%			
+			}	
+		}
+	%>
+	</table>
+	</div>
+
 </div>
 	     
 
@@ -184,14 +193,14 @@ span.star-prototype > * {
 <script>
 $(function(){
 	//댓글 textarea focus시에 로그인여부확인
-	$("[name=boardCommentContent]").focus(function(){
+	$("[name=reviewCommentContent]").focus(function(){
 		if(<%=userLoggedIn==null%>){
 			loginAlert();
 		}
 	});
 	
 	//댓글폼 submit이벤트처리
-	$("[name=boardCommentFrm]").submit(function(e){
+	$("[name=reviewCommentFrm]").submit(function(e){
 		//로그인여부검사
 		if(<%=userLoggedIn==null%>){
 			loginAlert();
@@ -221,7 +230,6 @@ $(function(){
 
 function loginAlert(){
 	alert("로그인 후 이용할 수 있습니다.");
-	$("#memberId").focus();
 }
 
 </script>

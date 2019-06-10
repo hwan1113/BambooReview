@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -404,7 +403,7 @@ public class ReviewDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next())
-				r.setLikeCnt(rset.getInt("like_cnt"));
+				r.setLikeCnt(rset.getInt("likecount"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -429,7 +428,7 @@ public class ReviewDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next())
-				r.setDisLikeCnt(rset.getInt("dislike_cnt"));
+				r.setDisLikeCnt(rset.getInt("dislikecount"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -455,7 +454,7 @@ public class ReviewDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next())
-				r.setRateCnt(rset.getInt("rate_cnt"));
+				r.setRateCnt(rset.getInt("ratecount"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -482,7 +481,7 @@ public class ReviewDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next())
-				r.setRateTotal(rset.getInt("rate_total"));
+				r.setRateTotal(rset.getInt("ratetotal"));
 				result = r.getRateTotal();
 			
 		} catch (SQLException e) {

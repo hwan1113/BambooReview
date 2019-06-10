@@ -3,59 +3,70 @@ package ads.model.vo;
 import java.sql.Date;
 
 public class AdsComment {
-	private int commentNo;
+	private int adsCommentNo;
 	private int customerNo;
 	private int adsNo;
 	private Date writtenDate;
-	private String commentContent;
+	private String adsCommentContent;
 	
 	public AdsComment() {
 		super();
 	}
-	
-	public AdsComment(int commentNo, int customerNo, int adsNo, Date writtenDate, String commentContent) {
+
+	public AdsComment(int adsCommentNo, int customerNo, int adsNo, Date writtenDate, String adsCommentContent) {
 		super();
-		this.commentNo = commentNo;
+		this.adsCommentNo = adsCommentNo;
 		this.customerNo = customerNo;
 		this.adsNo = adsNo;
 		this.writtenDate = writtenDate;
-		this.commentContent = commentContent;
+		this.adsCommentContent = adsCommentContent;
 	}
-	
-	public int getCommentNo() {
-		return commentNo;
+
+	public int getAdsCommentNo() {
+		return adsCommentNo;
 	}
-	public void setCommentNo(int commentNo) {
-		this.commentNo = commentNo;
+
+	public void setAdsCommentNo(int adsCommentNo) {
+		this.adsCommentNo = adsCommentNo;
 	}
+
 	public int getCustomerNo() {
 		return customerNo;
 	}
+
 	public void setCustomerNo(int customerNo) {
 		this.customerNo = customerNo;
 	}
+
 	public int getAdsNo() {
 		return adsNo;
 	}
+
 	public void setAdsNo(int adsNo) {
 		this.adsNo = adsNo;
 	}
+
 	public Date getWrittenDate() {
 		return writtenDate;
 	}
+
 	public void setWrittenDate(Date writtenDate) {
 		this.writtenDate = writtenDate;
 	}
-	public String getCommentContent() {
-		return commentContent;
+
+	public String getAdsCommentContent() {
+		return adsCommentContent;
 	}
-	public void setCommentContent(String commentContent) {
-		this.commentContent = commentContent;
+
+	public void setAdsCommentContent(String adsCommentContent) {
+		this.adsCommentContent = adsCommentContent;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "AdsComment [commentNo=" + commentNo + ", customerNo=" + customerNo + ", adsNo=" + adsNo
-				+ ", writtenDate=" + writtenDate + ", commentContent=" + commentContent + "]";
+		return "AdsComment [adsCommentNo=" + adsCommentNo + ", customerNo=" + customerNo + ", adsNo=" + adsNo
+				+ ", writtenDate=" + writtenDate + ", adsCommentContent=" + adsCommentContent + "]";
 	}
+	
+	
 }
