@@ -26,8 +26,10 @@ public class ReviewListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//파라미터 핸들링
-		String hotelId = request.getParameter("hotelId");
-		String hotelName = request.getParameter("hotelName");
+		String hotelId = request.getParameter("hotelid");
+		String hotelName = request.getParameter("hotelname");
+		String srchWord = request.getParameter("srchWord");
+
 		int numPerPage = 5;//한페이지당 수
 		int cPage = 1;//요청페이지
 		try{
@@ -89,7 +91,9 @@ public class ReviewListServlet extends HttpServlet {
 		//4.뷰단 포워딩		
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/review/reviewList.jsp");
 		request.setAttribute("hotelName", hotelName);
+
 		request.setAttribute("hotelId", hotelId);
+		request.setAttribute("srchWord", srchWord);
 		request.setAttribute("list",list);
 		request.setAttribute("pageBar",pageBar);	
 		//request.setAttribute("cPage",cPage);		

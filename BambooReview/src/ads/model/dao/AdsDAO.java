@@ -53,7 +53,6 @@ public class AdsDAO {
 				ads.setAdsNo(rset.getInt("ads_no"));
 				ads.setAdsTitle(rset.getString("ads_title"));
 				ads.setAdsWriter(getUserName(conn, rset.getInt("customer_no")));
-				System.out.println("userName@DAOlist="+getUserName(conn, rset.getInt("customer_no")));
 				ads.setAdsContent(rset.getString("ads_content"));
 				ads.setWrittenDate(rset.getDate("written_date"));
 				ads.setReadCnt(rset.getInt("read_cnt"));
