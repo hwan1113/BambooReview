@@ -22,8 +22,8 @@
 <!-- <script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script> -->
 <script>
     $(function() { $("#postcodify_search_button").postcodifyPopUp({
-        insertAddress : "#address",
-        insertDetails : "#details",
+        insertAddress : "#searchedAddress",
+        insertDetails : "#detailedAddress",
         hideOldAddresses : false
     }); });
 </script>
@@ -109,8 +109,8 @@ top:659px;
 		</div>
 		<div id="postcodify">
 		<input type="button" id="postcodify_search_button" value="주소검색"/>
-		검색한 주소: <input type="text" name="address" id="address" value="" style="width: 350px;" required/>
-		상세 주소: <input type="text" name="details" id="details" value="" style="width: 350px;"/><br />
+		검색한 주소: <input type="text" name="searchedAddress" id="searchedAddress" value="<%=ads.getSearchedAddress() %>" style="width: 350px;" required/>
+		상세 주소: <input type="text" name="detailedAddress" id="detailedAddress" value="<%=ads.getDetailedAddress() %>" style="width: 350px;"/><br />
 		</div>
 		<fieldset style="text-align:center;">
                               인터넷<input type="checkbox" name="facilities" value="인터넷" />
@@ -123,7 +123,7 @@ top:659px;
 		<textarea id="summernote" name="adsContent" required><%=ads.getAdsContent() %></textarea>
 		<div class="ui centered grid">
 		<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">수정</button>
-		<button type="button" class="btn btn-warning">취소</button>
+		<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/ads/adsView?adsNo=<%=ads.getAdsNo()%>'">취소</button>
 		</div>
 		<input id="customerNo" type="hidden" name="customerNo" value="<%=ads.getCustomerNo()%>"/>
 		<input id="adsNo" type="hidden" name="adsNo" value="<%=ads.getAdsNo()%>"/>

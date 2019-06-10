@@ -17,8 +17,8 @@
 <!-- <script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script> -->
 <script>
     $(function() { $("#postcodify_search_button").postcodifyPopUp({
-        insertAddress : "#address",
-        insertDetails : "#details",
+        insertAddress : "#searchedAddress",
+        insertDetails : "#detailedAddress",
         hideOldAddresses : false
     }); });
 </script>
@@ -105,8 +105,8 @@ top:659px;
  
 		<!-- 주소와 우편번호를 입력할 <input>들을 생성하고 적당한 name과 id를 부여한다 -->
 		<input type="button" id="postcodify_search_button" value="주소검색"/>
-		검색한 주소: <input type="text" name="address" id="address" value="" style="width: 350px;" required/>
-		상세 주소: <input type="text" name="details" id="details" value="" style="width: 350px;"/><br />
+		검색한 주소: <input type="text" name="searchedAddress" id="searchedAddress" value="" style="width: 350px;" required/>
+		상세 주소: <input type="text" name="detailedAddress" id="detailedAddress" value="" style="width: 350px;"/><br />
 		</div>
 		<fieldset style="text-align:center;">
                               인터넷<input type="checkbox" name="facilities" value="인터넷" />

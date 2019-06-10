@@ -12,7 +12,7 @@
 <style>
 span.star-prototype, span.star-prototype > * {
     height: 16px; 
-    background: url(http://i.imgur.com/YsyS5y8.png) 0 -16px repeat-x;
+    background: url(<%=request.getContextPath()%>/images/starImage.png) 0 -16px repeat-x;
     width: 80px;
     display: inline-block;
 }
