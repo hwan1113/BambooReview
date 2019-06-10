@@ -24,6 +24,7 @@
 	<h3 class="ui block header centered">
  	 	<%=srchWord%>지역의 호텔 리스트 입니다.
 	</h3>
+	<input id="srchedWord" name="srchedWord" type="hidden" value="<%=srchWord%>">
 	
 	<!-- <div class="ui visible message">
 		<p>정렬 방식</p>
@@ -53,7 +54,7 @@
       				<img src="https://maps.googleapis.com/maps/api/place/photo?photoreference=<%=HotelArr.getJSONObject(i).getString("photo")%>&key=AIzaSyBamfF6Gj9yf1Spt6oL6sX1GB86eMTtI6U&maxheight=70&maxwidth=100" style="border:3px solid black; height:150px;">
     			</div>
     			<div class="content">
-     			 	<a class="header" href="<%=request.getContextPath()%>/review/reviewList?hotelid=<%=HotelArr.getJSONObject(i).getString("id")%>&hotelname=<%=HotelArr.getJSONObject(i).getString("name")%>"><%=HotelArr.getJSONObject(i).getString("name")%></a>
+     			 	<a class="header" href="<%=request.getContextPath()%>/review/reviewList?hotelid=<%=HotelArr.getJSONObject(i).getString("id")%>&hotelname=<%=HotelArr.getJSONObject(i).getString("name")%>&srchWord=<%=srchWord%>"><%=HotelArr.getJSONObject(i).getString("name")%></a>
      				 <div class="meta">
         			<span><%=HotelArr.getJSONObject(i).getString("address") %></span>
       				</div>

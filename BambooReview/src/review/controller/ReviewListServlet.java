@@ -28,6 +28,7 @@ public class ReviewListServlet extends HttpServlet {
 		//파라미터 핸들링
 		String hotelId = request.getParameter("hotelid");
 		String hotelName = request.getParameter("hotelname");
+		String srchWord = request.getParameter("srchWord");
 		int numPerPage = 5;//한페이지당 수
 		int cPage = 1;//요청페이지
 		try{
@@ -90,6 +91,7 @@ public class ReviewListServlet extends HttpServlet {
 		RequestDispatcher reqDispatcher = request.getRequestDispatcher("/WEB-INF/views/review/reviewList.jsp");
 		request.setAttribute("hotelName", hotelName);
 		request.setAttribute("hotelid", hotelId);
+		request.setAttribute("srchWord", srchWord);
 		request.setAttribute("list",list);
 		request.setAttribute("pageBar",pageBar);	
 		//request.setAttribute("cPage",cPage);		

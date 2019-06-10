@@ -6,6 +6,8 @@
 	String pageBar = (String)request.getAttribute("pageBar");
 	String hotelName = (String)request.getAttribute("hotelName");
 	String hotelid = (String)request.getAttribute("hotelid");
+	String srchWord  = (String)request.getAttribute("srchWord");
+	
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" />		
@@ -21,7 +23,8 @@
 	 	<div class="ui breadcrumb">
 		  <a href="<%=request.getContextPath()%>" class="section">Home</a>
 		  <i class="right chevron icon divider"></i>
-		  <a href="javascript:history.back();" class="section">location</a>
+		  <a href="javascript:history.back();" class="section"
+		  	 onclick=><%=srchWord %></a>
 		  <i class="right arrow icon divider"></i>
 	  	  <div class="active section"><%=hotelName %></div>
 		</div>
