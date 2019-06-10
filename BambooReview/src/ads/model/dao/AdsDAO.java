@@ -105,9 +105,11 @@ public class AdsDAO {
 
 			//pstmt.setInt(1, ads.getCustomerNo());
 			pstmt.setString(1, ads.getAdsTitle());
-			pstmt.setString(2, ads.getFullAddress());
-			pstmt.setString(3, ads.getFacilities());
-			pstmt.setString(4, ads.getAdsContent());
+			pstmt.setString(2, ads.getSearchedAddress());
+			pstmt.setString(3, ads.getDetailedAddress());
+			pstmt.setString(4, ads.getFacilities());
+			pstmt.setString(5, ads.getAdsContent());
+			
 
 			result = pstmt.executeUpdate();
 			
@@ -184,7 +186,8 @@ public class AdsDAO {
 				ads.setAdsNo(rset.getInt("ads_no"));
 				ads.setCustomerNo(rset.getInt("customer_no"));
 				ads.setAdsTitle(rset.getString("ads_title"));
-				ads.setFullAddress(rset.getString("address"));
+				ads.setSearchedAddress(rset.getString("searched_address"));
+				ads.setDetailedAddress(rset.getString("detailed_address"));
 				ads.setFacilities(rset.getString("facilities"));
 				ads.setAdsWriter(getUserName(conn, rset.getInt("customer_no")));
 				System.out.println("userName@DAO="+getUserName(conn, rset.getInt("customer_no")));
@@ -212,10 +215,11 @@ public class AdsDAO {
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, ads.getAdsTitle());
-			pstmt.setString(2, ads.getFullAddress());
-			pstmt.setString(3, ads.getFacilities());
-			pstmt.setString(4, ads.getAdsContent());
-			pstmt.setInt(5, ads.getAdsNo());
+			pstmt.setString(2, ads.getSearchedAddress());
+			pstmt.setString(3, ads.getDetailedAddress());
+			pstmt.setString(4, ads.getFacilities());
+			pstmt.setString(5, ads.getAdsContent());
+			pstmt.setInt(6, ads.getAdsNo());
 			
 			result = pstmt.executeUpdate();
 			

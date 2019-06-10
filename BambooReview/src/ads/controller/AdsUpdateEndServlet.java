@@ -28,9 +28,9 @@ public class AdsUpdateEndServlet extends HttpServlet {
 		String adsWriter = request.getParameter("adsWriter");
 		String adsContent = request.getParameter("adsContent");
 		int adsNo = Integer.parseInt(request.getParameter("adsNo"));
-		String address = request.getParameter("address");
-		String details = request.getParameter("details");
-		String fullAddress = address + " " + details;
+		String searchedAddress = request.getParameter("searchedAddress");
+		String detailedAddress = request.getParameter("detailedAddress");
+		//String fullAddress = searchedAddress + " " + detailedAddress;
 		String[] arrFacilities = request.getParameterValues("facilities");
 		String facilities = Arrays.toString(arrFacilities);
 
@@ -39,7 +39,8 @@ public class AdsUpdateEndServlet extends HttpServlet {
 		ads.setAdsWriter(adsWriter);
 		ads.setAdsContent(adsContent);
 		ads.setAdsNo(adsNo);
-		ads.setFullAddress(fullAddress);
+		ads.setSearchedAddress(searchedAddress);
+		ads.setDetailedAddress(detailedAddress);
 		ads.setFacilities(facilities);
 		
 		//2. 업무로직

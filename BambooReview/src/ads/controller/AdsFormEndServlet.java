@@ -30,9 +30,9 @@ public class AdsFormEndServlet extends HttpServlet {
 		String adsWriter = request.getParameter("adsWriter");
 		System.out.println("writer@serv="+adsWriter);
 		String adsContent = request.getParameter("adsContent");
-		String address = request.getParameter("address");
-		String details = request.getParameter("details");
-		String fullAddress = address + " " + details;
+		String searchedAddress = request.getParameter("searchedAddress");
+		String detailedAddress = request.getParameter("detailedAddress");
+		//String fullAddress = searchedAddress + " " + detailedAddress;
 		String[] arrFacilities = request.getParameterValues("facilities");
 		String facilities = Arrays.toString(arrFacilities);
 		
@@ -41,7 +41,8 @@ public class AdsFormEndServlet extends HttpServlet {
 		ads.setCustomerNo(customerNo);
 		ads.setAdsWriter(adsWriter);
 		ads.setAdsContent(adsContent);
-		ads.setFullAddress(fullAddress);
+		ads.setSearchedAddress(searchedAddress);
+		ads.setDetailedAddress(detailedAddress);
 		ads.setFacilities(facilities);
 		
 		//2. 업무로직

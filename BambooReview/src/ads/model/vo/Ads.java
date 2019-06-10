@@ -9,8 +9,9 @@ public class Ads {
 	private int adsRate;	//광고글 점수
 	private int rateTotal;//광고글 점수 합계
 	private String adsTitle;	//광고글 제목
-	private String fullAddress;	//주소
-	private String facilities;
+	private String searchedAddress;	//검색한 주소
+	private String detailedAddress;	//상세 주소
+	private String facilities;	//편의시설
 	private String adsContent;	//광고글 내용
 	private Date writtenDate;	//작성한 날짜
 	private Date modifiedDate;	//수정한 날짜
@@ -24,8 +25,8 @@ public class Ads {
 	}
 
 	public Ads(int adsNo, int customerNo, String adsWriter, int adsRate, int rateTotal, String adsTitle,
-			String fullAddress, String facilities, String adsContent, Date writtenDate, Date modifiedDate,
-			int readCnt, int likeCnt, int disLikeCnt, int rateCnt) {
+			String searchedAddress, String detailedAddress, String facilities, String adsContent, Date writtenDate,
+			Date modifiedDate, int readCnt, int likeCnt, int disLikeCnt, int rateCnt) {
 		super();
 		this.adsNo = adsNo;
 		this.customerNo = customerNo;
@@ -33,7 +34,8 @@ public class Ads {
 		this.adsRate = adsRate;
 		this.rateTotal = rateTotal;
 		this.adsTitle = adsTitle;
-		this.fullAddress = fullAddress;
+		this.searchedAddress = searchedAddress;
+		this.detailedAddress = detailedAddress;
 		this.facilities = facilities;
 		this.adsContent = adsContent;
 		this.writtenDate = writtenDate;
@@ -92,12 +94,20 @@ public class Ads {
 		this.adsTitle = adsTitle;
 	}
 
-	public String getFullAddress() {
-		return fullAddress;
+	public String getSearchedAddress() {
+		return searchedAddress;
 	}
 
-	public void setFullAddress(String fullAddress) {
-		this.fullAddress = fullAddress;
+	public void setSearchedAddress(String searchedAddress) {
+		this.searchedAddress = searchedAddress;
+	}
+
+	public String getDetailedAddress() {
+		return detailedAddress;
+	}
+
+	public void setDetailedAddress(String detailedAddress) {
+		this.detailedAddress = detailedAddress;
 	}
 
 	public String getFacilities() {
@@ -167,11 +177,12 @@ public class Ads {
 	@Override
 	public String toString() {
 		return "Ads [adsNo=" + adsNo + ", customerNo=" + customerNo + ", adsWriter=" + adsWriter + ", adsRate="
-				+ adsRate + ", rateTotal=" + rateTotal + ", adsTitle=" + adsTitle + ", fullAddress=" + fullAddress
-				+ ", facilities=" + facilities + ", adsContent=" + adsContent + ", writtenDate="
-				+ writtenDate + ", modifiedDate=" + modifiedDate + ", readCnt=" + readCnt + ", likeCnt=" + likeCnt
-				+ ", disLikeCnt=" + disLikeCnt + ", rateCnt=" + rateCnt + "]";
+				+ adsRate + ", rateTotal=" + rateTotal + ", adsTitle=" + adsTitle + ", searchedAddress="
+				+ searchedAddress + ", detailedAddress=" + detailedAddress + ", facilities=" + facilities
+				+ ", adsContent=" + adsContent + ", writtenDate=" + writtenDate + ", modifiedDate=" + modifiedDate
+				+ ", readCnt=" + readCnt + ", likeCnt=" + likeCnt + ", disLikeCnt=" + disLikeCnt + ", rateCnt="
+				+ rateCnt + "]";
 	}
-	
-	
+
+		
 }

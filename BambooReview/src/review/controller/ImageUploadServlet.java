@@ -1,25 +1,21 @@
 package review.controller;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 
-import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.util.URLEncoder;
 import org.json.simple.JSONObject;
 
 import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.oreilly.servlet.multipart.FileRenamePolicy;
+
+import common.UserFileRenamePolicy;
 /**
  * Servlet implementation class ImageUploadServlet
  */
@@ -41,15 +37,23 @@ public class ImageUploadServlet extends HttpServlet {
 		
 		String fileName = ""; // 파일명
 		
+		FileRenamePolicy policy	= new UserFileRenamePolicy();
+		
 		try {
-	        // 파일업로드 및 업로드 후 파일명 가져옴
-			MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "utf-8", new DefaultFileRenamePolicy());
+			// 파일업로드 및 업로드 후 파일명 가져옴
+			MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "utf-8", policy);
 			Enumeration files = multi.getFileNames();
-			String file = (String)files.nextElement(); 
-			fileName = multi.getFilesystemName(file); 
+			String file = (String) files.nextElement();
+			
+			//인코딩 방식은 파일명에 공백이 있으면 오류가 발생함.
+			//따라서 기존에 만들어 두었던 FileRenamePolicy를 사용함
+			/*fileName = multi.getFilesystemName(file); 
 			System.out.println(fileName);
 			fileName = java.net.URLEncoder.encode(fileName, "UTF-8");
-			System.out.println("afterEncode="+fileName);
+			System.out.println("afterEncode="+fileName);*/
+			
+			fileName = multi.getFilesystemName(file); 
+			System.out.println("fileName@serv="+fileName);
 
 			//이미지 크기를 view창에 맞추기 위해 썸네일 이미지 생성해서 파일이름으로 가져옴
 			//수정사항: reviewContent창을 확대해 자동리사이즈 되므로 필요없어짐
