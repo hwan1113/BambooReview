@@ -17,6 +17,12 @@
 form#main-form{
 	min-height: 650px;
 }
+#footer{
+position:absolute;
+top:101%;
+margin-botton:0;
+
+}
 </style>
 <script type="text/javascript">
     /* summernote에서 이미지 업로드시 실행할 함수 */
