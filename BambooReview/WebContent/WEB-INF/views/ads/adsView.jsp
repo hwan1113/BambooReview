@@ -20,10 +20,29 @@ span.star-prototype > * {
     background-position: 0 0;
     width:80px; 
 }
+#btn-insert{
+	position:relative;
+	top:-19px;
+	width:70px;
+	height:48px;
+	right:4px;
+	background-color:#02b502;
+	border:1px solid black;
+	color:white;
+}
+.btn-delete{
+	width:50px;
+	height:32px;
+	background-color:red;
+	color:white;
+	border:1px solid gray;
+	
+}
+
 </style>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ads.css" />
 <div class="ui centered grid">
-	<div class="area">
+	<div class="area" style="width:750px; margin:0px 0px 14px 0px;">
 		<section id="ads-container">
 
         <h3><%=ads.getAdsTitle() %></h3>
@@ -48,14 +67,65 @@ span.star-prototype > * {
   				주소: <span><%=ads.getFullAddress() %></span>
   				편의시설: <span><%=ads.getFacilities() %></span>
   			</div>
-	 		 <div class="ui green segment" style="height:355px; overflow:scroll;">
+	 		 <div class="ui green segment" style="height:100%; min-height:505px;  text-align:center;">
 	  			<div class="ui grid">
 	  				<div class=adsContent><%=ads.getAdsContent()%></div>
 	  			</div>
 	  		</div>
-	  	<div class="ui centered grid">
+	  		<!-- 댓글 부분 -->
+<hr style="margin-top:30px;" />
+
+<div id="comment-container">
+	<div class="comment-editor">
+		<form action="<%=request.getContextPath()%>/ads/adsCommentInsert"
+			  name="adsCommentFrm"
+			  method="post">
+			<textarea name="adsCommentContent"  style="resize: none;"
+					  cols="60" rows="2"></textarea>
+			<button type="submit" id="btn-insert">댓글쓰기</button>	  
+			<input type="hidden" name="adsNo" value="<%=ads.getAdsNo() %>" />  
+			<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no() %>" />
+			<input type="hidden" name="adsCommentWriter" value="<%=userLoggedIn!=null?userLoggedIn.getUserName():""%>" />
+		</form>
+	</div>
+	
+	<!-- 댓글목록 테이블 -->
+	<div class="ui centered grid">
+	<table id="tbl-comment">
+	<%if(!adsCommentList.isEmpty()) {
+		for(AdsComment ac: adsCommentList){
+	%>
+			<tr class="level1">
+				<td>
+					<sub class="comment-writer"><%=userLoggedIn.getUserName() %></sub>
+					<sub class="comment-date"><%=ac.getWrittenDate() %></sub>
+					<br />
+					<%=ac.getAdsCommentContent() %>
+					
+				</td>
+				<td>
+					<%-- 삭제버튼 추가 --%>
+					<% if(userLoggedIn != null &&
+						((userLoggedIn.getCustomer_no() == ac.getCustomerNo())
+						|| "A".equals(userLoggedIn.getStatus()))) {%>
+					<button class="btn-delete" value="<%=ac.getAdsCommentNo()%>">삭제</button>
+					<%} %>
+				</td>
+			</tr>
+	<%			
+			}
+		
+		}
+	%>
+	</table>
+	</div>
+	  	
+     </div>
+          
+	     </section>
+	     <div class="ui centered grid">
 	  
-		  <div class="ui buttons">
+		  <div class="ui buttons" style="margin:25px;">
 		 		<form id="like_form" action="<%=request.getContextPath()%>/ads/adsLikeCnt?adsNo=<%=ads.getAdsNo()%>">  
     				<input type="hidden" name="command" value="likeCnt"> 
     				<input type="hidden" name="adsNo" value="<%=ads.getAdsNo()%>">
@@ -72,9 +142,10 @@ span.star-prototype > * {
 		  </div>
 	      
        </div>
-     </div>
-
-           	     <%--글작성자/관리자인경우 수정삭제 가능 --%>
+       
+       
+       
+        	     <%--글작성자/관리자인경우 수정삭제 가능 --%>
 		   <% if(userLoggedIn != null &&
 		    		((userLoggedIn.getCustomer_no() == ads.getCustomerNo())
 		    		|| "A".equals(userLoggedIn.getStatus()))) {%>
@@ -109,58 +180,19 @@ span.star-prototype > * {
 				<button onclick="return rate()" >평가</button>
 			</form>
 			<%} %>
-	     </section>
+       
+       
 	</div>
 </div>
 
-<!-- 댓글 부분 -->
-<hr style="margin-top:30px;" />
 
-<div id="comment-container">
-	<div class="comment-editor">
-		<form action="<%=request.getContextPath()%>/ads/adsCommentInsert"
-			  name="adsCommentFrm"
-			  method="post">
-			<textarea name="adsCommentContent" 
-					  cols="60" rows="3"></textarea>
-			<button type="submit" id="btn-insert">등록</button>	  
-			<input type="hidden" name="adsNo" value="<%=ads.getAdsNo() %>" />  
-			<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no() %>" />
-			<input type="hidden" name="adsCommentWriter" value="<%=userLoggedIn!=null?userLoggedIn.getUserName():""%>" />
-		</form>
-	</div>
-	
-	<!-- 댓글목록 테이블 -->
-	<table id="tbl-comment">
-	<%if(!adsCommentList.isEmpty()) {
-		for(AdsComment ac: adsCommentList){
-	%>
-			<tr class="level1">
-				<td>
-					<sub class="comment-writer"><%=userLoggedIn.getUserName() %></sub>
-					<sub class="comment-date"><%=ac.getWrittenDate() %></sub>
-					<br />
-					<%=ac.getAdsCommentContent() %>
-					
-				</td>
-				<td>
-					<%-- 삭제버튼 추가 --%>
-					<% if(userLoggedIn != null &&
-						((userLoggedIn.getCustomer_no() == ac.getCustomerNo())
-						|| "A".equals(userLoggedIn.getStatus()))) {%>
-					<button class="btn-delete" value="<%=ac.getAdsCommentNo()%>">삭제</button>
-					<%} %>
-				</td>
-			</tr>
-	<%			
-			}
-		
-		}
-	%>
-	</table>
 	
 	
 </div>
+<div class="ui menu" style="background-color:#68b30d; height:2.5rem; bottom:0; width:1024px; margin:0; text-align:center;">
+		  <div style="left:34%; top:6px; width:1024px;">
+		    <p style="font-size:17px;">&lt;Copyright 2019. Team Thanos. All rights reserved.&gt;</p>
+  	</div>
 <script>
 $(function(){
 	//댓글 textarea focus시에 로그인여부확인
@@ -316,5 +348,3 @@ return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
 // 숫자 평점을 별로 변환하도록 호출하는 함수
 $('.star-prototype').generateStars();
 </script>
-
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>

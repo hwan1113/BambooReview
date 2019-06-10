@@ -5,7 +5,9 @@
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/payment.css" />
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 
-
+<style>
+body {overflow-y: hidden; overflow-x: hidden;}
+</style>
 <div class="all"></div>
 <div class="ui centered grid">
 <div class="all-content">
