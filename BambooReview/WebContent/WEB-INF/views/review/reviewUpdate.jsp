@@ -17,6 +17,7 @@
 <script src="<%=request.getContextPath()%>/dist/lang/summernote-ko-KR.js"></script>
 <style>
 body {overflow-y: hidden; overflow-x: hidden;}
+footer
 </style>
 <script type="text/javascript">
     /* summernote에서 이미지 업로드시 실행할 함수 */
