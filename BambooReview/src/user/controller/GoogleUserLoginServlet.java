@@ -23,16 +23,16 @@ public class GoogleUserLoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userName= request.getParameter("userName");
 		String email=request.getParameter("email");
-		String picture=request.getParameter("picture");
 		
 		User userLoggedIn = new UserService().selectOne(email);
+		
 		User u = new User();
 		String msg = "";
 		HttpSession session = request.getSession();
+		
 		if(userLoggedIn==null) {
 			u.setEmail(email);
 			u.setUserName(userName);
-			u.setProfile(picture);
 			u.setStatus("G");
 			int result= new UserService().insertGoogleUser(u);
 			if(result>0) {

@@ -68,7 +68,7 @@
 	<!-- 글쓰기 권한은 일반회원과 관리자만 가능 -->
 	<% if(userLoggedIn != null &&
 		    		("U".equals(userLoggedIn.getStatus())
-		    		|| "A".equals(userLoggedIn.getStatus()))) {%>
+		    		|| "G".equals(userLoggedIn.getStatus()))) {%>
 	<button  id="btn-add" class="ui olive button" 
 		style="float:right; background-color:#68b30d"
 		onclick="location.href='<%=request.getContextPath()%>/review/reviewForm?hotelName=<%=hotelName %>&hotelId=<%=hotelid%>'">

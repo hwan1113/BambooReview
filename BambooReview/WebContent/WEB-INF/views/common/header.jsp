@@ -39,11 +39,8 @@ if (document.location.pathname.indexOf('/user') > -1 ||
 	  var pathArr = document.location.pathname.split('/');
 
 	  var page = "/"+pathArr[1]+"/"+pathArr[2];
-
-
 	  // Sets the page value on the tracker.
 	  ga('set', 'page', page);
-
 	  // Sending the pageview no longer requires passing the page
 	  // value since it's now stored on the tracker object.
 	  ga('send', 'pageview');
@@ -130,6 +127,7 @@ gapi.load('auth2', function() {
 		  console.log('fetched perfectly!')
 		  })
 })
+
 function signOut() {
    var auth2 = gapi.auth2.getAuthInstance();
    auth2.signOut().then(function () {

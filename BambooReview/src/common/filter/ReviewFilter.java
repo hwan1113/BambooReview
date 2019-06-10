@@ -19,7 +19,6 @@ import user.model.vo.User;
 @WebFilter(urlPatterns = {"/review/reviewList",
 		"/review/reviewView",
 		"/review/reviewForm",
-		"/review/reviewUpdate",
 		"/review/reviewDelete"})
 public class ReviewFilter implements Filter {
 
