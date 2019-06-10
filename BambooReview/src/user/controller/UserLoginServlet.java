@@ -21,7 +21,8 @@ import user.model.vo.User;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/user/login")
+@WebServlet(urlPatterns= {"/user/login"},
+			name = "UserLoginServlet")
 public class UserLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -85,7 +86,7 @@ public class UserLoginServlet extends HttpServlet {
 			}
 		}else {
 			msg = "존재하지 않는 아이디이거나 비밀번호가 틀렸습니다.";
-			loc="/";
+			loc="/user/userLogin";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

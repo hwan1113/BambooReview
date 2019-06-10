@@ -45,7 +45,6 @@ body {overflow-y: hidden; overflow-x: hidden;}
  	    });
  	}
 </script>
-	
 <script>
     $(document).ready(function() {
         $('#summernote').summernote({
@@ -53,9 +52,6 @@ body {overflow-y: hidden; overflow-x: hidden;}
         	height: 450,
 		    callbacks: {
 				onImageUpload: function(files, editor, welEditable) {
-		            /* for (var i = files.length - 1; i >= 0; i--) {
-		            	sendFile(files[i], this);
-		            } */
 		            sendFile(files[0], this);
 		        }
 			}

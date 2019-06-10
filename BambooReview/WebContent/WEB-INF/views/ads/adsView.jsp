@@ -5,7 +5,10 @@
 <%
     Ads ads = (Ads)request.getAttribute("ads");
 	List<AdsComment> adsCommentList = (List<AdsComment>)request.getAttribute("adsCommentList");
-	double avgRate = 1.5;
+	double avg = (double)ads.getRateTotal() / ads.getRateCnt();
+	if(ads.getDetailedAddress()==null)
+		ads.setDetailedAddress("");
+	String fullAddress = ads.getSearchedAddress()+ " " +ads.getDetailedAddress();
 %>
 <style>
 span.star-prototype, span.star-prototype > * {
@@ -39,8 +42,26 @@ span.star-prototype > * {
 	
 }
 
+.map_view {
+    display: none;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 50%;
+    height: 50%;
+    padding: 16px;
+    border: 10px solid black;
+    background-color: white;
+    z-index:1002;
+    filter: alpha(opacity=80)
+    overflow: auto;
+}
+
 </style>
+
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/ads.css" />
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ffc9015ab481251bc7da43886e3db28a&libraries=services"></script>
+
 <div class="ui centered grid">
 	<div class="area" style="width:750px; margin:0px 0px 14px 0px;">
 		<section id="ads-container">
@@ -52,7 +73,7 @@ span.star-prototype > * {
 		  		<div class="four column row">
 		    		<div class="left floated column"><%=ads.getAdsWriter() %>님
 		    		</div>
-		    		평가 : <span class="star-prototype"><%=avgRate%></span>(<%= avgRate%>)
+		    		평가 : <span class="star-prototype"><%=avg %></span>(<%=avg%>)
 		    		<div class="right floated column">
 			    		<i class="eye icon"></i>
 			    		<%=ads.getReadCnt() %>
@@ -64,7 +85,10 @@ span.star-prototype > * {
 		 	 	</div>
   			</div>
   			<div>
-  				주소: <span><%=ads.getSearchedAddress()+ " " +ads.getDetailedAddress() %></span>
+  				주소: <span id="fullAddress">
+  				<a href = "javascript:void(0)" onclick = "document.getElementById('map').style.display='block';document.getElementById('fade').style.display='block'"
+  					><%=fullAddress%></a></span>
+  				<p>(클릭하면 지도로 연결됩니다.)</p>	
   				편의시설: <span><%=ads.getFacilities() %></span>
   			</div>
 	 		 <div class="ui green segment" style="height:100%; min-height:505px;  text-align:center;">
@@ -324,6 +348,7 @@ function rate(){
 			function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data 
 				if (data.result == "0"){
 					alert("이미 평가를 하셨어요.");
+					console.log(data.result);
 				}
 				else{
 					alert("평가해 주셔서 감사합니다.");
@@ -347,4 +372,90 @@ return this.each(function(i,e){$(e).html($('<span/>').width($(e).text()*16));});
 
 // 숫자 평점을 별로 변환하도록 호출하는 함수
 $('.star-prototype').generateStars();
+</script>
+
+<!-- 다음지도 담을 div -->
+<div id="map" class="map_view"></div>
+
+<!-- 주소 클릭하면 지도 팝업창 띄우기 -->
+<!-- <script type="text/javascript">
+   $(document).ready(function() {
+    $('#fullAddress').click(function() {
+     $('#map').show();
+    });
+
+    $('#close').click(function() {
+     $('#map').hide();
+    });
+   });
+ </script> -->
+ 
+ <!-- 팝업창 외의 영역을 클릭하면 팝업 닫는 부분 -->
+ <script>
+ $(document).ready(function(){
+	 $(document).mousedown(function(e){
+	 $('.map_view').each(function(){
+	         if( $(this).css('display') == 'block' )
+	         {
+	             var l_position = $(this).offset();
+	             l_position.right = parseInt(l_position.left) + ($(this).width());
+	             l_position.bottom = parseInt(l_position.top) + parseInt($(this).height());
+
+
+	             if( ( l_position.left <= e.pageX && e.pageX <= l_position.right )
+	                 && ( l_position.top <= e.pageY && e.pageY <= l_position.bottom ) )
+	             {
+	                 //alert( 'popup in click' );
+	             }
+	             else
+	             {
+	                 //alert( 'popup out click' );
+	                 $(this).hide("fast");
+	             }
+	         }
+	     });
+	 }); 
+	 })
+
+ </script>
+
+<!-- 다음지도 연동부분 -->
+<script>
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+	// 지도를 생성합니다    
+	var map = new daum.maps.Map(mapContainer, mapOption); 
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new daum.maps.services.Geocoder();
+	
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch(fullAddress, function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === daum.maps.services.Status.OK) {
+
+        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new daum.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new daum.maps.InfoWindow({
+            content: '<div style="width:200px;text-align:center;padding:6px 0;"><%=fullAddress%></div>'
+        });
+        
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});  
 </script>
