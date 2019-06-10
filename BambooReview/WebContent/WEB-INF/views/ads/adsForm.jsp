@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
-<title>Ads 작성</title>
+<title>광고게시판 글 작성</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/ads.css" />
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 <script src="<%=request.getContextPath()%>/js/jquery-3.4.0.js"></script>
@@ -24,9 +24,7 @@
 </script>
 
 <style>
-.ui.menu{
-top:659px;
-}
+body {overflow-y: hidden; overflow-x: hidden;}
 </style>
 <script type="text/javascript">
        /* summernote에서 이미지 업로드시 실행할 함수 */
@@ -96,26 +94,58 @@ top:659px;
 		  method="get"
 		  enctype="multipart/form-data">
 	   <div class="ui centered grid" style="margin-top:5px;">  
-		제목: <input id="title" type="text" name="adsTitle" required />&nbsp;&nbsp;
-		작성자: <input id="writer" type="text" name="adsWriter"
-				 value="<%=adsService.getUserName(userLoggedIn.getCustomer_no())%>" readonly/>
-		</div>
-	    <!-- 검색 기능을 표시할 <div>를 생성한다 -->
-		<div id="postcodify">
- 
-		<!-- 주소와 우편번호를 입력할 <input>들을 생성하고 적당한 name과 id를 부여한다 -->
-		<input type="button" id="postcodify_search_button" value="주소검색"/>
-		검색한 주소: <input type="text" name="searchedAddress" id="searchedAddress" value="" style="width: 350px;" required/>
-		상세 주소: <input type="text" name="detailedAddress" id="detailedAddress" value="" style="width: 350px;"/><br />
-		</div>
+			<div class="ui labeled input" style="height:49px; top:-3px;">
+			  <div class="ui label" style="font-size:11px; height:33px; margin:0 auto;">
+			     <p>작성자</p>
+			  </div>
+			  <input id="writer" type="text" name="adsWriter" style="margin:0px 0px 16px 0px; width:80px; text-align:center;"
+					 value="<%=adsService.getUserName(userLoggedIn.getCustomer_no())%>" readonly/>
+			</div>
+				 
+				 
+			<div class="ui labeled input" style="height:49px; top:-3px;">
+			  <div class="ui label" style="font-size:11px; height:33px; margin:0 auto;">
+			     <p>제목</p>
+			  </div>
+			  <input id="title" type="text" name="adsTitle" required style="margin:0px 0px 16px 0px; width:300px;
+				"/>&nbsp;&nbsp;
+			</div>	 
+				 
 		<fieldset style="text-align:center;">
                               인터넷<input type="checkbox" name="facilities" value="인터넷" />
                 SPA<input type="checkbox" name="facilities" value="SPA" />
                               피트니스<input type="checkbox" name="facilities" value="피트니스" />
                	수영장<input type="checkbox" name="facilities" value="수영장" />
                	조식부페<input type="checkbox" name="facilities" value="조식부페" />
-               	기타: <input type="text" name="facilities" value="" />
+               	<div class="ui labeled input" style="height:33px; top:-3px;">
+				  <div class="ui label" style="font-size:11px; height:33px; margin:0 auto;">
+				     <p>기타</p>
+				  </div>
+				  <input type="text" name="facilities" value="" style="width:80px;"/>
+				</div>	 
             </fieldset>
+		
+	    <!-- 검색 기능을 표시할 <div>를 생성한다 -->
+		<div id="postcodify" style="margin-bottom:15px;">
+ 
+		<!-- 주소와 우편번호를 입력할 <input>들을 생성하고 적당한 name과 id를 부여한다 -->
+		<div class="ui action input" style="height:80%;">
+  			<input type="text" placeholder="주소를 검색하세요" name="searchedAddress" id="searchedAddress" value="" style="width: 350px;" required/>
+  			<button class="ui button" id="postcodify_search_button">주소 검색</button>
+		</div>
+		
+		<div class="ui labeled input" style="height:80%; top:-3px;">
+		  <div class="ui label" style="font-size:11px; margin:0 auto;">
+		     <p>상세주소</p>
+		  </div>
+		  <input type="text" placeholder="상세 주소를 입력하세요" name="detailedAddress" id="detailedAddress" value="" 
+		  style="width: 350px;">
+		</div>
+		
+		</div>
+		
+		</div>
+		
 		<textarea id="summernote" name="adsContent" required></textarea>
 
 		<div class="ui centered grid">
