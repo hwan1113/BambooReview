@@ -192,6 +192,8 @@ public class ReviewDAO {
 				r.setLikeCnt(rset.getInt("like_cnt"));
 				r.setDisLikeCnt(rset.getInt("dislike_cnt"));
 				r.setHotelId(rset.getString("hotel_id"));
+				r.setRateCnt(rset.getInt("rate_cnt"));
+				r.setRateTotal(rset.getInt("rate_total"));
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -455,6 +457,7 @@ public class ReviewDAO {
 			
 			if(rset.next())
 				r.setRateCnt(rset.getInt("ratecount"));
+				r.setRateTotal(rset.getInt("rate_total"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -467,7 +470,7 @@ public class ReviewDAO {
 	}
 	
 
-	public int getTotalRate(Connection conn, int reviewNo) {
+	/*public int getTotalRate(Connection conn, int reviewNo) {
 		Review r = new Review();
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -493,7 +496,7 @@ public class ReviewDAO {
 
 		return result;
 		
-	}
+	}*/
 	
 	public List<Review> selectDeletedReviewList(Connection conn, int cPage, int numPerPage) {
 		List<Review> list = new ArrayList<>();
@@ -608,6 +611,8 @@ public class ReviewDAO {
 		
 		return result;
 	}
+
+		
 
 
 }

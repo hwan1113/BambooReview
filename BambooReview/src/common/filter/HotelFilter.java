@@ -16,7 +16,7 @@ import user.model.vo.User;
 /**
  * Servlet Filter implementation class HotelFilter
  */
-@WebFilter(urlPatterns = {"/hotel/hotelList",
+@WebFilter(urlPatterns = {"/hotel/hotelList/*",
 		"",
 		"",
 		""})

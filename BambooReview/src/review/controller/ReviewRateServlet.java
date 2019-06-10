@@ -26,22 +26,11 @@ public class ReviewRateServlet extends HttpServlet {
 		int customerNo = Integer.parseInt(request.getParameter("customerNo"));
 		int reviewRate = Integer.parseInt(request.getParameter("reviewRate"));
 		int result = service.updateRateTotal(reviewNo, customerNo, reviewRate);
+		//평균을 여기서 계산하는 것이 아니라, ReviewView.jsp넘어오기전 ReviewviewServlet에서 selectOne시에 rate count와 rate총점을 넣어주어야함.
 		Review r = service.selectRateCount(reviewNo);
-		r.setRateTotal(service.getTotalRate(reviewNo));
-		
-		double avg = (double)r.getRateTotal() / r.getRateCnt();
-		
-		//System.out.println("avg@serv1="+String.format("%.2f", (double)r.getRateTotal() / r.getRateCnt()));
-		
-		//출력 확인
-		System.out.println("rateCnt@serv="+r.getRateCnt());
-		System.out.println("rateTotal@serv="+r.getRateTotal());
-		System.out.println("avg@serv1="+String.format("%.2f", avg));
 		
 		JSONObject obj = new JSONObject(); 
 		
-		obj.put("rateTotal", r.getRateTotal());
-		obj.put("rateCnt", r.getRateCnt()); //request.setAttribute("json", json);
 		obj.put("result", result); //request.setAttribute("json", json);
 		
 		response.setContentType("application/x-json; charset=UTF-8"); 

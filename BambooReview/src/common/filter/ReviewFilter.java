@@ -17,8 +17,9 @@ import user.model.vo.User;
  * Servlet Filter implementation class ReviewFilter
  */
 @WebFilter(urlPatterns = {"/review/reviewList",
-		"",
-		""})
+		"/review/reviewView",
+		"/review/reviewForm",
+		"/review/reviewDelete"})
 public class ReviewFilter implements Filter {
 
     /**
@@ -44,15 +45,16 @@ public class ReviewFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest)request; 
 		HttpSession session = httpRequest.getSession();
 		User userLoggedIn = (User)session.getAttribute("userLoggedIn");
-		String reqHotelId = httpRequest.getParameter("hotelid");
-		String reqHotelName = httpRequest.getParameter("hotelname");
+		String reqHotelId = httpRequest.getParameter("hotelId");
+		String reqHotelName = httpRequest.getParameter("hotelName");
+		
 		
 		if(userLoggedIn != null && reqHotelId!=null &&reqHotelName!=null)
 		
 		
+		System.out.println("hotelId= "+reqHotelId);
 		if(userLoggedIn == null ||
 				reqHotelId == null || reqHotelName==null) {
-			System.out.println("applied!");
 			request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
 			request.setAttribute("loc", "/");
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp")

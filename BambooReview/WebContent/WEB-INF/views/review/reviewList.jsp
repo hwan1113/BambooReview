@@ -5,7 +5,9 @@
 	List<Review> list = (List<Review>)request.getAttribute("list");
 	String pageBar = (String)request.getAttribute("pageBar");
 	String hotelName = (String)request.getAttribute("hotelName");
-	String hotelid = (String)request.getAttribute("hotelid");
+	String hotelid = (String)request.getAttribute("hotelId");
+	String srchWord  = (String)request.getAttribute("srchWord");
+
 %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" />		
@@ -21,7 +23,8 @@
 	 	<div class="ui breadcrumb">
 		  <a href="<%=request.getContextPath()%>" class="section">Home</a>
 		  <i class="right chevron icon divider"></i>
-		  <a href="javascript:history.back();" class="section">location</a>
+		  <a href="javascript:history.back();" class="section"
+		  	 onclick=><%=srchWord %></a>
 		  <i class="right arrow icon divider"></i>
 	  	  <div class="active section"><%=hotelName %></div>
 		</div>
@@ -68,10 +71,12 @@
 	<!-- 글쓰기 권한은 일반회원과 관리자만 가능 -->
 	<% if(userLoggedIn != null &&
 		    		("U".equals(userLoggedIn.getStatus())
-		    		|| "A".equals(userLoggedIn.getStatus()))) {%>
+		    		|| "G".equals(userLoggedIn.getStatus()))) {%>
 	<button  id="btn-add" class="ui olive button" 
-		style="float:right; background-color:#68b30d"onclick="location.href='<%=request.getContextPath()%>/review/reviewForm?hotelName=<%=hotelName %>&hotelid=<%=hotelid%>'"/><i class="pencil alternate icon"></i>글쓰기</button>
-	
+		style="float:right; background-color:#68b30d"
+		onclick="location.href='<%=request.getContextPath()%>/review/reviewForm?hotelName=<%=hotelName %>&hotelId=<%=hotelid%>'">
+		<i class="pencil alternate icon"></i>글쓰기</button>
+
 	</div>
 	<%} %>
 

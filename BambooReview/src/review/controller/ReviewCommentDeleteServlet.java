@@ -21,14 +21,17 @@ public class ReviewCommentDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 		int CommentNo = Integer.parseInt(request.getParameter("del"));
-		System.out.println("no="+reviewNo+", del="+CommentNo);
+		String hotelName = request.getParameter("hotelName");
+		String hotelId = request.getParameter("hotelId");
+		
+		
 
 		int result = new ReviewService().deletereviewComment(CommentNo);
 		
 		String view = "/WEB-INF/views/common/msg.jsp";
 		String msg = "";
 		//javascript/html에서 사용할 url은 contextPath를 포함한다.
-		String loc = "/review/reviewView?reviewNo="+reviewNo;
+		String loc = "/review/reviewView?reviewNo="+reviewNo+"&hotelName="+hotelName+"&hotelId="+hotelId;
 
 		if(result>0)
 			msg = "댓글 삭제 성공!";

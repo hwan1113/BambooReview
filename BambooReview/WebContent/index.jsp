@@ -170,8 +170,8 @@ $("#searh-button").click(function(){
              var json = JSON.stringify(Arr);
               $("#hotelData").val(json)
        		$("#srchword").val($("#srch-input").val())
-               $("#hotelDataFrm").attr('action', '<%=request.getContextPath()%>/hotel/hotelList')
-              $("#hotelDataFrm").submit()
+            $("#hotelDataFrm").attr('action', '<%=request.getContextPath()%>/hotel/hotelList?srchword='+$("#srchword").val())
+            $("#hotelDataFrm").submit()
         }
 	},
 	error:function(jqxhr, textStatus, errorThrown){

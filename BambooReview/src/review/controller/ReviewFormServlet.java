@@ -19,7 +19,7 @@ public class ReviewFormServlet extends HttpServlet {
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String hotelName = request.getParameter("hotelName");
-		String hotelid = request.getParameter("hotelid");
+		String hotelid = request.getParameter("hotelId");
 		
 		request.setAttribute("hotelName", hotelName);
 		request.setAttribute("hotelid", hotelid);

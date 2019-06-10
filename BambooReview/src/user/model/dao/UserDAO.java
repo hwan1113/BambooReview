@@ -86,7 +86,6 @@ public class UserDAO {
 				u.setEnrollDate(rset.getDate("enrolldate"));
 				u.setQuitDate(rset.getDate("quitdate"));
 				u.setStatus(rset.getString("status"));
-				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -280,12 +279,8 @@ public class UserDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, u.getEmail());
-			pstmt.setString(2, u.getPassword());
-			pstmt.setString(3, u.getUserName());
-			pstmt.setString(4, u.getPhone());
-			pstmt.setString(5, u.getStatus());
-			pstmt.setString(6, u.getProfile());
-			
+			pstmt.setString(2, u.getUserName());
+			pstmt.setString(3, u.getStatus());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

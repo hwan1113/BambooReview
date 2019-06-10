@@ -91,7 +91,7 @@ footer
 			  <div class="ui label" style="height:25px; position:absolute; top:10px; width:50px; left:-40px;" >
 			    <p style="position:absolute; top:4px;">제목</p>
 			  </div>
-			  <input id="title" type="text" name="reviewTitle" required />
+			  <input id="title" type="text" name="reviewTitle" value ="<%=r.getReviewTitle()%>" required />
 			</div>
 		
 		<div class="ui labeled input" style="margin:0px 0px 6px 0px; left:60px;">
@@ -102,11 +102,12 @@ footer
 				 value="<%=service.getUserName(userLoggedIn.getCustomer_no())%>" style="width:80px;" readonly/>
 			</div>
 	   </div>
-		<textarea style="margin-top:10px;" id="summernote" name="reviewContent"></textarea>
+		<textarea style="margin-top:10px;" id="summernote" name="reviewContent"
+		><%=r.getReviewContent() %></textarea>
 
 		<div class="ui centered grid">
 			<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">작성</button>
-			<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelname=<%=hotelName %>&hotelid=<%=r.getHotelId()%>'">취소</button>
+			<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelName=<%=hotelName %>&hotelId=<%=r.getHotelId()%>'">취소</button>
 		</div>
 		
 		<input id="hotelName" type="hidden" name="hotelName" value="<%=hotelName%>" />

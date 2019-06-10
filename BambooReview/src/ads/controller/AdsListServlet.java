@@ -31,7 +31,6 @@ public class AdsListServlet extends HttpServlet {
 		}
 
 		List<Ads> adsList = new AdsService().selectAdsList(cPage, numPerPage);
-		System.out.println("adsList=" + adsList);
 				
 		int totalAdsCount = new AdsService().selectAdsCount();
 		int totalPage = (int)Math.ceil((double)totalAdsCount/numPerPage);	

@@ -10,8 +10,8 @@
  <script src="<%=request.getContextPath()%>/js/jquery-3.4.0.js"></script>
  <form name="checkIdDuplicateFrm" method="post">
 	<input type="hidden" name="email" />
-
 </form>
+
 <title>LoginView</title>
 	<div class="ui two column centered grid">
   		<div class="column centered row">
@@ -61,8 +61,9 @@
 <script>
 function signIn() {
 	var auth2 = gapi.auth2.getAuthInstance();
-	var profile = auth2.currentUser.get().getBasicProfile();
+	
 	auth2.signIn().then(function(){
+	var profile = auth2.currentUser.get().getBasicProfile();
 		  $("#userName").val(profile.getName())
 	      $("#email").val(profile.getEmail())
 	      $("#picture").val(profile.getImageUrl())
