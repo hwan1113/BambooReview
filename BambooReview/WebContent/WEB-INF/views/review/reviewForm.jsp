@@ -109,7 +109,7 @@ body {overflow-y: hidden; overflow-x: hidden;}
 			<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">작성</button>
 			<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelName=<%=hotelName %>&hotelId=<%=hotelId%>'">취소</button>
 		</div>
-		
+		<input type="hidden" name="srchWord" value="<%=srchWord%>"/>
 		<input id="hotelName" type="hidden" name="hotelName" value="<%=hotelName%>" />
 	  	<input id="hotelId" type="hidden" name="hotelId" value="<%=hotelId%>" />
 		<input id="customerNo" type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"/>

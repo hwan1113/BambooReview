@@ -13,8 +13,8 @@ body {overflow-y: hidden; overflow-x: hidden;}
 <div class="all-content">
 <div class="ui small message" style="text-align:center; font-size:14px; font-family:sans-serif; font-weight:bold">이용권 안내</div>
 <div class="ui placeholder segment">
-<div class="ui green message" id="month">베이직(한달 이용권)</div>
-<div class="ui teal message" id="year">프리미엄(1년 이용권)</div>
+<div class="ui green message" id="month">베이직(한달 이용권) 1700원</div>
+<div class="ui teal message" id="year">프리미엄(1년 이용권) 17000원</div>
   <div class="ui two column very relaxed stackable grid">
           <p class="month-detail">한달간 커뮤니티 모든 글 열람,등록, 수정, 삭제가능</p>
     <div class="column">
@@ -33,11 +33,13 @@ body {overflow-y: hidden; overflow-x: hidden;}
     Or
   </div>
 </div>
-<div class="ui buttons" style="position:absolute; left:38.5%; top:510px; ">
+<div class="ui buttons" style="position:absolute; left:23.5%; top:510px; ">
   <%if(userLoggedIn==null) {%>
   <button class="ui positive button" onclick="sendBack()"><i class="won sign icon"></i>결제하기</button>
   <%}else{ %>
-  <button class="ui positive button" onclick="requestPay()"><i class="won sign icon"></i>결제하기</button>
+  <button class="ui positive button" onclick="requestPay(17000, '프리미엄')"><i class="won sign icon"></i> 프리미엄 결제하기</button>
+  <div class="or"></div>
+  <button class="ui positive button" onclick="requestPay(1700, '베이직')"><i class="won sign icon"></i> 베이직 결제하기</button>
   <input type="hidden" value="<%=userLoggedIn.getCustomer_no()%>" id="pay_cust_no"/>
   <input type="hidden" value="<%=userLoggedIn.getEmail()%>" id="pay_eamil"/>
   <input type="hidden" value="<%=userLoggedIn.getUserName()%>" id="pay_name"/>
@@ -52,10 +54,10 @@ body {overflow-y: hidden; overflow-x: hidden;}
 </div>
 <script>
 IMP.init("imp28947597");
-function requestPay() {
+function requestPay(amount,type) {
 	const email = $("#pay_email").val()
 	const name = $("#pay_name").val()
-	param={customer_no: $("#pay_cust_no").val(), amount: 1000}
+	param={customer_no: $("#pay_cust_no").val(), amount: amount}
 	$.ajax({
 		url: '<%=request.getContextPath()%>/payment/paymentInfo',
 		type: "get",
@@ -67,7 +69,7 @@ function requestPay() {
 			    pg: "html5_inicis",
 			    pay_method: "card",
 			    merchant_uid: data.payment_no,
-			    name: "베이직(한달 이용권)",
+			    name: type,
 			    amount: data.amount,
 			    buyer_email: email,
 			    buyer_name: name,

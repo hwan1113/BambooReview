@@ -151,12 +151,12 @@ public class AdsService {
 	}
 	
 
-	public int getTotalRate(int adsNo) {
-		Connection conn = getConnection();
-		int result = new AdsDAO().getTotalRate(conn, adsNo);
-		close(conn);
-		return result;
-	}
+//	public int getTotalRate(int adsNo) {
+//		Connection conn = getConnection();
+//		int result = new AdsDAO().getTotalRate(conn, adsNo);
+//		close(conn);
+//		return result;
+//	}
 
 	public int deleteAds(int adsNo) {
 		Connection conn = getConnection();

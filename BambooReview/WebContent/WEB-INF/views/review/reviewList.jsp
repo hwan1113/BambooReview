@@ -47,7 +47,7 @@
 				<td><%= r.getReviewNo() %></td>
 				<td><%= r.getReviewWriter() %></td>
 				<td>
-					<a href="<%=request.getContextPath() %>/review/reviewView?reviewNo=<%= r.getReviewNo()%>&hotelName=<%=hotelName%>&hotelId=<%=hotelid%>"><%= r.getReviewTitle() %></a>
+					<a href="<%=request.getContextPath() %>/review/reviewView?reviewNo=<%= r.getReviewNo()%>&hotelName=<%=hotelName%>&hotelId=<%=hotelid%>&srchWord=<%=srchWord%>"><%= r.getReviewTitle() %></a>
 				</td>
 				<td style="text-align:center;"><%= r.getWrittenDate() %></td>
 				<td style="text-align:center;"><%=r.getReadCnt() %></td>

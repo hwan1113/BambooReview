@@ -47,12 +47,12 @@ public class ReviewFormEndServlet extends HttpServlet {
 			msg = "게시글 등록성공!";
 			
 			//성공한 경우, result변수에 새로 등록된 글번호를 가져옴.
-			loc = "/review/reviewView?reviewNo="+result+"&hotelName="+hotelName+"&hotelId="+hotelId;
+			loc = "/review/reviewView?reviewNo="+result+"&hotelName="+hotelName+"&hotelId="+hotelId+"&srchWord="+srchWord;
 		}
 		else {
 			msg = "게시글 등록실패!";
 			//실패한 경우, 해당 호텔 리뷰 리스트로 돌아감
-			loc = "/review/reviewList?hotelId="+hotelId+"&hotelName="+hotelName;
+			loc = "/review/reviewList?hotelId="+hotelId+"&hotelName="+hotelName+"&srchWord="+srchWord;
 		}
 		
 		//3.view단 처리

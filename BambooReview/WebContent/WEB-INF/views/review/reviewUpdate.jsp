@@ -5,6 +5,7 @@
 <%
 	Review r = (Review)request.getAttribute("review");
 	String hotelName = (String)request.getAttribute("hotelName");
+	String srchWord = (String)request.getAttribute("srchWord");
 %>
 
 <title>Review 수정</title>
@@ -107,9 +108,10 @@ footer
 
 		<div class="ui centered grid">
 			<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">작성</button>
-			<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelName=<%=hotelName %>&hotelId=<%=r.getHotelId()%>'">취소</button>
+			<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelName=<%=hotelName %>&hotelId=<%=r.getHotelId()%>&srchWord=<%=srchWord%>'">취소</button>
 		</div>
 		
+		<input type="hidden" name="srchWord" value="<%=srchWord%>" />
 		<input id="hotelName" type="hidden" name="hotelName" value="<%=hotelName%>" />
 		<input id="hotelId" type="hidden" name="hotelId" value="<%=r.getHotelId()%>" />
 		<input id="customerNo" type="hidden" name="customerNo" value="<%=r.getCustomerNo()%>"/>

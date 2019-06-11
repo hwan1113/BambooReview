@@ -4,6 +4,7 @@
 <%@ page import="ads.model.vo.*, java.util.*, ads.model.service.* " %>
 <%
     Ads ads = (Ads)request.getAttribute("ads");
+	System.out.println("adsView.jsp ads ="+ads);
 	List<AdsComment> adsCommentList = (List<AdsComment>)request.getAttribute("adsCommentList");
 	double avg = (double)ads.getRateTotal() / ads.getRateCnt();
 	if(ads.getDetailedAddress()==null)

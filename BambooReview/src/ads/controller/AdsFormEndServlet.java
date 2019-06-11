@@ -26,13 +26,11 @@ public class AdsFormEndServlet extends HttpServlet {
 		//1. 파라미터 핸들링
 		String adsTitle = request.getParameter("adsTitle");
 		int customerNo = Integer.parseInt(request.getParameter("customerNo"));
-		System.out.println("customerNo@serv="+customerNo);
 		String adsWriter = request.getParameter("adsWriter");
-		System.out.println("writer@serv="+adsWriter);
+
 		String adsContent = request.getParameter("adsContent");
 		String searchedAddress = request.getParameter("searchedAddress");
 		String detailedAddress = request.getParameter("detailedAddress");
-		//String fullAddress = searchedAddress + " " + detailedAddress;
 		String[] arrFacilities = request.getParameterValues("facilities");
 		String facilities = Arrays.toString(arrFacilities);
 		

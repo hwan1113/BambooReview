@@ -101,15 +101,12 @@ public class AdsDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-
-			//pstmt.setInt(1, ads.getCustomerNo());
 			pstmt.setString(1, ads.getAdsTitle());
 			pstmt.setString(2, ads.getSearchedAddress());
 			pstmt.setString(3, ads.getDetailedAddress());
 			pstmt.setString(4, ads.getFacilities());
 			pstmt.setString(5, ads.getAdsContent());
-			
-
+			pstmt.setInt(6, ads.getCustomerNo());
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -189,7 +186,6 @@ public class AdsDAO {
 				ads.setDetailedAddress(rset.getString("detailed_address"));
 				ads.setFacilities(rset.getString("facilities"));
 				ads.setAdsWriter(getUserName(conn, rset.getInt("customer_no")));
-				System.out.println("userName@DAO="+getUserName(conn, rset.getInt("customer_no")));
 				ads.setAdsContent(rset.getString("ads_content"));
 				ads.setWrittenDate(rset.getDate("written_date"));
 				ads.setReadCnt(rset.getInt("read_cnt"));
@@ -461,6 +457,7 @@ public class AdsDAO {
 			
 			if(rset.next())
 				ads.setRateCnt(rset.getInt("rate_cnt"));
+				ads.setRateTotal(rset.getInt("rate_total"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -473,33 +470,33 @@ public class AdsDAO {
 	}
 	
 
-	public int getTotalRate(Connection conn, int adsNo) {
-		Ads ads = new Ads();
-		int result = 0;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("getTotalRate");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, adsNo);
-			
-			rset = pstmt.executeQuery();
-			
-			if(rset.next())
-				ads.setRateTotal(rset.getInt("rate_total"));
-				result = ads.getRateTotal();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-
-		return result;
-		
-	}
+//	public int getTotalRate(Connection conn, int adsNo) {
+//		Ads ads = new Ads();
+//		int result = 0;
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		String sql = prop.getProperty("getTotalRate");
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setInt(1, adsNo);
+//			
+//			rset = pstmt.executeQuery();
+//			
+//			if(rset.next())
+//				ads.setRateTotal(rset.getInt("rate_total"));
+//				result = ads.getRateTotal();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(rset);
+//			close(pstmt);
+//		}
+//
+//		return result;
+//		
+//	}
 	
 	public List<Ads> selectDeletedAdsList(Connection conn, int cPage, int numPerPage) {
 		List<Ads> adsList = new ArrayList<>();

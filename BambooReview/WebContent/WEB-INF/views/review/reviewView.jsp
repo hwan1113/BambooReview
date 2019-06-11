@@ -11,6 +11,7 @@
 	if(Double.isNaN(avg)){
 		avg=0;
 	}
+	String srchWord = (String)request.getAttribute("srchWord");
 %>
 <style>
 span.star-prototype, span.star-prototype > * {
@@ -138,13 +139,13 @@ span.star-prototype > * {
 		    <tr>
 		        <th colspan="2">
 		            <input type="button" value="수정하기" class="btn btn-success"
-		            	   onclick="location.href='<%=request.getContextPath()%>/review/reviewUpdate?reviewNo=<%=r.getReviewNo()%>&hotelName=<%=hotelName%>'"/>
+		            	   onclick="location.href='<%=request.getContextPath()%>/review/reviewUpdate?reviewNo=<%=r.getReviewNo()%>&hotelName=<%=hotelName%>&srchWord=<%=srchWord%>'"/>
 		            <input type="button" value="삭제하기" class="btn btn-warning" onclick="deleteReview();"/>
 		        </th>
 		    </tr>
 		    <%} %>
 		    <input type="button" value="목록으로" class="btn btn-success" style="background-color:#aacc19; border:1px solid #aacc19"
-		           onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelName=<%=hotelName %>&hotelId=<%=hotelId%>'"/>
+		           onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelName=<%=hotelName %>&hotelId=<%=hotelId%>&srchWord=<%=srchWord%>'"/>
 		    
 		    <%  //글작성자와 관리자가 아닌 사람만 평가가 가능
 			if(userLoggedIn != null &&

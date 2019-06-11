@@ -27,6 +27,7 @@ public class ReviewUpdateEndServlet extends HttpServlet {
 		String reviewTitle = request.getParameter("reviewTitle");
 		String reviewWriter = request.getParameter("reviewWriter");
 		String reviewContent = request.getParameter("reviewContent");
+		String srchWord = request.getParameter("srchWord");
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 
 		Review r = new Review();
@@ -39,13 +40,13 @@ public class ReviewUpdateEndServlet extends HttpServlet {
 		int result = new ReviewService().updateReview(r);
 		
 		String msg = "";
-		String loc = "/review/reviewList";
+		String loc = "/review/reviewList?hotelName="+hotelName+"&hotelId="+hotelId+"&srchWord="+srchWord;
 
 		if(result>0) {
 			msg = "게시글 등록성공!";
 			r = new ReviewService().selectOne(reviewNo);
 			//성공한 경우, result변수에 새로 등록된 글번호를 가져옴.
-			loc = "/review/reviewView?reviewNo="+r.getReviewNo()+"&hotelName="+hotelName+"&hotelId="+hotelId;
+			loc = "/review/reviewView?reviewNo="+r.getReviewNo()+"&hotelName="+hotelName+"&hotelId="+hotelId+"&srchWord="+srchWord;
 		}
 		else {
 			msg = "게시글 등록실패!";

@@ -103,7 +103,6 @@ position:relative;
 					 value="<%=adsService.getUserName(userLoggedIn.getCustomer_no())%>" readonly/>
 			</div>
 				 
-				 
 			<div class="ui labeled input" style="height:49px; top:-3px;">
 			  <div class="ui label" style="font-size:11px; height:33px; margin:0 auto;">
 			     <p>제목</p>

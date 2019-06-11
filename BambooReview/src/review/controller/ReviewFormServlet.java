@@ -20,10 +20,10 @@ public class ReviewFormServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String hotelName = request.getParameter("hotelName");
 		String hotelid = request.getParameter("hotelId");
-		
+		String srchWord = request.getParameter("srchWord");
 		request.setAttribute("hotelName", hotelName);
 		request.setAttribute("hotelid", hotelid);
-		
+		request.setAttribute("srchWord", srchWord);
 		request.getRequestDispatcher("/WEB-INF/views/review/reviewForm.jsp").forward(request, response);
 		
 		

@@ -30,6 +30,7 @@ public class ReviewViewServlet extends HttpServlet {
 		int reviewNo  = Integer.parseInt(request.getParameter("reviewNo"));
 		String hotelName = request.getParameter("hotelName");
 		String hotelId = request.getParameter("hotelId");
+		String srchWord = request.getParameter("srchWord");
 		
 		//2.비지니스로직 호출
 		ReviewService reviewService = new ReviewService();
@@ -77,6 +78,7 @@ public class ReviewViewServlet extends HttpServlet {
 		
 		String view = "/WEB-INF/views/review/reviewView.jsp";
 		
+		request.setAttribute("srchWord", srchWord);
 		request.setAttribute("review", review);
 		request.setAttribute("commentList", commentList);
 		

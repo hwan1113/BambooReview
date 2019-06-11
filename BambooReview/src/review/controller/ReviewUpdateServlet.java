@@ -25,11 +25,13 @@ public class ReviewUpdateServlet extends HttpServlet {
 		//1.파라미터
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 		String hotelName = request.getParameter("hotelName");
+		String srchWord = request.getParameter("srchWord");
 		
 		//2. 업무로직
 		Review r = new ReviewService().selectOne(reviewNo);
 		
 		//3. view단처리
+		request.setAttribute("srchWord", srchWord);
 		request.setAttribute("review", r);
 		request.setAttribute("hotelName", hotelName);
 		request.getRequestDispatcher("/WEB-INF/views/review/reviewUpdate.jsp")
