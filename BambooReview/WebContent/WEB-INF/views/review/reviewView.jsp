@@ -30,6 +30,7 @@ span.star-prototype > * {
     background-position: 0 0;
     width:80px; 
 }
+
 </style>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" />
 <div class="ui centered grid">
@@ -56,13 +57,33 @@ span.star-prototype > * {
 			    	</div>
 		 	 	</div>
   			</div>
-	 		 <div class="ui green segment" style="height:1oo%; min-height:505px; text-align:center;">
+	 		 <div class="ui green segment" style="height:1oo%; min-height:505px; text-align:center; ">
 	  			<div class="ui grid">
 	  				<div class=reviewContent><%=r.getReviewContent()%></div>
 	  			</div>
 	  		</div>
+	  		  <%  //글작성자와 관리자가 아닌 사람만 평가가 가능
+			if(userLoggedIn != null &&
+				((userLoggedIn.getCustomer_no() != r.getCustomerNo())
+					&& !"A".equals(userLoggedIn.getStatus()))) {%>
+		    <form id="rate_form" action="<%=request.getContextPath()%>/review/reviewRate?reviewNo=<%=r.getReviewNo()%>">
+				<input type="hidden" name="command" value="rateCnt">
+				<input type="hidden" name="command" value="rateTotal">
+				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
+   				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
+   				<select name="reviewRate">
+				    <option value="" disabled selected>점수선택</option>
+				    <option value="5">아주 만족해요(5)</option>
+				    <option value="4">만족해요(4)</option>
+				    <option value="3">보통이에요(3)</option>
+				    <option value="2">그냥 그래요(2)</option>
+				    <option value="1">별로에요(1)</option>	
+				</select>
+				<button class="ui button" onclick="return rate()" style="width:90px; height:30px; background-color:#d2ea1a;"><i class="star icon"></i>평가</button>
+			</form>
+			<%} %>
 	      	         <!-- 댓글 부분 -->
-<hr style="margin-top:30px;" />
+<hr style="margin-top:10px;" />
 
 <div id="comment-container">
 	<div class="comment-editor">
@@ -118,7 +139,7 @@ span.star-prototype > * {
            	     <%--글작성자/관리자인경우 수정삭제 가능 --%>
            	     <div class="ui centered grid">
 	  
-					  <div class="ui buttons" id="like-form">
+					  <div class="ui buttons" id="like-form" style="margin-top:10px;">
 					 		<form id="like_form" action="<%=request.getContextPath()%>/review/reviewLikeCnt?reviewNo=<%=r.getReviewNo()%>">  
 			    				<input type="hidden" name="command" value="likeCnt"> 
 			    				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
@@ -142,35 +163,21 @@ span.star-prototype > * {
 		    <div class="listbtn">
 		    <tr>
 		        <th colspan="2">
-		            <input type="button" value="수정하기" class="btn btn-success"
+		            <button class="btn btn-success" 
 		            	   onclick="location.href='<%=request.getContextPath()%>/review/reviewUpdate?reviewNo=<%=r.getReviewNo()%>&hotelName=<%=hotelName%>&srchWord=<%=srchWord%>'"/>
-		            <input type="button" value="삭제하기" class="btn btn-warning" onclick="deleteReview();"/>
+		            	   <i class="edit icon"></i>수정</button>
+		            <button class="btn btn-warning" onclick="deleteReview();"><i class="trash icon"></i>삭제하기</button>
 		        </th>
 		    </tr>
 		    <%} %>
 		    <input type="button" value="목록으로" class="btn btn-success" style="background-color:#aacc19; border:1px solid #aacc19"
 		           onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelName=<%=hotelName %>&hotelId=<%=hotelId%>&srchWord=<%=srchWord%>'"/>
+
 		    
-		    <%  //글작성자와 관리자가 아닌 사람만 평가가 가능
-			if(userLoggedIn != null &&
-				((userLoggedIn.getCustomer_no() != r.getCustomerNo())
-					&& !"A".equals(userLoggedIn.getStatus()))) {%>
-		    <form id="rate_form" action="<%=request.getContextPath()%>/review/reviewRate?reviewNo=<%=r.getReviewNo()%>">
-				<input type="hidden" name="command" value="rateCnt">
-				<input type="hidden" name="command" value="rateTotal">
-				<input type="hidden" name="reviewNo" value="<%=r.getReviewNo()%>">
-   				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
-   				<select name="reviewRate">
-				    <option value="" disabled selected>점수선택</option>
-				    <option value="5">아주 만족해요(5)</option>
-				    <option value="4">만족해요(4)</option>
-				    <option value="3">보통이에요(3)</option>
-				    <option value="2">그냥 그래요(2)</option>
-				    <option value="1">별로에요(1)</option>	
-				</select>
-				<button type="button" onclick="return rate()" >평가</button>
-			</form>
-			<%} %>
+		    <button class="btn btn-success" style="background-color:#aacc19; position:relative; float:right; border:1px solid #aacc19; margin-bottom:15px;" 
+		    onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelName=<%=hotelName %>&hotelId=<%=hotelId%>'"><i class="list icon"></i>목록</button>
+		    
+		  
 		    </div>
 
 	     </section>
