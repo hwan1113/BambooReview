@@ -14,7 +14,7 @@
   		  <form class="ui form" name="userEnrollFrm" action="<%=request.getContextPath() %>/user/signup"  onsubmit="return enrollValidation();">
 			  <div class="field">
 			    <label>이메일</label>
-			    <input type="text" name="email" placeholder="email" id="email" required style="width:370px;"/>
+			    <input type="email" name="email" placeholder="email" id="email" required style="width:370px;" />
 			  </div>
 			  <input type="button" value="이메일 중복검사" class="ui olive button" 
 			  style="position:absolute; height:38px; top:23px; left:366px; font-size:13px;"
@@ -82,6 +82,9 @@
 				alert("아이디 중복검사 해주세요.");
 				return false;
 			}
+			//중복검사 통과하면 입력창 readonly로 설정
+			/* else
+				$("#email").attr("readonly",true); */
 			//패스워드 일치 여부
 			if($("#password").val()!=$("#passwordCfrm").val()){
 				alert("비밀번호가 일치하지 않습니다");

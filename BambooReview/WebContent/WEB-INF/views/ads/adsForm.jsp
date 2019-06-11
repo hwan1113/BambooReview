@@ -14,7 +14,6 @@
 <script src="<%=request.getContextPath()%>/postcodify-master/api/search.min.js"></script>
  
 <!-- "검색" 단추를 누르면 팝업 레이어가 열리도록 설정한다 -->
-<!-- <script> $(function() { $("#postcodify_search_button").postcodifyPopUp(); }); </script> -->
 <script>
     $(function() { $("#postcodify_search_button").postcodifyPopUp({
         insertAddress : "#searchedAddress",
@@ -134,10 +133,10 @@ position:relative;
 	                              피트니스<input type="checkbox" name="facilities" value="피트니스" />
 	               	수영장<input type="checkbox" name="facilities" value="수영장" />
 	               	<div class="row">
-	               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
-	               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
-	               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
-	               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
+	               	공연장<input type="checkbox" name="facilities" value="공연장" />
+	               	음식점<input type="checkbox" name="facilities" value="음식점" />
+	               	룸서비스<input type="checkbox" name="facilities" value="룸서비스" />
+	               	BAR<input type="checkbox" name="facilities" value="BAR" />
 	               	</div>
 	               	<div class="row">
 	               	<div class="ui labeled input" style="height:26px;  position:relative; top:-10px;">

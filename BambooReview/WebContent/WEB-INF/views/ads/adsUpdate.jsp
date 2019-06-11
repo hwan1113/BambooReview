@@ -4,6 +4,8 @@
 <%@ page import="ads.model.vo.*" %>
 <%
 	Ads ads = (Ads)request.getAttribute("ads");
+	if(ads.getDetailedAddress()==null)
+		ads.setDetailedAddress("");
 %>
 
 <title>Ads 수정</title>

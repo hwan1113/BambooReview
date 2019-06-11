@@ -1,7 +1,6 @@
 package user.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +14,8 @@ import user.model.vo.User;
 /**
  * Servlet implementation class UserEnrollServlet
  */
-@WebServlet("/user/signup")
+@WebServlet(urlPatterns= {"/user/signup"},
+			name = "UserEnrollServlet")
 public class UserEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

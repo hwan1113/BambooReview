@@ -15,15 +15,15 @@
 <style>
 span.star-prototype, span.star-prototype > * {
     height: 16px; 
-    background: url(<%=request.getContextPath()%>/images/starImage.png) 0 -16px repeat-x;
+    background: (<%=request.getContextPath()%>/images/starImage.png) 0 -16px repeat-x;
     width: 80px;
     display: inline-block;
 }
  
 span.star-prototype > * {
 	float: left;
-    background-position: 0, 0;
-    width:80px;
+    background-position: 0 0;
+    width:80px; 
 }
 </style>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/review.css" />
@@ -40,7 +40,7 @@ span.star-prototype > * {
 		  		<div class="four column row" id="wwww">
 		    		<div class="left floated column"><%=r.getReviewWriter() %>님
 		    		</div>
-		    		평가 : <span class="star-prototype"><%=avg %></span><%=avg %>
+		    		평가 : <span class="star-prototype"><%=avg %></span>(<%=avg%>)
 		    		<div class="right floated column">
 			    		<i class="eye icon"></i>
 			    		<%=r.getReadCnt() %>
