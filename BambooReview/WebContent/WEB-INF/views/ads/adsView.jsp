@@ -91,13 +91,33 @@ span.star-prototype > * {
   				<p>(클릭하면 지도로 연결됩니다.)</p>	
   				편의시설: <span><%=ads.getFacilities() %></span>
   			</div>
-	 		 <div class="ui green segment" style="height:100%; min-height:505px;  text-align:center;">
+	 		 <div class="ui green segment" style="height:100%; min-height:505px;  text-align:center; margin:0px 0px 5px 0px;">
 	  			<div class="ui grid">
 	  				<div class=adsContent><%=ads.getAdsContent()%></div>
 	  			</div>
 	  		</div>
+	  			    <%  //글작성자와 관리자가 아닌 사람만 평가가 가능
+			if(userLoggedIn != null &&
+				((userLoggedIn.getCustomer_no() != ads.getCustomerNo())
+					&& !"A".equals(userLoggedIn.getStatus()))) {%>
+		    <form id="rate_form" action="<%=request.getContextPath()%>/ads/adsRate?adsNo=<%=ads.getAdsNo()%>">
+				<input type="hidden" name="command" value="rateCnt">
+				<input type="hidden" name="command" value="rateTotal">
+				<input type="hidden" name="adsNo" value="<%=ads.getAdsNo()%>">
+   				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
+   				<select name="adsRate">
+				    <option value="" disabled selected>점수선택</option>
+				    <option value="5">아주 만족해요(5)</option>
+				    <option value="4">만족해요(4)</option>
+				    <option value="3">보통이에요(3)</option>
+				    <option value="2">그냥 그래요(2)</option>
+				    <option value="1">별로에요(1)</option>
+				</select>
+				<button class="ui button" onclick="return rate()" style="width:90px; height:30px; background-color:#d2ea1a;"><i class="star icon"></i>평가</button>
+			</form>
+			<%} %>
 	  		<!-- 댓글 부분 -->
-<hr style="margin-top:30px;" />
+<hr style="margin-top:5px;" />
 
 <div id="comment-container">
 	<div class="comment-editor">
@@ -181,29 +201,10 @@ span.star-prototype > * {
 		        </th>
 		    </tr>
 		    <%} %>
-		    <input type="button" value="목록으로" class="btn btn-success" style="background-color:#aacc19; border:1px solid #aacc19"
-		           onclick="location.href='<%=request.getContextPath()%>/ads/adsList'"/>
+		    <button type="button" class="btn btn-success" style="background-color:#aacc19; margin-bottom:10px; border:1px solid #aacc19"
+		           onclick="location.href='<%=request.getContextPath()%>/ads/adsList'"/><i class="list icon"></i>목록으로</button>
 		    
-		    <%  //글작성자와 관리자가 아닌 사람만 평가가 가능
-			if(userLoggedIn != null &&
-				((userLoggedIn.getCustomer_no() != ads.getCustomerNo())
-					&& !"A".equals(userLoggedIn.getStatus()))) {%>
-		    <form id="rate_form" action="<%=request.getContextPath()%>/ads/adsRate?adsNo=<%=ads.getAdsNo()%>">
-				<input type="hidden" name="command" value="rateCnt">
-				<input type="hidden" name="command" value="rateTotal">
-				<input type="hidden" name="adsNo" value="<%=ads.getAdsNo()%>">
-   				<input type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"> 
-   				<select name="adsRate">
-				    <option value="" disabled selected>점수선택</option>
-				    <option value="5">아주 만족해요(5)</option>
-				    <option value="4">만족해요(4)</option>
-				    <option value="3">보통이에요(3)</option>
-				    <option value="2">그냥 그래요(2)</option>
-				    <option value="1">별로에요(1)</option>
-				</select>
-				<button onclick="return rate()" >평가</button>
-			</form>
-			<%} %>
+	
        
        
 	</div>
