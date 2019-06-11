@@ -11,6 +11,10 @@
 	String fullAddress = ads.getSearchedAddress()+ " " +ads.getDetailedAddress();
 %>
 <style>
+.adsContent img{
+	max-width: 100%;
+}
+
 span.star-prototype, span.star-prototype > * {
     height: 16px; 
     background: url(<%=request.getContextPath()%>/images/starImage.png) 0 -16px repeat-x;
@@ -291,9 +295,11 @@ function like(){
 			function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data 
 				if (data.result == "0"){
 					alert("이미 좋아요를 누르셨어요.");
+					location.reload();
 				}
 				else{
 					alert("이 글에 좋아요를 눌렀습니다.");
+					location.reload();
 				} 
 			}, 
 		error: 
@@ -318,9 +324,11 @@ function disLike(){
 			function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data 
 				if (data.result == "0"){
 					alert("이미 신고하기를 누르셨어요.");
+					location.reload();
 				}
 				else{
 					alert("이 글을 신고 하셨어요.");
+					location.reload();
 				} 
 			}, 
 		error: 
@@ -348,10 +356,11 @@ function rate(){
 			function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data 
 				if (data.result == "0"){
 					alert("이미 평가를 하셨어요.");
-					console.log(data.result);
+					location.reload();
 				}
 				else{
 					alert("평가해 주셔서 감사합니다.");
+					location.reload();
 				} 
 			}, 
 		error: 

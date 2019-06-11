@@ -13,6 +13,10 @@
 	}
 %>
 <style>
+.reviewContent img{
+	max-width: 100%;
+}
+
 span.star-prototype, span.star-prototype > * {
     height: 16px; 
     background: (<%=request.getContextPath()%>/images/starImage.png) 0 -16px repeat-x;
@@ -254,6 +258,7 @@ function like(){
 				}
 				else{
 					alert("이 글에 좋아요를 눌렀습니다.");
+					location.reload();
 				} 
 			}, 
 		error: 
@@ -278,6 +283,7 @@ function disLike(){
 			function(data){ //ajax통신 성공시 넘어오는 데이터 통째 이름 =data 
 				if (data.result == "0"){
 					alert("이미 신고하기를 누르셨어요.");
+					location.reload();
 				}
 				else{
 					alert("이 글을 신고 하셨어요.");

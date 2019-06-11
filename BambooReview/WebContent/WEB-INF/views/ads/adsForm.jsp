@@ -23,6 +23,7 @@
 </script>
 
 <style>
+
 #footer{
 position:relative;
 }
@@ -137,17 +138,17 @@ position:relative;
 			                              피트니스<input type="checkbox" name="facilities" value="피트니스" />
 			                              수영장<input type="checkbox" name="facilities" value="수영장" />
 			               	<div class="row">
-			               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
-			               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
-			               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
-			               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
+			               	공연장<input type="checkbox" name="facilities" value="공연장" />
+			               	음식점<input type="checkbox" name="facilities" value="음식점" />
+			               	룸서비스<input type="checkbox" name="facilities" value="룸서비스" />
+			               	BAR<input type="checkbox" name="facilities" value="BAR" />
 	               			</div>
 	               			<div class="row">
 	               				<div class="ui labeled input" style="height:26px;  position:relative; top:-1px;">
 					  				<div class="ui label" style="font-size:11px; height:26px;">
 					     				<p>기타</p>
 					  				</div>
-					  				<input type="text" name="facilities" value="" style="width:80px;"/>
+					  				<input type="text" name="facilities" value="" style="width:150px;"/>
 					  			</div>
 						   </div>
 					</div>
