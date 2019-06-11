@@ -30,7 +30,7 @@ span#duplicated{
 	<%if(isUsable == true){ %>
 		[<span><%=email %></span>]는 사용가능합니다.
 		<br /><br />
-		<button type="button" onclick="setEmail('<%=email%>')">닫기</button>
+		<button type="button" class="ui button" onclick="setEmail('<%=email%>')"><i class="window close icon"></i>닫기</button>
 	<% } else { %>
 		[<span id="duplicated"><%=email %></span>]는 이미 사용중입니다.
 		<br /><br />
