@@ -42,6 +42,12 @@
 			  </div>
 			  
 			  <div class="field">
+			    <label>회원 구분</label>
+			    <label><input type="radio" name="status" id="normal" value="U" checked/> 일반 회원</label>
+			    <label><input type="radio" name="status" id="business" value="B" /> 사업자 회원</label>
+			  </div>
+			  
+			  <div class="field">
 			    <div class="ui checkbox">
 			      <input type="checkbox" name="saveId" required>
 			      <label>개인정보 약관에 동의합니다.</label>
@@ -82,9 +88,10 @@
 				alert("아이디 중복검사 해주세요.");
 				return false;
 			}
-			//중복검사 통과하면 입력창 readonly로 설정
-			/* else
-				$("#email").attr("readonly",true); */
+ 			/* else if(isValid == "1"){
+				$("#email").prop('readonly', true);
+				return true;
+			} */
 			//패스워드 일치 여부
 			if($("#password").val()!=$("#passwordCfrm").val()){
 				alert("비밀번호가 일치하지 않습니다");

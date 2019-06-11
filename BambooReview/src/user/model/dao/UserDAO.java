@@ -107,6 +107,7 @@ public class UserDAO {
 			pstmt.setString(2, u.getPassword());
 			pstmt.setString(3, u.getUserName());
 			pstmt.setString(4, u.getPhone());
+			pstmt.setString(5, u.getStatus());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

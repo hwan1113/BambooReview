@@ -25,12 +25,14 @@ public class UserEnrollServlet extends HttpServlet {
     	String password= request.getParameter("password");
     	String userName = request.getParameter("name");
     	String phone = request.getParameter("phone");
+    	String status = request.getParameter("status");
 		
     	User u = new User();
     	u.setEmail(email);
     	u.setPassword(password);
     	u.setUserName(userName);
     	u.setPhone(phone);
+    	u.setStatus(status);
     	
     	int result= new UserService().insertUser(u);
     	
