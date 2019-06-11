@@ -99,29 +99,85 @@ top:659px;
  
 </script>
 
-<section id="ads-container">
+<section id="ads-container" style="height:300px;">
 	<form action="<%=request.getContextPath()%>/ads/adsUpdateEnd"
 		  method="get"
 		  enctype="multipart/form-data">
 		<div class="ui centered grid" style="margin-top:5px;">
-		 제목: <input id="title" type="text" name="adsTitle" 
-					 value="<%=ads.getAdsTitle() %>"required />&nbsp;&nbsp;&nbsp;
-		 작성자: <input id="writer" type="text" name="adsWriter" 
+		
+		<div class="ui labeled input" style="height:49px; top:-3px;">
+			  <div class="ui label" style="font-size:11px; height:33px; margin:0 auto;">
+			     <p>작성자</p>
+			  </div>
+			  <input id="writer" type="text" name="adsWriter" style="margin:0px 0px 16px 0px; width:100px; text-align:center;"
 				 	 value="<%=ads.getCustomerNo()%>" readonly/>
+			</div>
+				 
+				 
+			<div class="ui labeled input" style="height:49px; top:-3px;">
+			  <div class="ui label" style="font-size:11px; height:33px; margin:0 auto;">
+			     <p>제목</p>
+			  </div>
+			  <input id="title" type="text" name="adsTitle" style="margin:0px 0px 16px 0px; width:780px;
+					 value="<%=ads.getAdsTitle() %>"required />&nbsp;&nbsp;&nbsp;
+			</div>	 
+		
+	
+	<div class="ui grid">
+	
+		<div id="postcodify" style="margin-bottom:15px;">
+		
+		
+		<div class="ui labeled input" style="height:80%; top:-3px; right:-10px;">
+		  <div class="ui label" style="font-size:11px; margin:0 auto;">
+		     <p>주소</p>
+		  </div>
+		  <input type="text" name="searchedAddress" id="searchedAddress" value="<%=ads.getSearchedAddress() %>" style="width: 430px;" required/>
 		</div>
-		<div id="postcodify">
-		<input type="button" id="postcodify_search_button" value="주소검색"/>
-		검색한 주소: <input type="text" name="searchedAddress" id="searchedAddress" value="<%=ads.getSearchedAddress() %>" style="width: 350px;" required/>
-		상세 주소: <input type="text" name="detailedAddress" id="detailedAddress" value="<%=ads.getDetailedAddress() %>" style="width: 350px;"/><br />
 		</div>
-		<fieldset style="text-align:center;">
-                              인터넷<input type="checkbox" name="facilities" value="인터넷" />
-                SPA<input type="checkbox" name="facilities" value="SPA" />
-                              피트니스<input type="checkbox" name="facilities" value="피트니스" />
-               	수영장<input type="checkbox" name="facilities" value="수영장" />
-               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
-               	기타: <input type="text" name="facilities" value="" />
-            </fieldset>
+		
+			<fieldset style="text-align:center; position:relative;left:150px; top:-10px; width:370px;">
+					<div class="ui centered grid" style="margin-top:5px; position:absolute; right:100px;">  
+		        		<div class="ui centered grid">            
+		        		<div class="ui steps">
+	  					<div class="step" style=" width: 240px;height:70px; padding:0px;">
+				                              인터넷<input type="checkbox" name="facilities" value="인터넷" />
+				              SPA<input type="checkbox" name="facilities" value="SPA" />
+				                              피트니스<input type="checkbox" name="facilities" value="피트니스" />
+				                              수영장<input type="checkbox" name="facilities" value="수영장" />
+				               	<div class="row">
+				               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
+				               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
+				               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
+				               	조식부페<input type="checkbox" name="facilities" value="조식부페" />
+		               			</div>
+		               			<div class="row">
+		               				<div class="ui labeled input" style="height:26px;  position:relative; top:-1px;">
+						  				<div class="ui label" style="font-size:11px; height:26px;">
+						     				<p>기타</p>
+						  				</div>
+						  				<input type="text" name="facilities" value="" style="width:80px;"/>
+						  			</div>
+							   </div>
+						</div>
+						</div>
+						</div>
+					</div> 
+		            </fieldset>
+		
+		<div class="ui labeled input" style="height:33px; top:-20px; left:10px;">
+		  <div class="ui label" style="font-size:11px; margin:0 auto;">
+		     <p>상세주소</p>
+		  </div>
+		  <input type="text" placeholder="상세 주소를 입력하세요" name="detailedAddress" id="detailedAddress" value="<%=ads.getDetailedAddress() %>" style="width: 350px;"
+		  style="width: 335px; ">
+		</div>
+  			<button class="ui button" id="postcodify_search_button" style="height:33px; width:72px; position:relative;top:-20px;">주소 검색</button>
+		</div>
+		</div>
+		</div>
+		
+		
 		<textarea id="summernote" name="adsContent" required><%=ads.getAdsContent() %></textarea>
 		<div class="ui centered grid">
 		<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">수정</button>
@@ -130,5 +186,10 @@ top:659px;
 		<input id="customerNo" type="hidden" name="customerNo" value="<%=ads.getCustomerNo()%>"/>
 		<input id="adsNo" type="hidden" name="adsNo" value="<%=ads.getAdsNo()%>"/>
 	</form>
+	
+	<div class="ui menu" style="background-color:#68b30d; height:2.5rem; bottom:0; width:1024px; margin-top:14px;" id="footer">
+  		<div style="position:absolute; left:34%;  width:1024px;">
+    		<p style="font-size:17px;">&lt;Copyright 2019. Team Thanos. All rights reserved.&gt;</p>
+    	</div>
+    </div>
 </section>
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
