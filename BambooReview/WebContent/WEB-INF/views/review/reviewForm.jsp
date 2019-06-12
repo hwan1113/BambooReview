@@ -50,7 +50,7 @@ body {overflow-y: hidden; overflow-x: hidden;}
     $(document).ready(function() {
         $('#summernote').summernote({
         	width: 1024,
-        	height: 450,
+        	height: 400,
 		    callbacks: {
 				onImageUpload: function(files, editor, welEditable) {
 		            sendFile(files[0], this);
@@ -107,12 +107,14 @@ body {overflow-y: hidden; overflow-x: hidden;}
 
 		<div class="ui centered grid">
 			<button type="submit" id="submit" name="submit" class="btn btn-success" onclick="validate();">작성</button>
-			<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelName=<%=hotelName %>&hotelId=<%=hotelId%>'">취소</button>
+			<button type="button" class="btn btn-warning" onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelName=<%=hotelName %>&hotelId=<%=hotelId%>&srchWord=<%=srchWord%>'">취소</button>
 		</div>
 		<input type="hidden" name="srchWord" value="<%=srchWord%>"/>
 		<input id="hotelName" type="hidden" name="hotelName" value="<%=hotelName%>" />
 	  	<input id="hotelId" type="hidden" name="hotelId" value="<%=hotelId%>" />
 		<input id="customerNo" type="hidden" name="customerNo" value="<%=userLoggedIn.getCustomer_no()%>"/>
 	</form>
+<div class="ui menu grid centered" style="position:relative; background-color:#68b30d; height:2.5rem; bottom:70px; width:1024px; margin:0;">
+    <p style="font-size:17px;">&lt;Copyright 2019. Team Thanos. All rights reserved.&gt;</p>
+ </div>
 </section>
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>

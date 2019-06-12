@@ -20,7 +20,7 @@
 
 span.star-prototype, span.star-prototype > * {
     height: 16px; 
-    background: (<%=request.getContextPath()%>/images/starImage.png) 0 -16px repeat-x;
+    background: url(<%=request.getContextPath()%>/images/starImage.png) 0 -16px repeat-x;
     width: 80px;
     display: inline-block;
 }
@@ -46,7 +46,7 @@ span.star-prototype > * {
 		  		<div class="four column row" id="wwww">
 		    		<div class="left floated column"><%=r.getReviewWriter() %>님
 		    		</div>
-		    		평가 : <span class="star-prototype"><%=avg %></span>(<%=avg%>)
+		    		평가 : <span class="star-prototype"><%=avg %></span>(<%=String.format("%.2f", avg)%>)
 		    		<div class="right floated column">
 			    		<i class="eye icon"></i>
 			    		<%=r.getReadCnt() %>
@@ -136,7 +136,7 @@ span.star-prototype > * {
 </div>
        </div>
 
-           	     <%--글작성자/관리자인경우 수정삭제 가능 --%>
+           
            	     <div class="ui centered grid">
 	  
 					  <div class="ui buttons" id="like-form" style="margin-top:10px;">
@@ -160,22 +160,21 @@ span.star-prototype > * {
        			<% if(userLoggedIn != null &&
 		    		((userLoggedIn.getCustomer_no() == r.getCustomerNo())
 		    		|| "A".equals(userLoggedIn.getStatus()))) {%>
-		    <div class="listbtn">
+		    <div class="listbtn" style="position:relative; left:30px;">
 		    <tr>
 		        <th colspan="2">
 		            <button class="btn btn-success" 
 		            	   onclick="location.href='<%=request.getContextPath()%>/review/reviewUpdate?reviewNo=<%=r.getReviewNo()%>&hotelName=<%=hotelName%>&srchWord=<%=srchWord%>'"/>
-		            	   <i class="edit icon"></i>수정</button>
+		            	   <i class="edit icon"></i>수정하기</button>
 		            <button class="btn btn-warning" onclick="deleteReview();"><i class="trash icon"></i>삭제하기</button>
 		        </th>
 		    </tr>
 		    <%} %>
-		    <input type="button" value="목록으로" class="btn btn-success" style="background-color:#aacc19; border:1px solid #aacc19"
-		           onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelName=<%=hotelName %>&hotelId=<%=hotelId%>&srchWord=<%=srchWord%>'"/>
+		 
 
 		    
 		    <button class="btn btn-success" style="background-color:#aacc19; position:relative; float:right; border:1px solid #aacc19; margin-bottom:15px;" 
-		    onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelName=<%=hotelName %>&hotelId=<%=hotelId%>'"><i class="list icon"></i>목록</button>
+		    onclick="location.href='<%=request.getContextPath()%>/review/reviewList?hotelName=<%=hotelName %>&hotelId=<%=hotelId%>&srchWord=<%=srchWord%>'"><i class="list icon"></i>목록</button>
 		    
 		  
 		    </div>

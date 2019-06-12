@@ -191,6 +191,8 @@ public class AdsDAO {
 				ads.setReadCnt(rset.getInt("read_cnt"));
 				ads.setLikeCnt(rset.getInt("like_cnt"));
 				ads.setDisLikeCnt(rset.getInt("dislike_cnt"));
+				ads.setRateTotal(rset.getInt("rate_total"));
+				ads.setRateCnt(rset.getInt("rate_cnt"));
 			}
 		}catch(Exception e){
 			e.printStackTrace();

@@ -100,7 +100,7 @@ position:relative;
 			  <div class="ui label" style="font-size:11px; height:33px; margin:0 auto;">
 			     <p>작성자</p>
 			  </div>
-			  <input id="writer" type="text" name="adsWriter" style="margin:0px 0px 16px 0px; width:100px; text-align:center;"
+			  <input id="writer" type="text" name="adsWriter" style="margin:0px 0px 16px 0px; width:100px; height:33px; text-align:center;"
 					 value="<%=adsService.getUserName(userLoggedIn.getCustomer_no())%>" readonly/>
 			</div>
 				 
@@ -108,7 +108,7 @@ position:relative;
 			  <div class="ui label" style="font-size:11px; height:33px; margin:0 auto;">
 			     <p>제목</p>
 			  </div>
-			  <input id="title" type="text" name="adsTitle" required style="margin:0px 0px 16px 0px; width:780px;
+			  <input id="title" type="text" name="adsTitle" required style="margin:0px 0px 16px 0px; width:780px; height: 33px;
 				"/>&nbsp;&nbsp;
 			</div>	 
 				 

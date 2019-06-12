@@ -4,6 +4,7 @@
 <%@ page import="ads.model.vo.*" %>
 <%
 	Ads ads = (Ads)request.getAttribute("ads");
+	System.out.println("ads@AdsUpdate.jsp"+ads);
 	if(ads.getDetailedAddress()==null)
 		ads.setDetailedAddress("");
 %>
@@ -67,7 +68,7 @@ top:659px;
     $(document).ready(function() {
         $('#summernote').summernote({
         	width: 1024,
-        	height: 400,
+        	height: 368,
 		    callbacks: {
 				onImageUpload: function(files, editor, welEditable) {
 		            /* for (var i = files.length - 1; i >= 0; i--) {
@@ -109,8 +110,8 @@ top:659px;
 			  <div class="ui label" style="font-size:11px; height:33px; margin:0 auto;">
 			     <p>작성자</p>
 			  </div>
-			  <input id="writer" type="text" name="adsWriter" style="margin:0px 0px 16px 0px; width:100px; text-align:center;"
-				 	 value="<%=ads.getCustomerNo()%>" readonly/>
+			  <input id="writer" type="text" name="adsWriter" style="margin:0px 0px 16px 0px; width:100px; height:33px; text-align:center;"
+				 	 value="<%=ads.getAdsWriter()%>" readonly/>
 			</div>
 				 
 				 
@@ -118,8 +119,8 @@ top:659px;
 			  <div class="ui label" style="font-size:11px; height:33px; margin:0 auto;">
 			     <p>제목</p>
 			  </div>
-			  <input id="title" type="text" name="adsTitle" style="margin:0px 0px 16px 0px; width:780px;
-					 value="<%=ads.getAdsTitle() %>"required />&nbsp;&nbsp;&nbsp;
+			  <input id="title" type="text" name="adsTitle" style="margin:0px 0px 16px 0px; width:780px; height:33px;"
+					 value="<%=ads.getAdsTitle()%>" required/>&nbsp;&nbsp;&nbsp;
 			</div>	 
 		
 	

@@ -23,6 +23,7 @@ public class ReviewCommentInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		//1.파라미터핸들링
 		int reviewNo = Integer.parseInt(request.getParameter("reviewNo"));
 		int customerNo = Integer.parseInt(request.getParameter("customerNo"));

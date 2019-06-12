@@ -37,7 +37,7 @@ public class PaidTransactionServlet extends HttpServlet {
 		String msg = "";
 		String loc = "/";
 		if(result>0) {
-			msg= "결제를 완료하였습니다.";
+			msg= "결제를 실패하였습니다.";
 		}else {
 			msg= "결제를 실패하였습니다.";
 		}

@@ -6,7 +6,12 @@
     Ads ads = (Ads)request.getAttribute("ads");
 	System.out.println("adsView.jsp ads ="+ads);
 	List<AdsComment> adsCommentList = (List<AdsComment>)request.getAttribute("adsCommentList");
+	
+	System.out.println("rate@adsView.jsp="+ads);
 	double avg = (double)ads.getRateTotal() / ads.getRateCnt();
+	if(Double.isNaN(avg)){
+		avg=0;
+	}
 	if(ads.getDetailedAddress()==null)
 		ads.setDetailedAddress("");
 	String fullAddress = ads.getSearchedAddress()+ " " +ads.getDetailedAddress();
@@ -78,7 +83,7 @@ span.star-prototype > * {
 		  		<div class="four column row">
 		    		<div class="left floated column"><%=ads.getAdsWriter() %>님
 		    		</div>
-		    		평가 : <span class="star-prototype"><%=avg %></span>(<%=avg%>)
+		    		평가 : <span class="star-prototype"><%=avg %></span>(<%=String.format("%.2f", avg)%>)
 		    		<div class="right floated column">
 			    		<i class="eye icon"></i>
 			    		<%=ads.getReadCnt() %>
@@ -198,6 +203,7 @@ span.star-prototype > * {
 		   <% if(userLoggedIn != null &&
 		    		((userLoggedIn.getCustomer_no() == ads.getCustomerNo())
 		    		|| "A".equals(userLoggedIn.getStatus()))) {%>
+		    <div class="listbtn" style="position:relative; left:30px; bottom:20px;">
 		    <tr>
 		        <th colspan="2">
 		            <input type="button" value="수정하기" class="btn btn-success"
@@ -206,12 +212,10 @@ span.star-prototype > * {
 		        </th>
 		    </tr>
 		    <%} %>
-		    <button type="button" class="btn btn-success" style="background-color:#aacc19; margin-bottom:10px; border:1px solid #aacc19"
-		           onclick="location.href='<%=request.getContextPath()%>/ads/adsList'"/><i class="list icon"></i>목록으로</button>
 		    
-	
-       
-       
+		    <button class="btn btn-success" style="background-color:#aacc19; position:relative; right:20px; float:right; border:1px solid #aacc19; margin-bottom:15px;" 
+		    onclick="location.href='<%=request.getContextPath()%>/ads/adsList'"><i class="list icon"></i>목록</button>
+		</div>
 	</div>
 </div>
 

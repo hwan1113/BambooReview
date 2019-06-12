@@ -4,3 +4,4 @@
   <div style="position:absolute; left:34%; top:6px; width:1024px;">
     <p style="font-size:17px;">&lt;Copyright 2019. Team Thanos. All rights reserved.&gt;</p>
   </div>
+  </div>
